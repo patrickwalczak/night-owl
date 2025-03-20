@@ -53,3 +53,7 @@ h6 {
 li {
 	list-style-type: none;
 }
+
+button {
+	cursor: pointer;
+}

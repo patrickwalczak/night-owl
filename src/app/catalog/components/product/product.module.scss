@@ -1,34 +1,50 @@
+@use '../../../../styles/variables.scss';
+@use '../../../../styles/_mixins.scss';
+
 .productContainer {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: repeat(3, auto);
-	grid-template-areas:
-		'img img'
-		'name name'
-		'price cart';
-	width: 500px;
-	border: 1px solid black;
+	cursor: pointer;
 }
 
-.imgPlaceholder {
-	grid-area: img;
+.productContainer:hover .img {
+	object-position: center 45%;
+	opacity: 1;
+}
+
+.img {
+	width: 100%;
+	aspect-ratio: 6 / 7;
+	object-fit: cover;
+	opacity: 0.9;
+	transition: all 0.5s ease-in-out;
+}
+
+.detailsBox {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto auto;
+	grid-template-areas: 'name name' 'price cartIcon';
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.75rem;
+	background-color: #fafafa;
 }
 
 .name {
 	grid-area: name;
-	text-align: center;
+	font-size: 1.2rem;
+	color: #5f5f5f;
 	font-weight: normal;
+	text-align: center;
 }
 
 .price {
 	grid-area: price;
 	font-weight: bold;
-	font-size: 1.6rem;
+	font-size: 1rem;
 }
 
-.cartIcon {
-	grid-area: cart;
-	width: 4rem;
-	height: 4rem;
-	border: 1px solid black;
+.cartBtn {
+	grid-area: cartIcon;
+	justify-self: end;
+	@include mixins.empty-button;
 }

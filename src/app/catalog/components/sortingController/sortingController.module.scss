@@ -1,0 +1,8 @@
+@use '../../../../styles/_mixins.scss';
+
+.sortBtn {
+	@include mixins.flex-row;
+	column-gap: 0.5rem;
+	padding: 0.25rem;
+	@include mixins.empty-button;
+}
