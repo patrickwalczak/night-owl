@@ -1,10 +1,7 @@
-@use '../../styles/variables.scss';
-@use '../../styles/_mixins.scss';
-
 .navigation {
 	&[data-css-position='relative'] {
 		position: relative;
-		background-color: variables.$muted-purple;
+		background-color: var(--color-muted-purple);
 	}
 
 	&[data-css-position='absolute'] {
@@ -13,7 +10,9 @@
 		background-color: transparent;
 	}
 
-	@include mixins.flex-row;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
@@ -22,9 +21,12 @@
 }
 
 .navigation__links {
-	@include mixins.flex-row;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 	gap: 2rem;
 }
+
 .navigation__link {
 	color: white;
 }

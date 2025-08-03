@@ -46,5 +46,6 @@
 .cartBtn {
 	grid-area: cartIcon;
 	justify-self: end;
-	@include mixins.empty-button;
+	background: none;
+	border: none;
 }

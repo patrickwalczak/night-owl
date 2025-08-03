@@ -1,8 +1,9 @@
-@use '../../../../styles/_mixins.scss';
-
 .sortBtn {
-	@include mixins.flex-row;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 	column-gap: 0.5rem;
 	padding: 0.25rem;
-	@include mixins.empty-button;
+	background: none;
+	border: none;
 }

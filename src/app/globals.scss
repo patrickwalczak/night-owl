@@ -16,11 +16,10 @@
 	--font-size-64: 4rem; // 64px
 	--font-size-76: 4.75rem; // 76px
 
-	// $muted-purple-dark: #73618c;
-	// 	$muted-purple: #7f669d;
-	// 	$accent-purple: #ae7fdf;
-	// 	$accent-purple-two: #c09bf5;
-	// 	$white: #ffffff;
+	--color-muted-purple: #7f669d;
+	--color-accent-purple: #ae7fdf;
+	--color-accent-purple-two: #c09bf5;
+	--color-white: #ffffff;
 }
 
 *, *::before, *::after {
@@ -75,6 +74,6 @@ li {
 	list-style-type: none;
 }
 
-button {
+button, a {
 	cursor: pointer;
 }

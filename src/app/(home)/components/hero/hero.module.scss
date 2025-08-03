@@ -18,13 +18,13 @@
 	height: 100%;
 	padding: 2rem;
 	text-align: center;
-	background-color: variables.$muted-purple;
+	background-color: var(--color-muted-purple);
 }
 
 .heading {
 	max-width: 80%;
 	font-size: 6rem;
-	color: variables.$white;
+	color: var(--color-white);
 }
 
 .shopBtn {
@@ -32,7 +32,7 @@
 	border: none;
 	font-size: 1.2rem;
 	color: #fff;
-	background-color: variables.$accent-purple;
+	background-color: var(--color-accent-purple);
 	border-radius: 25px;
 	transition: background-color 0.3s ease-in-out;
 
