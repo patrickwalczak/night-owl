@@ -1,22 +1,28 @@
 @use '../../styles/variables.scss';
-
-@mixin flex-row {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-}
+@use '../../styles/_mixins.scss';
 
 .navigation {
-	@include flex-row;
+	&[data-css-position='relative'] {
+		position: relative;
+		background-color: variables.$muted-purple;
+	}
+
+	&[data-css-position='absolute'] {
+		position: absolute;
+		top: 0;
+		background-color: transparent;
+	}
+
+	@include mixins.flex-row;
 	justify-content: space-between;
 	align-items: center;
+	width: 100%;
 	padding: 0.75rem 2rem;
-	background-color: variables.$muted-purple;
 	color: white;
 }
 
 .navigation__links {
-	@include flex-row;
+	@include mixins.flex-row;
 	gap: 2rem;
 }
 .navigation__link {

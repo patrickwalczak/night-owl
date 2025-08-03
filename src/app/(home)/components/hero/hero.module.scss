@@ -1,0 +1,49 @@
+@use '../../../../styles/variables.scss';
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100dvh;
+	background-color: #1a1a1a;
+}
+
+.textContentContainer {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	row-gap: 5rem;
+	height: 100%;
+	padding: 2rem;
+	text-align: center;
+	background-color: variables.$muted-purple;
+}
+
+.heading {
+	max-width: 80%;
+	font-size: 6rem;
+	color: variables.$white;
+}
+
+.shopBtn {
+	padding: 0.75rem 2rem;
+	border: none;
+	font-size: 1.2rem;
+	color: #fff;
+	background-color: variables.$accent-purple;
+	border-radius: 25px;
+	transition: background-color 0.3s ease-in-out;
+
+	&:hover {
+		background-color: #a679e0;
+	}
+}
+
+.heroImage {
+	flex: 1;
+	height: 100%;
+	max-width: 100%;
+	object-fit: cover;
+}

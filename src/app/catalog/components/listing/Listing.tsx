@@ -6,7 +6,7 @@ import FilteringController from '../filteringController/FilteringController';
 import SortingController from '../sortingController/SortingController';
 
 const Listing = async () => {
-	const products = await prisma.product.findMany();
+	const products = [];
 
 	return (
 		<div className={styles.listingContainer}>
