@@ -2,11 +2,9 @@ import Link from 'next/link';
 import React from 'react';
 import styles from './navigation.module.scss';
 
-type Position = React.CSSProperties['position'];
-
-const Navigation = ({ position }: { position: Position }) => {
+const Navigation = () => {
 	return (
-		<nav className={styles.navigation} data-css-position={position}>
+		<nav className={styles.navigation}>
 			<Link href="/">
 				<h2 className={styles.logo}>Night Owl</h2>
 			</Link>

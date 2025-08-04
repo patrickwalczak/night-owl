@@ -8,8 +8,59 @@ generator client {
 }
 
 model Product {
-  id    Int    @id @default(autoincrement())
-  price Int
-  name  String
-  img_url String
+  id            String   @id @default(cuid())
+  name          String
+  description   String
+  price         Float
+  discountPrice Float?
+  currency      String   @default("USD")
+  quantity      Int
+  inStock       Boolean  @default(true)
+  images        String[] // Array of image URLs
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  tags ProductTag[]
 }
+
+model Category {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products Product[]
+}
+
+model Tag {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products ProductTag[]
+}
+
+model ProductTag {
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  tag       Tag     @relation(fields: [tagId], references: [id])
+  tagId     String
+
+  @@id([productId, tagId])
+}
+
+/**
+ * Hanging lamps
+ * Chandeliers
+ * Ceiling lamps
+ * Ceiling lights
+ * Wall lamps
+ * Floor lamps
+ * Desk lamps
+ * Table lamps
+ */

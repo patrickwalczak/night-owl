@@ -1,15 +1,5 @@
 .navigation {
-	&[data-css-position='relative'] {
-		position: relative;
-		background-color: var(--color-muted-purple);
-	}
-
-	&[data-css-position='absolute'] {
-		position: absolute;
-		top: 0;
-		background-color: transparent;
-	}
-
+	position: sticky;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -17,7 +7,7 @@
 	align-items: center;
 	width: 100%;
 	padding: 0.75rem 2rem;
-	color: white;
+	color: var(--color-owl-white);
 }
 
 .navigation__links {
@@ -28,7 +18,7 @@
 }
 
 .navigation__link {
-	color: white;
+	color: var(--color-owl-white);
 }
 
 .logo {

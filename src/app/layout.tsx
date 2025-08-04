@@ -1,5 +1,6 @@
 import './globals.scss';
 import { Playfair_Display, Inter } from 'next/font/google';
+import StoreProvider from './StoreProvider';
 
 export const inter = Inter({
 	subsets: ['latin'],
@@ -20,7 +21,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-			<body>{children}</body>
+			<body>
+				<StoreProvider>{children}</StoreProvider>
+			</body>
 		</html>
 	);
 }

@@ -1,0 +1,37 @@
+{
+	"version": 1.1,
+	"properties": [
+		{
+			"name": "--font-family-inter",
+			"description": "Inter font family (sans-serif fallback)"
+		},
+		{
+			"name": "--font-family-playfair",
+			"description": "Playfair Display font family (serif fallback)"
+		},
+
+		{ "name": "--font-size-12", "description": "Font size 12px (0.75rem)" },
+		{ "name": "--font-size-14", "description": "Font size 14px (0.875rem)" },
+		{ "name": "--font-size-15", "description": "Font size 15px (0.9375rem)" },
+		{ "name": "--font-size-16", "description": "Font size 16px (1rem)" },
+		{ "name": "--font-size-18", "description": "Font size 18px (1.125rem)" },
+		{ "name": "--font-size-20", "description": "Font size 20px (1.25rem)" },
+		{ "name": "--font-size-22", "description": "Font size 22px (1.375rem)" },
+		{ "name": "--font-size-26", "description": "Font size 26px (1.625rem)" },
+		{ "name": "--font-size-32", "description": "Font size 32px (2rem)" },
+		{ "name": "--font-size-42", "description": "Font size 42px (2.625rem)" },
+		{ "name": "--font-size-54", "description": "Font size 54px (3.375rem)" },
+		{ "name": "--font-size-64", "description": "Font size 64px (4rem)" },
+		{ "name": "--font-size-76", "description": "Font size 76px (4.75rem)" },
+
+		{ "name": "--color-owl-white", "description": "Pure white" },
+		{ "name": "--color-owl-blue-800", "description": "Very dark blue, used as base text color" },
+
+		{ "name": "--color-owl-purple-100", "description": "Light purple tint" },
+		{ "name": "--color-owl-purple-200", "description": "Slightly darker purple" },
+		{ "name": "--color-owl-purple-400", "description": "Medium purple" },
+		{ "name": "--color-owl-purple-700", "description": "Primary brand purple" },
+		{ "name": "--color-owl-purple-800", "description": "Alternative purple shade" },
+		{ "name": "--color-owl-purple-850", "description": "Muted dark purple (text/borders)" }
+	]
+}

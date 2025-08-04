@@ -5,7 +5,7 @@ import Listing from './components/listing/Listing';
 const Catalog = () => {
 	return (
 		<>
-			<Navigation position="relative" />
+			<Navigation />
 			<main>
 				<Listing />
 			</main>
