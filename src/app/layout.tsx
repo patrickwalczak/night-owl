@@ -1,4 +1,5 @@
 import './globals.scss';
+import '../styles/utils.scss';
 import { Playfair_Display, Inter } from 'next/font/google';
 import StoreProvider from './StoreProvider';
 

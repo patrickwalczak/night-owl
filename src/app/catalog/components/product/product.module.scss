@@ -23,13 +23,13 @@
 	align-items: center;
 	gap: 0.5rem;
 	padding: 0.75rem;
-	background-color: #fafafa;
+	background-color: var(--color-owl-gray-200);
 }
 
 .name {
 	grid-area: name;
 	font-size: 1.2rem;
-	color: #5f5f5f;
+	color: var(--color-owl-gray-500);
 	font-weight: normal;
 	text-align: center;
 }
@@ -45,4 +45,8 @@
 	justify-self: end;
 	background: none;
 	border: none;
+
+	path {
+		stroke: var(--color-owl-white);
+	}
 }

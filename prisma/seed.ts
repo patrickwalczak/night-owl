@@ -1,41 +1,37 @@
+// prisma/seed.ts
 import { PrismaClient } from '@prisma/client';
-
 const prisma = new PrismaClient();
 
-const categories = [
-	'Hanging lamps',
-	'Chandeliers',
-	'Ceiling lamps',
-	'Ceiling lights',
-	'Wall lamps',
-	'Floor lamps',
-	'Desk lamps',
-	'Table lamps',
-];
-
 async function main() {
-	for (const name of categories) {
-		const slug = name
-			.toLowerCase()
-			.replace(/ /g, '-')
-			.replace(/[^\w-]+/g, '');
+	const manufacturers = [
+		'LumaLight Co.',
+		'BrightNest',
+		'GlowMark Lighting',
+		'Aurora Fixtures',
+		'Nocturne Lights',
+		'Zenith Illumination',
+		'HaloCraft',
+		'LightWorx',
+		'VividRay',
+		'NexaLux',
+	];
 
-		await prisma.category.upsert({
-			where: { slug },
+	for (const name of manufacturers) {
+		await prisma.manufacturer.upsert({
+			where: { name },
 			update: {},
 			create: {
 				name,
-				slug,
 			},
 		});
 	}
 
-	console.log('✅ Categories seeded.');
+	console.log('✅ Manufacturers seeded');
 }
 
 main()
 	.catch((e) => {
-		console.error('❌ Seed error:', e);
+		console.error(e);
 		process.exit(1);
 	})
 	.finally(async () => {

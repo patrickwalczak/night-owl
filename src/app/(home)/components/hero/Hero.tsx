@@ -1,15 +1,25 @@
 import React from 'react';
 import styles from './hero.module.scss';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export const Hero = () => {
 	return (
-		<section className={styles.container}>
-			<div className={styles.textContentContainer}>
+		<section className={`${styles.container} flex align-center justify-center`}>
+			<div className={`${styles.textContentContainer} flex flex-col align-center justify-center`}>
 				<h1 className={styles.heading}>Lighting That Shines Beyond the Darkness</h1>
-				<button className={styles.shopBtn}>Shop now</button>
+				<Link className={styles.shopBtn} href={'/catalog'}>
+					Shop now
+				</Link>
 			</div>
-			<Image className={styles.heroImage} src={'/owl.webp'} alt={'Hero Image'} width={3600} height={4500} priority />
+			<Image
+				className={styles.heroImage}
+				src={'/owl.webp'}
+				alt={'Decorative background with an owl'}
+				width={3600}
+				height={4500}
+				priority
+			/>
 		</section>
 	);
 };

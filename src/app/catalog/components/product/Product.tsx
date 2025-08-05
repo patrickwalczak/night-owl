@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './product.module.scss';
-import CartIcon from '../../../../../public/icons/cart.svg';
+import Cart from '@/components/icons/Cart';
+import Image from 'next/image';
 
 interface ProductType {
 	id: number;
-	img_url: string;
 	name: string;
 	price: number;
 }
@@ -16,12 +16,19 @@ interface ProductPropsType {
 const Product = ({ product }: ProductPropsType) => {
 	return (
 		<div className={styles.productContainer}>
-			<img alt={product.name} className={styles.img} src={product.img_url} />
+			<Image
+				unoptimized
+				width={600}
+				height={400}
+				alt={product.name}
+				className={styles.img}
+				src={'https://placehold.co/600x400'}
+			/>
 			<div className={styles.detailsBox}>
 				<h3 className={styles.name}>{product.name}</h3>
 				<p className={styles.price}>${product.price}</p>
 				<button className={styles.cartBtn}>
-					<CartIcon />
+					<Cart />
 				</button>
 			</div>
 		</div>
