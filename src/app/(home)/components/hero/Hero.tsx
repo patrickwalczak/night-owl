@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export const Hero = () => {
 	return (
-		<section className={`${styles.container} flex align-center justify-center`}>
+		<section className={`${styles.container} align-center justify-center`}>
 			<div className={`${styles.textContentContainer} flex flex-col align-center justify-center`}>
 				<h1 className={styles.heading}>Lighting That Shines Beyond the Darkness</h1>
 				<Link className={styles.shopBtn} href={'/catalog'}>

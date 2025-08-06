@@ -2,12 +2,11 @@ import Link from 'next/link';
 import React from 'react';
 import styles from './navigation.module.scss';
 import Cart from '../icons/Cart';
-import Hamburger from '../icons/Hamburger';
 import MobileNavigation from './MobileNavigation';
 
-const Navigation = ({ isTransparent = false }: { isTransparent?: boolean }) => {
+const Navigation = () => {
 	return (
-		<nav className={`${styles.nav} ${isTransparent ? styles.nav__transparent : ''}`}>
+		<nav className={`${styles.nav}`}>
 			<Link href="/">
 				<h2 className={styles.logo}>Night Owl</h2>
 			</Link>
@@ -24,11 +23,11 @@ const Navigation = ({ isTransparent = false }: { isTransparent?: boolean }) => {
 					</Link>
 				</li>
 			</ul>
-			{/* <button className={`${styles.button} button-empty`}>
+			<button className={`${styles.button} ${styles.cartButton} button-empty`}>
 				<Cart />
-			</button> */}
+			</button>
 
-			<MobileNavigation />
+			{/* <MobileNavigation /> */}
 		</nav>
 	);
 };
