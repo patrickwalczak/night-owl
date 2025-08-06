@@ -1,0 +1,55 @@
+@use '../../styles/zindex';
+@use '../../styles/breakpoints';
+
+$border: 1px solid var(--color-owl-purple-200);
+
+.contentWrapper {
+  height: 100vh;
+  overflow-y: auto;
+  padding-top: 10vmax;
+  padding-bottom: 5rem;
+  text-align: center;
+  background-color: var(--color-owl-purple-850);
+  color: var(--color-owl-white);
+
+  @supports (height: 100dvh) {
+    height: 100dvh;
+  }
+
+  @media (min-width: breakpoints.$breakpoint-768) {
+    display: none;
+  }
+}
+
+.list {
+  padding: 0;
+  border-top: $border;
+}
+
+.listItem, .cartButton {
+  border-bottom: $border;
+}
+
+.navElement {
+  padding: 2rem;
+  font-size: var(--font-size-32);
+}
+
+.hamburgerBtn {
+  @media (min-width: breakpoints.$breakpoint-768) {
+    display: none;
+  }
+}
+
+.cartButton {
+  svg {
+    width: var(--font-size-48);
+    height: var(--font-size-48);
+  }
+}
+
+.button {
+  path {
+    stroke: var(--color-owl-white);
+  }
+}

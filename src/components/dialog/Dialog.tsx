@@ -1,6 +1,11 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { use, useEffect } from 'react';
+import styles from './dialog.module.scss';
+import { createPortal } from 'react-dom';
+import Close from '../icons/Close';
+import { useBodyOverflow } from './useBodyOverflow';
+import { useHandleEscape } from './useHandleEscape';
 
 type DialogProps = {
 	open: boolean;
@@ -9,42 +14,21 @@ type DialogProps = {
 };
 
 const Dialog = ({ open, onClose, children }: DialogProps) => {
-	const dialogRef = useRef<HTMLDialogElement>(null);
+	useBodyOverflow(open);
+	useHandleEscape(open, onClose);
 
-	useEffect(() => {
-		const dialog = dialogRef.current;
-		if (!dialog) return;
+	if (!open) return null;
 
-		if (open) {
-			if (!dialog.open) dialog.showModal();
-		} else {
-			if (dialog.open) dialog.close();
-		}
-
-		const handleCancel = (e: Event) => {
-			e.preventDefault();
-			onClose();
-		};
-
-		dialog.addEventListener('cancel', handleCancel); // handles ESC
-		return () => dialog.removeEventListener('cancel', handleCancel);
-	}, [open, onClose]);
-
-	return (
-		<dialog
-			ref={dialogRef}
-			className="dialog"
-			onClick={(e) => {
-				// close if backdrop is clicked
-				const dialog = dialogRef.current;
-				if (e.target === dialog) onClose();
-			}}
-		>
-			<button className="dialog-close" onClick={onClose} aria-label="Close dialog">
-				✕
-			</button>
-			{children}
-		</dialog>
+	return createPortal(
+		<div className={styles.overlay} onClick={onClose}>
+			<div className={styles.modal} onClick={(e) => e.stopPropagation()} role="dialog">
+				<button className={styles.closeButton} onClick={onClose} aria-label="Close modal">
+					<Close />
+				</button>
+				{children}
+			</div>
+		</div>,
+		document.body
 	);
 };
 

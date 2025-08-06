@@ -1,48 +1,48 @@
 @use '../../styles/zindex';
+@use '../../styles/breakpoints';
 
-.nav {
-	z-index: zindex.$navigation-zindex;
+.header {
+	z-index: zindex.$header-zindex;
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
+	color: var(--color-owl-white);
+
+	// background-color: var(--color-owl-purple-850);
+	// box-shadow: 0 8px 20px 5px rgba(0, 0, 0, 0.2);
+}
+
+.nav {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding: 0.75rem;
-	color: var(--color-owl-white);
-	// background-color: var(--color-owl-purple-850);
-	// box-shadow: 0 8px 20px 5px rgba(0, 0, 0, 0.2);
 
-	@media (width > 768px) {
+	@media (min-width: breakpoints.$breakpoint-768) {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		padding: 0.75rem 2rem;
 	}
 }
 
-.nav__transparent {
-	// background-color: transparent;
+.listWrapper {
+	justify-self: end;
+
+	@media (max-width: breakpoints.$breakpoint-768) {
+		display: none;
+	}
 }
 
-.links {
-	// display: none;
-	display: flex;
-	align-items: center;
+.list, .listWrapper {
 	gap: 2rem;
 }
 
-.link {
-	color: var(--color-owl-white);
-}
-
 .logo {
-	font-weight: 400;
-	font-size: 1.2rem;
+	font-size: var(--font-size-20);
 }
 
 .button {
-
 	path {
 		stroke: var(--color-owl-white);
 	}

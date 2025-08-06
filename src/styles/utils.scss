@@ -18,6 +18,12 @@
   justify-content: center;
 }
 
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .flex-grow-0 {
   flex-grow: 0;
 }
@@ -29,4 +35,13 @@
 .button-empty {
   border: none;
   background: none;
+  padding: 0.2rem;
+}
+
+.block {
+  display: block;
+}
+
+.w-100 {
+  width: 100%;
 }
