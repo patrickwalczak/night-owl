@@ -1,15 +1,11 @@
 import React from 'react';
-import Navigation from '../../components/navigation/Navigation';
 import Listing from './components/listing/Listing';
 
 const Catalog = async () => {
 	return (
-		<>
-			<Navigation />
-			<main>
-				<Listing />
-			</main>
-		</>
+		<main>
+			<Listing />
+		</main>
 	);
 };
 

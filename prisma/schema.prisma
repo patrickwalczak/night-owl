@@ -17,7 +17,7 @@ enum ProductStatus {
 model Product {
   id          String        @id @default(cuid())
   name        String
-  description String
+  description String?
   price       Float
   currency    String        @default("USD")
   slug        String        @unique //
