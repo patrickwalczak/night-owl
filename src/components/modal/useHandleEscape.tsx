@@ -3,9 +3,7 @@ import { useEffect } from 'react';
 export const useHandleEscape = (open: boolean, onClose: () => void) => {
 	useEffect(() => {
 		const handleKeyDown = (e: KeyboardEvent) => {
-			if (e.key === 'Escape') {
-				onClose();
-			}
+			if (e.key === 'Escape') onClose();
 		};
 
 		if (open) {

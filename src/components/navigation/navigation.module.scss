@@ -7,10 +7,17 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	color: var(--color-owl-white);
+	transition: 200ms ease-in-out;
+	background-color: var(--color-owl-purple-850);
 
-	// background-color: var(--color-owl-purple-850);
-	// box-shadow: 0 8px 20px 5px rgba(0, 0, 0, 0.2);
+	&.isTransparent {
+		background-color: transparent;
+	}
+
+	&:hover {
+		background-color: var(--color-owl-purple-850);
+		box-shadow: 0 8px 20px 5px rgba(0, 0, 0, 0.2);
+	}
 }
 
 .nav {
@@ -34,15 +41,33 @@
 	}
 }
 
-.list, .listWrapper {
+.logo, .catalogButton {
+	color: var(--color-owl-white);
+}
+
+.catalogButton {
+	font-size: var(--font-size-18);
+}
+
+.listWrapper {
 	gap: 2rem;
 }
 
-.logo {
-	font-size: var(--font-size-20);
+.logoLink {
+	width: max-content;
 }
 
-.button {
+.logo {
+	font-size: var(--font-size-26);
+	font-weight: var(--font-weight-400);
+}
+
+.cartButton {
+	svg {
+		width: var(--font-size-32);
+		height: var(--font-size-32);
+	}
+
 	path {
 		stroke: var(--color-owl-white);
 	}

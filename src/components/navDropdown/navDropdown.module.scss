@@ -1,0 +1,22 @@
+@use '../../styles/zindex';
+@use '../../styles/breakpoints';
+
+.dropdown {
+  display: none;
+
+  @media (min-width: breakpoints.$breakpoint-768) {
+    width: 100%;
+  }
+}
+
+.wrapper {
+  display: grid;
+  grid-auto-columns: auto;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-200);
+  color: var(--color-owl-white);
+  border-top: 2px solid var(--color-owl-purple-500);
+}

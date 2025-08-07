@@ -7,63 +7,86 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum ProductStatus {
+  NEW
+  SALE
+  PROMOTION
+  DEFAULT
+}
+
 model Product {
-  id            String   @id @default(cuid())
-  name          String
-  description   String
-  price         Float
-  discountPrice Float?
-  currency      String   @default("USD")
-  quantity      Int
-  inStock       Boolean  @default(true)
-  images        String[] // Array of image URLs
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id          String        @id @default(cuid())
+  name        String
+  description String
+  price       Float
+  currency    String        @default("USD")
+  slug        String        @unique //
+  quantity    Int           @default(100)
+  inStock     Boolean       @default(true)
+  image       String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  status      ProductStatus @default(DEFAULT)
 
   categoryId String
   category   Category @relation(fields: [categoryId], references: [id])
 
-  tags ProductTag[]
-
-  manufacturerId String
-  manufacturer   Manufacturer @relation(fields: [manufacturerId], references: [id])
+  parameterValues ProductParameterValue[]
 }
 
-model Manufacturer {
-  id        String   @id @default(cuid())
-  name      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model ParameterValue {
+  id    String @id @default(cuid())
+  value String
+  count Float
 
-  products Product[]
+  parameterId String
+  parameter   Parameter @relation(fields: [parameterId], references: [id])
+
+  products ProductParameterValue[]
+}
+
+model ProductParameterValue {
+  id               String @id @default(cuid())
+  productId        String
+  parameterValueId String
+
+  product        Product        @relation(fields: [productId], references: [id])
+  parameterValue ParameterValue @relation(fields: [parameterValueId], references: [id])
+}
+
+model Parameter {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  categories CategoryParameter[]
+  values     ParameterValue[]
+}
+
+model CategoryParameter {
+  id          String @id @default(cuid())
+  categoryId  String
+  parameterId String
+
+  category  Category  @relation(fields: [categoryId], references: [id])
+  parameter Parameter @relation(fields: [parameterId], references: [id])
 }
 
 model Category {
-  id        String   @id @default(cuid())
-  name      String
-  slug      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id       String     @id @default(cuid())
+  name     String
+  parentId String?
+  slug     String     @unique
+  parent   Category?  @relation("Subcategories", fields: [parentId], references: [id])
+  children Category[] @relation("Subcategories")
 
   products Product[]
-}
 
-model Tag {
-  id        String   @id @default(cuid())
-  name      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  products ProductTag[]
-}
-
-model ProductTag {
-  product   Product @relation(fields: [productId], references: [id])
-  productId String
-  tag       Tag     @relation(fields: [tagId], references: [id])
-  tagId     String
-
-  @@id([productId, tagId])
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  CategoryParameter CategoryParameter[]
 }
 
 /**

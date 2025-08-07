@@ -13,7 +13,15 @@ const MobileNavigation = () => {
 	return (
 		<>
 			<Menu isOpen={isOpen} close={close} />
-			<button className={mergeClasses(styles.button, 'button-empty', styles.hamburgerBtn)} onClick={open}>
+			<button
+				type="button"
+				aria-label="Open menu"
+				aria-expanded={isOpen}
+				aria-controls="mobile-menu"
+				aria-haspopup="true"
+				className={mergeClasses(styles.button, 'button-empty', styles.hamburgerBtn)}
+				onClick={open}
+			>
 				<Hamburger />
 			</button>
 		</>
