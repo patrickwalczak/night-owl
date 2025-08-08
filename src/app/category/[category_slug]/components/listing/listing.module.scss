@@ -1,9 +1,15 @@
+@use '../../../../../styles/breakpoints';
+
 .listingContainer {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	row-gap: 1rem;
-	padding: 5rem 0.5rem;
+	padding: 2.5rem 1rem;
+
+	@media (min-width: breakpoints.$breakpoint-768) {
+		padding: 5rem;
+	}
 }
 
 .productsContainer {

@@ -3,6 +3,7 @@ import React from 'react';
 const Cart = ({ className = '' }: { className?: string }) => {
 	return (
 		<svg
+			aria-hidden="true"
 			className={className}
 			width="30"
 			height="30"

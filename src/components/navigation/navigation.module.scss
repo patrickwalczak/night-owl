@@ -7,14 +7,49 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	transition: 200ms ease-in-out;
 	background-color: var(--color-owl-purple-850);
+	color: var(--color-owl-white);
 
-	&.isTransparent {
+	&:not(.isScrolled).isHomepage {
 		background-color: transparent;
 	}
 
-	&:hover {
+	&:not(.isHomepage) {
+		position: sticky;
+
+		.logo {
+			font-size: var(--font-size-22);
+		}
+	}
+
+	&.isScrolled {
+		.catalogButton {
+			font-size: var(--font-size-16);
+		}
+
+		.logo {
+			font-size: var(--font-size-18);
+		}
+
+		.cartButton {
+			svg {
+				width: var(--font-size-26);
+				height: var(--font-size-26);
+			}
+		}
+	}
+
+	&:not(.isHomepage), &.isScrolled {
+		.nav {
+			padding: 0.5rem;
+
+			@media (min-width: breakpoints.$breakpoint-768) {
+				padding: 0.5rem 1rem;
+			}
+		}
+	}
+
+	&:not(.isHomepage):hover, &.isScrolled, &.isHomepage.isDropdownExpanded {
 		background-color: var(--color-owl-purple-850);
 		box-shadow: 0 8px 20px 5px rgba(0, 0, 0, 0.2);
 	}
@@ -34,6 +69,7 @@
 }
 
 .listWrapper {
+	gap: 2rem;
 	justify-self: end;
 
 	@media (max-width: breakpoints.$breakpoint-768) {
@@ -41,16 +77,8 @@
 	}
 }
 
-.logo, .catalogButton {
-	color: var(--color-owl-white);
-}
-
 .catalogButton {
 	font-size: var(--font-size-18);
-}
-
-.listWrapper {
-	gap: 2rem;
 }
 
 .logoLink {

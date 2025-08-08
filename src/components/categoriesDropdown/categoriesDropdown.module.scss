@@ -2,10 +2,11 @@
 @use '../../styles/breakpoints';
 
 .dropdown {
-  display: none;
+  overflow: hidden;
+  width: 100%;
 
-  @media (min-width: breakpoints.$breakpoint-768) {
-    width: 100%;
+  @media (max-width: breakpoints.$breakpoint-768) {
+    border-bottom: 1px solid var(--color-owl-purple-500);
   }
 }
 
@@ -18,5 +19,8 @@
   font-size: var(--font-size-16);
   font-weight: var(--font-weight-200);
   color: var(--color-owl-white);
-  border-top: 2px solid var(--color-owl-purple-500);
+
+  @media (min-width: breakpoints.$breakpoint-768) {
+    border-top: 2px solid var(--color-owl-purple-500);
+  }
 }

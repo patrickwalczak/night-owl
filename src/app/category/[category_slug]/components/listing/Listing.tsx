@@ -86,7 +86,7 @@ const Listing = async () => {
 	return (
 		<div className={styles.listingContainer}>
 			<div className={styles.productControlsBar}>
-				<h2 className={styles.productsHeading}>Products ({products.length})</h2>
+				<h2 className={styles.productsHeading}>Category name ({products.length})</h2>
 				<div className={styles.productControlsButtons}>
 					<FilteringController />
 					<SortingController />

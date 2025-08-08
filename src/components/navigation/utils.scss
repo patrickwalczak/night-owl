@@ -1,6 +1,11 @@
 .nav-hover-underline {
   position: relative;
 
+  &:focus-visible::after {
+    width: 0;
+    transform: scale(0);
+  }
+
   &::after {
     content: '';
     position: absolute;
@@ -16,5 +21,14 @@
 
   &:hover::after {
     transform: scaleX(1);
+  }
+}
+
+.mobile-nav-element {
+  padding: 2rem;
+  font-size: var(--font-size-32);
+
+  &--border-bottom {
+    border-bottom: 1px solid var(--color-owl-purple-500);
   }
 }

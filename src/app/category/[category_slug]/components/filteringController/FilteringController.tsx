@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import FiltersIcon from '../../../../../public/icons/filters.svg';
+import FiltersIcon from '../../../../../../public/icons/filters.svg';
 import styles from './filteringController.module.scss';
 
 const FilteringController = () => {
@@ -8,14 +8,16 @@ const FilteringController = () => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const handleClick = () => {
-		setlabel(isOpen ? 'Show Filters' : 'Show Filters');
+		setlabel(isOpen ? 'Hide Filters' : 'Show Filters');
 		setIsOpen(!isOpen);
 	};
 
 	return (
-		<button onClick={handleClick} className={styles.filterBtn}>
-			Show Filters <FiltersIcon />
-		</button>
+		<>
+			<button onClick={handleClick} className={styles.filterBtn}>
+				Show Filters <FiltersIcon />
+			</button>
+		</>
 	);
 };
 

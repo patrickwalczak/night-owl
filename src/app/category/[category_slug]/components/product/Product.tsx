@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './product.module.scss';
 import Cart from '@/components/icons/Cart';
 import Image from 'next/image';
+import { mergeClasses } from '@/utils/mergeClasses';
 
 interface ProductType {
 	id: number;
@@ -27,7 +28,7 @@ const Product = ({ product }: ProductPropsType) => {
 			<div className={styles.detailsBox}>
 				<h3 className={styles.name}>{product.name}</h3>
 				<p className={styles.price}>${product.price}</p>
-				<button className={styles.cartBtn}>
+				<button className={mergeClasses(styles.cartBtn, 'button-empty')}>
 					<Cart />
 				</button>
 			</div>
