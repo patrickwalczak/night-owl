@@ -39,6 +39,10 @@
 		}
 	}
 
+	&.isHidden {
+		transform: translateY(-100%);
+	}
+
 	&:not(.isHomepage), &.isScrolled {
 		.nav {
 			padding: 0.5rem;

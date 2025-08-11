@@ -1,0 +1,12 @@
+.btn {
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 30px;
+  font-weight: bold;
+  border: 1px solid var(--color-owl-gray-900);
+
+
+  svg path {
+    stroke-width: 2px;
+  }
+}

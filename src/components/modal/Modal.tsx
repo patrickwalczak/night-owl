@@ -29,15 +29,15 @@ const Modal = ({ open, onClose, children }: ModalProps) => {
 	);
 };
 
+const Header = ({ className = '', children }: { className?: string; children: React.ReactNode }) => {
+	return <div className={className}>{children}</div>;
+};
+
 const CloseButton = ({ className = '' }: { className?: string }) => {
 	const { onClose } = useSafeContext(ModalContext);
 
 	return (
-		<button
-			className={mergeClasses(styles.closeButton, 'button-empty', className)}
-			onClick={onClose}
-			aria-label="Close modal"
-		>
+		<button className={mergeClasses('button-empty', className)} onClick={onClose} aria-label="Close modal">
 			<Close />
 		</button>
 	);
@@ -66,6 +66,17 @@ type WrapperPropsType = {
 };
 
 const Wrapper = ({ children, className = '', id = '', initial, animate, exit, transition }: WrapperPropsType) => {
+	const { onClose } = useSafeContext(ModalContext);
+
+	const handleClick = (e: React.MouseEvent) => {
+		e.stopPropagation();
+		const element = e.target as HTMLAnchorElement;
+
+		if (!element.closest('a[href]')) return;
+
+		onClose();
+	};
+
 	return (
 		<AnimatePresence>
 			<motion.div
@@ -76,7 +87,7 @@ const Wrapper = ({ children, className = '', id = '', initial, animate, exit, tr
 				transition={transition}
 				role="dialog"
 				aria-modal="true"
-				onClick={(e) => e.stopPropagation()}
+				onClick={handleClick}
 				id={id}
 			>
 				{children}
@@ -88,5 +99,6 @@ const Wrapper = ({ children, className = '', id = '', initial, animate, exit, tr
 Modal.CloseButton = CloseButton;
 Modal.Overlay = Overlay;
 Modal.Wrapper = Wrapper;
+Modal.Header = Header;
 
 export default Modal;

@@ -1,104 +1,61 @@
 import React from 'react';
-import Product from '../product/Product';
 import styles from './listing.module.scss';
-import FilteringController from '../filteringController/FilteringController';
-import SortingController from '../sortingController/SortingController';
+import { mergeClasses } from '@/utils/mergeClasses';
+import ParametersController from '../mobile/parametersController/ParametersController';
+import ProductsInfinite from '../ProductsInfinite';
+import { getCategoryBySlug, getProductsForCategory } from '@/lib/catalog/data';
+import { parseListingParams } from '@/lib/catalog/url';
 
-const products = [
-	{
-		id: 1,
-		name: 'Product 1',
-		price: 19.99,
-	},
-	{
-		id: 2,
-		name: 'Product 1',
-		price: 19.99,
-	},
-	{
-		id: 3,
-		name: 'Product 1',
-		price: 19.99,
-	},
-	{
-		id: 4,
-		name: 'Product 1',
-		price: 19.99,
-	},
-	{
-		id: 5,
-		name: 'Product 1',
-		price: 19.99,
-	},
-	{
-		id: 6,
-		name: 'Product 1',
-		price: 19.99,
-	},
-	{
-		id: 7,
-		name: 'Product 1',
-		price: 19.99,
-	},
-	{
-		id: 8,
-		name: 'Product 1',
-		price: 19.99,
-	},
-	{
-		id: 9,
-		name: 'Product 1',
-		price: 19.99,
-	},
-	{
-		id: 10,
-		name: 'Product 1',
-		price: 19.99,
-	},
-	{
-		id: 11,
-		name: 'Product 1',
-		price: 19.99,
-	},
-	{
-		id: 12,
-		name: 'Product 1',
-		price: 19.99,
-	},
-	{
-		id: 13,
-		name: 'Product 1',
-		price: 19.99,
-	},
-	{
-		id: 14,
-		name: 'Product 1',
-		price: 19.99,
-	},
-	{
-		id: 15,
-		name: 'Product 1',
-		price: 19.99,
-	},
-];
+export default async function Listing({
+	params,
+	searchParams,
+}: {
+	params: { category_slug: string };
+	searchParams: Record<string, string | string[] | undefined>;
+}) {
+	const slug = params.category_slug;
 
-const Listing = async () => {
+	const search =
+		'?' +
+		new URLSearchParams(
+			Object.entries(searchParams).flatMap(([key, value]) =>
+				value == null ? [] : Array.isArray(value) ? value.map((x) => [key, x]) : [[key, value]]
+			)
+		).toString();
+
+	const parsed = parseListingParams(new URLSearchParams(search.slice(1)));
+
+	const category = await getCategoryBySlug(slug);
+	if (!category) {
+		return null;
+	}
+
+	const { items, total, pageSize } = await getProductsForCategory({
+		categoryId: category.id,
+		page: parsed.page ?? 1,
+		sort: parsed.sort,
+		q: parsed.q,
+		priceMin: parsed.priceMin,
+		priceMax: parsed.priceMax,
+		paramValueIds: parsed.paramValueIds,
+	});
+
+	const totalPages = Math.max(1, Math.ceil(total / pageSize));
+	const nextPage = totalPages > 1 ? 2 : null;
+
 	return (
 		<div className={styles.listingContainer}>
-			<div className={styles.productControlsBar}>
-				<h2 className={styles.productsHeading}>Category name ({products.length})</h2>
-				<div className={styles.productControlsButtons}>
-					<FilteringController />
-					<SortingController />
-				</div>
+			<h2 className={mergeClasses(styles.productsHeading, 'transition-200')}>{category.name}</h2>
+
+			<div className={styles.productControlsButtons}>
+				<ParametersController />
 			</div>
-			<div className={styles.productsContainer}>
-				{products.map((product) => (
-					<Product key={product.id} product={product} />
-				))}
-			</div>
+
+			<ProductsInfinite
+				categorySlug={slug}
+				search={search}
+				initialPage={{ items, page: 1, nextPage, total, pageSize }}
+			/>
 		</div>
 	);
-};
-
-export default Listing;
+}

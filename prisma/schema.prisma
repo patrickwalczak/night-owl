@@ -88,27 +88,3 @@ model Category {
   updatedAt         DateTime            @updatedAt
   CategoryParameter CategoryParameter[]
 }
-
-/**
- * Hanging lamps
- * Chandeliers
- * Ceiling lamps
- * Ceiling lights
- * Wall lamps
- * Floor lamps
- * Desk lamps
- * Table lamps
- */
-
-/**
- * 'LumaLight Co.',
- * 'BrightNest',
- * 'GlowMark Lighting',
- * 'Aurora Fixtures',
- * 'Nocturne Lights',
- * 'Zenith Illumination',
- * 'HaloCraft',
- * 'LightWorx',
- * 'VividRay',
- * 'NexaLux',
- */

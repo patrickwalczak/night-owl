@@ -3,18 +3,13 @@ import styles from './product.module.scss';
 import Cart from '@/components/icons/Cart';
 import Image from 'next/image';
 import { mergeClasses } from '@/utils/mergeClasses';
+import { ListingProductType } from '@/types/product.model';
 
 interface ProductType {
-	id: number;
-	name: string;
-	price: number;
+	product: ListingProductType;
 }
 
-interface ProductPropsType {
-	product: ProductType;
-}
-
-const Product = ({ product }: ProductPropsType) => {
+const Product = ({ product }: ProductType) => {
 	return (
 		<div className={styles.productContainer}>
 			<Image

@@ -2,7 +2,6 @@
 @use '../../styles/breakpoints';
 
 .dropdown {
-  overflow: hidden;
   width: 100%;
 
   @media (max-width: breakpoints.$breakpoint-768) {
@@ -15,12 +14,23 @@
   grid-auto-columns: auto;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
+  height: auto;
   padding: 2rem;
   font-size: var(--font-size-16);
   font-weight: var(--font-weight-200);
-  color: var(--color-owl-white);
 
   @media (min-width: breakpoints.$breakpoint-768) {
     border-top: 2px solid var(--color-owl-purple-500);
   }
+}
+
+.noCategories {
+  text-transform: uppercase;
+  font-weight: var(--font-weight-100);
+}
+
+.isRootCategory {
+  font-size: var(--font-size-22);
+  font-weight: var(--font-weight-300);
 }

@@ -18,12 +18,13 @@ interface NavigationContextType {
 	isExpanded: boolean;
 	isScrolled: boolean;
 	setIsExpanded: React.Dispatch<React.SetStateAction<boolean>>;
+	hideDropdown: () => void;
 }
 
 export const NavigationContext = createContext<NavigationContextType | null>(null);
 
 const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) => {
-	const isScrolled = useIsScrolled();
+	const { isScrolled, direction } = useIsScrolled();
 	const { expandDropdown, hideDropdown, isExpanded, setIsExpanded } = useIsDropdownExpanded();
 
 	const catalogBtnRef = useRef<HTMLButtonElement | null>(null);
@@ -36,6 +37,7 @@ const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) =
 		isExpanded,
 		isScrolled,
 		setIsExpanded,
+		hideDropdown,
 	};
 
 	const onKeyDown = (e: React.KeyboardEvent) => {
@@ -61,9 +63,10 @@ const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) =
 					isHomepage && styles.isHomepage,
 					isScrolled && styles.isScrolled,
 					isExpanded && styles.isDropdownExpanded,
+					direction === 'down' && styles.isHidden,
 					'transition-200'
 				)}
-				onMouseLeave={hideDropdown}
+				onPointerLeave={hideDropdown}
 				onKeyDown={onKeyDown}
 			>
 				<nav className={mergeClasses(styles.nav, 'transition-200')} aria-label="Main navigation">

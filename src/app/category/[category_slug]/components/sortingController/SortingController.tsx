@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './sortingController.module.scss';
-import SortingIcon from '../../../../../../public/icons/arrow_down.svg';
+import ArrowDown from '@/components/icons/ArrowDown';
 
 const SortingController = () => {
 	return (
 		<button className={styles.sortBtn}>
-			Sort By <SortingIcon />
+			Sort By <ArrowDown />
 		</button>
 	);
 };

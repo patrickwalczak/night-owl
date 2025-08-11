@@ -10,16 +10,21 @@ import { useSafeContext } from '@/hooks/useSafeContext';
 import { NavigationContext } from '@/components/navigation/Navigation';
 
 const MobileNavigation = () => {
-	const { isScrolled } = useSafeContext(NavigationContext);
-	const { isOpen, close, open } = useOpenState();
+	const { isScrolled, hideDropdown } = useSafeContext(NavigationContext);
+	const { isOpened, close, open } = useOpenState();
+
+	const handleCloseMenu = () => {
+		close();
+		hideDropdown();
+	};
 
 	return (
 		<>
-			<Menu isOpen={isOpen} close={close} />
+			<Menu isOpen={isOpened} close={handleCloseMenu} />
 			<button
 				type="button"
 				aria-label="Open menu"
-				aria-expanded={isOpen}
+				aria-expanded={isOpened}
 				aria-controls="mobile-menu"
 				aria-haspopup="true"
 				className={mergeClasses(

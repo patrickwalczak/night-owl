@@ -1,12 +1,18 @@
-import React from 'react';
 import Listing from './components/listing/Listing';
 
-const Catalog = async () => {
+export default async function Catalog({
+	params,
+	searchParams,
+}: {
+	params: Promise<{ category_slug: string }>;
+	searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+	const p = await params;
+	const sp = await searchParams;
+
 	return (
 		<main>
-			<Listing />
+			<Listing params={p} searchParams={sp} />
 		</main>
 	);
-};
-
-export default Catalog;
+}

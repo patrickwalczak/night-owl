@@ -14,9 +14,7 @@ const CategoriesDropdown = ({
 	categories: SimpleCategoryModelType[];
 	controllerBtnRef?: React.RefObject<HTMLButtonElement | null>;
 }) => {
-	const refCallback = (node: HTMLDivElement) => {
-		if (node) node.querySelector('a')?.focus();
-
+	const refCallback = () => {
 		return () => {
 			controllerBtnRef?.current?.focus();
 		};
@@ -38,7 +36,7 @@ const CategoriesDropdown = ({
 					{categories.length ? (
 						<ul className={mergeClasses(styles.wrapper)}>
 							{categories.map((category) => (
-								<Category key={category.id} category={category} />
+								<Category key={category.id} category={category} isRootCategory />
 							))}
 						</ul>
 					) : (
@@ -52,12 +50,29 @@ const CategoriesDropdown = ({
 
 export default CategoriesDropdown;
 
-const Category = ({ category }: { category: SimpleCategoryModelType }) => (
-	<li key={category.id}>
-		<Link className={mergeClasses('nav-hover-underline')} href={`/category/${category.slug}`}>
-			{category.name}
-		</Link>
-	</li>
+const Category = ({
+	category,
+	isRootCategory = false,
+}: {
+	category: SimpleCategoryModelType;
+	isRootCategory?: boolean;
+}) => (
+	<>
+		<li key={category.id}>
+			<Link
+				className={mergeClasses('nav-hover-underline', isRootCategory && styles.isRootCategory)}
+				href={`/category/${category.slug}`}
+			>
+				{category.name}
+			</Link>
+		</li>
+
+		{category.children.length
+			? category.children.map((child) => <Category key={child.id} category={{ children: [], ...child }} />)
+			: null}
+	</>
 );
 
-const NoCategoriesMessage = () => <p className={styles.noCategories}>No categories available</p>;
+const NoCategoriesMessage = () => (
+	<p className={mergeClasses('mobile-nav-element', styles.noCategories)}>No categories available</p>
+);

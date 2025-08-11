@@ -32,7 +32,7 @@ const Menu = ({ isOpen, close }: { isOpen: boolean; close: () => void }) => {
 						<HomeLink />
 						<CategoriesDropdownController />
 
-						<NavigationButton>
+						<NavigationButton className={'mobile-nav-element--border-bottom'}>
 							<Cart className={styles.cartSvg} />
 						</NavigationButton>
 					</motion.div>

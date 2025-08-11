@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import FiltersIcon from '../../../../../../public/icons/filters.svg';
-import styles from './filteringController.module.scss';
+import FilterButton from '../filterButton/FilterButton';
 
 const FilteringController = () => {
 	const [label, setlabel] = useState('Show Filters');
@@ -14,9 +13,7 @@ const FilteringController = () => {
 
 	return (
 		<>
-			<button onClick={handleClick} className={styles.filterBtn}>
-				Show Filters <FiltersIcon />
-			</button>
+			<FilterButton label={label} handleClick={handleClick} />
 		</>
 	);
 };

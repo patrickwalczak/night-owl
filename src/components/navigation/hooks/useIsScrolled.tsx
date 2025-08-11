@@ -1,26 +1,42 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-const useIsScrolled = () => {
+type ScrollDirection = 'up' | 'down';
+
+const useScrollState = (offset = 60, threshold = 8) => {
 	const [isScrolled, setIsScrolled] = useState(false);
+	const [direction, setDirection] = useState<ScrollDirection>('up');
+
+	const lastY = useRef(0);
+	const ticking = useRef(false);
 
 	useEffect(() => {
-		const handleScroll = () => {
-			const scrollY = window.scrollY;
+		const onScroll = () => {
+			const y = Math.max(0, window.scrollY);
 
-			if (scrollY < 60) setIsScrolled(false);
-			else setIsScrolled(true);
+			if (!ticking.current) {
+				window.requestAnimationFrame(() => {
+					setIsScrolled(y >= offset);
+
+					const diff = y - lastY.current;
+					if (Math.abs(diff) >= threshold) {
+						setDirection(diff > 0 ? 'down' : 'up');
+						lastY.current = y;
+					}
+
+					ticking.current = false;
+				});
+				ticking.current = true;
+			}
 		};
 
-		handleScroll();
+		lastY.current = Math.max(0, window.scrollY);
+		onScroll();
 
-		window.addEventListener('scroll', handleScroll, { passive: true });
+		window.addEventListener('scroll', onScroll, { passive: true });
+		return () => window.removeEventListener('scroll', onScroll);
+	}, [offset, threshold]);
 
-		return () => {
-			window.removeEventListener('scroll', handleScroll);
-		};
-	}, []);
-
-	return isScrolled;
+	return { isScrolled, direction };
 };
 
-export default useIsScrolled;
+export default useScrollState;
