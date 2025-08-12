@@ -1,25 +1,11 @@
-import { cache } from 'react';
-import type { SortKey } from './types';
+'use server';
+
+import { SortOrderKeys } from '@/types/catalog.models';
 import prisma from '../../../prisma/prisma';
 
 const PAGE_SIZE = 20;
 
-export const getCategoryBySlug = cache(async (slug: string) => {
-	return prisma.category.findUnique({
-		where: { slug },
-		select: { id: true, name: true, slug: true, parentId: true },
-	});
-});
-
-export async function getSubcategories(parentId: string) {
-	return prisma.category.findMany({
-		where: { parentId },
-		select: { id: true, name: true, slug: true },
-		orderBy: { name: 'asc' },
-	});
-}
-
-function toOrderBy(sort: SortKey) {
+function toOrderBy(sort: SortOrderKeys) {
 	switch (sort) {
 		case 'price_asc':
 			return { price: 'asc' as const };
@@ -32,19 +18,10 @@ function toOrderBy(sort: SortKey) {
 	}
 }
 
-export async function getCategoryProductCountDirect(categoryId: string) {
-	const children = await prisma.category.findMany({
-		where: { parentId: categoryId },
-		select: { id: true },
-	});
-	const ids = [categoryId, ...children.map((c) => c.id)];
-	return prisma.product.count({ where: { categoryId: { in: ids } } });
-}
-
 export async function getProductsForCategory(opts: {
 	categoryId: string;
 	page: number;
-	sort: SortKey;
+	sort: SortOrderKeys;
 	paramValueIds?: string[];
 	query?: string;
 }) {
@@ -82,5 +59,5 @@ export async function getProductsForCategory(opts: {
 		prisma.product.count({ where }),
 	]);
 
-	return { items, total, pageSize: PAGE_SIZE, _debugWhere: where };
+	return { items, total, pageSize: PAGE_SIZE };
 }

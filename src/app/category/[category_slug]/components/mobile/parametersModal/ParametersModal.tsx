@@ -3,13 +3,22 @@ import { mergeClasses } from '@/utils/mergeClasses';
 import styles from './parametersModal.module.scss';
 import Modal from '@/components/modal/Modal';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import SortByGroup from '../sortByGroup/SortByGroup';
 import { useQuery } from '@tanstack/react-query';
+import { SortOrderKeys } from '@/types/catalog.models';
+import SortingController from '../sortingController/SortingController';
+
+const DEFAULT_SORT_ORDER: SortOrderKeys = 'popularity';
 
 const ParametersModal = ({ isOpened, close }: { isOpened: boolean; close: () => void }) => {
 	const router = useRouter();
 	const pathname = usePathname();
-	const current = useSearchParams();
+	const searchParams = useSearchParams();
+
+	const initialSort = searchParams.get('sort') || DEFAULT_SORT_ORDER;
+	const initialParamIds = (searchParams.get('params') ?? '').split(',').filter(Boolean);
+
+	const [sort, setSort] = useState<SortOrderKeys>(initialSort as SortOrderKeys);
+	const [selectedParamIds, setSelectedParamIds] = useState<string[]>(initialParamIds);
 
 	const { data } = useQuery({
 		queryKey: ['category-parameters', pathname],
@@ -26,21 +35,15 @@ const ParametersModal = ({ isOpened, close }: { isOpened: boolean; close: () => 
 		setSelectedParamIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
 	}
 
-	const initialSort = current.get('sort') ?? 'popularity';
-	const initialParamIds = (current.get('params') ?? '').split(',').filter(Boolean);
-
-	const [sort, setSort] = useState(initialSort);
-	const [selectedParamIds, setSelectedParamIds] = useState<string[]>(initialParamIds);
-
 	function replaceParams(next: URLSearchParams) {
 		next.delete('page');
 		router.replace(`${pathname}?${next.toString()}`, { scroll: false });
 	}
 
 	function onApply() {
-		const next = new URLSearchParams(current.toString());
+		const next = new URLSearchParams(searchParams.toString());
 
-		if (sort) next.set('sort', sort);
+		if (sort && sort !== DEFAULT_SORT_ORDER) next.set('sort', sort);
 		else next.delete('sort');
 
 		if (selectedParamIds.length) {
@@ -54,8 +57,8 @@ const ParametersModal = ({ isOpened, close }: { isOpened: boolean; close: () => 
 	}
 
 	function onReset() {
-		const next = new URLSearchParams(current.toString());
-		['q', 'sort', 'priceMin', 'priceMax', 'params', 'page'].forEach((k) => next.delete(k));
+		const next = new URLSearchParams(searchParams.toString());
+		['query', 'sort', 'params', 'page'].forEach((k) => next.delete(k));
 		replaceParams(next);
 		close();
 	}
@@ -76,11 +79,8 @@ const ParametersModal = ({ isOpened, close }: { isOpened: boolean; close: () => 
 						<Modal.CloseButton className={styles.closeModalBtn} />
 					</Modal.Header>
 
-					<div className={styles.body}>
-						<div className={styles.filtersContainer}>
-							<SortByGroup value={sort} onChange={setSort} />
-						</div>
-
+					<div className={mergeClasses(styles.body, 'flex', 'flex-col')}>
+						<SortingController sort={sort} setSort={setSort} />
 						{data?.parameters.map((param) => (
 							<section key={param.id} className={mergeClasses(styles.paramSection, 'flex', 'flex-col')}>
 								<h4 className={styles.paramHeading}>{param.name}</h4>

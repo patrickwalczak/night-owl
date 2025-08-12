@@ -3,11 +3,12 @@ import styles from './listing.module.scss';
 import { mergeClasses } from '@/utils/mergeClasses';
 import ParametersController from '../mobile/parametersController/ParametersController';
 import ProductsInfinite from '../ProductsInfinite';
-import { getCategoryBySlug, getCategoryProductCountDirect, getProductsForCategory } from '@/lib/catalog/data';
-import { normalizeSearchParams, parseListingParams } from '@/lib/catalog/url';
+import { getCategoryBySlug, getCategoryProductCountDirect } from '@/lib/serverActions/category';
+import { normalizeSearchParams, parseListingParams } from '@/utils/url';
 import Subcategories from '../subcategories/Subcategories';
-import { SearchParamsType, UrlParamType } from '@/lib/catalog/types';
+import { SearchParamsType, UrlParamType } from '@/types/types';
 import { notFound } from 'next/navigation';
+import { getProductsForCategory } from '@/lib/serverActions/product';
 
 export default async function Listing({
 	params,

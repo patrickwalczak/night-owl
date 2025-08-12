@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { getCategoryBySlug } from '@/lib/catalog/data';
-import { getParametersForCategory } from '@/lib/catalog/parameters';
+import { getCategoryBySlug } from '@/lib/serverActions/category';
+import { getParametersForCategory } from '@/lib/serverActions/parameter';
 
 export async function GET(_req: Request, { params }: { params: { category_slug: string } }) {
 	const cat = await getCategoryBySlug(params.category_slug);

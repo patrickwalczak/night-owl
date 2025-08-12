@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './subcategories.module.scss';
-import { getSubcategories } from '@/lib/catalog/data';
+import { getSubcategories } from '@/lib/serverActions/category';
 import Link from 'next/link';
 
 const Subcategories = async ({ categoryId }: { categoryId: string }) => {
@@ -11,9 +11,9 @@ const Subcategories = async ({ categoryId }: { categoryId: string }) => {
 	return (
 		<div className={styles.ribbon}>
 			<div className={styles.scroller}>
-				{subcategories.map((s) => (
-					<Link key={s.id} href={`/category/${s.slug}`} className={styles.pill}>
-						{s.name}
+				{subcategories.map((subcategory) => (
+					<Link key={subcategory.id} href={`/category/${subcategory.slug}`} className={styles.pill}>
+						{subcategory.name}
 					</Link>
 				))}
 			</div>

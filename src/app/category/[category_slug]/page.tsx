@@ -1,5 +1,5 @@
 import Listing from './components/listing/Listing';
-import { SearchParamsType, UrlParamType } from '@/lib/catalog/types';
+import { SearchParamsType, UrlParamType } from '@/types/types';
 
 export default async function Catalog({
 	params,

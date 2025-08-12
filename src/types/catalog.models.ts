@@ -1,8 +1,10 @@
-export type SortKey = 'popularity' | 'price_asc' | 'price_desc' | 'newest';
+import { SORT_ORDER_OPTIONS } from '@/constants';
+
+export type SortOrderKeys = (typeof SORT_ORDER_OPTIONS)[number];
 
 export type SearchParamsType = {
 	query?: string;
-	sort?: SortKey;
+	sort?: SortOrderKeys;
 	page?: string;
 	params?: string;
 } & Record<string, never>;

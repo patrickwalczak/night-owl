@@ -13,12 +13,11 @@ export interface Category {
 	CategoryParameter?: CategoryParameter[];
 }
 
-// First-layer only category tree
 export type CategoryLeaf = Pick<Category, 'id' | 'name' | 'slug'>;
 
 export interface SimpleCategoryModelType {
 	id: string;
 	name: string;
 	slug: string;
-	children: CategoryLeaf[]; // first layer only
+	children: CategoryLeaf[];
 }

@@ -41,7 +41,6 @@ export interface CategoryParameter {
 	parameter?: Parameter;
 }
 
-// Product list card (for grids/catalogs)
 export interface ProductCardModel {
 	id: string;
 	name: string;
@@ -54,7 +53,6 @@ export interface ProductCardModel {
 	category: { id: string; slug: string; name: string };
 }
 
-// Product detail with parameter values (flattened)
 export interface ProductDetailModel {
 	id: string;
 	name: string;
@@ -69,7 +67,6 @@ export interface ProductDetailModel {
 	updatedAt: Date;
 	category: { id: string; name: string; slug: string };
 
-	// e.g. [{ parameter: "Color", values: [{value:"Red", count: 10}, ...] }]
 	parameters: Array<{
 		parameterId: string;
 		parameterName: string;

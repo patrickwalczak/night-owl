@@ -41,9 +41,10 @@
 }
 
 .body {
+  gap: 1.5rem;
   min-height: 0;
+  padding: 1.5rem 1rem;
   overflow: auto;
-  padding: 0 1rem;
 }
 
 .filtersContainer {
@@ -169,4 +170,50 @@
 .chkText {
   font: inherit;
   color: var(--color-owl-gray-900);
+}
+
+// Radio
+
+$radio-size: var(--font-size-18);
+
+.sortGroup {
+  border: none;
+  padding: 0;
+}
+
+.sortLegend {
+  margin-bottom: .75rem;
+  font-weight: var(--font-weight-600);
+  font-size: var(--font-size-16);
+}
+
+.sortList {
+  gap: 1rem;
+  padding: 0;
+}
+
+.sortLabel {
+  gap: .75rem;
+  cursor: pointer;
+}
+
+.customRadio {
+  width: $radio-size;
+  height: $radio-size;
+  border-color: var(--color-owl-gray-900);
+  background: var(--color-owl-white);
+
+  &::after {
+    width: calc($radio-size / 2);
+    height: calc($radio-size / 2);
+    background: var(--color-owl-gray-900);
+  }
+}
+
+.sortLabel:hover .customRadio {
+  border-color: var(--color-owl-gray-900);
+}
+
+.labelText {
+  font-size: var(--font-size-16);
 }
