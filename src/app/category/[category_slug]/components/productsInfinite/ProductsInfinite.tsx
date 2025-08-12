@@ -2,8 +2,9 @@
 
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect, useMemo, useRef } from 'react';
-import Product from './product/Product';
 import { ListingProductType } from '@/types/product.model';
+import Product from '../product/Product';
+import styles from './productsInfinite.module.scss';
 
 type PagePayload = {
 	items: ListingProductType[];
@@ -63,7 +64,7 @@ export default function ProductsInfinite({ categorySlug, search, initialPage }: 
 
 	return (
 		<>
-			<div className="productsContainer">
+			<div className={styles.productsContainer}>
 				{items.map((p) => (
 					<Product key={p.id} product={p} />
 				))}

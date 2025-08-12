@@ -1,8 +1,8 @@
 import React, { SetStateAction, Dispatch } from 'react';
-import styles from './sortingController.module.scss';
+import styles from './sortOrderSelector.module.scss';
 import { mergeClasses } from '@/utils/mergeClasses';
 import { SortOrderKeys } from '@/types/catalog.models';
-import { createRadioGroup } from '../sortByGroup/RadioGroup';
+import { createRadioGroup } from '../../radioGroup/RadioGroup';
 
 const SORT_OPTIONS: { value: SortOrderKeys; label: string }[] = [
 	{ value: 'popularity', label: 'Featured' },
@@ -11,7 +11,7 @@ const SORT_OPTIONS: { value: SortOrderKeys; label: string }[] = [
 	{ value: 'price_asc', label: 'Price: Low-High' },
 ];
 
-const SortingController = ({
+const SortOrderSelector = ({
 	sort,
 	setSort,
 }: {
@@ -45,4 +45,4 @@ const SortingController = ({
 	);
 };
 
-export default SortingController;
+export default SortOrderSelector;

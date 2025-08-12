@@ -1,0 +1,16 @@
+@use '../../../../../styles/breakpoints';
+
+.productsContainer {
+  --product-card-width: max(200px, 40%);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--product-card-width), 1fr));
+  gap: 1rem;
+
+  @media (min-width: breakpoints.$breakpoint-768) {
+    --product-card-width: 310px;
+  }
+
+  @media (min-width: breakpoints.$breakpoint-1024) {
+    --product-card-width: max(340px, 30%);
+  }
+}

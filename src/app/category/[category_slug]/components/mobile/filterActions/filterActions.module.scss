@@ -1,0 +1,28 @@
+.footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-top: 1px solid var(--color-owl-gray-300);
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+}
+
+.footerBtn {
+  display: block;
+  padding: 0.615rem 1rem;
+  border-radius: 2rem;
+  width: 50%;
+  font-size: var(--font-size-16);
+}
+
+.showBtn {
+  background-color: var(--color-owl-purple-500);
+  color: var(--color-owl-white);
+  border: none
+}
+
+.resetBtn {
+  background-color: transparent;
+  border: 1px solid var(--color-owl-gray-400);
+}

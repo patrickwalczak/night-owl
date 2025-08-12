@@ -5,30 +5,38 @@ import Image from 'next/image';
 import { mergeClasses } from '@/utils/mergeClasses';
 import { ListingProductType } from '@/types/product.model';
 
-interface ProductType {
-	product: ListingProductType;
-}
+type Props = { product: ListingProductType };
 
-const Product = ({ product }: ProductType) => {
+export default function Product({ product }: Props) {
 	return (
-		<div className={styles.productContainer}>
-			<Image
-				unoptimized
-				width={600}
-				height={400}
-				alt={product.name}
-				className={styles.img}
-				src={'https://placehold.co/600x400'}
-			/>
-			<div className={styles.detailsBox}>
-				<h3 className={styles.name}>{product.name}</h3>
-				<p className={styles.price}>${product.price}</p>
-				<button className={mergeClasses(styles.cartBtn, 'button-empty')}>
-					<Cart />
-				</button>
+		<article className={mergeClasses(styles.card, 'transition-200')}>
+			<div className={mergeClasses(styles.thumb, 'w-100')}>
+				<Image
+					src={'https://placehold.co/600x400.webp'}
+					alt={product.name}
+					fill
+					priority={false}
+					className={styles.img}
+				/>
 			</div>
-		</div>
-	);
-};
 
-export default Product;
+			<div className={mergeClasses(styles.details, 'align-center')}>
+				<h3 title={product.name} className={mergeClasses(styles.title, 'truncate')}>
+					{product.name}
+				</h3>
+
+				<div className={styles.bottomContainer}>
+					<p className={styles.price}>${product.price}</p>
+					<button
+						type="button"
+						className={mergeClasses(styles.cartBtn, 'button-empty', 'transition-200', 'flex-center')}
+						aria-label={`Add “${product.name}” to cart`}
+					>
+						<Cart />
+						<span className="sr-only">Add to cart</span>
+					</button>
+				</div>
+			</div>
+		</article>
+	);
+}

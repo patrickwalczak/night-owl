@@ -1,36 +1,6 @@
 import { Category } from '@prisma/client';
-import { ProductModelType, ProductStatus } from './product.model';
-
-export interface Parameter {
-	id: string;
-	name: string;
-	description?: string | null;
-	createdAt: Date;
-	updatedAt: Date;
-
-	categories?: CategoryParameter[];
-	values?: ParameterValue[];
-}
-
-export interface ParameterValue {
-	id: string;
-	value: string;
-	count: number;
-
-	parameterId: string;
-	parameter?: Parameter;
-
-	products?: ProductParameterValueModel[];
-}
-
-export interface ProductParameterValueModel {
-	id: string;
-	productId: string;
-	parameterValueId: string;
-
-	product?: ProductModelType;
-	parameterValue?: ParameterValue;
-}
+import { ProductStatus } from './product.model';
+import { ParameterModelType } from './parameter.model';
 
 export interface CategoryParameter {
 	id: string;
@@ -38,7 +8,7 @@ export interface CategoryParameter {
 	parameterId: string;
 
 	category?: Category;
-	parameter?: Parameter;
+	parameter?: ParameterModelType;
 }
 
 export interface ProductCardModel {

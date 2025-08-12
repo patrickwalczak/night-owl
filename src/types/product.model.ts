@@ -1,5 +1,5 @@
 import { Category } from './category.model';
-import { ProductParameterValueModel } from './db.models';
+import { ProductParameterValueModelType } from './parameter.model';
 
 export type ProductStatus = 'NEW' | 'SALE' | 'PROMOTION' | 'DEFAULT';
 
@@ -20,7 +20,7 @@ export interface ProductModelType {
 	categoryId: string;
 	category?: Category; // include only when you select/join it
 
-	parameterValues?: ProductParameterValueModel[];
+	parameterValues?: ProductParameterValueModelType[];
 }
 
 export type ListingProductType = Pick<ProductModelType, 'id' | 'name' | 'slug' | 'image' | 'price' | 'status'>;

@@ -1,0 +1,51 @@
+.fieldset {
+  border: none;
+  padding: 0;
+}
+
+.legend {
+  margin-bottom: .75rem;
+  font-weight: var(--font-weight-600);
+  font-size: var(--font-size-16);
+}
+
+.list {
+  gap: 1rem;
+  padding: 0;
+}
+
+.label {
+  gap: .5rem;
+}
+
+.customCheckbox {
+  width: var(--font-size-18);
+  height: var(--font-size-18);
+  border-color: var(--color-owl-gray-500);
+  background: var(--color-owl-white);
+}
+
+.customCheckbox::after {
+  width: 12px;
+  height: 12px;
+  background: var(--color-owl-white);
+}
+
+.label .input:checked + .customCheckbox {
+  background: var(--color-owl-gray-500);
+  border-color: var(--color-owl-gray-500);
+}
+
+.label:hover .customCheckbox {
+  border-color: var(--color-owl-gray-900);
+}
+
+.label .input:focus-visible + .customCheckbox {
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-owl-gray-900) 25%, transparent);
+  outline: 2px solid transparent;
+}
+
+.customCheckboxValue {
+  font: inherit;
+  color: var(--color-owl-gray-900);
+}

@@ -1,17 +1,17 @@
 @use '../../../../../styles/breakpoints';
 
-.listingContainer {
-	display: flex;
-	flex-direction: column;
+.listing {
+	max-width: 1560px;
+	margin: 0 auto;
 	row-gap: 1rem;
 	padding: 2.5rem 1rem;
 
 	@media (min-width: breakpoints.$breakpoint-768) {
-		padding: 5rem;
+		padding: 3rem 2rem;
 	}
 }
 
-.productsHeading {
+.categoryName {
 	text-align: start;
 	color: var(--color-owl-gray-900);
 	font-size: var(--font-size-26);
@@ -19,21 +19,10 @@
 	background-color: var(--color-owl-white);
 }
 
-.productControlsBar {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	column-gap: 1rem;
-	width: 100%;
-	max-width: 450px;
-}
-
-.productControlsButtons {
+.stickyContainer {
 	position: sticky;
 	top: 0;
-	background-color: var(--color-owl-white);
-	padding: 0.5rem;
 	column-gap: 1rem;
+	padding: 0.5rem;
+	background-color: var(--color-owl-white);
 }

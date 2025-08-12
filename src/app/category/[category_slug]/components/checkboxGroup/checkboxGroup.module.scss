@@ -1,0 +1,38 @@
+.label {
+  cursor: pointer;
+  user-select: none;
+}
+
+.customCheckbox {
+  border-radius: .375rem;
+  border-width: 2px;
+  border-style: solid;
+  position: relative;
+}
+
+.customCheckbox::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  -webkit-mask: url("/check.svg") no-repeat center / contain;
+  mask: url("/check.svg") no-repeat center / contain;
+  transform: scale(0);
+}
+
+.label .input:checked + .customCheckbox::after {
+  transform: scale(1);
+}
+
+.label .input:disabled + .customCheckbox {
+  opacity: .5;
+}
+
+.label .input:disabled ~ .customCheckboxValue {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.customCheckboxValue {
+  color: var(--color-owl-gray-900);
+}
