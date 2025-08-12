@@ -1,0 +1,10 @@
+import { NextResponse } from 'next/server';
+import { getCategoryBySlug } from '@/lib/catalog/data';
+import { getParametersForCategory } from '@/lib/catalog/parameters';
+
+export async function GET(_req: Request, { params }: { params: { category_slug: string } }) {
+	const cat = await getCategoryBySlug(params.category_slug);
+	if (!cat) return NextResponse.json({ error: 'Category not found' }, { status: 404 });
+	const data = await getParametersForCategory(cat.id);
+	return NextResponse.json({ parameters: data });
+}

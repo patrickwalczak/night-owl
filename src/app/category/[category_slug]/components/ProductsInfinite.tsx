@@ -30,7 +30,7 @@ export default function ProductsInfinite({ categorySlug, search, initialPage }: 
 		return res.json();
 	};
 
-	const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status, fetchStatus } = useInfiniteQuery({
+	const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } = useInfiniteQuery({
 		queryKey: key,
 		queryFn: fetchPage,
 		getNextPageParam: (last) => last.nextPage,
@@ -55,8 +55,6 @@ export default function ProductsInfinite({ categorySlug, search, initialPage }: 
 		return () => obs?.disconnect();
 	}, [hasNextPage, fetchNextPage]);
 
-	if (!data && fetchStatus === 'fetching') return <p>Loading…</p>;
-
 	if (status === 'error') return <p>Couldn’t load products.</p>;
 
 	const items = (data?.pages ?? []).flatMap((p) => p.items);
@@ -73,7 +71,6 @@ export default function ProductsInfinite({ categorySlug, search, initialPage }: 
 
 			<div ref={loadMoreRef} aria-hidden="true" />
 			{isFetchingNextPage && <p>Loading more…</p>}
-			{!hasNextPage && <p role="status">End of results.</p>}
 		</>
 	);
 }

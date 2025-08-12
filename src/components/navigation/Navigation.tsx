@@ -88,9 +88,9 @@ const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) =
 						>
 							Catalog
 						</button>
-						<button type="button" className={mergeClasses(styles.cartButton, 'button-empty')} aria-label="Open cart">
+						{/* <button type="button" className={mergeClasses(styles.cartButton, 'button-empty')} aria-label="Open cart">
 							<Cart />
-						</button>
+						</button> */}
 					</div>
 
 					<MobileNavigation />

@@ -1,0 +1,22 @@
+.ribbon {
+  position: relative;
+  overflow: hidden;
+}
+
+.scroller {
+  display: flex;
+  gap: .75rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.pill {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}

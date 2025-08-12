@@ -1,11 +1,28 @@
+.modal {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--color-owl-white);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  overflow: hidden;
+
+  @supports (height: 100dvh) {
+    height: 100dvh;
+  }
+}
+
 .header {
-  padding-block: 1rem 0;
-  padding-inline: 0.75rem;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 0.75rem 1rem;
+  background: var(--color-owl-white);
+  border-bottom: 1px solid var(--color-owl-gray-300);
 }
 
 .heading {
-  font-weight: var(--font-weight-300);
-  font-size: var(--font-size-22);
+  font-weight: var(--font-weight-400);
+  font-size: var(--font-size-18);
 }
 
 .closeModalBtn {
@@ -23,8 +40,133 @@
   }
 }
 
-.modal {
-  width: 100%;
-  height: 100%;
-  background-color: var(--color-owl-white);
+.body {
+  min-height: 0;
+  overflow: auto;
+  padding: 0 1rem;
+}
+
+.filtersContainer {
+  display: grid;
+  gap: 1rem;
+  padding-block: 1rem 2rem;
+}
+
+.footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-top: 1px solid var(--color-owl-gray-300);
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+}
+
+.footerBtn {
+  display: block;
+  padding: 0.615rem 1rem;
+  border-radius: 2rem;
+  width: 50%;
+  font-size: var(--font-size-16);
+}
+
+.showBtn {
+  background-color: var(--color-owl-purple-500);
+  color: var(--color-owl-white);
+  border: none
+}
+
+.resetBtn {
+  background-color: transparent;
+  border: 1px solid var(--color-owl-gray-400);
+}
+
+.paramSection {
+  gap: 1rem
+}
+
+.paramValues {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.chk {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.chk input {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* The custom square */
+.chkBox {
+  inline-size: 20px;
+  block-size: 20px;
+  border-radius: .375rem;
+  border: 2px solid var(--color-owl-gray-500);
+  background: #fff;
+  position: relative;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+
+/* White checkmark (SVG mask) */
+.chkBox::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  inline-size: 12px;
+  block-size: 12px;
+  background: #fff;
+  /* mask the check icon so background shows as the check */
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'><path fill='black' d='M6.4 11.6L2.8 8l1.13-1.13L6.4 8.34l5.67-5.67L13.2 3.8z'/></svg>") no-repeat center / contain;
+  mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'><path fill='black' d='M6.4 11.6L2.8 8l1.13-1.13L6.4 8.34l5.67-5.67L13.2 3.8z'/></svg>") no-repeat center / contain;
+  transform: scale(0);
+  transition: transform .15s ease;
+}
+
+.chk input:checked + .chkBox {
+  background: var(--color-owl-gray-500);
+  border-color: var(--color-owl-gray-500);
+}
+
+.chk input:checked + .chkBox::after {
+  transform: scale(1);
+}
+
+.chk:hover .chkBox {
+  border-color: var(--color-owl-gray-900);
+}
+
+.chk input:focus-visible + .chkBox {
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-owl-gray-900) 25%, transparent);
+  outline: 2px solid transparent;
+}
+
+.chk input:disabled + .chkBox {
+  opacity: .5;
+}
+
+.chk input:disabled ~ .chkText {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+/* Label text */
+.chkText {
+  font: inherit;
+  color: var(--color-owl-gray-900);
 }

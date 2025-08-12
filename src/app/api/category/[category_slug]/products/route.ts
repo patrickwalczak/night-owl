@@ -1,4 +1,3 @@
-// app/api/category/[category_slug]/products/route.ts
 import { NextResponse } from 'next/server';
 import { getCategoryBySlug, getProductsForCategory } from '@/lib/catalog/data';
 import { parseListingParams } from '@/lib/catalog/url';

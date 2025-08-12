@@ -11,6 +11,14 @@ export const getCategoryBySlug = cache(async (slug: string) => {
 	});
 });
 
+export async function getSubcategories(parentId: string) {
+	return prisma.category.findMany({
+		where: { parentId },
+		select: { id: true, name: true, slug: true },
+		orderBy: { name: 'asc' },
+	});
+}
+
 function toOrderBy(sort: SortKey) {
 	switch (sort) {
 		case 'price_asc':
@@ -24,14 +32,21 @@ function toOrderBy(sort: SortKey) {
 	}
 }
 
+export async function getCategoryProductCountDirect(categoryId: string) {
+	const children = await prisma.category.findMany({
+		where: { parentId: categoryId },
+		select: { id: true },
+	});
+	const ids = [categoryId, ...children.map((c) => c.id)];
+	return prisma.product.count({ where: { categoryId: { in: ids } } });
+}
+
 export async function getProductsForCategory(opts: {
 	categoryId: string;
 	page: number;
 	sort: SortKey;
 	paramValueIds?: string[];
-	q?: string;
-	priceMin?: number;
-	priceMax?: number;
+	query?: string;
 }) {
 	const children = await prisma.category.findMany({
 		where: { parentId: opts.categoryId },
@@ -41,13 +56,7 @@ export async function getProductsForCategory(opts: {
 
 	const where: any = { categoryId: { in: categoryIds }, inStock: true };
 
-	if (opts.q) where.name = { contains: opts.q, mode: 'insensitive' };
-
-	if (opts.priceMin != null || opts.priceMax != null) {
-		where.price = {};
-		if (opts.priceMin != null) where.price.gte = opts.priceMin;
-		if (opts.priceMax != null) where.price.lte = opts.priceMax;
-	}
+	if (opts.query) where.name = { contains: opts.query, mode: 'insensitive' };
 
 	if (opts.paramValueIds?.length) {
 		where.parameterValues = {
