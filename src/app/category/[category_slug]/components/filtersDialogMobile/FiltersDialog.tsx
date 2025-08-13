@@ -2,8 +2,8 @@
 
 import useIsOpenState from '@/hooks/useIsOpenState';
 import React from 'react';
-import FilterButton from '../filterButton/FilterButton';
 import FiltersModal from './filtersModal/FiltersModal';
+import FilterButton from '../filterButton/FilterButton';
 
 const FiltersDialog = () => {
 	const { isOpened, close, open } = useIsOpenState();

@@ -5,7 +5,7 @@ import Modal from '@/components/modal/Modal';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { SortOrderKeys } from '@/types/catalog.models';
-import SortOrderSelector from '../sortOrderSelector/SortOrderSelector';
+import SortOrderSelector from '../../sortOrderSelector/SortOrderSelector';
 import { FilterParameterType } from '@/types/parameter.model';
 import FilterActions from '../filterActions/FilterActions';
 import { DEFAULT_SORT_ORDER } from '@/constants';

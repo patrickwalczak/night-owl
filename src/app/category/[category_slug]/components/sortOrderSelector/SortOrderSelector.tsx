@@ -2,7 +2,7 @@ import React, { SetStateAction, Dispatch } from 'react';
 import styles from './sortOrderSelector.module.scss';
 import { mergeClasses } from '@/utils/mergeClasses';
 import { SortOrderKeys } from '@/types/catalog.models';
-import { createRadioGroup } from '../../radioGroup/RadioGroup';
+import { createRadioGroup } from '../radioGroup/RadioGroup';
 
 const SORT_OPTIONS: { value: SortOrderKeys; label: string }[] = [
 	{ value: 'popularity', label: 'Featured' },

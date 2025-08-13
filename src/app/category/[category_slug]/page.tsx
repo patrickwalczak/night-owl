@@ -1,7 +1,7 @@
 import { UrlParamType, SearchParamsType } from '@/types/catalog.models';
-import Listing from './components/listing/Listing';
+import CatalogView from './components/catalogView/CatalogView';
 
-export default async function Catalog({
+export default async function CatalogServer({
 	params,
 	searchParams,
 }: {
@@ -11,9 +11,5 @@ export default async function Catalog({
 	const awaitedParams = await params;
 	const awaitedSearchParams = await searchParams;
 
-	return (
-		<main>
-			<Listing params={awaitedParams} searchParams={awaitedSearchParams} />
-		</main>
-	);
+	return <CatalogView params={awaitedParams} searchParams={awaitedSearchParams} />;
 }

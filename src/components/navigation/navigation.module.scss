@@ -15,8 +15,6 @@
 	}
 
 	&:not(.isHomepage) {
-		position: sticky;
-
 		.logo {
 			font-size: var(--font-size-22);
 		}
@@ -55,7 +53,7 @@
 
 	&:not(.isHomepage):hover, &.isScrolled, &.isHomepage.isDropdownExpanded {
 		background-color: var(--color-owl-purple-850);
-		box-shadow: 0 8px 20px 5px rgba(0, 0, 0, 0.2);
+		// box-shadow: 0 8px 20px 5px rgba(0, 0, 0, 0.2);
 	}
 }
 
