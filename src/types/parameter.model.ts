@@ -11,7 +11,7 @@ export interface ParameterModelType {
 	values?: ParameterValueModelType[];
 }
 
-export type FilterParameterType = Pick<ParameterModelType, 'id' | 'name' | 'values'>;
+export type FilterParameterType = Pick<ParameterModelType, 'id' | 'name'> & { values: FilterParameterValueType[] };
 
 export interface ParameterValueModelType {
 	id: string;
@@ -23,6 +23,8 @@ export interface ParameterValueModelType {
 
 	products?: ProductParameterValueModelType[];
 }
+
+export type FilterParameterValueType = Pick<ParameterValueModelType, 'id' | 'value' | 'count'>;
 
 export interface ProductParameterValueModelType {
 	id: string;

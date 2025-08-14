@@ -1,8 +1,10 @@
-import { getCategoryProductCountDirect } from '@/lib/serverActions/category';
+'use client';
+
+import { useAppSelector } from '@/lib/store/hooks';
 import React from 'react';
 
-const CategoryProductsTotal = async ({ categoryId }: { categoryId: string }) => {
-	const totalInCategory = await getCategoryProductCountDirect(categoryId);
+const CategoryProductsTotal = () => {
+	const totalInCategory = useAppSelector((state) => state.catalog.productSum);
 
 	return <span>{totalInCategory} Results</span>;
 };

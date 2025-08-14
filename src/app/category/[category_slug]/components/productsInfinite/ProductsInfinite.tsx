@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import { ListingProductType } from '@/types/product.model';
 import Product from '../product/Product';
 import styles from './productsInfinite.module.scss';
+import { useAppSelector } from '@/lib/store/hooks';
 
 type PagePayload = {
 	items: ListingProductType[];
@@ -15,12 +16,27 @@ type PagePayload = {
 };
 
 type Props = {
-	categorySlug: string;
 	search: string;
-	initialPage?: PagePayload;
+	initialItems: ListingProductType[];
 };
 
-export default function ProductsInfinite({ categorySlug, search, initialPage }: Props) {
+export default function ProductsInfinite({ search, initialItems }: Props) {
+	const {
+		category: { slug: categorySlug },
+		page,
+		pageSize,
+		nextPage,
+		productSum,
+	} = useAppSelector((state) => state.catalog);
+
+	const initialPage = {
+		items: initialItems,
+		page,
+		nextPage,
+		total: productSum,
+		pageSize,
+	};
+
 	const key = useMemo(() => ['products', categorySlug, search], [categorySlug, search]);
 
 	const fetchPage = async ({ pageParam = 1 }): Promise<PagePayload> => {
@@ -63,15 +79,16 @@ export default function ProductsInfinite({ categorySlug, search, initialPage }: 
 	if (items.length === 0) return <p>No products found.</p>;
 
 	return (
-		<>
+		<div className={styles.container}>
 			<div className={styles.productsContainer}>
 				{items.map((p) => (
 					<Product key={p.id} product={p} />
 				))}
 			</div>
-
-			<div ref={loadMoreRef} aria-hidden="true" />
+			<div className={styles.loaderContainer} ref={loadMoreRef} aria-hidden="true">
+				<div className={styles.loader}></div>
+			</div>
 			{isFetchingNextPage && <p>Loading more…</p>}
-		</>
+		</div>
 	);
 }

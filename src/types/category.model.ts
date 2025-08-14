@@ -13,11 +13,12 @@ export interface Category {
 	CategoryParameter?: CategoryParameter[];
 }
 
-export type CategoryLeaf = Pick<Category, 'id' | 'name' | 'slug'>;
+export type CategoryLeaf = Pick<Category, 'id' | 'name' | 'slug'> & { _count: { products: number } };
 
 export interface SimpleCategoryModelType {
 	id: string;
 	name: string;
 	slug: string;
+	parentId: string | null;
 	children: CategoryLeaf[];
 }

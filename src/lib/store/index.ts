@@ -1,15 +1,17 @@
 import { configureStore, PreloadedStateShapeFromReducersMapObject, combineReducers } from '@reduxjs/toolkit';
 import orderSlice from './features/order/orderSlice';
+import catalogSlice from './features/catalog/catalogSlice';
 
 // export type PreloadedStateType = PreloadedStateShapeFromReducersMapObject<typeof rootReducer>;
 
-// const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+	order: orderSlice,
+	catalog: catalogSlice,
+});
 
 export const makeStore = () => {
 	return configureStore({
-		reducer: {
-			cart: orderSlice,
-		},
+		reducer: rootReducer,
 	});
 };
 

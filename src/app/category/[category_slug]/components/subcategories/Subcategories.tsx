@@ -1,10 +1,12 @@
+'use client';
+
 import React from 'react';
 import styles from './subcategories.module.scss';
-import { getSubcategories } from '@/lib/serverActions/category';
 import Link from 'next/link';
+import { useAppSelector } from '@/lib/store/hooks';
 
-const Subcategories = async ({ categoryId }: { categoryId: string }) => {
-	const subcategories = await getSubcategories(categoryId);
+const Subcategories = () => {
+	const subcategories = useAppSelector((state) => state.catalog.subcategories);
 
 	if (!subcategories.length) return null;
 

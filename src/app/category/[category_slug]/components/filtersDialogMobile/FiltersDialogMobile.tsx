@@ -12,8 +12,6 @@ const FiltersDialog = dynamic(() => import('./FiltersDialog'), {
 export default function FiltersDialogMobile() {
 	const isMobileOrTablet = useMediaQuery('(max-width: 1023px)');
 
-	if (isMobileOrTablet === null) return <FilterButton label={'Filters'} handleClick={() => {}} />;
-
 	if (!isMobileOrTablet) return null;
 
 	return <FiltersDialog />;
