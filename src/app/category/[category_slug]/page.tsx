@@ -1,8 +1,6 @@
 import { UrlParamType, SearchParamsType } from '@/types/catalog.models';
 import CatalogView from './components/catalog/Catalog';
 import { normalizeSearchParams, parseListingParams } from '@/utils/url';
-import { getCategoryBySlug } from '@/lib/serverActions/category';
-import { getProductsForCategory } from '@/lib/serverActions/product';
 import { notFound } from 'next/navigation';
 import { cookies } from 'next/headers';
 import CatalogClient from './components/catalog/CatalogClient';

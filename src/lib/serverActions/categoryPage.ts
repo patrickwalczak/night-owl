@@ -31,6 +31,12 @@ export const getCategoryPageData = cache(async (slug: string, opts: FetchOpts) =
 		OR: [{ category: { slug } }, { category: { parent: { slug } } }],
 	};
 
+	if (opts.paramValueIds?.length) {
+		whereProducts.parameterValues = {
+			some: { parameterValueId: { in: opts.paramValueIds } },
+		};
+	}
+
 	const [category, items, total, parameters] = await prisma.$transaction(
 		[
 			prisma.category.findUnique({

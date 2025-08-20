@@ -1,60 +1,108 @@
-import React from 'react';
+'use client';
+
+import React, { createContext, PropsWithChildren } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { DEFAULT_SORT_ORDER, SEARCH_PARAMS_KEYS } from '@/constants';
 import { mergeClasses } from '@/utils/mergeClasses';
 import styles from './filterActions.module.scss';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { DEFAULT_SORT_ORDER } from '@/constants';
+import { useSafeContext } from '@/hooks/useSafeContext';
 
-const FilterActions = ({
-	close,
-	sort,
-	selectedParamIds,
-}: {
-	close: () => void;
+type RootProps = {
 	sort?: string;
 	selectedParamIds: string[];
-}) => {
+	defaultSort?: string; // default: DEFAULT_SORT_ORDER
+	className?: string; // footer wrapper classes
+};
+
+type Ctx = {
+	onApply: () => void;
+	onReset: () => void;
+};
+
+const FilterActionsCtx = createContext<Ctx | null>(null);
+
+function Root({
+	children,
+	sort,
+	selectedParamIds,
+	defaultSort = DEFAULT_SORT_ORDER,
+	className,
+}: PropsWithChildren<RootProps>) {
 	const router = useRouter();
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
 
-	function replaceParams(next: URLSearchParams) {
+	const replaceParams = (next: URLSearchParams) => {
 		next.delete('page');
 		router.replace(`${pathname}?${next.toString()}`, { scroll: false });
-	}
+	};
 
-	function onApply() {
+	const onApply = () => {
 		const next = new URLSearchParams(searchParams.toString());
 
-		if (sort && sort !== DEFAULT_SORT_ORDER) next.set('sort', sort);
+		if (sort && sort !== defaultSort) next.set('sort', sort);
 		else next.delete('sort');
 
-		if (selectedParamIds.length) {
-			next.set('params', selectedParamIds.join(','));
-		} else {
-			next.delete('params');
-		}
+		if (selectedParamIds.length) next.set('params', selectedParamIds.join(','));
+		else next.delete('params');
 
 		replaceParams(next);
-		close();
-	}
+	};
 
-	function onReset() {
+	const onReset = () => {
 		const next = new URLSearchParams(searchParams.toString());
-		['query', 'sort', 'params', 'page'].forEach((k) => next.delete(k));
+		SEARCH_PARAMS_KEYS.forEach((k) => next.delete(k));
 		replaceParams(next);
-		close();
-	}
+	};
 
 	return (
-		<footer className={mergeClasses(styles.footer, 'flex', 'justify-between')}>
-			<button type="button" className={mergeClasses(styles.resetBtn, styles.footerBtn)} onClick={onReset}>
-				Reset
-			</button>
-			<button type="button" className={mergeClasses(styles.showBtn, styles.footerBtn)} onClick={onApply}>
-				Show results
-			</button>
-		</footer>
+		<FilterActionsCtx.Provider value={{ onApply, onReset }}>
+			<footer className={mergeClasses(styles.container, 'flex', 'align-center', className)}>{children}</footer>
+		</FilterActionsCtx.Provider>
 	);
-};
+}
 
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & { className?: string };
+
+function Reset({ children = 'Reset', className, onClick = (e) => {}, ...rest }: ButtonProps) {
+	const { onReset } = useSafeContext(FilterActionsCtx);
+
+	const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+		onReset();
+		onClick(e);
+	};
+
+	return (
+		<button
+			type="button"
+			className={mergeClasses(styles.resetBtn, styles.filterBtn, className)}
+			onClick={handleClick}
+			{...rest}
+		>
+			{children}
+		</button>
+	);
+}
+
+function Apply({ children = 'Show results', className, onClick = (e) => {}, ...rest }: ButtonProps) {
+	const { onApply } = useSafeContext(FilterActionsCtx);
+
+	const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+		onApply();
+		onClick(e);
+	};
+
+	return (
+		<button
+			type="button"
+			className={mergeClasses(styles.showBtn, styles.filterBtn, className)}
+			onClick={handleClick}
+			{...rest}
+		>
+			{children}
+		</button>
+	);
+}
+
+const FilterActions = Object.assign(Root, { Reset, Apply });
 export default FilterActions;

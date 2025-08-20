@@ -1,9 +1,13 @@
 .fieldset {
+  min-width: 0;
   border: none;
   padding: 0;
 }
 
 .legend {
+  display: block;
+  max-width: 100%;
+  inline-size: 100%;
   margin-bottom: .75rem;
   font-weight: var(--font-weight-600);
   font-size: var(--font-size-16);

@@ -92,8 +92,8 @@ export function createCheckboxGroup<T extends string>() {
 						onChange={() => toggle(value)}
 						className={mergeClasses('sr-only', styles.input, inputClassName)}
 					/>
-					<span aria-hidden className={mergeClasses(styles.customCheckbox, customCheckboxClassName)} />
-					<span className={mergeClasses(styles.customCheckboxValue, labelTextClassName)}>{label}</span>
+					<span aria-hidden className={mergeClasses(styles.customCheckbox, customCheckboxClassName, 'flex-shrink-0')} />
+					<span className={mergeClasses(styles.customCheckboxValue, labelTextClassName, 'truncate')}>{label}</span>
 				</label>
 			</li>
 		);

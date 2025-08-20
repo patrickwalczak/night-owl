@@ -1,6 +1,5 @@
 .filtersContainer {
   position: sticky;
-  top: 0;
   height: 100%;
 }
 
@@ -8,8 +7,20 @@
   position: absolute;
   top: 0;
   right: 0;
+  gap: 1.5rem;
   width: 300px;
-  height: 100%;
   padding: 1rem;
   background-color: var(--color-owl-white);
+}
+
+.subcategories {}
+
+.actions {
+  background-color: var(--color-owl-white);
+}
+
+.content {
+  gap: 1.5rem;
+  overflow-y: auto;
+  padding-right: 0.25rem;
 }

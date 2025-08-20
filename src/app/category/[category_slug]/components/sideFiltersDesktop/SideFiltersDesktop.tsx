@@ -1,18 +1,21 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import styles from './sideFiltersDesktop.module.scss';
 import FiltersWrapper from './FiltersWrapper';
 import { useSearchParams } from 'next/navigation';
 import ParameterGroup from '../parameterGroup/ParameterGroup';
 import FilterActions from '../filtersDialogMobile/filterActions/FilterActions';
-import { useAppDispatch, useAppSelector } from '@/lib/store/hooks';
-import { toggleFilters } from '@/lib/store/features/catalog/catalogSlice';
+import { useAppSelector } from '@/lib/store/hooks';
+import Link from 'next/link';
+import { mergeClasses } from '@/utils/mergeClasses';
 
 const SideFiltersDesktop = () => {
 	const parameters = useAppSelector((state) => state.catalog.parameters);
-	const dispatch = useAppDispatch();
+	const subcategories = useAppSelector((state) => state.catalog.subcategories);
+	const filtersRef = useRef<HTMLDivElement | null>(null);
+	const [scrollableHeight, setScrollableHeight] = useState('100vh');
 
 	const searchParams = useSearchParams();
 
@@ -20,18 +23,66 @@ const SideFiltersDesktop = () => {
 
 	const [selectedParamIds, setSelectedParamIds] = useState<string[]>(initialParamIds);
 
+	useEffect(() => {
+		const onScroll = () => {
+			if (filtersRef.current) {
+				const rect = filtersRef.current.getBoundingClientRect();
+
+				const height = window.innerHeight - rect.y;
+				setScrollableHeight(`${height}px`);
+			}
+		};
+
+		onScroll();
+
+		window.addEventListener('scroll', onScroll);
+		return () => window.removeEventListener('scroll', onScroll);
+	}, []);
+
 	return (
 		<FiltersWrapper>
-			<div className={styles.filters}>
-				{parameters.map((param) => (
-					<ParameterGroup
-						key={param.id}
-						parameter={param}
-						selectedParamIds={selectedParamIds}
-						setSelectedParamIds={setSelectedParamIds}
-					/>
-				))}
-				<FilterActions selectedParamIds={selectedParamIds} close={() => dispatch(toggleFilters())} />
+			<div
+				ref={filtersRef}
+				style={{ height: scrollableHeight }}
+				className={mergeClasses(styles.filters, 'flex', 'flex-col')}
+			>
+				<div className={mergeClasses(styles.content, 'flex', 'flex-col')}>
+					<div className={mergeClasses(styles.subcategories, 'flex', 'flex-col')}>
+						{subcategories.map((subcategory) => (
+							<Link key={subcategory.id} href={`/category/${subcategory.slug}`}>
+								{subcategory.name}
+							</Link>
+						))}
+					</div>
+					{parameters.map((param) => (
+						<ParameterGroup
+							key={param.id}
+							parameter={param}
+							selectedParamIds={selectedParamIds}
+							setSelectedParamIds={setSelectedParamIds}
+						/>
+					))}
+					{parameters.map((param) => (
+						<ParameterGroup
+							key={param.id}
+							parameter={param}
+							selectedParamIds={selectedParamIds}
+							setSelectedParamIds={setSelectedParamIds}
+						/>
+					))}
+					{parameters.map((param) => (
+						<ParameterGroup
+							key={param.id}
+							parameter={param}
+							selectedParamIds={selectedParamIds}
+							setSelectedParamIds={setSelectedParamIds}
+						/>
+					))}
+				</div>
+				<FilterActions className={styles.actions} selectedParamIds={selectedParamIds}>
+					<FilterActions.Apply />
+					<FilterActions.Reset />
+				</FilterActions>
 			</div>
 		</FiltersWrapper>
 	);

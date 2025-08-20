@@ -39,6 +39,8 @@ export default function ProductsInfinite({ search, initialItems }: Props) {
 
 	const key = useMemo(() => ['products', categorySlug, search], [categorySlug, search]);
 
+	console.log(key);
+
 	const fetchPage = async ({ pageParam = 1 }): Promise<PagePayload> => {
 		const queryParams = new URLSearchParams(search.startsWith('?') ? search.slice(1) : search);
 		queryParams.set('page', String(pageParam));
@@ -47,7 +49,7 @@ export default function ProductsInfinite({ search, initialItems }: Props) {
 		return res.json();
 	};
 
-	const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } = useInfiniteQuery({
+	const { data, fetchNextPage, hasNextPage, status } = useInfiniteQuery({
 		queryKey: key,
 		queryFn: fetchPage,
 		getNextPageParam: (last) => last.nextPage,
@@ -85,10 +87,11 @@ export default function ProductsInfinite({ search, initialItems }: Props) {
 					<Product key={p.id} product={p} />
 				))}
 			</div>
-			<div className={styles.loaderContainer} ref={loadMoreRef} aria-hidden="true">
-				<div className={styles.loader}></div>
-			</div>
-			{isFetchingNextPage && <p>Loading more…</p>}
+			{hasNextPage && (
+				<div className={styles.loaderContainer} ref={loadMoreRef} aria-hidden="true">
+					<div className={styles.loader}></div>
+				</div>
+			)}
 		</div>
 	);
 }

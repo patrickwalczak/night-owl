@@ -10,11 +10,13 @@ type CartItem = {
 type OrderState = {
 	items: CartItem[];
 	isCartOpen: boolean;
+	isNavigationOpen: boolean;
 };
 
 const initialState: OrderState = {
 	items: [],
 	isCartOpen: false,
+	isNavigationOpen: false,
 };
 
 const orderSlice = createSlice({
@@ -41,9 +43,12 @@ const orderSlice = createSlice({
 		setCartOpen: (state, action: PayloadAction<boolean>) => {
 			state.isCartOpen = action.payload;
 		},
+		toggleNavigation: (state, action) => {
+			state.isNavigationOpen = action.payload.isNavigationOpen;
+		},
 	},
 });
 
-export const { addItem, removeItem, clearCart, toggleCart, setCartOpen } = orderSlice.actions;
+export const { addItem, removeItem, clearCart, toggleCart, setCartOpen, toggleNavigation } = orderSlice.actions;
 
 export default orderSlice.reducer;

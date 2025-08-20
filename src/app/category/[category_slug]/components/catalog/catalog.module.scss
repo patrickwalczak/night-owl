@@ -5,23 +5,26 @@
 	max-width: 1920px;
 	margin: var(--navigation-height) auto 0;
 	row-gap: 1rem;
-	padding: 2.5rem 1rem;
+	padding-block: 2.5rem;
 
 	@media (min-width: breakpoints.$breakpoint-768) {
-		padding: 3rem 2rem;
+		padding-block: 3rem;
 	}
 }
 
-.stickyContainer {
-	z-index: zindex.$catalog-filters;
-	position: sticky;
-	top: 0px;
-	column-gap: 1rem;
-	min-height: 3.125rem;
-	padding: 0.5rem;
-	background-color: var(--color-owl-white);
+.header {
+	padding-inline: 1rem;
+
+	@media (min-width: breakpoints.$breakpoint-768) {
+		padding-inline: 2rem;
+	}
 }
 
 .productsContainer {
-	gap: 2rem;
+	padding-right: 1rem;
+
+	@media (min-width: breakpoints.$breakpoint-768) {
+		padding-right: 2rem;
+		gap: 2rem;
+	}
 }

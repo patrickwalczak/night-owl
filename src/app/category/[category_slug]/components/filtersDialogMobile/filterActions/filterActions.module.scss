@@ -1,19 +1,30 @@
-.footer {
+@use '../../../../../../styles/breakpoints';
+
+.container {
+  z-index: 2;
   position: sticky;
   bottom: 0;
-  z-index: 2;
+  flex-direction: row;
   gap: 0.75rem;
   padding: 1rem;
   border-top: 1px solid var(--color-owl-gray-300);
   padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+
+  @media (min-width: breakpoints.$breakpoint-768) {
+    flex-direction: column;
+  }
 }
 
-.footerBtn {
+.filterBtn {
   display: block;
   padding: 0.615rem 1rem;
   border-radius: 2rem;
   width: 50%;
   font-size: var(--font-size-16);
+
+  @media (min-width: breakpoints.$breakpoint-768) {
+    width: 100%;
+  }
 }
 
 .showBtn {

@@ -24,11 +24,11 @@ const ParameterGroup = ({
 			name={`parameter-${parameter.id}`}
 			className={styles.fieldset}
 		>
-			<CheckboxGroup.Legend className={styles.legend}>{parameter.name}</CheckboxGroup.Legend>
+			<CheckboxGroup.Legend className={mergeClasses(styles.legend, 'truncate')}>{parameter.name}</CheckboxGroup.Legend>
 			<CheckboxGroup.List className={mergeClasses(styles.list, 'flex', 'flex-col')}>
 				{parameter.values.map((v) => (
 					<CheckboxGroup.Option
-						labelClassName={styles.label}
+						labelClassName={mergeClasses(styles.label, 'truncate')}
 						inputClassName={mergeClasses(styles.input, 'sr-only')}
 						customCheckboxClassName={styles.customCheckbox}
 						labelTextClassName={styles.customCheckboxValue}

@@ -1,8 +1,11 @@
+import { toggleNavigation } from '@/lib/store/features/order/orderSlice';
+import { useAppDispatch } from '@/lib/store/hooks';
 import { useEffect, useRef, useState } from 'react';
 
 type ScrollDirection = 'up' | 'down';
 
 const useScrollState = (offset = 60, threshold = 8) => {
+	const dispatch = useAppDispatch();
 	const [isScrolled, setIsScrolled] = useState(false);
 	const [direction, setDirection] = useState<ScrollDirection>('up');
 
@@ -19,6 +22,7 @@ const useScrollState = (offset = 60, threshold = 8) => {
 
 					const diff = y - lastY.current;
 					if (Math.abs(diff) >= threshold) {
+						dispatch(toggleNavigation({ isNavigationOpen: diff > 0 }));
 						setDirection(diff > 0 ? 'down' : 'up');
 						lastY.current = y;
 					}
