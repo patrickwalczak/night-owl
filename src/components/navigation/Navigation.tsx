@@ -12,6 +12,7 @@ import { usePathname } from 'next/navigation';
 import useIsScrolled from './hooks/useIsScrolled';
 import useIsDropdownExpanded from './hooks/useIsDropdownExpanded';
 import styles from './navigation.module.scss';
+import { useAppSelector } from '@/lib/store/hooks';
 
 interface NavigationContextType {
 	categories: SimpleCategoryModelType[];
@@ -24,6 +25,8 @@ interface NavigationContextType {
 export const NavigationContext = createContext<NavigationContextType | null>(null);
 
 const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) => {
+	const isDesktop = useAppSelector((state) => state.app.isDesktop);
+
 	const { isScrolled, direction } = useIsScrolled();
 	const { expandDropdown, hideDropdown, isExpanded, setIsExpanded } = useIsDropdownExpanded();
 
@@ -74,26 +77,28 @@ const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) =
 						<span className={mergeClasses(styles.logo, 'transition-200')}>Night Owl</span>
 					</Link>
 
-					<div className={mergeClasses(styles.listWrapper, 'flex', 'align-center')}>
-						<button
-							ref={catalogBtnRef}
-							onPointerEnter={expandDropdown}
-							type="button"
-							className={mergeClasses(styles.catalogButton, 'button-empty', 'nav-hover-underline', 'transition-200')}
-							aria-haspopup="true"
-							aria-expanded={isExpanded}
-							aria-controls="catalog-dropdown"
-							id="catalog-button"
-							onKeyDown={handleKeyDownOnButton}
-						>
-							Catalog
-						</button>
-						{/* <button type="button" className={mergeClasses(styles.cartButton, 'button-empty')} aria-label="Open cart">
+					{isDesktop && (
+						<div className={mergeClasses(styles.listWrapper, 'flex', 'align-center')}>
+							<button
+								ref={catalogBtnRef}
+								onPointerEnter={expandDropdown}
+								type="button"
+								className={mergeClasses(styles.catalogButton, 'button-empty', 'nav-hover-underline', 'transition-200')}
+								aria-haspopup="true"
+								aria-expanded={isExpanded}
+								aria-controls="catalog-dropdown"
+								id="catalog-button"
+								onKeyDown={handleKeyDownOnButton}
+							>
+								Catalog
+							</button>
+							{/* <button type="button" className={mergeClasses(styles.cartButton, 'button-empty')} aria-label="Open cart">
 							<Cart />
 						</button> */}
-					</div>
+						</div>
+					)}
 
-					<MobileNavigation />
+					{!isDesktop && <MobileNavigation />}
 				</nav>
 				<CategoriesDropdown controllerBtnRef={catalogBtnRef} isExpanded={isExpanded} categories={categories} />
 			</header>

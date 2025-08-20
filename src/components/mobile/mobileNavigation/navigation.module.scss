@@ -13,14 +13,11 @@
   @supports (height: 100dvh) {
     height: 100dvh;
   }
-
-  @media (min-width: breakpoints.$breakpoint-768) {
-    display: none;
-  }
 }
 
 .hamburgerBtn {
   transform: scale(1);
+  justify-self: end;
 
   svg {
     width: var(--font-size-32);
@@ -29,10 +26,6 @@
 
   &.isScrolled {
     transform: scale(0.85);
-  }
-
-  @media (min-width: breakpoints.$breakpoint-768) {
-    display: none;
   }
 }
 

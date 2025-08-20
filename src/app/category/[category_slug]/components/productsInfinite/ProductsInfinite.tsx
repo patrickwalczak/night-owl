@@ -39,8 +39,6 @@ export default function ProductsInfinite({ search, initialItems }: Props) {
 
 	const key = useMemo(() => ['products', categorySlug, search], [categorySlug, search]);
 
-	console.log(key);
-
 	const fetchPage = async ({ pageParam = 1 }): Promise<PagePayload> => {
 		const queryParams = new URLSearchParams(search.startsWith('?') ? search.slice(1) : search);
 		queryParams.set('page', String(pageParam));

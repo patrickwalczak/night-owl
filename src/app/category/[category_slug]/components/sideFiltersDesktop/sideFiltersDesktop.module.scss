@@ -13,14 +13,20 @@
   background-color: var(--color-owl-white);
 }
 
-.subcategories {}
+.subcategories {
+  gap: 1rem;
+}
+
+.subcategory {
+  font-weight: var(--font-weight-600);
+}
 
 .actions {
   background-color: var(--color-owl-white);
 }
 
 .content {
-  gap: 1.5rem;
+  gap: 2rem;
   overflow-y: auto;
   padding-right: 0.25rem;
 }

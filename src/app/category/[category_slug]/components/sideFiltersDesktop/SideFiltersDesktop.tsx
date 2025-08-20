@@ -49,27 +49,15 @@ const SideFiltersDesktop = () => {
 				<div className={mergeClasses(styles.content, 'flex', 'flex-col')}>
 					<div className={mergeClasses(styles.subcategories, 'flex', 'flex-col')}>
 						{subcategories.map((subcategory) => (
-							<Link key={subcategory.id} href={`/category/${subcategory.slug}`}>
+							<Link
+								className={mergeClasses(styles.subcategory, 'truncate')}
+								key={subcategory.id}
+								href={`/category/${subcategory.slug}`}
+							>
 								{subcategory.name}
 							</Link>
 						))}
 					</div>
-					{parameters.map((param) => (
-						<ParameterGroup
-							key={param.id}
-							parameter={param}
-							selectedParamIds={selectedParamIds}
-							setSelectedParamIds={setSelectedParamIds}
-						/>
-					))}
-					{parameters.map((param) => (
-						<ParameterGroup
-							key={param.id}
-							parameter={param}
-							selectedParamIds={selectedParamIds}
-							setSelectedParamIds={setSelectedParamIds}
-						/>
-					))}
 					{parameters.map((param) => (
 						<ParameterGroup
 							key={param.id}
