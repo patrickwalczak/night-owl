@@ -1,4 +1,4 @@
-import { toggleNavigation } from '@/lib/store/features/order/orderSlice';
+import { toggleNavigation } from '@/lib/store/features/app/appSlice';
 import { useAppDispatch } from '@/lib/store/hooks';
 import { useEffect, useRef, useState } from 'react';
 

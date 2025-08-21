@@ -23,4 +23,7 @@ export interface ProductModelType {
 	parameterValues?: ProductParameterValueModelType[];
 }
 
-export type ListingProductType = Pick<ProductModelType, 'id' | 'name' | 'slug' | 'image' | 'price' | 'status'>;
+export type ListingProductType = Pick<
+	ProductModelType,
+	'id' | 'name' | 'slug' | 'image' | 'price' | 'status' | 'currency'
+>;

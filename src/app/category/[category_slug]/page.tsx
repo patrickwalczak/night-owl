@@ -37,6 +37,7 @@ export default async function Catalog({
 			</CatalogClient>
 		);
 	} catch (error) {
+		console.log(error);
 		notFound();
 	}
 }

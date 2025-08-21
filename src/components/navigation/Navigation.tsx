@@ -12,7 +12,9 @@ import { usePathname } from 'next/navigation';
 import useIsScrolled from './hooks/useIsScrolled';
 import useIsDropdownExpanded from './hooks/useIsDropdownExpanded';
 import styles from './navigation.module.scss';
-import { useAppSelector } from '@/lib/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/lib/store/hooks';
+import CartDrawer from '../cartDrawer/CartDrawer';
+import { openCart } from '@/lib/store/features/order/orderSlice';
 
 interface NavigationContextType {
 	categories: SimpleCategoryModelType[];
@@ -26,6 +28,7 @@ export const NavigationContext = createContext<NavigationContextType | null>(nul
 
 const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) => {
 	const isDesktop = useAppSelector((state) => state.app.isDesktop);
+	const dispatch = useAppDispatch();
 
 	const { isScrolled, direction } = useIsScrolled();
 	const { expandDropdown, hideDropdown, isExpanded, setIsExpanded } = useIsDropdownExpanded();
@@ -42,6 +45,8 @@ const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) =
 		setIsExpanded,
 		hideDropdown,
 	};
+
+	const openCartDrawer = () => dispatch(openCart());
 
 	const onKeyDown = (e: React.KeyboardEvent) => {
 		if (e.key === 'Escape' || e.key === 'ArrowUp') {
@@ -92,15 +97,21 @@ const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) =
 							>
 								Catalog
 							</button>
-							{/* <button type="button" className={mergeClasses(styles.cartButton, 'button-empty')} aria-label="Open cart">
-							<Cart />
-						</button> */}
+							<button
+								onClick={openCartDrawer}
+								type="button"
+								className={mergeClasses(styles.cartButton, 'button-empty')}
+								aria-label="Open cart"
+							>
+								<Cart />
+							</button>
 						</div>
 					)}
 
 					{!isDesktop && <MobileNavigation />}
 				</nav>
 				<CategoriesDropdown controllerBtnRef={catalogBtnRef} isExpanded={isExpanded} categories={categories} />
+				<CartDrawer />
 			</header>
 		</NavigationContext.Provider>
 	);

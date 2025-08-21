@@ -11,20 +11,20 @@ import { NavigationContext } from '@/components/navigation/Navigation';
 
 const MobileNavigation = () => {
 	const { isScrolled, hideDropdown } = useSafeContext(NavigationContext);
-	const { isOpened, close, open } = useOpenState();
+	const { isOpened: isMenuOpened, close: closeMenu, open: openMenu } = useOpenState();
 
 	const handleCloseMenu = () => {
-		close();
+		closeMenu();
 		hideDropdown();
 	};
 
 	return (
 		<>
-			<Menu isOpen={isOpened} close={handleCloseMenu} />
+			<Menu isMenuOpened={isMenuOpened} closeMenu={handleCloseMenu} />
 			<button
 				type="button"
 				aria-label="Open menu"
-				aria-expanded={isOpened}
+				aria-expanded={isMenuOpened}
 				aria-controls="mobile-menu"
 				aria-haspopup="true"
 				className={mergeClasses(
@@ -34,7 +34,7 @@ const MobileNavigation = () => {
 					isScrolled && styles.isScrolled,
 					'transition-200'
 				)}
-				onClick={open}
+				onClick={openMenu}
 			>
 				<Hamburger />
 			</button>

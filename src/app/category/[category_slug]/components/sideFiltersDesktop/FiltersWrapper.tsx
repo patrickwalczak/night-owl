@@ -4,7 +4,7 @@ import { mergeClasses } from '@/utils/mergeClasses';
 import { useAppSelector } from '@/lib/store/hooks';
 
 const FiltersWrapper = ({ children }: { children: React.ReactNode }) => {
-	const isNavigationOpen = useAppSelector((state) => state.order.isNavigationOpen);
+	const isNavigationOpen = useAppSelector((state) => state.app.isNavigationOpen);
 	const isOpened = useAppSelector((state) => state.catalog.ui.areFiltersOpen);
 
 	return (

@@ -1,38 +1,21 @@
+import { CartItem } from '@/types/cartItem';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type CartItem = {
-	id: string;
-	name: string;
-	price: number;
-	quantity: number;
-};
+type OrderState = { items: CartItem[]; isCartOpen: boolean };
 
-type OrderState = {
-	items: CartItem[];
-	isCartOpen: boolean;
-	isNavigationOpen: boolean;
-};
-
-const initialState: OrderState = {
-	items: [],
-	isCartOpen: false,
-	isNavigationOpen: false,
-};
+const initialState: OrderState = { items: [], isCartOpen: false };
 
 const orderSlice = createSlice({
 	name: 'order',
 	initialState,
 	reducers: {
 		addItem: (state, action: PayloadAction<CartItem>) => {
-			const existing = state.items.find((item) => item.id === action.payload.id);
-			if (existing) {
-				existing.quantity += action.payload.quantity;
-			} else {
-				state.items.push(action.payload);
-			}
+			const existing = state.items.find((i) => i.id === action.payload.id);
+			if (existing) existing.quantity += action.payload.quantity;
+			else state.items.push(action.payload);
 		},
 		removeItem: (state, action: PayloadAction<string>) => {
-			state.items = state.items.filter((item) => item.id !== action.payload);
+			state.items = state.items.filter((i) => i.id !== action.payload);
 		},
 		clearCart: (state) => {
 			state.items = [];
@@ -40,15 +23,48 @@ const orderSlice = createSlice({
 		toggleCart: (state) => {
 			state.isCartOpen = !state.isCartOpen;
 		},
-		setCartOpen: (state, action: PayloadAction<boolean>) => {
-			state.isCartOpen = action.payload;
+		openCart: (state) => {
+			state.isCartOpen = true;
 		},
-		toggleNavigation: (state, action) => {
-			state.isNavigationOpen = action.payload.isNavigationOpen;
+		closeCart: (state) => {
+			state.isCartOpen = false;
+		},
+		setQuantity: (state, action: PayloadAction<{ id: string; qty: number }>) => {
+			const item = state.items.find((i) => i.id === action.payload.id);
+			if (!item) return;
+			const max = item.stock ?? 99;
+			const q = Math.max(0, Math.min(action.payload.qty, max));
+			if (q <= 0) state.items = state.items.filter((i) => i.id !== item.id);
+			else item.quantity = q;
+		},
+		incrementItem: (state, action: PayloadAction<{ id: string }>) => {
+			console.log(state.items);
+			const item = state.items.find((i) => i.id === action.payload.id);
+			console.log(item);
+			if (!item) return;
+			const max = item.stock ?? 99;
+			item.quantity = Math.min(max, item.quantity + 1);
+		},
+		decrementItem: (state, action: PayloadAction<{ id: string }>) => {
+			const item = state.items.find((i) => i.id === action.payload.id);
+			if (!item) return;
+			const next = item.quantity - 1;
+			if (next <= 0) state.items = state.items.filter((i) => i.id !== item.id);
+			else item.quantity = next;
 		},
 	},
 });
 
-export const { addItem, removeItem, clearCart, toggleCart, setCartOpen, toggleNavigation } = orderSlice.actions;
+export const {
+	addItem,
+	removeItem,
+	clearCart,
+	toggleCart,
+	openCart,
+	closeCart,
+	setQuantity,
+	incrementItem,
+	decrementItem,
+} = orderSlice.actions;
 
 export default orderSlice.reducer;

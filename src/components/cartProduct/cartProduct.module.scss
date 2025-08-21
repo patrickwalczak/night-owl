@@ -1,0 +1,38 @@
+.product {
+  display: grid;
+  grid-template-columns: 75px auto auto auto;
+  justify-items: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(--color-owl-gray-300);
+}
+
+.thumb {
+  width: 75px;
+  position: relative;
+  aspect-ratio: 3 / 2;
+  background: var(--color-owl-gray-200);
+}
+
+.img {
+  object-fit: cover;
+}
+
+.productName {
+  justify-self: left;
+  min-width: 0;
+  width: 100%;
+  display: block;
+  color: var(--color-owl-gray-500);
+  font-size: var(--font-size-14);
+}
+
+.productPrice {
+  width: 100%;
+  min-width: 0;
+  justify-self: right;
+  display: block;
+  font-size: var(--font-size-14);
+  color: var(--color-owl-gray-500);
+}

@@ -1,0 +1,90 @@
+$radius: 9999px;
+$border: 1px solid #d1d5db; // gray-300
+$bg: #fff;
+$text: #111827; // gray-900
+$muted: #6b7280; // gray-500
+$shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+$focus: 0 0 0 3px rgba(59, 130, 246, 0.35); // blue focus ring
+
+.wrap {
+  width: max-content;
+  gap: .25rem;
+  border: $border;
+  border-radius: $radius;
+  background: $bg;
+  box-shadow: $shadow;
+  padding: .15rem .25rem;
+}
+
+.iconBtn,
+.plusBtn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  transition: transform .06s ease, color .15s ease, opacity .15s ease;
+  color: $muted;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: $focus;
+    border-radius: .5rem;
+  }
+
+  &:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.iconBtn {
+  svg {
+    width: 1.1rem;
+    height: 1.1rem;
+
+    path {
+      stroke: var(--color-owl-gray-500);
+    }
+  }
+
+  &:hover {
+    color: #ef4444;
+  }
+}
+
+.value {
+  width: 2rem;
+  border: none;
+  overflow-x: auto;
+  text-align: center;
+  font-weight: 400;
+  color: $text;
+}
+
+.plusBtn {
+  font-weight: 400;
+  font-size: 1.15rem;
+  color: $muted;
+
+  &:hover {
+    color: $text;
+  }
+}
+
+@media (forced-colors: active) {
+  .wrap {
+    border: 1px solid ButtonText;
+  }
+
+  .iconBtn, .plusBtn {
+    color: ButtonText;
+  }
+}

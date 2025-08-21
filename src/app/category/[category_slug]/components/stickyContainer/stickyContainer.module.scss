@@ -7,4 +7,8 @@
   column-gap: 1rem;
   padding: 0.5rem;
   background-color: var(--color-owl-white);
+
+  @media (min-width: breakpoints.$breakpoint-1024) {
+    padding: 0.5rem 2rem;
+  }
 }

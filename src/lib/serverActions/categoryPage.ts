@@ -54,7 +54,7 @@ export const getCategoryPageData = cache(async (slug: string, opts: FetchOpts) =
 				orderBy: toOrderBy(opts.sort),
 				skip: (page - 1) * PAGE_SIZE,
 				take: PAGE_SIZE,
-				select: { id: true, name: true, slug: true, price: true, image: true, status: true },
+				select: { id: true, name: true, slug: true, price: true, image: true, status: true, currency: true },
 			}),
 			prisma.product.count({ where: whereProducts }),
 			prisma.parameter.findMany({

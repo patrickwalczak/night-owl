@@ -7,10 +7,15 @@ import styles from './navigation.module.scss';
 import { motion } from 'framer-motion';
 import NavigationButton from '../navigationButton/NavigationButton';
 import { CategoriesDropdownController } from '../categoriesDropdownController/CategoriesDropdownController';
+import { useAppDispatch } from '@/lib/store/hooks';
+import { openCart } from '@/lib/store/features/order/orderSlice';
 
-const Menu = ({ isOpen, close }: { isOpen: boolean; close: () => void }) => {
+const Menu = ({ isMenuOpened, closeMenu }: { isMenuOpened: boolean; closeMenu: () => void }) => {
+	const dispatch = useAppDispatch();
+	const openCartDrawer = () => dispatch(openCart());
+
 	return (
-		<Modal open={isOpen} onClose={close}>
+		<Modal open={isMenuOpened} onClose={closeMenu}>
 			<Modal.Overlay>
 				<Modal.Wrapper
 					id="mobile-menu"
@@ -32,9 +37,9 @@ const Menu = ({ isOpen, close }: { isOpen: boolean; close: () => void }) => {
 						<HomeLink />
 						<CategoriesDropdownController />
 
-						{/* <NavigationButton className={'mobile-nav-element--border-bottom'}>
+						<NavigationButton handleClick={openCartDrawer} className={'mobile-nav-element--border-bottom'}>
 							<Cart className={styles.cartSvg} />
-						</NavigationButton> */}
+						</NavigationButton>
 					</motion.div>
 				</Modal.Wrapper>
 			</Modal.Overlay>

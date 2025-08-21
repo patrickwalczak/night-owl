@@ -11,7 +11,7 @@ export default function StoreProvider({ children, device }: { children: ReactNod
 
 	if (!storeRef.current) {
 		storeRef.current = makeStore({
-			app: { device },
+			app: { device, isMobile: device === 'mobile', isTablet: device === 'tablet', isDesktop: device === 'desktop' },
 		});
 	}
 

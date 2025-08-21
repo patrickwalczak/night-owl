@@ -5,22 +5,21 @@ import styles from './stickyContainer.module.scss';
 import { useAppSelector } from '@/lib/store/hooks';
 import { mergeClasses } from '@/utils/mergeClasses';
 import CategoryProductsTotal from '../categoryProductsTotal/CategoryProductsTotal';
-import FiltersDialogMobile from '../filtersDialogMobile/FiltersDialogMobile';
 import SideFiltersButton from '../sideFiltersButton/SideFiltersButton';
 import CategoryName from '../categoryName/CategoryName';
+import FiltersDialog from '../filtersDialogMobile/FiltersDialog';
 
 const StickyContainer = () => {
-	const isNavigationOpen = useAppSelector((state) => state.order.isNavigationOpen);
+	const isDesktop = useAppSelector((state) => state.app.isDesktop);
+	const isNavigationOpen = useAppSelector((state) => state.app.isNavigationOpen);
 
 	return (
 		<div
 			className={mergeClasses(styles.stickyContainer, 'flex', 'align-center', 'justify-between', 'transition-200')}
 			style={{ top: isNavigationOpen ? '0px' : '43px' }}
 		>
-			<CategoryName isProductSum />
-			<CategoryProductsTotal />
-			<FiltersDialogMobile />
-			<SideFiltersButton />
+			{isDesktop ? <CategoryName isProductSum /> : <CategoryProductsTotal />}
+			{isDesktop ? <SideFiltersButton /> : <FiltersDialog />}
 		</div>
 	);
 };

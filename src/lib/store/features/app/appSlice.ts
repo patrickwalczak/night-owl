@@ -7,6 +7,7 @@ export interface AppState {
 	isMobile: boolean;
 	isTablet: boolean;
 	isDesktop: boolean;
+	isNavigationOpen: boolean;
 }
 
 const initialState: AppState = {
@@ -14,6 +15,7 @@ const initialState: AppState = {
 	isMobile: false,
 	isTablet: false,
 	isDesktop: true,
+	isNavigationOpen: false,
 };
 
 const appSlice = createSlice({
@@ -26,8 +28,11 @@ const appSlice = createSlice({
 			state.isTablet = action.payload === 'tablet';
 			state.isMobile = action.payload === 'mobile';
 		},
+		toggleNavigation: (state, action) => {
+			state.isNavigationOpen = action.payload.isNavigationOpen;
+		},
 	},
 });
 
-export const { setDevice } = appSlice.actions;
+export const { setDevice, toggleNavigation } = appSlice.actions;
 export default appSlice.reducer;
