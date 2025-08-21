@@ -30,8 +30,10 @@ export default async function RootLayout({
 		<html lang="en" className={`${inter.variable} ${playfair.variable}`}>
 			<body>
 				<StoreProvider device={device}>
-					<NavigationServer />
-					<AppClient>{children}</AppClient>
+					<AppClient>
+						<NavigationServer />
+						{children}
+					</AppClient>
 				</StoreProvider>
 			</body>
 		</html>
