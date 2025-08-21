@@ -2,7 +2,7 @@ import './globals.scss';
 import '../styles/utils.scss';
 import { Playfair_Display, Inter } from 'next/font/google';
 import StoreProvider from './StoreProvider';
-// import NavigationServer from '../components/navigationServer/NavigationServer';
+import NavigationServer from '../components/navigationServer/NavigationServer';
 import { headers } from 'next/headers';
 import { DeviceType } from '@/types/device.model';
 import AppClient from '@/components/AppClient';
@@ -31,7 +31,7 @@ export default async function RootLayout({
 			<body>
 				<StoreProvider device={device}>
 					<AppClient>
-						{/* <NavigationServer /> */}
+						<NavigationServer />
 						{children}
 					</AppClient>
 				</StoreProvider>
