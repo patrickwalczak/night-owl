@@ -2,16 +2,19 @@
 
 import React from 'react';
 import styles from './categoryName.module.scss';
-import { useAppSelector } from '@/lib/store/hooks';
+import { useSafeContext } from '@/hooks/useSafeContext';
+import { CatalogContext } from '../catalog/CatalogProvider';
 
 const CategoryName = ({ isProductSum = false }: { isProductSum?: boolean }) => {
-	const categoryName = useAppSelector((state) => state.catalog.category.name);
-	const produtSum = useAppSelector((state) => state.catalog.productSum);
+	const {
+		productSum,
+		category: { name },
+	} = useSafeContext(CatalogContext);
 
 	return (
 		<h2 className={styles.categoryName}>
-			{categoryName}
-			{isProductSum && ` (${produtSum})`}
+			{name}
+			{isProductSum && ` (${productSum})`}
 		</h2>
 	);
 };

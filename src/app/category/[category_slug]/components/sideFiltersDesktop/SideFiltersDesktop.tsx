@@ -7,18 +7,17 @@ import FiltersWrapper from './FiltersWrapper';
 import { useSearchParams } from 'next/navigation';
 import ParameterGroup from '../parameterGroup/ParameterGroup';
 import FilterActions from '../filtersDialogMobile/filterActions/FilterActions';
-import { useAppSelector } from '@/lib/store/hooks';
 import Link from 'next/link';
 import { mergeClasses } from '@/utils/mergeClasses';
+import { useSafeContext } from '@/hooks/useSafeContext';
+import { CatalogContext } from '../catalog/CatalogProvider';
 
 const SideFiltersDesktop = () => {
-	const parameters = useAppSelector((state) => state.catalog.parameters);
-	const subcategories = useAppSelector((state) => state.catalog.subcategories);
+	const { subcategories, parameters } = useSafeContext(CatalogContext);
 	const filtersRef = useRef<HTMLDivElement | null>(null);
 	const [scrollableHeight, setScrollableHeight] = useState('100vh');
 
 	const searchParams = useSearchParams();
-
 	const initialParamIds = (searchParams.get('params') ?? '').split(',').filter(Boolean);
 
 	const [selectedParamIds, setSelectedParamIds] = useState<string[]>(initialParamIds);

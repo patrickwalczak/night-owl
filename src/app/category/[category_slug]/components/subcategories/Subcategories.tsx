@@ -3,10 +3,11 @@
 import React from 'react';
 import styles from './subcategories.module.scss';
 import Link from 'next/link';
-import { useAppSelector } from '@/lib/store/hooks';
+import { useSafeContext } from '@/hooks/useSafeContext';
+import { CatalogContext } from '../catalog/CatalogProvider';
 
 const Subcategories = () => {
-	const subcategories = useAppSelector((state) => state.catalog.subcategories);
+	const { subcategories } = useSafeContext(CatalogContext);
 
 	if (!subcategories.length) return null;
 

@@ -4,6 +4,8 @@ import React from 'react';
 import styles from './categoriesDropdown.module.scss';
 import Link from 'next/link';
 import { SimpleCategoryModelType } from '@/types/category.model';
+import { useSafeContext } from '@/hooks/useSafeContext';
+import { NavigationContext } from '../navigation/Navigation';
 
 const CategoriesDropdown = ({
 	isExpanded,
@@ -54,24 +56,33 @@ const Category = ({
 	category,
 	isRootCategory = false,
 }: {
-	category: SimpleCategoryModelType;
+	category: Pick<SimpleCategoryModelType, 'id' | 'name' | 'slug' | 'children'>;
 	isRootCategory?: boolean;
-}) => (
-	<>
-		<li key={category.id}>
-			<Link
-				className={mergeClasses('nav-hover-underline', isRootCategory && styles.isRootCategory)}
-				href={`/category/${category.slug}`}
-			>
-				{category.name}
-			</Link>
-		</li>
+}) => {
+	const { setIsExpanded } = useSafeContext(NavigationContext);
 
-		{category.children.length
-			? category.children.map((child) => <Category key={child.id} category={{ children: [], ...child }} />)
-			: null}
-	</>
-);
+	const handleClick = () => {
+		setIsExpanded(false);
+	};
+
+	return (
+		<>
+			<li key={category.id}>
+				<Link
+					onClick={handleClick}
+					className={mergeClasses('nav-hover-underline', isRootCategory && styles.isRootCategory)}
+					href={`/category/${category.slug}`}
+				>
+					{category.name}
+				</Link>
+			</li>
+
+			{category.children.length
+				? category.children.map((child) => <Category key={child.id} category={{ children: [], ...child }} />)
+				: null}
+		</>
+	);
+};
 
 const NoCategoriesMessage = () => (
 	<p className={mergeClasses('mobile-nav-element', styles.noCategories)}>No categories available</p>

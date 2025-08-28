@@ -5,7 +5,8 @@ import { useEffect, useMemo, useRef } from 'react';
 import { ListingProductType } from '@/types/product.model';
 import Product from '../product/Product';
 import styles from './productsInfinite.module.scss';
-import { useAppSelector } from '@/lib/store/hooks';
+import { useSafeContext } from '@/hooks/useSafeContext';
+import { CatalogContext } from '../catalog/CatalogProvider';
 
 type PagePayload = {
 	items: ListingProductType[];
@@ -22,12 +23,12 @@ type Props = {
 
 export default function ProductsInfinite({ search, initialItems }: Props) {
 	const {
-		category: { slug: categorySlug },
 		page,
 		pageSize,
 		nextPage,
 		productSum,
-	} = useAppSelector((state) => state.catalog);
+		category: { slug: categorySlug },
+	} = useSafeContext(CatalogContext);
 
 	const initialPage = {
 		items: initialItems,

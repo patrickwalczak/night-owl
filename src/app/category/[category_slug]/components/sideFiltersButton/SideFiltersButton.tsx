@@ -2,19 +2,18 @@
 
 import React from 'react';
 import FilterButton from '../filterButton/FilterButton';
-import { useAppDispatch, useAppSelector } from '@/lib/store/hooks';
-import { toggleFilters } from '@/lib/store/features/catalog/catalogSlice';
 import { setBoolCookieClient } from '@/utils/cookie';
 import styles from './sideFiltersButton.module.scss';
+import { CatalogContext } from '../catalog/CatalogProvider';
+import { useSafeContext } from '@/hooks/useSafeContext';
 
 const SideFiltersButton = () => {
-	const dispatch = useAppDispatch();
-	const isOpened = useAppSelector((state) => state.catalog.ui.areFiltersOpen);
-	const label = isOpened ? 'Hide filters' : 'Show filters';
+	const { areFiltersOpen, toggleFilters } = useSafeContext(CatalogContext);
+	const label = areFiltersOpen ? 'Hide filters' : 'Show filters';
 
 	const handleClick = () => {
-		dispatch(toggleFilters());
-		setBoolCookieClient('areFiltersOpen', !isOpened, {
+		toggleFilters();
+		setBoolCookieClient('areFiltersOpen', !areFiltersOpen, {
 			maxAge: 60 * 60 * 24 * 365,
 			sameSite: 'lax',
 			path: '/',

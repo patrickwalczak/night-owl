@@ -8,10 +8,11 @@ import SortOrderSelector from '../../sortOrderSelector/SortOrderSelector';
 import FilterActions from '../filterActions/FilterActions';
 import { DEFAULT_SORT_ORDER } from '@/constants';
 import ParameterGroup from '../../parameterGroup/ParameterGroup';
-import { useAppSelector } from '@/lib/store/hooks';
+import { useSafeContext } from '@/hooks/useSafeContext';
+import { CatalogContext } from '../../catalog/CatalogProvider';
 
 const FiltersModal = ({ isOpened, close }: { isOpened: boolean; close: () => void }) => {
-	const parameters = useAppSelector((state) => state.catalog.parameters);
+	const { parameters } = useSafeContext(CatalogContext);
 
 	const searchParams = useSearchParams();
 
@@ -20,6 +21,12 @@ const FiltersModal = ({ isOpened, close }: { isOpened: boolean; close: () => voi
 
 	const [sort, setSort] = useState<SortOrderKeys>(initialSort as SortOrderKeys);
 	const [selectedParamIds, setSelectedParamIds] = useState<string[]>(initialParamIds);
+
+	const reset = () => {
+		close();
+		setSort(DEFAULT_SORT_ORDER);
+		setSelectedParamIds([]);
+	};
 
 	return (
 		<Modal open={isOpened} onClose={close}>
@@ -50,7 +57,7 @@ const FiltersModal = ({ isOpened, close }: { isOpened: boolean; close: () => voi
 					</div>
 					<FilterActions selectedParamIds={selectedParamIds}>
 						<FilterActions.Apply onClick={close} />
-						<FilterActions.Reset onClick={close} />
+						<FilterActions.Reset onClick={reset} />
 					</FilterActions>
 				</Modal.Wrapper>
 			</Modal.Overlay>

@@ -1,12 +1,13 @@
 'use client';
 
-import { useAppSelector } from '@/lib/store/hooks';
+import { useSafeContext } from '@/hooks/useSafeContext';
 import React from 'react';
+import { CatalogContext } from '../catalog/CatalogProvider';
 
 const CategoryProductsTotal = () => {
-	const totalInCategory = useAppSelector((state) => state.catalog.productSum);
+	const { productSum } = useSafeContext(CatalogContext);
 
-	return <span>{totalInCategory} Results</span>;
+	return <span>{productSum} Results</span>;
 };
 
 export default CategoryProductsTotal;

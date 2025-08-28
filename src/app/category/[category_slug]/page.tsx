@@ -3,7 +3,7 @@ import CatalogView from './components/catalog/Catalog';
 import { normalizeSearchParams, parseListingParams } from '@/utils/url';
 import { notFound } from 'next/navigation';
 import { cookies } from 'next/headers';
-import CatalogClient from './components/catalog/CatalogClient';
+import CatalogProvider from './components/catalog/CatalogProvider';
 import { getCategoryPageData } from '@/lib/serverActions/categoryPage';
 
 export default async function Catalog({
@@ -27,14 +27,14 @@ export default async function Catalog({
 		const areFiltersOpen = (await cookies()).get('areFiltersOpen')?.value === '1';
 
 		return (
-			<CatalogClient
+			<CatalogProvider
 				productsData={products}
 				category={category}
 				areFiltersOpen={areFiltersOpen}
 				parameters={parameters}
 			>
 				<CatalogView items={products.items} search={search} />
-			</CatalogClient>
+			</CatalogProvider>
 		);
 	} catch (error) {
 		console.log(error);
