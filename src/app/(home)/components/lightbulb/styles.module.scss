@@ -1,14 +1,13 @@
 .container {
-  --bulb-size: 80%;
   --stroke-off: #646464;
   --stroke-on: #d97706;
   --glow-rgb: 255, 223, 120;
 
   display: grid;
   justify-items: center;
-  height: 100vh;
+  min-height: 100vh;
   background-color: var(--color-owl-blue-800);
-  padding: 1rem;
+  padding: 5rem 1rem;
 
   @media (min-width: 1024px) {
     grid-template-columns: 50% 50%;
@@ -24,10 +23,20 @@
 .heading {
   font-family: var(--font-family-playfair);
   font-weight: var(--font-weight-600);
-  font-size: var(--font-size-80);
+  font-size: var(--font-size-64);
   color: var(--color-owl-white-200);
   max-width: 700px;
   text-align: center;
+
+  @media (min-width: 1024px) {
+    font-size: var(--font-size-80);
+  }
+}
+
+.bulbContainer {
+  min-height: 500px;
+  height: 100vh;
+  max-height: 900px;
 }
 
 .lamp {
@@ -53,10 +62,17 @@
 }
 
 .svg {
+  --bulb-size: 80%;
   inline-size: var(--bulb-size);
   block-size: var(--bulb-size);
+
   display: block;
   transition: filter 220ms ease;
+
+  @media (min-width: 1024px) {
+    inline-size: var(--bulb-size);
+    block-size: var(--bulb-size);
+  }
 }
 
 .bulb {

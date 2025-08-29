@@ -14,7 +14,7 @@ export default function LightBulb() {
 					{`Night isn't the end of the day.It's a different kind of beginning—with better lighting.`}
 				</h2>
 			</div>
-			<div className="flex-center">
+			<div className={mergeClasses('flex-center', styles.bulbContainer)}>
 				<svg
 					viewBox="0 0 128 128"
 					width="128"
