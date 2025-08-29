@@ -8,6 +8,7 @@ import CategoryProductsTotal from '../categoryProductsTotal/CategoryProductsTota
 import SideFiltersButton from '../sideFiltersButton/SideFiltersButton';
 import CategoryName from '../categoryName/CategoryName';
 import FiltersDialog from '../filtersDialogMobile/FiltersDialog';
+import SortDropdown from '../sortDropdown/SortDropdown';
 
 const StickyContainer = () => {
 	const isDesktop = useAppSelector((state) => state.app.isDesktop);
@@ -16,10 +17,13 @@ const StickyContainer = () => {
 	return (
 		<div
 			className={mergeClasses(styles.stickyContainer, 'flex', 'align-center', 'justify-between', 'transition-200')}
-			style={{ top: isNavigationOpen ? '0px' : '43px' }}
+			style={{ top: isNavigationOpen ? '0px' : '48px' }}
 		>
 			{isDesktop ? <CategoryName isProductSum /> : <CategoryProductsTotal />}
-			{isDesktop ? <SideFiltersButton /> : <FiltersDialog />}
+			<div className={mergeClasses('flex', 'align-center')}>
+				{isDesktop ? <SideFiltersButton /> : <FiltersDialog />}
+				{isDesktop ? <SortDropdown /> : null}
+			</div>
 		</div>
 	);
 };

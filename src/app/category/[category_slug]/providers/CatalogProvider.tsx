@@ -15,6 +15,7 @@ type CategoryMini = {
 export type SubcategoryType = Pick<SimpleCategoryModelType, 'id' | 'name' | 'slug'>[];
 
 interface CatalogContextType {
+	initialProducts: ListingProductType[];
 	areFiltersOpen: boolean;
 	parameters: FilterParameterType[];
 	subcategories: SubcategoryType;
@@ -41,7 +42,7 @@ export const CatalogContext = React.createContext<CatalogContextType | null>(nul
 const CatalogProvider = ({
 	children,
 	areFiltersOpen: areFiltersOpenProp,
-	productsData,
+	initialProductsProp,
 	parameters: parametersProp,
 	category: categoryProp,
 }: {
@@ -49,7 +50,7 @@ const CatalogProvider = ({
 	areFiltersOpen: boolean;
 	parameters: FilterParameterType[];
 	category: SimpleCategoryModelType;
-	productsData: {
+	initialProductsProp: {
 		items: ListingProductType[];
 		total: number;
 		pageSize: number;
@@ -66,14 +67,16 @@ const CatalogProvider = ({
 		parentId: categoryProp.parentId ?? null,
 	});
 
-	const [productSum, setProductSum] = useState<number>(productsData.total);
-	const [page, setPage] = useState<number>(productsData.page);
-	const [pageSize, setPageSize] = useState<number>(productsData.pageSize);
+	const [productSum, setProductSum] = useState<number>(initialProductsProp.total);
+	const [page, setPage] = useState<number>(initialProductsProp.page);
+	const [pageSize, setPageSize] = useState<number>(initialProductsProp.pageSize);
+	const [initialProducts] = useState(initialProductsProp.items);
 
 	const totalPages = Math.max(1, Math.ceil(productSum / pageSize));
 	const nextPage = page < totalPages ? page + 1 : null;
 
 	const value = {
+		initialProducts,
 		areFiltersOpen,
 		parameters,
 		subcategories,

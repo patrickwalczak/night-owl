@@ -1,76 +1,25 @@
 'use client';
 
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { useEffect, useMemo, useRef } from 'react';
-import { ListingProductType } from '@/types/product.model';
+import { useEffect, useRef } from 'react';
 import Product from '../product/Product';
 import styles from './productsInfinite.module.scss';
-import { useSafeContext } from '@/hooks/useSafeContext';
-import { CatalogContext } from '../catalog/CatalogProvider';
+import { useProductsInfinite } from '@/hooks/useProductsInfinite';
+import PulsingMask from '@/components/pulsingMask/PulsingMask';
 
-type PagePayload = {
-	items: ListingProductType[];
-	page: number;
-	nextPage: number | null;
-	total: number;
-	pageSize: number;
-};
-
-type Props = {
-	search: string;
-	initialItems: ListingProductType[];
-};
-
-export default function ProductsInfinite({ search, initialItems }: Props) {
-	const {
-		page,
-		pageSize,
-		nextPage,
-		productSum,
-		category: { slug: categorySlug },
-	} = useSafeContext(CatalogContext);
-
-	const initialPage = {
-		items: initialItems,
-		page,
-		nextPage,
-		total: productSum,
-		pageSize,
-	};
-
-	const key = useMemo(() => ['products', categorySlug, search], [categorySlug, search]);
-
-	const fetchPage = async ({ pageParam = 1 }): Promise<PagePayload> => {
-		const queryParams = new URLSearchParams(search.startsWith('?') ? search.slice(1) : search);
-		queryParams.set('page', String(pageParam));
-		const res = await fetch(`/api/category/${categorySlug}/products?` + queryParams.toString(), { cache: 'no-store' });
-		if (!res.ok) throw new Error('Failed to load');
-		return res.json();
-	};
-
-	const { data, fetchNextPage, hasNextPage, status } = useInfiniteQuery({
-		queryKey: key,
-		queryFn: fetchPage,
-		getNextPageParam: (last) => last.nextPage,
-		initialPageParam: 1,
-		initialData: initialPage ? { pages: [initialPage], pageParams: [1] } : undefined,
-		staleTime: 30_000,
-		refetchOnMount: false,
-		refetchOnWindowFocus: false,
-	});
-
+export default function ProductsInfinite() {
+	const { hasNextPage, fetchNextPage, data, status, isFetching } = useProductsInfinite();
 	const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
-		let obs: IntersectionObserver | null = null;
+		let observer: IntersectionObserver | null = null;
 		if (hasNextPage && loadMoreRef.current) {
-			obs = new IntersectionObserver((entries) => entries.some((e) => e.isIntersecting) && fetchNextPage(), {
+			observer = new IntersectionObserver((entries) => entries.some((e) => e.isIntersecting) && fetchNextPage(), {
 				rootMargin: '600px',
 			});
-			obs.observe(loadMoreRef.current);
+			observer.observe(loadMoreRef.current);
 		}
 
-		return () => obs?.disconnect();
+		return () => observer?.disconnect();
 	}, [hasNextPage, fetchNextPage]);
 
 	if (status === 'error') return <p>Couldn’t load products.</p>;
@@ -80,7 +29,7 @@ export default function ProductsInfinite({ search, initialItems }: Props) {
 	if (items.length === 0) return <p>No products found.</p>;
 
 	return (
-		<div className={styles.container}>
+		<PulsingMask active={isFetching} wrapClassName={styles.container}>
 			<div className={styles.productsContainer}>
 				{items.map((p) => (
 					<Product key={p.id} product={p} />
@@ -91,6 +40,6 @@ export default function ProductsInfinite({ search, initialItems }: Props) {
 					<div className={styles.loader}></div>
 				</div>
 			)}
-		</div>
+		</PulsingMask>
 	);
 }

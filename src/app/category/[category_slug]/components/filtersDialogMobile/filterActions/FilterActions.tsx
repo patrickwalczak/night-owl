@@ -1,25 +1,25 @@
 'use client';
 
 import React, { createContext, PropsWithChildren } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { DEFAULT_SORT_ORDER, SEARCH_PARAMS_KEYS } from '@/constants';
+import { DEFAULT_SORT_ORDER } from '@/constants';
 import { mergeClasses } from '@/utils/mergeClasses';
 import styles from './filterActions.module.scss';
 import { useSafeContext } from '@/hooks/useSafeContext';
+import { CatalogUrlActionsContext } from '../../../providers/CatalogUrlActionsProvider';
 
 type RootProps = {
 	sort?: string;
 	selectedParamIds: string[];
-	defaultSort?: string; // default: DEFAULT_SORT_ORDER
-	className?: string; // footer wrapper classes
+	defaultSort?: string;
+	className?: string;
 };
 
-type Ctx = {
+type ActionsContextType = {
 	onApply: () => void;
 	onReset: () => void;
 };
 
-const FilterActionsCtx = createContext<Ctx | null>(null);
+const FilterActionsCtx = createContext<ActionsContextType | null>(null);
 
 function Root({
 	children,
@@ -28,32 +28,16 @@ function Root({
 	defaultSort = DEFAULT_SORT_ORDER,
 	className,
 }: PropsWithChildren<RootProps>) {
-	const router = useRouter();
-	const pathname = usePathname();
-	const searchParams = useSearchParams();
-
-	const replaceParams = (next: URLSearchParams) => {
-		next.delete('page');
-		router.replace(`${pathname}?${next.toString()}`, { scroll: false });
-	};
+	const { applyFilters, reset } = useSafeContext(CatalogUrlActionsContext);
 
 	const onApply = () => {
-		const next = new URLSearchParams(searchParams.toString());
-
-		if (sort && sort !== defaultSort) next.set('sort', sort);
-		else next.delete('sort');
-
-		if (selectedParamIds.length) next.set('params', selectedParamIds.join(','));
-		else next.delete('params');
-
-		replaceParams(next);
+		applyFilters({
+			sort: sort && sort !== defaultSort ? sort : null,
+			ids: selectedParamIds,
+		});
 	};
 
-	const onReset = () => {
-		const next = new URLSearchParams(searchParams.toString());
-		SEARCH_PARAMS_KEYS.forEach((k) => next.delete(k));
-		replaceParams(next);
-	};
+	const onReset = () => reset();
 
 	return (
 		<FilterActionsCtx.Provider value={{ onApply, onReset }}>
@@ -64,7 +48,7 @@ function Root({
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & { className?: string };
 
-function Reset({ children = 'Reset', className, onClick = (e) => {}, ...rest }: ButtonProps) {
+function Reset({ children = 'Reset', className, onClick = () => {}, ...rest }: ButtonProps) {
 	const { onReset } = useSafeContext(FilterActionsCtx);
 
 	const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -84,7 +68,7 @@ function Reset({ children = 'Reset', className, onClick = (e) => {}, ...rest }: 
 	);
 }
 
-function Apply({ children = 'Show results', className, onClick = (e) => {}, ...rest }: ButtonProps) {
+function Apply({ children = 'Show results', className, onClick = () => {}, ...rest }: ButtonProps) {
 	const { onApply } = useSafeContext(FilterActionsCtx);
 
 	const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

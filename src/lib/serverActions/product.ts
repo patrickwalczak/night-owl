@@ -14,7 +14,7 @@ function toOrderBy(sort: SortOrderKeys) {
 		case 'newest':
 			return { createdAt: 'desc' as const };
 		default:
-			return { createdAt: 'desc' as const }; // fallback “popularity”
+			return { createdAt: 'desc' as const };
 	}
 }
 

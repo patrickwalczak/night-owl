@@ -1,39 +1,42 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-
 import styles from './sideFiltersDesktop.module.scss';
 import FiltersWrapper from './FiltersWrapper';
-import { useSearchParams } from 'next/navigation';
 import ParameterGroup from '../parameterGroup/ParameterGroup';
 import FilterActions from '../filtersDialogMobile/filterActions/FilterActions';
 import Link from 'next/link';
 import { mergeClasses } from '@/utils/mergeClasses';
 import { useSafeContext } from '@/hooks/useSafeContext';
-import { CatalogContext } from '../catalog/CatalogProvider';
+import { CatalogContext } from '../../providers/CatalogProvider';
+import { CatalogUrlActionsContext } from '../../providers/CatalogUrlActionsProvider';
+
+function parseIds(sp: URLSearchParams): string[] {
+	return (sp.get('params') ?? '')
+		.split(',')
+		.map((s) => s.trim())
+		.filter(Boolean);
+}
 
 const SideFiltersDesktop = () => {
 	const { subcategories, parameters } = useSafeContext(CatalogContext);
+	const { searchParams } = useSafeContext(CatalogUrlActionsContext);
 	const filtersRef = useRef<HTMLDivElement | null>(null);
 	const [scrollableHeight, setScrollableHeight] = useState('100vh');
 
-	const searchParams = useSearchParams();
-	const initialParamIds = (searchParams.get('params') ?? '').split(',').filter(Boolean);
+	const [selectedParamIds, setSelectedParamIds] = useState<string[]>(() => parseIds(searchParams));
 
-	const [selectedParamIds, setSelectedParamIds] = useState<string[]>(initialParamIds);
+	useEffect(() => {
+		setSelectedParamIds(parseIds(searchParams));
+	}, [searchParams]);
 
 	useEffect(() => {
 		const onScroll = () => {
-			if (filtersRef.current) {
-				const rect = filtersRef.current.getBoundingClientRect();
-
-				const height = window.innerHeight - rect.y;
-				setScrollableHeight(`${height}px`);
-			}
+			if (!filtersRef.current) return;
+			const rect = filtersRef.current.getBoundingClientRect();
+			setScrollableHeight(`${window.innerHeight - rect.y}px`);
 		};
-
 		onScroll();
-
 		window.addEventListener('scroll', onScroll);
 		return () => window.removeEventListener('scroll', onScroll);
 	}, []);
@@ -57,6 +60,7 @@ const SideFiltersDesktop = () => {
 							</Link>
 						))}
 					</div>
+
 					{parameters.map((param) => (
 						<ParameterGroup
 							key={param.id}
@@ -66,6 +70,7 @@ const SideFiltersDesktop = () => {
 						/>
 					))}
 				</div>
+
 				<FilterActions className={styles.actions} selectedParamIds={selectedParamIds}>
 					<FilterActions.Apply />
 					<FilterActions.Reset />

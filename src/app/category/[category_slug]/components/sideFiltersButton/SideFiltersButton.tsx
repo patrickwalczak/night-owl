@@ -4,7 +4,7 @@ import React from 'react';
 import FilterButton from '../filterButton/FilterButton';
 import { setBoolCookieClient } from '@/utils/cookie';
 import styles from './sideFiltersButton.module.scss';
-import { CatalogContext } from '../catalog/CatalogProvider';
+import { CatalogContext } from '../../providers/CatalogProvider';
 import { useSafeContext } from '@/hooks/useSafeContext';
 
 const SideFiltersButton = () => {

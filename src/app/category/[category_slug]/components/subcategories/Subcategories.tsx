@@ -4,7 +4,7 @@ import React from 'react';
 import styles from './subcategories.module.scss';
 import Link from 'next/link';
 import { useSafeContext } from '@/hooks/useSafeContext';
-import { CatalogContext } from '../catalog/CatalogProvider';
+import { CatalogContext } from '../../providers/CatalogProvider';
 
 const Subcategories = () => {
 	const { subcategories } = useSafeContext(CatalogContext);

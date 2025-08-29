@@ -9,7 +9,7 @@ import FilterActions from '../filterActions/FilterActions';
 import { DEFAULT_SORT_ORDER } from '@/constants';
 import ParameterGroup from '../../parameterGroup/ParameterGroup';
 import { useSafeContext } from '@/hooks/useSafeContext';
-import { CatalogContext } from '../../catalog/CatalogProvider';
+import { CatalogContext } from '../../../providers/CatalogProvider';
 
 const FiltersModal = ({ isOpened, close }: { isOpened: boolean; close: () => void }) => {
 	const { parameters } = useSafeContext(CatalogContext);
@@ -55,7 +55,7 @@ const FiltersModal = ({ isOpened, close }: { isOpened: boolean; close: () => voi
 							/>
 						))}
 					</div>
-					<FilterActions selectedParamIds={selectedParamIds}>
+					<FilterActions sort={sort} selectedParamIds={selectedParamIds}>
 						<FilterActions.Apply onClick={close} />
 						<FilterActions.Reset onClick={reset} />
 					</FilterActions>

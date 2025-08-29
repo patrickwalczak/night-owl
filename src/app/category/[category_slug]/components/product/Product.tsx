@@ -7,9 +7,7 @@ import { ListingProductType } from '@/types/product.model';
 import { useAppDispatch } from '@/lib/store/hooks';
 import { addItem } from '@/lib/store/features/order/orderSlice';
 
-type Props = { product: ListingProductType };
-
-export default function Product({ product }: Props) {
+export default function Product({ product }: { product: ListingProductType }) {
 	const dispatch = useAppDispatch();
 
 	const addProduct = () => {

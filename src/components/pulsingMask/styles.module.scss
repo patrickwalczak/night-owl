@@ -1,0 +1,39 @@
+.wrap {
+  position: relative;
+}
+
+.mask {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: auto;
+  cursor: progress;
+  border-radius: 8px;
+
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.55));
+  animation: pulse 1.2s ease-in-out infinite;
+
+  backdrop-filter: saturate(110%) blur(1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mask {
+    animation: none;
+    opacity: 0.65;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 0.4;
+  }
+}

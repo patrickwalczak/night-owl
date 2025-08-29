@@ -2,7 +2,7 @@
 
 import { useSafeContext } from '@/hooks/useSafeContext';
 import React from 'react';
-import { CatalogContext } from '../catalog/CatalogProvider';
+import { CatalogContext } from '../../providers/CatalogProvider';
 
 const CategoryProductsTotal = () => {
 	const { productSum } = useSafeContext(CatalogContext);

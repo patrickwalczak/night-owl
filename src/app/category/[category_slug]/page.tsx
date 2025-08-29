@@ -3,8 +3,9 @@ import CatalogView from './components/catalog/Catalog';
 import { normalizeSearchParams, parseListingParams } from '@/utils/url';
 import { notFound } from 'next/navigation';
 import { cookies } from 'next/headers';
-import CatalogProvider from './components/catalog/CatalogProvider';
+import CatalogProvider from './providers/CatalogProvider';
 import { getCategoryPageData } from '@/lib/serverActions/categoryPage';
+import { CatalogUrlActionsProvider } from './providers/CatalogUrlActionsProvider';
 
 export default async function Catalog({
 	params,
@@ -28,12 +29,14 @@ export default async function Catalog({
 
 		return (
 			<CatalogProvider
-				productsData={products}
+				initialProductsProp={products}
 				category={category}
 				areFiltersOpen={areFiltersOpen}
 				parameters={parameters}
 			>
-				<CatalogView items={products.items} search={search} />
+				<CatalogUrlActionsProvider>
+					<CatalogView />
+				</CatalogUrlActionsProvider>
 			</CatalogProvider>
 		);
 	} catch (error) {

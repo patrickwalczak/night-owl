@@ -3,7 +3,7 @@ import styles from './sideFiltersDesktop.module.scss';
 import { mergeClasses } from '@/utils/mergeClasses';
 import { useAppSelector } from '@/lib/store/hooks';
 import { useSafeContext } from '@/hooks/useSafeContext';
-import { CatalogContext } from '../catalog/CatalogProvider';
+import { CatalogContext } from '../../providers/CatalogProvider';
 
 const FiltersWrapper = ({ children }: { children: React.ReactNode }) => {
 	const isNavigationOpen = useAppSelector((state) => state.app.isNavigationOpen);

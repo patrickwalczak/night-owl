@@ -3,7 +3,7 @@
 import React from 'react';
 import styles from './categoryName.module.scss';
 import { useSafeContext } from '@/hooks/useSafeContext';
-import { CatalogContext } from '../catalog/CatalogProvider';
+import { CatalogContext } from '../../providers/CatalogProvider';
 
 const CategoryName = ({ isProductSum = false }: { isProductSum?: boolean }) => {
 	const {

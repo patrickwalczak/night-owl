@@ -38,9 +38,7 @@ const orderSlice = createSlice({
 			else item.quantity = q;
 		},
 		incrementItem: (state, action: PayloadAction<{ id: string }>) => {
-			console.log(state.items);
 			const item = state.items.find((i) => i.id === action.payload.id);
-			console.log(item);
 			if (!item) return;
 			const max = item.stock ?? 99;
 			item.quantity = Math.min(max, item.quantity + 1);

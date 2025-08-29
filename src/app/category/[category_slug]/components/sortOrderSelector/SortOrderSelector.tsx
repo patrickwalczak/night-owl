@@ -3,13 +3,7 @@ import styles from './sortOrderSelector.module.scss';
 import { mergeClasses } from '@/utils/mergeClasses';
 import { SortOrderKeys } from '@/types/catalog.models';
 import { createRadioGroup } from '../radioGroup/RadioGroup';
-
-const SORT_OPTIONS: { value: SortOrderKeys; label: string }[] = [
-	{ value: 'popularity', label: 'Featured' },
-	{ value: 'newest', label: 'Newest' },
-	{ value: 'price_desc', label: 'Price: High-Low' },
-	{ value: 'price_asc', label: 'Price: Low-High' },
-];
+import { SORT_OPTIONS } from '@/constants';
 
 const SortOrderSelector = ({
 	sort,

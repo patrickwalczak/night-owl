@@ -3,11 +3,14 @@ import { getCategoryBySlug } from '@/lib/serverActions/category';
 import { parseListingParams } from '@/utils/url';
 import { getProductsForCategory } from '@/lib/serverActions/product';
 
-export async function GET(req: Request, { params }: { params: { category_slug: string } }) {
-	const url = new URL(req.url);
-	const parsed = parseListingParams(url.searchParams);
+export async function GET(req: Request, ctx: { params: Promise<{ category_slug: string }> }) {
+	const params = await ctx.params;
+	const { searchParams } = new URL(req.url);
+
+	const parsed = parseListingParams(searchParams);
 
 	const category = await getCategoryBySlug(params.category_slug);
+
 	if (!category) {
 		return NextResponse.json({ error: 'Category not found' }, { status: 404 });
 	}

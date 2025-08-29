@@ -6,12 +6,11 @@ import { mergeClasses } from '@/utils/mergeClasses';
 import Subcategories from '../subcategories/Subcategories';
 import ProductsInfinite from '../productsInfinite/ProductsInfinite';
 import SideFiltersDesktop from '../sideFiltersDesktop/SideFiltersDesktop';
-import { ListingProductType } from '@/types/product.model';
 import CategoryName from '../categoryName/CategoryName';
 import StickyContainer from '../stickyContainer/StickyContainer';
 import { useAppSelector } from '@/lib/store/hooks';
 
-export default function CatalogView({ items, search }: { items: ListingProductType[]; search: URLSearchParams }) {
+export default function CatalogView() {
 	const isDesktop = useAppSelector((state) => state.app.isDesktop);
 
 	return (
@@ -22,7 +21,7 @@ export default function CatalogView({ items, search }: { items: ListingProductTy
 
 			<div className={mergeClasses(styles.productsContainer, 'flex')}>
 				{isDesktop && <SideFiltersDesktop />}
-				<ProductsInfinite search={search.toString()} initialItems={items} />
+				<ProductsInfinite />
 			</div>
 		</main>
 	);
