@@ -9,22 +9,36 @@ import SideFiltersButton from '../sideFiltersButton/SideFiltersButton';
 import CategoryName from '../categoryName/CategoryName';
 import FiltersDialog from '../filtersDialogMobile/FiltersDialog';
 import SortDropdown from '../sortDropdown/SortDropdown';
+import { useIsSticky } from '@/hooks/useIsSticky';
 
 const StickyContainer = () => {
-	const isDesktop = useAppSelector((state) => state.app.isDesktop);
-	const isNavigationOpen = useAppSelector((state) => state.app.isNavigationOpen);
+	const isDesktop = useAppSelector((s) => s.app.isDesktop);
+	const isNavigationOpen = useAppSelector((s) => s.app.isNavigationOpen);
+	const topPx = isNavigationOpen ? 0 : 48;
+	const { isStuck, sentinelRef } = useIsSticky(topPx);
 
 	return (
-		<div
-			className={mergeClasses(styles.stickyContainer, 'flex', 'align-center', 'justify-between', 'transition-200')}
-			style={{ top: isNavigationOpen ? '0px' : '48px' }}
-		>
-			{isDesktop ? <CategoryName isProductSum /> : <CategoryProductsTotal />}
-			<div className={mergeClasses('flex', 'align-center', 'gap-1')}>
-				{isDesktop ? <SideFiltersButton /> : <FiltersDialog />}
-				{isDesktop ? <SortDropdown /> : null}
+		<>
+			<div ref={sentinelRef} aria-hidden="true" />
+
+			<div
+				className={mergeClasses(
+					styles.stickyContainer,
+					isStuck && styles.isStuck,
+					'flex',
+					'align-center',
+					'justify-between',
+					'transition-200'
+				)}
+				style={{ top: `${topPx}px` }}
+			>
+				{isDesktop ? <CategoryName isStuck={isStuck} isProductSum /> : <CategoryProductsTotal />}
+				<div className={mergeClasses('flex', 'align-center', 'gap-1')}>
+					{isDesktop ? <SideFiltersButton /> : <FiltersDialog />}
+					{isDesktop ? <SortDropdown /> : null}
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

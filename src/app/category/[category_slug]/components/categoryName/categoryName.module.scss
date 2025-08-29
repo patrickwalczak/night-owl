@@ -1,7 +1,20 @@
 .categoryName {
-  text-align: start;
+  --fs-large: var(--font-size-26);
+  --fs-small: var(--font-size-22);
+
   color: var(--color-owl-gray-900);
-  font-size: var(--font-size-26);
   font-weight: var(--font-weight-400);
+  font-size: var(--fs-large);
+  line-height: 1.2;
   background-color: var(--color-owl-white);
+}
+
+.stuck {
+  font-size: var(--fs-small);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .categoryName {
+    transition: none;
+  }
 }

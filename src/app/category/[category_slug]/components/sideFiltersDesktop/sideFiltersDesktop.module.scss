@@ -1,6 +1,11 @@
 .filtersContainer {
   position: sticky;
   height: 100%;
+
+  &[data-open="false"] {
+    pointer-events: none;
+    visibility: hidden;
+  }
 }
 
 .filters {

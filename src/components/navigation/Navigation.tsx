@@ -103,7 +103,7 @@ const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) =
 								ref={catalogBtnRef}
 								onPointerEnter={expandDropdown}
 								type="button"
-								className={mergeClasses(styles.catalogButton, 'button-empty', 'nav-hover-underline', 'transition-200')}
+								className={mergeClasses(styles.catalogButton, 'button-empty')}
 								aria-haspopup="true"
 								aria-expanded={isExpanded}
 								aria-controls="catalog-dropdown"
