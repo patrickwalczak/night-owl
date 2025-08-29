@@ -1,16 +1,9 @@
-/* Size + colors you can tweak */
-:global(:root) {
-  --bulb-size: 80%;
-  /* make it bigger here */
-  --stroke-off: #646464;
-  /* grey off */
-  --stroke-on: #d97706;
-  /* warm amber on */
-  --glow-rgb: 255, 223, 120;
-  /* glow color (R,G,B) */
-}
-
 .container {
+  --bulb-size: 80%;
+  --stroke-off: #646464;
+  --stroke-on: #d97706;
+  --glow-rgb: 255, 223, 120;
+
   display: grid;
   justify-items: center;
   height: 100vh;
