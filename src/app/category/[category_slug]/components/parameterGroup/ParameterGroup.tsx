@@ -34,6 +34,7 @@ const ParameterGroup = ({
 						labelTextClassName={styles.customCheckboxValue}
 						key={v.id}
 						value={v.id}
+						count={v._count.products || 0}
 						label={v.value}
 						id={`parameter-${parameter.id}-${v.id}`}
 					/>

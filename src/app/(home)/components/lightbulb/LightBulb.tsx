@@ -1,0 +1,266 @@
+'use client';
+
+import React, { useState } from 'react';
+import styles from './styles.module.scss';
+import { mergeClasses } from '@/utils/mergeClasses';
+
+export default function LightBulb() {
+	const [on] = useState(true);
+
+	return (
+		<div className={mergeClasses(styles.container)}>
+			<div className={mergeClasses(styles.titleContainer, 'flex-center')}>
+				<h2 className={styles.heading}>
+					{`Night isn't the end of the day.It's a different kind of beginning—with better lighting.`}
+				</h2>
+			</div>
+			<div className="flex-center">
+				<svg
+					viewBox="0 0 128 128"
+					width="128"
+					height="128"
+					className={mergeClasses(styles.svg, on && styles.on)}
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<defs>
+						<radialGradient id="bulbFill" cx="64" cy="56" r="40" gradientUnits="userSpaceOnUse">
+							<stop offset="0%" stopColor="rgba(255, 223, 120, 1)" />
+							<stop offset="60%" stopColor="rgba(255, 223, 120, .45)" />
+							<stop offset="100%" stopColor="rgba(255, 223, 120, 0)" />
+						</radialGradient>
+					</defs>
+
+					<circle className={styles.bulb} cx="64" cy="56" r="40" fill="url(#bulbFill)" />
+
+					<g className={styles.wires}>
+						<g>
+							<path
+								fill="none"
+								stroke="#646464"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeMiterlimit="10"
+								d="M78,102v10.43c0,6.394-5.143,11.57-11.346,11.57h-5.443C55.01,124,50,118.823,50,112.43V102"
+							/>
+							<path
+								fill="none"
+								stroke="#646464"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeMiterlimit="10"
+								d="M69,124v0.996c0,1.101-0.984,2.004-2.084,2.004h-5.852c-1.1,0-2.064-0.903-2.064-2.004V124"
+							/>
+							<line
+								fill="none"
+								stroke="#646464"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeMiterlimit="10"
+								x1="50"
+								y1="102"
+								x2="69"
+								y2="102"
+							/>
+							<line
+								fill="none"
+								stroke="#646464"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeMiterlimit="10"
+								x1="50"
+								y1="107"
+								x2="69"
+								y2="107"
+							/>
+							<line
+								fill="none"
+								stroke="#646464"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeMiterlimit="10"
+								x1="50"
+								y1="112"
+								x2="69"
+								y2="112"
+							/>
+							<line
+								fill="none"
+								stroke="#646464"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeMiterlimit="10"
+								x1="75"
+								y1="102"
+								x2="78"
+								y2="102"
+							/>
+							<line
+								fill="none"
+								stroke="#646464"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeMiterlimit="10"
+								x1="75"
+								y1="107"
+								x2="78"
+								y2="107"
+							/>
+							<line
+								fill="none"
+								stroke="#646464"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeMiterlimit="10"
+								x1="75"
+								y1="112"
+								x2="78"
+								y2="112"
+							/>
+							<line
+								fill="none"
+								stroke="#646464"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeMiterlimit="10"
+								x1="51"
+								y1="117"
+								x2="77"
+								y2="117"
+							/>
+							<path
+								fill="none"
+								stroke="#646464"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeMiterlimit="10"
+								d="M67.992,92.139l0.014-11.41l25.07-9.109c2.076-0.755,3.146-3.051,2.391-5.126s-3.051-3.146-5.127-2.391l-27.064,9.834
+                c-1.857,0.345-3.266,1.967-3.268,3.926l-0.016,14.276"
+							/>
+							<g>
+								<path
+									fill="none"
+									stroke="#646464"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeMiterlimit="10"
+									d="M36.293,83.477c-1.633,0-3.166-1.008-3.758-2.632c-0.756-2.075,0.314-4.372,2.391-5.126l55.414-20.17
+                  c2.076-0.756,4.371,0.314,5.127,2.391c0.756,2.075-0.314,4.371-2.391,5.127L37.662,83.234
+                  C37.209,83.399,36.748,83.477,36.293,83.477z"
+								/>
+							</g>
+							<g>
+								<path
+									fill="none"
+									stroke="#646464"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeMiterlimit="10"
+									d="M36.293,74.945c-1.633,0-3.166-1.008-3.758-2.632c-0.756-2.076,0.314-4.372,2.391-5.127L90.34,47.018
+                  c2.076-0.756,4.371,0.314,5.127,2.391c0.756,2.075-0.314,4.371-2.391,5.126l-55.414,20.17
+                  C37.209,74.868,36.748,74.945,36.293,74.945z"
+								/>
+							</g>
+							<g>
+								<path
+									fill="none"
+									stroke="#646464"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeMiterlimit="10"
+									d="M36.293,66.393c-1.633,0-3.166-1.009-3.758-2.633c-0.756-2.076,0.314-4.372,2.391-5.127l55.414-20.17
+                  c2.076-0.756,4.371,0.314,5.127,2.391s-0.314,4.371-2.391,5.127L37.662,66.15C37.209,66.314,36.748,66.393,36.293,66.393z"
+								/>
+							</g>
+							<g>
+								<path
+									fill="none"
+									stroke="#646464"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeMiterlimit="10"
+									d="M36.293,57.904c-1.633,0-3.166-1.008-3.758-2.633c-0.756-2.076,0.314-4.371,2.391-5.126l55.414-20.17
+                  c2.076-0.756,4.371,0.315,5.127,2.39c0.756,2.077-0.314,4.371-2.391,5.127l-55.414,20.17
+                  C37.209,57.826,36.748,57.904,36.293,57.904z"
+								/>
+							</g>
+							<g>
+								<path
+									fill="none"
+									stroke="#646464"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeMiterlimit="10"
+									d="M36.293,49.373c-1.633,0-3.166-1.008-3.758-2.633c-0.756-2.076,0.314-4.371,2.391-5.127l55.414-20.17
+                  c2.076-0.755,4.371,0.315,5.127,2.391c0.756,2.076-0.314,4.371-2.391,5.127l-55.414,20.17
+                  C37.209,49.295,36.748,49.373,36.293,49.373z"
+								/>
+							</g>
+							<g>
+								<path
+									fill="none"
+									stroke="#646464"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeMiterlimit="10"
+									d="M36.293,40.819c-1.633,0-3.166-1.009-3.758-2.634c-0.756-2.075,0.314-4.37,2.391-5.125l55.414-20.17
+                  c2.076-0.756,4.371,0.314,5.127,2.391s-0.314,4.371-2.391,5.126l-55.414,20.17C37.209,40.742,36.748,40.819,36.293,40.819z"
+								/>
+							</g>
+							<g>
+								<path
+									fill="none"
+									stroke="#646464"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeMiterlimit="10"
+									d="M36.293,32.322c-1.633,0-3.166-1.009-3.758-2.633c-0.756-2.076,0.314-4.371,2.391-5.127L90.34,4.393
+                  c2.076-0.755,4.371,0.314,5.127,2.391s-0.314,4.371-2.391,5.127L37.662,32.08C37.209,32.244,36.748,32.322,36.293,32.322z"
+								/>
+							</g>
+							<g>
+								<path
+									fill="none"
+									stroke="#646464"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeMiterlimit="10"
+									d="M36.293,23.846c-1.633,0-3.166-1.008-3.758-2.633c-0.756-2.076,0.314-4.371,2.391-5.127L75.703,1.238
+                  c2.078-0.756,4.373,0.314,5.127,2.391C81.586,5.705,80.516,8,78.439,8.756L37.662,23.604
+                  C37.209,23.768,36.748,23.846,36.293,23.846z"
+								/>
+							</g>
+							<path
+								fill="none"
+								stroke="#646464"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeMiterlimit="10"
+								d="M80,100.004c0,1.104-0.91,1.996-2.014,1.996h-28c-1.105,0-1.986-0.892-1.986-1.996v-6C48,92.899,48.881,92,49.986,92h28
+                C79.09,92,80,92.899,80,94.004V100.004z"
+							/>
+						</g>
+					</g>
+				</svg>
+			</div>
+		</div>
+	);
+}

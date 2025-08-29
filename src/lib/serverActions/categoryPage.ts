@@ -27,6 +27,7 @@ type FetchOpts = {
 export const getCategoryPageData = cache(async (slug: string, opts: FetchOpts) => {
 	const page = Math.max(1, opts.page ?? 1);
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const whereProducts: any = {
 		OR: [{ category: { slug } }, { category: { parent: { slug } } }],
 	};
@@ -72,7 +73,7 @@ export const getCategoryPageData = cache(async (slug: string, opts: FetchOpts) =
 					id: true,
 					name: true,
 					values: {
-						select: { id: true, value: true, count: true },
+						select: { id: true, value: true, _count: { select: { products: true } } },
 						orderBy: { value: 'asc' },
 					},
 				},

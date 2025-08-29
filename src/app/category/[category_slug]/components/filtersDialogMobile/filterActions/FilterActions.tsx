@@ -37,7 +37,7 @@ function Root({
 		});
 	};
 
-	const onReset = () => reset();
+	const onReset = () => reset(sort ? [] : ['sort']);
 
 	return (
 		<FilterActionsCtx.Provider value={{ onApply, onReset }}>

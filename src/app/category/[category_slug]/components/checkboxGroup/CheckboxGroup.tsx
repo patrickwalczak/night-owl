@@ -60,6 +60,7 @@ export function createCheckboxGroup<T extends string>() {
 		value: T;
 		label: ReactNode;
 		id?: string;
+		count: number;
 		labelClassName?: string;
 		inputClassName?: string;
 		customCheckboxClassName?: string;
@@ -74,26 +75,44 @@ export function createCheckboxGroup<T extends string>() {
 		inputClassName,
 		customCheckboxClassName,
 		labelTextClassName,
-	}: OptionProps) {
+		count,
+	}: OptionProps & { count?: number }) {
 		const { name, selected, toggle } = useSafeContext<Ctx<T>>(CheckBoxGroupContext);
 		const autoId = useId();
 		const inputId = id ?? `${name}-${autoId}`;
 		const checked = selected.has(value);
 
+		const disabled = !checked && count === 0;
+
+		const fullLabel = `${label} (${count})`;
+
 		return (
 			<li>
-				<label htmlFor={inputId} className={mergeClasses(styles.label, labelClassName, 'flex', 'align-center')}>
+				<label
+					htmlFor={inputId}
+					title={fullLabel}
+					className={mergeClasses(styles.label, labelClassName, 'flex', 'align-center')}
+				>
 					<input
 						id={inputId}
 						type="checkbox"
 						name={name}
 						value={value}
 						checked={checked}
+						disabled={disabled}
 						onChange={() => toggle(value)}
 						className={mergeClasses('sr-only', styles.input, inputClassName)}
+						aria-label={fullLabel}
 					/>
+
 					<span aria-hidden className={mergeClasses(styles.customCheckbox, customCheckboxClassName, 'flex-shrink-0')} />
-					<span className={mergeClasses(styles.customCheckboxValue, labelTextClassName, 'truncate')}>{label}</span>
+
+					<span className={mergeClasses(styles.textWrap)}>
+						<span className={mergeClasses(styles.customCheckboxValue, labelTextClassName, 'truncate')}>{label}</span>
+						<span className={mergeClasses(styles.count, disabled && styles.countZero)} aria-hidden>
+							({count.toLocaleString()})
+						</span>
+					</span>
 				</label>
 			</li>
 		);

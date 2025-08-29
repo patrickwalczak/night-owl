@@ -20,12 +20,32 @@
   transform: scale(0);
 }
 
-.label .input:checked + .customCheckbox::after {
-  transform: scale(1);
+.textWrap {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .35rem;
+  min-width: 0;
+}
+
+.count {
+  flex: 0 0 auto;
+  color: var(--color-owl-gray-500);
+}
+
+.countZero {
+  color: var(--color-owl-gray-400);
 }
 
 .label .input:disabled + .customCheckbox {
   opacity: .5;
+}
+
+.label .input:disabled ~ .textWrap .count {
+  opacity: .6;
+}
+
+.label .input:checked + .customCheckbox::after {
+  transform: scale(1);
 }
 
 .label .input:disabled ~ .customCheckboxValue {

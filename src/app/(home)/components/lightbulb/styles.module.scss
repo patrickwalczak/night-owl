@@ -1,0 +1,103 @@
+/* Size + colors you can tweak */
+:global(:root) {
+  --bulb-size: 80%;
+  /* make it bigger here */
+  --stroke-off: #646464;
+  /* grey off */
+  --stroke-on: #d97706;
+  /* warm amber on */
+  --glow-rgb: 255, 223, 120;
+  /* glow color (R,G,B) */
+}
+
+.container {
+  display: grid;
+  justify-items: center;
+  height: 100vh;
+  background-color: var(--color-owl-blue-800);
+  padding: 1rem;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 50% 50%;
+    padding: 4rem;
+  }
+}
+
+.titleContainer {
+  flex: 10;
+  padding: 0.5rem;
+}
+
+.heading {
+  font-family: var(--font-family-playfair);
+  font-weight: var(--font-weight-600);
+  font-size: var(--font-size-80);
+  color: var(--color-owl-white-200);
+  max-width: 700px;
+  text-align: center;
+}
+
+.lamp {
+  flex: 6;
+  display: inline-grid;
+  place-items: center;
+  width: max-content;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+
+  box-shadow: 0 0 0 rgba(var(--glow-rgb), 0);
+  transition: box-shadow 220ms ease, filter 220ms ease, transform 120ms ease;
+
+  &:focus-visible {
+    outline: 3px solid rgba(var(--glow-rgb), 0.6);
+    outline-offset: 4px;
+  }
+
+  &:active {
+    transform: scale(.98);
+  }
+}
+
+.svg {
+  inline-size: var(--bulb-size);
+  block-size: var(--bulb-size);
+  display: block;
+  transition: filter 220ms ease;
+}
+
+.bulb {
+  opacity: 0;
+  transition: opacity 220ms ease;
+  pointer-events: none;
+}
+
+.wires * {
+  stroke: var(--stroke-off) !important;
+  transition: stroke 220ms ease;
+}
+
+.on {
+  // box-shadow:
+  //   0 0 36px 10px rgba(var(--glow-rgb), 0.22),
+  //   0 0 80px 22px rgba(var(--glow-rgb), 0.12);
+}
+
+.on .svg {
+  filter:
+    drop-shadow(0 0 10px rgba(var(--glow-rgb), .65)) drop-shadow(0 0 26px rgba(var(--glow-rgb), .35));
+}
+
+.on .bulb {
+  opacity: 1;
+}
+
+.on .wires * {
+  stroke: var(--stroke-on) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lamp, .svg, .bulb, .wires * {
+    transition: none;
+  }
+}

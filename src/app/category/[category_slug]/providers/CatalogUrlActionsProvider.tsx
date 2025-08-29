@@ -1,8 +1,9 @@
 'use client';
 
 import React, { createContext, useCallback, useMemo } from 'react';
-import { DEFAULT_SORT_ORDER } from '@/constants';
+import { DEFAULT_SORT_ORDER, SEARCH_PARAMS_KEYS } from '@/constants';
 import { useShallowSearchParams } from '@/hooks/useShallowSearchParams';
+import { SearchParamsTypeKeys } from '@/types/catalog.models';
 
 type ApplyArgs = { sort?: string | null; ids?: string[]; query?: string | null };
 
@@ -15,7 +16,7 @@ type CatalogUrlActionsContextType = {
 	addParam: (id: string) => void; // adds one id to ?params=
 	removeParam: (id: string) => void; // removes one id from ?params=
 	setQuery: (q: string | null) => void; // sets ?q= and resets ?page=
-	reset: () => void; // clears sort/params/q/page
+	reset: (ignoredSearchParamsKeys?: SearchParamsTypeKeys[]) => void; // clears sort/params/query/page
 	applyFilters: (args: ApplyArgs) => void;
 	searchParams: URLSearchParams;
 };
@@ -49,15 +50,15 @@ export function CatalogUrlActionsProvider({ children }: { children: React.ReactN
 
 	const addParam = useCallback(
 		(id: string) => {
-			replace((sp) => {
-				sp.delete('page');
-				const list = (sp.get('params') || '')
+			replace((searchParams) => {
+				searchParams.delete('page');
+				const list = (searchParams.get('params') || '')
 					.split(',')
-					.map((s) => s.trim())
+					.map((searchParam) => searchParam.trim())
 					.filter(Boolean);
 				if (!list.includes(id)) list.push(id);
-				if (list.length) sp.set('params', list.join(','));
-				else sp.delete('params');
+				if (list.length) searchParams.set('params', list.join(','));
+				else searchParams.delete('params');
 			});
 		},
 		[replace]
@@ -65,37 +66,40 @@ export function CatalogUrlActionsProvider({ children }: { children: React.ReactN
 
 	const removeParam = useCallback(
 		(id: string) => {
-			replace((sp) => {
-				sp.delete('page');
-				const list = (sp.get('params') || '')
+			replace((searchParams) => {
+				searchParams.delete('page');
+				const list = (searchParams.get('params') || '')
 					.split(',')
-					.map((s) => s.trim())
+					.map((searchParam) => searchParam.trim())
 					.filter(Boolean)
 					.filter((x) => x !== id);
-				if (list.length) sp.set('params', list.join(','));
-				else sp.delete('params');
+				if (list.length) searchParams.set('params', list.join(','));
+				else searchParams.delete('params');
 			});
 		},
 		[replace]
 	);
 
 	const setQuery = useCallback(
-		(q: string | null) => {
-			replace((sp) => {
-				sp.delete('page');
-				const clean = (q ?? '').trim();
-				if (clean) sp.set('q', clean);
-				else sp.delete('q');
+		(query: string | null) => {
+			replace((searchParams) => {
+				searchParams.delete('page');
+				const clean = (query ?? '').trim();
+				if (clean) searchParams.set('query', clean);
+				else searchParams.delete('query');
 			});
 		},
 		[replace]
 	);
 
-	const reset = useCallback(() => {
-		replace((sp) => {
-			['sort', 'params', 'q', 'page'].forEach((k) => sp.delete(k));
-		});
-	}, [replace]);
+	const reset = useCallback(
+		(ignoredSearchParamsKeys: SearchParamsTypeKeys[] = []) => {
+			replace((sp) => {
+				SEARCH_PARAMS_KEYS.filter((k) => !ignoredSearchParamsKeys.includes(k)).forEach((k) => sp.delete(k));
+			});
+		},
+		[replace]
+	);
 
 	const applyFilters = useCallback(
 		({ sort = null, ids, query = null }: ApplyArgs) => {
