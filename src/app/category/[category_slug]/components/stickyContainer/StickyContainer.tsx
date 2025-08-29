@@ -20,7 +20,7 @@ const StickyContainer = () => {
 			style={{ top: isNavigationOpen ? '0px' : '48px' }}
 		>
 			{isDesktop ? <CategoryName isProductSum /> : <CategoryProductsTotal />}
-			<div className={mergeClasses('flex', 'align-center')}>
+			<div className={mergeClasses('flex', 'align-center', 'gap-1')}>
 				{isDesktop ? <SideFiltersButton /> : <FiltersDialog />}
 				{isDesktop ? <SortDropdown /> : null}
 			</div>

@@ -15,7 +15,7 @@ import styles from './navigation.module.scss';
 import { useAppDispatch, useAppSelector } from '@/lib/store/hooks';
 import CartDrawer from '../cartDrawer/CartDrawer';
 import { openCart } from '@/lib/store/features/order/orderSlice';
-import Overlay from './overlay/Overlay';
+import Overlay from './Overlay';
 
 interface NavigationContextType {
 	categories: SimpleCategoryModelType[];

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { SimpleCategoryModelType } from '@/types/category.model';
+import { SimpleCategoryModelType, SubcategoryType } from '@/types/category.model';
 import { FilterParameterType } from '@/types/parameter.model';
 import { ListingProductType } from '@/types/product.model';
 
@@ -11,8 +11,6 @@ type CategoryMini = {
 	slug: string;
 	parentId: string | null;
 };
-
-export type SubcategoryType = Pick<SimpleCategoryModelType, 'id' | 'name' | 'slug'>[];
 
 interface CatalogContextType {
 	initialProducts: ListingProductType[];

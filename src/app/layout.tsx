@@ -1,7 +1,7 @@
 import './globals.scss';
 import '../styles/utils.scss';
 import { Playfair_Display, Inter } from 'next/font/google';
-import StoreProvider from './StoreProvider';
+import StoreProvider from './providers/StoreProvider';
 import NavigationServer from '@/components/NavigationServer';
 import { headers } from 'next/headers';
 import { DeviceType } from '@/types/device.model';

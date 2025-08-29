@@ -22,3 +22,5 @@ export interface SimpleCategoryModelType {
 	parentId: string | null;
 	children: CategoryLeaf[];
 }
+
+export type SubcategoryType = Pick<SimpleCategoryModelType, 'id' | 'name' | 'slug'>[];

@@ -2,9 +2,9 @@
 
 import { useRef, ReactNode } from 'react';
 import { Provider } from 'react-redux';
-import { makeStore } from '../lib/store/index';
 import { AppStore } from '@/lib/store/types';
 import { DeviceType } from '@/types/device.model';
+import { makeStore } from '@/lib/store';
 
 export default function StoreProvider({ children, device }: { children: ReactNode; device: DeviceType }) {
 	const storeRef = useRef<AppStore | null>(null);

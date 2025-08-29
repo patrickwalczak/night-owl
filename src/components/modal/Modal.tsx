@@ -4,7 +4,7 @@ import { createContext } from 'react';
 import styles from './modal.module.scss';
 import { createPortal } from 'react-dom';
 import Close from '../icons/Close';
-import { useBodyOverflow } from './useBodyOverflow';
+import { useBodyOverflow } from '../../hooks/useBodyOverflow';
 import { useHandleEscape } from './useHandleEscape';
 import { mergeClasses } from '@/utils/mergeClasses';
 import { useSafeContext } from '@/hooks/useSafeContext';
@@ -47,7 +47,7 @@ const Overlay = ({ className = '', children }: { className?: string; children: R
 	const { onClose } = useSafeContext(ModalContext);
 
 	return (
-		<div className={mergeClasses(styles.overlay, className)} onClick={onClose}>
+		<div className={mergeClasses('backdrop', className)} onClick={onClose}>
 			{children}
 		</div>
 	);
