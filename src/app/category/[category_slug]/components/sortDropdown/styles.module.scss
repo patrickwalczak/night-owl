@@ -1,10 +1,9 @@
-:root {
+:global(:root) {
 	--dropdown-bg: #fff;
-	--dropdown-border: #e5e7eb; // gray-200
+	--dropdown-border: #e5e7eb;
 	--dropdown-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
-	--text: #0f172a; // slate-900
-	--muted: #6b7280; // gray-500
-	--hover: #f3f4f6; // gray-100
+	--text: #0f172a;
+	--hover: #f3f4f6;
 }
 
 .toolbar {

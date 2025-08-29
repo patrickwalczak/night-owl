@@ -2,7 +2,7 @@
 
 import './utils.scss';
 import Link from 'next/link';
-import React, { createContext, useRef } from 'react';
+import React, { createContext, useEffect, useRef } from 'react';
 import Cart from '../icons/Cart';
 import MobileNavigation from '../mobile/mobileNavigation/MobileNavigation';
 import { mergeClasses } from '@/utils/mergeClasses';
@@ -15,6 +15,7 @@ import styles from './navigation.module.scss';
 import { useAppDispatch, useAppSelector } from '@/lib/store/hooks';
 import CartDrawer from '../cartDrawer/CartDrawer';
 import { openCart } from '@/lib/store/features/order/orderSlice';
+import Overlay from './overlay/Overlay';
 
 interface NavigationContextType {
 	categories: SimpleCategoryModelType[];
@@ -34,6 +35,8 @@ const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) =
 	const { expandDropdown, hideDropdown, isExpanded, setIsExpanded } = useIsDropdownExpanded();
 
 	const catalogBtnRef = useRef<HTMLButtonElement | null>(null);
+
+	const mainEl = useRef<HTMLElement | null>(null);
 
 	const pathname = usePathname();
 	const isHomepage = pathname === '/';
@@ -62,6 +65,18 @@ const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) =
 			setIsExpanded((prev) => !prev);
 		}
 	};
+
+	useEffect(() => {
+		mainEl.current = document.querySelector('main');
+
+		if (mainEl.current && isExpanded) {
+			mainEl.current.setAttribute('inert', String(isExpanded));
+		} else if (mainEl.current) {
+			mainEl.current.removeAttribute('inert');
+		}
+
+		return () => mainEl.current?.removeAttribute('inert');
+	}, [isExpanded]);
 
 	return (
 		<NavigationContext.Provider value={ctx}>
@@ -113,6 +128,7 @@ const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) =
 				<CategoriesDropdown controllerBtnRef={catalogBtnRef} isExpanded={isExpanded} categories={categories} />
 				<CartDrawer />
 			</header>
+			<Overlay open={isExpanded} onClose={hideDropdown} zIndex={2} />
 		</NavigationContext.Provider>
 	);
 };
