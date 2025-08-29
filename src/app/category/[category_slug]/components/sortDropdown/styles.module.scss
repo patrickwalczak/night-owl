@@ -1,12 +1,10 @@
-:global(:root) {
+.toolbar {
 	--dropdown-bg: #fff;
 	--dropdown-border: #e5e7eb;
 	--dropdown-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
 	--text: #0f172a;
 	--hover: #f3f4f6;
-}
 
-.toolbar {
 	display: flex;
 	align-items: center;
 	gap: 16px;
