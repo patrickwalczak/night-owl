@@ -1,36 +1,56 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './styles.module.scss';
 import { mergeClasses } from '@/utils/mergeClasses';
+import { useScrubbedInView } from '@/hooks/useScrubbedInView';
 
 export default function LightBulb() {
-	const [on] = useState(true);
+	const {
+		ref: svgRef,
+		isOn: isSvgOn,
+		mapped: r,
+	} = useScrubbedInView<HTMLDivElement>({
+		autoDisconnect: 'threshold',
+		mapTo: { min: 0, max: 40 },
+	});
+
+	const {
+		ref: headingRef,
+		progress: headingProgress,
+		isOn: isHeadingOn,
+	} = useScrubbedInView<HTMLDivElement>({
+		autoDisconnect: 'threshold',
+		mapTo: { min: 0, max: 40 },
+	});
 
 	return (
-		<div className={mergeClasses(styles.container)}>
-			<div className={mergeClasses(styles.titleContainer, 'flex-center')}>
-				<h2 className={styles.heading}>
-					{`Night isn't the end of the day.It's a different kind of beginning—with better lighting.`}
+		<div
+			className={mergeClasses(styles.container, 'section-dark')}
+			style={{ ['--progress']: headingProgress } as React.CSSProperties}
+		>
+			<div ref={headingRef} className={mergeClasses(styles.titleContainer, 'flex-center')}>
+				<h2 className={mergeClasses(styles.heading, isHeadingOn && styles.headingOn)}>
+					{`Night isn't the end of the day.It's a different kind of beginning - with better lighting.`}
 				</h2>
 			</div>
-			<div className={mergeClasses('flex-center', styles.bulbContainer)}>
+			<div ref={svgRef} className={mergeClasses('flex-center', styles.bulbContainer, isSvgOn && styles.isSvgOn)}>
 				<svg
 					viewBox="0 0 128 128"
 					width="128"
 					height="128"
-					className={mergeClasses(styles.svg, on && styles.on)}
+					className={mergeClasses(styles.svg)}
 					xmlns="http://www.w3.org/2000/svg"
 				>
 					<defs>
-						<radialGradient id="bulbFill" cx="64" cy="56" r="40" gradientUnits="userSpaceOnUse">
+						<radialGradient id="bulbFill" cx="64" cy="56" r={r} gradientUnits="userSpaceOnUse">
 							<stop offset="0%" stopColor="rgba(255, 223, 120, 1)" />
 							<stop offset="60%" stopColor="rgba(255, 223, 120, .45)" />
 							<stop offset="100%" stopColor="rgba(255, 223, 120, 0)" />
 						</radialGradient>
 					</defs>
 
-					<circle className={styles.bulb} cx="64" cy="56" r="40" fill="url(#bulbFill)" />
+					<circle className={styles.bulb} cx="64" cy="56" r={r} fill="url(#bulbFill)" />
 
 					<g className={styles.wires}>
 						<g>

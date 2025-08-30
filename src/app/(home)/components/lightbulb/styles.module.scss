@@ -5,9 +5,10 @@
 
   display: grid;
   justify-items: center;
+  gap: 1rem;
   min-height: 100vh;
   background-color: var(--color-owl-blue-800);
-  padding: 5rem 1rem;
+  padding: 5rem 1rem 2rem;
 
   @media (min-width: 1024px) {
     grid-template-columns: 50% 50%;
@@ -23,46 +24,31 @@
 .heading {
   font-family: var(--font-family-playfair);
   font-weight: var(--font-weight-600);
-  font-size: var(--font-size-64);
+  font-size: var(--font-size-48);
   color: var(--color-owl-white-200);
   max-width: 700px;
   text-align: center;
+  transition: color 200ms ease, text-shadow 200ms ease, opacity 200ms ease;
+  opacity: calc(0.75 + 0.25 * var(--progress, 0));
 
   @media (min-width: 1024px) {
     font-size: var(--font-size-80);
   }
 }
 
+.headingOn {
+  color: color-mix(in lab, var(--color-owl-white-200) calc(60% + 40% * var(--progress, 0)), white 40%);
+  text-shadow:
+    0 0 calc(2px + 6px * var(--progress, 0)) rgba(var(--glow-rgb), calc(.15 + .25 * var(--progress, 0)));
+}
+
 .bulbContainer {
   min-height: 500px;
-  height: 100vh;
   max-height: 900px;
 }
 
-.lamp {
-  flex: 6;
-  display: inline-grid;
-  place-items: center;
-  width: max-content;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-
-  box-shadow: 0 0 0 rgba(var(--glow-rgb), 0);
-  transition: box-shadow 220ms ease, filter 220ms ease, transform 120ms ease;
-
-  &:focus-visible {
-    outline: 3px solid rgba(var(--glow-rgb), 0.6);
-    outline-offset: 4px;
-  }
-
-  &:active {
-    transform: scale(.98);
-  }
-}
-
 .svg {
-  --bulb-size: 80%;
+  --bulb-size: 100%;
   inline-size: var(--bulb-size);
   block-size: var(--bulb-size);
 
@@ -70,43 +56,33 @@
   transition: filter 220ms ease;
 
   @media (min-width: 1024px) {
-    inline-size: var(--bulb-size);
-    block-size: var(--bulb-size);
+    --bulb-size: 80%;
   }
 }
 
 .bulb {
-  opacity: 0;
+  opacity: 1;
   transition: opacity 220ms ease;
   pointer-events: none;
 }
 
 .wires * {
-  stroke: var(--stroke-off) !important;
+  stroke: var(--stroke-off);
   transition: stroke 220ms ease;
 }
 
-.on {
-  // box-shadow:
-  //   0 0 36px 10px rgba(var(--glow-rgb), 0.22),
-  //   0 0 80px 22px rgba(var(--glow-rgb), 0.12);
-}
-
-.on .svg {
+.isSvgOn .svg {
   filter:
     drop-shadow(0 0 10px rgba(var(--glow-rgb), .65)) drop-shadow(0 0 26px rgba(var(--glow-rgb), .35));
 }
 
-.on .bulb {
-  opacity: 1;
-}
 
-.on .wires * {
-  stroke: var(--stroke-on) !important;
+.isSvgOn .wires * {
+  stroke: var(--stroke-on);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lamp, .svg, .bulb, .wires * {
+  .svg, .bulb, .wires * {
     transition: none;
   }
 }
