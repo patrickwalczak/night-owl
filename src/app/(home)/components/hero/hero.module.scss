@@ -1,6 +1,7 @@
 @use '../../../../styles/breakpoints';
 
 .container {
+	position: relative;
 	display: grid;
 	grid-auto-rows: auto;
 	// background-color: var(--color-owl-blue-800);
@@ -42,6 +43,12 @@
 	font-size: clamp(var(--font-size-54), calc(12vw + 0.1rem), var(--font-size-76));
 	color: var(--color-owl-white);
 
+	span {
+		display: inline-block;
+		margin-right: 0.25em;
+		text-shadow: 4px 11px 5px rgba(0, 0, 0, 0.15);
+	}
+
 	@media (orientation: landscape) and (max-height: breakpoints.$breakpoint-480) {
 		font-size: var(--font-size-54);
 	}
@@ -59,17 +66,18 @@
 	padding: 0.625rem 5rem;
 	border: none;
 	border-radius: 25px;
-	font-size: var(--font-size-20);
+	font-size: var(--font-size-18);
 	font-weight: var(--font-weight-500);
 	color: var(--color-owl-white);
 	background-color: var(--color-owl-purple-400);
+	box-shadow: 4px 11px 5px rgba(0, 0, 0, 0.15);
 
 	&:hover {
 		background-color: var(--color-owl-purple-500);
 	}
 
 	@media (min-width: breakpoints.$breakpoint-1024) {
-		min-width: 20rem;
+		min-width: 18rem;
 		padding-block: 0.75rem;
 	}
 }
@@ -78,4 +86,81 @@
 	min-height: 500px;
 	height: 100vh;
 	object-fit: cover;
+}
+
+.toggleScene {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 120px;
+	height: auto;
+	transform-box: fill-box;
+	transform-origin: 50% 0%;
+	animation: swing 6s infinite;
+	animation-timing-function: linear;
+	will-change: transform;
+}
+
+@keyframes swing {
+	0% {
+		transform: rotate(0deg);
+		animation-timing-function: ease-out;
+	}
+
+	25% {
+		transform: rotate(6deg);
+		animation-timing-function: ease-in;
+	}
+
+	50% {
+		transform: rotate(0deg);
+		animation-timing-function: ease-out;
+	}
+
+	75% {
+		transform: rotate(-6deg);
+		animation-timing-function: ease-in;
+	}
+
+	100% {
+		transform: rotate(0deg);
+	}
+}
+
+.cordEnd {
+	fill: #272727;
+}
+
+.cords {
+	stroke: #cfcfcf;
+}
+
+.bulb {
+	stroke: #eaeaea26;
+}
+
+.cap {
+	fill: #ffffff;
+}
+
+.capShine {
+	fill: #ffffff;
+	// fill: var(--color-owl-blue-800);
+}
+
+.filament {
+	stroke: #d8c51e;
+}
+
+.flash {
+	stroke: #d8c51e;
+}
+
+.shine {
+	stroke: rgba(193, 198, 71, 0.752);
+}
+
+.bulbShape {
+	fill: #ffffff1c
 }

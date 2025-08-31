@@ -31,7 +31,8 @@ export default function LightBulb() {
 		>
 			<div ref={headingRef} className={mergeClasses(styles.titleContainer, 'flex-center')}>
 				<h2 className={mergeClasses(styles.heading, isHeadingOn && styles.headingOn)}>
-					{`Night isn't the end of the day. It's a different kind of beginning - with better lighting.`}
+					{`Night isn't the end of the day. It's a different kind of beginning - with better`}{' '}
+					<span className={styles.highlight}>lighting.</span>
 				</h2>
 			</div>
 			<div ref={svgRef} className={mergeClasses('flex-center', styles.bulbContainer, isSvgOn && styles.isSvgOn)}>
