@@ -1,0 +1,27 @@
+.page {
+  gap: 2rem;
+  padding: 1rem 4rem;
+  margin: var(--navigation-height) auto 0;
+
+  @media (min-width: 1024px) {
+    gap: 5rem;
+  }
+}
+
+.breadcrumbs {
+  ol {
+    padding-left: 0;
+    gap: 0.5rem;
+    font-size: var(--font-size-12);
+  }
+
+  li + li::before {
+    content: "›";
+    opacity: .6;
+    margin: 0 4px;
+  }
+
+  a {
+    color: var(--color-owl-gray-500);
+  }
+}

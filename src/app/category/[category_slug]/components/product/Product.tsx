@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import styles from './product.module.scss';
 import Cart from '@/components/icons/Cart';
 import Image from 'next/image';
@@ -9,10 +9,13 @@ import { ListingProductType } from '@/types/product.model';
 import { useAppDispatch } from '@/lib/store/hooks';
 import { addItem } from '@/lib/store/features/order/orderSlice';
 import { useRouter } from 'next/navigation';
+import { flyToCart } from '@/utils/flyToCart';
 
 export default function Product({ product }: { product: ListingProductType }) {
 	const dispatch = useAppDispatch();
 	const router = useRouter();
+
+	const imgRef = useRef<HTMLImageElement>(null);
 
 	const productUrl = `/product/${product.slug}`;
 
@@ -28,13 +31,20 @@ export default function Product({ product }: { product: ListingProductType }) {
 				currency: product.currency,
 			})
 		);
+		const source = imgRef.current!;
+		const target = document.querySelector('[data-cart-icon]') as HTMLElement | null;
+		if (source && target) {
+			flyToCart(source, target, {
+				duration: 750,
+				curvature: 0.5,
+				shrinkTo: 0.01,
+			});
+		}
 	};
 
-	// const goToProduct = () => router.push(productUrl);
-	const goToProduct = () => {};
+	const goToProduct = () => router.push(productUrl);
 
-	// const onCardClick = () => goToProduct();
-	const onCardClick = () => {};
+	const onCardClick = () => goToProduct();
 
 	const onCardKeyDown: React.KeyboardEventHandler<HTMLElement> = (e) => {
 		if (e.target !== e.currentTarget) return;
@@ -68,13 +78,7 @@ export default function Product({ product }: { product: ListingProductType }) {
 			onKeyDown={onCardKeyDown}
 		>
 			<div className={mergeClasses(styles.thumb, 'w-100')}>
-				<Image
-					src={'https://placehold.co/600x400.webp'}
-					alt={product.name}
-					fill
-					priority={false}
-					className={styles.img}
-				/>
+				<Image ref={imgRef} src={'https://placehold.co/600x400.webp'} alt={product.name} fill className={styles.img} />
 			</div>
 
 			<div className={mergeClasses(styles.details, 'align-center')}>

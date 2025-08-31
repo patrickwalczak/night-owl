@@ -69,11 +69,11 @@
 	font-size: var(--font-size-18);
 	font-weight: var(--font-weight-500);
 	color: var(--color-owl-white);
-	background-color: var(--color-owl-purple-400);
-	box-shadow: 4px 11px 5px rgba(0, 0, 0, 0.15);
+	background-color: var(--color-owl-purple-500);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, .25);
 
 	&:hover {
-		background-color: var(--color-owl-purple-500);
+		background-color: var(--color-owl-purple-500-faded);
 	}
 
 	@media (min-width: breakpoints.$breakpoint-1024) {

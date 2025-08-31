@@ -2,7 +2,7 @@
 
 import './utils.scss';
 import Link from 'next/link';
-import React, { createContext, useEffect, useRef } from 'react';
+import React, { createContext, useEffect, useMemo, useRef } from 'react';
 import Cart from '../icons/Cart';
 import MobileNavigation from '../mobile/mobileNavigation/MobileNavigation';
 import { mergeClasses } from '@/utils/mergeClasses';
@@ -16,6 +16,7 @@ import { useAppDispatch, useAppSelector } from '@/lib/store/hooks';
 import CartDrawer from '../cartDrawer/CartDrawer';
 import { openCart } from '@/lib/store/features/order/orderSlice';
 import Overlay from './Overlay';
+import { CartItem } from '@/types/cartItem';
 
 interface NavigationContextType {
 	categories: SimpleCategoryModelType[];
@@ -29,6 +30,7 @@ export const NavigationContext = createContext<NavigationContextType | null>(nul
 
 const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) => {
 	const isDesktop = useAppSelector((state) => state.app.isDesktop);
+	const items = useAppSelector((state) => state.order.items);
 	const dispatch = useAppDispatch();
 
 	const { isScrolled, direction } = useIsScrolled();
@@ -117,8 +119,10 @@ const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) =
 								type="button"
 								className={mergeClasses(styles.cartButton, 'button-empty')}
 								aria-label="Open cart"
+								data-cart-icon
 							>
 								<Cart />
+								<CartBadgeInline items={items} />
 							</button>
 						</div>
 					)}
@@ -134,3 +138,26 @@ const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) =
 };
 
 export default Navigation;
+
+function CartBadgeInline({ items }: { items: CartItem[] }) {
+	const ref = useRef<HTMLSpanElement>(null);
+	const countTotal = useMemo(() => items.reduce((acc, i) => acc + i.quantity, 0), [items]);
+
+	useEffect(() => {
+		if (!ref.current || items.length <= 0) return;
+		ref.current.classList.remove(styles.bump);
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+		ref.current.offsetWidth;
+		ref.current.classList.add(styles.bump);
+	}, [items]);
+
+	if (items.length <= 0) return null;
+
+	const display = countTotal > 99 ? '99+' : String(countTotal);
+
+	return (
+		<span ref={ref} className={styles.badge} aria-live="polite" aria-atomic="true">
+			{display}
+		</span>
+	);
+}
