@@ -6,8 +6,9 @@ import { mergeClasses } from '@/utils/mergeClasses';
 import ProductHero from './components/productHero/ProductHero';
 import RelatedProducts from './components/relatedProducts/RelatedProducts';
 
-export default async function ProductPage({ params }: { params: { slug: string } }) {
-	const data = await getProductFullBySlug(params.slug);
+export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+	const awaitedParams = await params;
+	const data = await getProductFullBySlug(awaitedParams.slug);
 
 	if (!data) return notFound();
 
