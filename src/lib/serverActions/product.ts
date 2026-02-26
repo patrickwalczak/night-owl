@@ -32,6 +32,7 @@ export async function getProductsForCategory(opts: {
 	});
 	const categoryIds = [opts.categoryId, ...children.map((c) => c.id)];
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const where: any = { categoryId: { in: categoryIds }, inStock: true };
 
 	if (opts.query) where.name = { contains: opts.query, mode: 'insensitive' };
