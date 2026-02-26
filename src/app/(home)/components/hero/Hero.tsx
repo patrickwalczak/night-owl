@@ -10,8 +10,6 @@ export const Hero = async () => {
 
 	return (
 		<section className={mergeClasses(styles.container, 'align-center', 'justify-center')}>
-			{/* <Bulb /> */}
-
 			<div className={`${styles.textContentContainer} flex flex-col align-center justify-center`}>
 				<h1 className={styles.heading}>
 					<span>Lighting</span>
