@@ -5,7 +5,7 @@ import styles from './categoriesDropdown.module.scss';
 import Link from 'next/link';
 import { SimpleCategoryModelType } from '@/types/category.model';
 import { useSafeContext } from '@/hooks/useSafeContext';
-import { NavigationContext } from '../navigation/Navigation';
+import { NavigationContext } from '../../widgets/navigation/ui/Navigation';
 
 const CategoriesDropdown = ({
 	isExpanded,

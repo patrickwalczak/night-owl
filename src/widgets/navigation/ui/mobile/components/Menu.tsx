@@ -1,12 +1,12 @@
 import { mergeClasses } from '@/utils/mergeClasses';
 import Link from 'next/link';
 import React from 'react';
-import Modal from '../../modal/Modal';
-import Cart from '../../icons/Cart';
+import Modal from '../../../../../components/modal/Modal';
+import Cart from '../../../../../components/icons/Cart';
 import styles from './navigation.module.scss';
 import { motion } from 'framer-motion';
-import NavigationButton from '../navigationButton/NavigationButton';
-import { CategoriesDropdownController } from '../categoriesDropdownController/CategoriesDropdownController';
+import NavigationButton from './NavigationButton';
+import { CategoriesDropdownController } from './CategoriesDropdownController';
 import { useAppDispatch } from '@/lib/store/hooks';
 import { openCart } from '@/lib/store/features/order/orderSlice';
 

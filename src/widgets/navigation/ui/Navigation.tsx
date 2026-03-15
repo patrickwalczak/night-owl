@@ -3,20 +3,20 @@
 import './utils.scss';
 import Link from 'next/link';
 import React, { createContext, useEffect, useMemo, useRef } from 'react';
-import Cart from '../icons/Cart';
-import MobileNavigation from '../mobile/mobileNavigation/MobileNavigation';
+import Cart from '../../../components/icons/Cart';
+import MobileNavigation from './mobile/MobileNavigation';
 import { mergeClasses } from '@/utils/mergeClasses';
-import CategoriesDropdown from '../categoriesDropdown/CategoriesDropdown';
+import CategoriesDropdown from '../../../components/categoriesDropdown/CategoriesDropdown';
 import { SimpleCategoryModelType } from '@/types/category.model';
 import { usePathname } from 'next/navigation';
-import useIsScrolled from './hooks/useIsScrolled';
-import useIsDropdownExpanded from './hooks/useIsDropdownExpanded';
+import useIsScrolled from '../hooks/useIsScrolled';
+import useIsDropdownExpanded from '../hooks/useIsDropdownExpanded';
 import styles from './navigation.module.scss';
 import { useAppDispatch, useAppSelector } from '@/lib/store/hooks';
-import CartDrawer from '../cartDrawer/CartDrawer';
+import CartDrawer from '../../../components/cartDrawer/CartDrawer';
 import { openCart } from '@/lib/store/features/order/orderSlice';
-import Overlay from './Overlay';
 import { CartItem } from '@/types/cartItem';
+import Overlay from './components/Overlay';
 
 interface NavigationContextType {
 	categories: SimpleCategoryModelType[];
