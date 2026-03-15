@@ -2,7 +2,7 @@
 
 import 'server-only';
 import { SortOrderKeys } from '@/types/catalog.models';
-import prisma from '../prisma/prisma';
+import prisma from '../../shared/lib/db/prisma';
 
 const PAGE_SIZE = 20;
 

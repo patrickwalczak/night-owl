@@ -1,0 +1,41 @@
+import './globals.scss';
+import '../styles/utils.scss';
+import { Playfair_Display, Inter } from 'next/font/google';
+import StoreProvider from '../src/app/providers/StoreProvider';
+import NavigationServer from '@/widgets/navigation/ui/NavigationServer';
+import { headers } from 'next/headers';
+import { DeviceType } from '@/types/device.model';
+import AppClient from '@/app/client/AppClient';
+
+export const inter = Inter({
+	subsets: ['latin'],
+	variable: '--font-inter',
+	display: 'swap',
+});
+
+export const playfair = Playfair_Display({
+	subsets: ['latin'],
+	variable: '--font-playfair',
+	display: 'swap',
+});
+
+export default async function RootLayout({
+	children,
+}: Readonly<{
+	children: React.ReactNode;
+}>) {
+	const device = (await headers()).get('x-device-type') as DeviceType;
+
+	return (
+		<html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+			<body>
+				<StoreProvider device={device}>
+					<AppClient>
+						<NavigationServer />
+						{children}
+					</AppClient>
+				</StoreProvider>
+			</body>
+		</html>
+	);
+}

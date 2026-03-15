@@ -1,4 +1,4 @@
-import prisma from '../prisma/prisma';
+import prisma from '../../shared/lib/db/prisma';
 
 export async function getParametersForCategory(categoryId: string) {
 	const children = await prisma.category.findMany({

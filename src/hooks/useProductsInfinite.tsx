@@ -3,10 +3,10 @@
 import { useMemo, useRef } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useSafeContext } from './useSafeContext';
-import { CatalogContext } from '@/app/category/[category_slug]/providers/CatalogProvider';
+import { CatalogContext } from 'app/category/[category_slug]/providers/CatalogProvider';
 import { ListingProductType } from '@/types/product.model';
 import { DEFAULT_SORT_ORDER } from '@/constants';
-import { CatalogUrlActionsContext } from '@/app/category/[category_slug]/providers/CatalogUrlActionsProvider';
+import { CatalogUrlActionsContext } from 'app/category/[category_slug]/providers/CatalogUrlActionsProvider';
 
 type PagePayload = {
 	items: ListingProductType[];
