@@ -1,8 +1,8 @@
 import React from 'react';
 import NavigationButton from './NavigationButton';
-import SubcategoriesDropdown from '@/components/categoriesDropdown/CategoriesDropdown';
-import { useSafeContext } from '@/hooks/useSafeContext';
+import SubcategoriesDropdown from '@/widgets/navigation/ui/desktop/categoriesDropdown/CategoriesDropdown';
 import { NavigationContext } from '@/widgets/navigation/ui/Navigation';
+import { useSafeContext } from '@/shared/hooks/useSafeContext';
 
 export const CategoriesDropdownController = () => {
 	const { categories, setIsExpanded, isExpanded } = useSafeContext(NavigationContext);

@@ -1,5 +1,5 @@
-@use '../../styles/zindex';
-@use '../../styles/breakpoints';
+@use '../../../app/styles/zindex';
+@use '../../../app/styles/breakpoints';
 
 .header {
 	z-index: zindex.$header-zindex;

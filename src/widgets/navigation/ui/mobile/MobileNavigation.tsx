@@ -2,12 +2,12 @@
 
 import React from 'react';
 import styles from './navigation.module.scss';
-import Hamburger from '../../../../components/icons/Hamburger';
+import Hamburger from '../../../../shared/ui/icons/Hamburger';
 import Menu from './components/Menu';
-import useOpenState from '@/hooks/useIsOpenState';
 import { mergeClasses } from '@/utils/mergeClasses';
-import { useSafeContext } from '@/hooks/useSafeContext';
 import { NavigationContext } from '@/widgets/navigation/ui/Navigation';
+import { useSafeContext } from '@/shared/hooks/useSafeContext';
+import useOpenState from '@/shared/hooks/useIsOpenState';
 
 const MobileNavigation = () => {
 	const { isScrolled, hideDropdown } = useSafeContext(NavigationContext);

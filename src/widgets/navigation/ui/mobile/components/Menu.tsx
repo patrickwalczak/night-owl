@@ -1,9 +1,9 @@
 import { mergeClasses } from '@/utils/mergeClasses';
 import Link from 'next/link';
 import React from 'react';
-import Modal from '../../../../../components/modal/Modal';
-import Cart from '../../../../../components/icons/Cart';
-import styles from './navigation.module.scss';
+import Modal from '../../../../../shared/ui/modal/Modal';
+import Cart from '../../../../../shared/ui/icons/Cart';
+import styles from '../navigation.module.scss';
 import { motion } from 'framer-motion';
 import NavigationButton from './NavigationButton';
 import { CategoriesDropdownController } from './CategoriesDropdownController';

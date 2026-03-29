@@ -1,11 +1,11 @@
 import { UrlParamType, SearchParamsType } from '@/types/catalog.models';
-import CatalogView from './components/catalog/Catalog';
 import { normalizeSearchParams, parseListingParams } from '@/utils/url';
 import { notFound } from 'next/navigation';
 import { cookies } from 'next/headers';
-import CatalogProvider from './providers/CatalogProvider';
+import CatalogProvider from '../../../src/pages/categorySlug/model/providers/CatalogProvider';
 import { getCategoryPageData } from '@/entities/category/api/getCategoryPageData';
-import { CatalogUrlActionsProvider } from './providers/CatalogUrlActionsProvider';
+import { CatalogUrlActionsProvider } from '../../../src/pages/categorySlug/model/providers/CatalogUrlActionsProvider';
+import CatalogView from '@/pages/categorySlug/ui/Catalog';
 
 export default async function Catalog({
 	params,

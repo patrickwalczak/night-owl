@@ -1,5 +1,5 @@
-import './globals.scss';
-import '../styles/utils.scss';
+import '../src/app/styles/globals.scss';
+import '../src/app/styles/utils.scss';
 import { Playfair_Display, Inter } from 'next/font/google';
 import StoreProvider from '../src/app/providers/StoreProvider';
 import NavigationServer from '@/widgets/navigation/ui/NavigationServer';

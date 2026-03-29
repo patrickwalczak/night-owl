@@ -1,7 +1,7 @@
 'use client';
 
 import { createPortal } from 'react-dom';
-import { useBodyOverflow } from '@/hooks/useBodyOverflow';
+import { useBodyOverflow } from '@/shared/hooks/useBodyOverflow';
 
 export default function Overlay({
 	open,
