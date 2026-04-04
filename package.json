@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev --turbopack",
-		"build": "prisma generate --schema=src/lib/prisma/schema.prisma && next build",
+		"build": "prisma generate --schema=src/shared/lib/db/schema.prisma  && next build",
 		"start": "next start",
 		"lint": "next lint"
 	},
@@ -12,15 +12,18 @@
 		"seed": "tsx prisma/seed.ts"
 	},
 	"dependencies": {
-		"@prisma/client": "^6.19.2",
+		"@prisma/adapter-pg": "^7.6.0",
+		"@prisma/client": "^7.6.0",
 		"@reduxjs/toolkit": "^2.8.2",
 		"@supabase/ssr": "^0.6.1",
 		"@supabase/supabase-js": "^2.49.1",
 		"@svgr/webpack": "^8.1.0",
 		"@tanstack/react-query": "^5.84.2",
+		"dotenv": "^17.4.0",
 		"framer-motion": "^12.23.12",
 		"next": "^16.2.2",
 		"next-cloudinary": "^6.16.0",
+		"pg": "^8.20.0",
 		"react": "^19.1.1",
 		"react-dom": "^19.1.1",
 		"react-redux": "^9.2.0",
@@ -34,7 +37,7 @@
 		"eslint": "^9",
 		"eslint-config-next": "^16.2.2",
 		"madge": "^8.0.0",
-		"prisma": "^6.19.2",
+		"prisma": "^7.6.0",
 		"sass": "^1.86.0",
 		"tsx": "^4.19.3",
 		"typescript": "^5"
