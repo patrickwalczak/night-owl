@@ -1,6 +1,6 @@
 import { cache } from 'react';
 import { SortOrderKeys } from '@/types/catalog.models';
-import prisma from '../../../shared/lib/db/prisma';
+import { prisma } from '../../../shared/lib/db/prisma';
 
 const PAGE_SIZE = 20;
 

@@ -1,5 +1,5 @@
 import { SimpleCategoryModelType } from '@/types/category.model';
-import prisma from '../../../shared/lib/db/prisma';
+import { prisma } from '../../../shared/lib/db/prisma';
 import { cache } from 'react';
 
 export const getCategoriesAction = cache(async function getCategoriesAction(): Promise<SimpleCategoryModelType[]> {

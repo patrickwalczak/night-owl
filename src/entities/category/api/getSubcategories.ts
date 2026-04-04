@@ -1,6 +1,6 @@
 'use server';
 
-import prisma from '../../../shared/lib/db/prisma';
+import { prisma } from '../../../shared/lib/db/prisma';
 
 export async function getSubcategories(parentId: string) {
 	return prisma.category.findMany({

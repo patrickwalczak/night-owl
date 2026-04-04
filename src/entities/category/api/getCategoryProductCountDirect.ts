@@ -1,6 +1,6 @@
 'use server';
 
-import prisma from '../../../shared/lib/db/prisma';
+import { prisma } from '../../../shared/lib/db/prisma';
 
 export async function getCategoryProductCountDirect(categoryId: string) {
 	const children = await prisma.category.findMany({
