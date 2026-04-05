@@ -3,7 +3,7 @@
 import React from 'react';
 import styles from './styles.module.scss';
 import { mergeClasses } from '@/utils/mergeClasses';
-import { useScrubbedInView } from '@/hooks/useScrubbedInView';
+import { useScrubbedInView } from '@/shared/hooks/useScrubbedInView';
 
 export default function LightBulb() {
 	const {

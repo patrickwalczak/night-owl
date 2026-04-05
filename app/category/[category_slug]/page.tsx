@@ -27,10 +27,6 @@ export default async function Catalog({
 
 		const areFiltersOpen = (await cookies()).get('areFiltersOpen')?.value === '1';
 
-		console.log(category);
-		console.log(parameters);
-		console.log(products);
-
 		return (
 			<CatalogProvider
 				initialProductsProp={products}

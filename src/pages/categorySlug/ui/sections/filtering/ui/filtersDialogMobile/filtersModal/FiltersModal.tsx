@@ -16,8 +16,8 @@ const FiltersModal = ({ isOpened, close }: { isOpened: boolean; close: () => voi
 
 	const searchParams = useSearchParams();
 
-	const initialSort = searchParams.get('sort') || DEFAULT_SORT_ORDER;
-	const initialParamIds = (searchParams.get('params') ?? '').split(',').filter(Boolean);
+	const initialSort = searchParams?.get('sort') || DEFAULT_SORT_ORDER;
+	const initialParamIds = (searchParams?.get('params') ?? '').split(',').filter(Boolean);
 
 	const [sort, setSort] = useState<SortOrderKeys>(initialSort as SortOrderKeys);
 	const [selectedParamIds, setSelectedParamIds] = useState<string[]>(initialParamIds);
