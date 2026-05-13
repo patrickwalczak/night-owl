@@ -1,8 +1,7 @@
 'use client';
 
-import React from 'react';
 import styles from './navigation.module.scss';
-import Hamburger from '../../../../shared/ui/icons/Hamburger';
+import { Hamburger } from '../../../../shared/ui/icons/Hamburger';
 import Menu from './components/Menu';
 import { mergeClasses } from '@/utils/mergeClasses';
 import { NavigationContext } from '@/widgets/navigation/ui/Navigation';

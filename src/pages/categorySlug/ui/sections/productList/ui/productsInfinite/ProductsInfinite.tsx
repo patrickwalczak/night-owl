@@ -29,7 +29,7 @@ export default function ProductsInfinite() {
 	if (items.length === 0) return <p>No products found.</p>;
 
 	return (
-		<PulsingMask active={isFetching} wrapClassName={styles.container}>
+		<PulsingMask active={false} wrapClassName={styles.container}>
 			<div className={styles.productsContainer}>
 				{items.map((p) => (
 					<Product key={p.id} product={p} />

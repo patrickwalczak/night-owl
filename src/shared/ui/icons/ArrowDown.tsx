@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ArrowDown = ({ className = '' }: { className?: string }) => {
 	return (
 		<svg

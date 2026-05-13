@@ -3,7 +3,7 @@
 import { createContext } from 'react';
 import styles from './modal.module.scss';
 import { createPortal } from 'react-dom';
-import Close from '../icons/Close';
+import { Close } from '../icons/Close';
 import { useBodyOverflow } from '../../hooks/useBodyOverflow';
 import { useHandleEscape } from './useHandleEscape';
 import { mergeClasses } from '@/utils/mergeClasses';
