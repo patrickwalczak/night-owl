@@ -22,7 +22,7 @@ export default function ProductsInfinite() {
 		return () => observer?.disconnect();
 	}, [hasNextPage, fetchNextPage]);
 
-	if (status === 'error') return <p>Couldn’t load products.</p>;
+	if (status === 'error') return <p>{'Couldn’t load products.'}</p>;
 
 	const items = (data?.pages ?? []).flatMap((p) => p.items);
 
