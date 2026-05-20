@@ -34,7 +34,6 @@
 		--font-weight-900: 900;
 
 		--color-owl-white: #ffffff;
-		--color-owl-white-200: #EAEAEA;
 
 		--color-owl-gray-200: #fafafa;
 		--color-owl-gray-300: #f1f1f1;
@@ -49,6 +48,9 @@
 		--color-owl-purple-500: #a387c8;
 		--color-owl-purple-500-faded: #a387c8ea;
 		--color-owl-purple-850: #73618C;
+
+		--text-primary-light: var(--color-owl-white);
+		--text-primary-dark: var(--color-owl-blue-800);
 
 		--navigation-height: 49px;
 	}
@@ -69,10 +71,11 @@
 		position: relative;
 		min-width: 300px;
 		margin: auto;
+		background-color: var(--color-owl-gray-200);
 		line-height: 1.5;
 		-webkit-font-smoothing: antialiased;
 		font-family: var(--font-family-inter);
-		color: var(--color-owl-gray-900);
+		color: var(--text-primary-dark);
 	}
 
 	a {

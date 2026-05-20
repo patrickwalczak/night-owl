@@ -43,7 +43,7 @@
   font-size: clamp(var(--font-size-54),
       calc(12vw + 0.1rem),
       var(--font-size-76));
-  color: var(--color-owl-white);
+  color: var(--text-primary-light);
 
   span {
     display: inline-block;
@@ -72,7 +72,7 @@
   border-radius: 25px;
   font-size: var(--font-size-18);
   font-weight: var(--font-weight-500);
-  color: var(--color-owl-white);
+  color: var(--text-primary-light);
   background-color: var(--color-owl-purple-500);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
 

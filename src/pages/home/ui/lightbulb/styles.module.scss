@@ -27,7 +27,7 @@
   font-family: var(--font-family-playfair);
   font-weight: var(--font-weight-600);
   font-size: var(--font-size-48);
-  color: var(--color-owl-white-200);
+  color: #EAEAEA;
   max-width: 700px;
   text-align: center;
   transition: color 200ms ease, text-shadow 200ms ease, opacity 200ms ease;
@@ -45,7 +45,7 @@
 
 .headingOn {
   color: color-mix(in lab,
-      var(--color-owl-white-200) calc(60% + 40% * var(--progress, 0)),
+      #EAEAEA calc(60% + 40% * var(--progress, 0)),
       white 40%);
   text-shadow: 0 0 calc(2px + 6px * var(--progress, 0)) rgba(var(--glow-rgb), calc(.15 + .25 * var(--progress, 0)));
 
