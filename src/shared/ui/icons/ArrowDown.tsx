@@ -11,14 +11,14 @@ const ArrowDown = ({ className = '' }: { className?: string }) => {
 		>
 			<path
 				d="M7 10L12 15"
-				stroke="var(--color-owl-gray-900)"
+				stroke="var(--color-owl-blue-800)"
 				stroke-width="2"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 			/>
 			<path
 				d="M12 15L17 10"
-				stroke="var(--color-owl-gray-900)"
+				stroke="var(--color-owl-blue-800)"
 				stroke-width="2"
 				stroke-linecap="round"
 				stroke-linejoin="round"

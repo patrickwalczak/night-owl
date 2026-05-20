@@ -1,7 +1,7 @@
 @use '../../../../../../../app/styles/breakpoints';
 
 .card {
-	border: 1px solid color-mix(in oklab, var(--color-owl-gray-900) 10%, transparent);
+	border: 1px solid color-mix(in oklab, var(--color-owl-blue-800) 10%, transparent);
 	border-radius: 14px;
 	background: var(--color-owl-white);
 	overflow: clip;
@@ -11,7 +11,7 @@
 	&:focus-within {
 		transform: translateY(-2px);
 		box-shadow: 0 6px 20px rgba(0, 0, 0, .08);
-		border-color: color-mix(in oklab, var(--color-owl-gray-900) 18%, transparent);
+		border-color: color-mix(in oklab, var(--color-owl-blue-800) 18%, transparent);
 	}
 
 	&:focus-visible {
@@ -76,7 +76,7 @@
 	}
 
 	path {
-		stroke: var(--color-owl-gray-900);
+		stroke: var(--color-owl-blue-800);
 	}
 }
 

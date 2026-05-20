@@ -4,7 +4,7 @@ export const Close = () => {
 			<g clipPath="url(#clip0_1_20121)">
 				<path
 					d="M7 7.00006L17 17.0001M7 17.0001L17 7.00006"
-					stroke="var(--color-owl-gray-900)"
+					stroke="var(--color-owl-blue-800)"
 					strokeWidth="2"
 					strokeLinecap="round"
 					strokeLinejoin="round"

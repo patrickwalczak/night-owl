@@ -28,5 +28,5 @@ $radio-size: var(--font-size-18);
 
 .radioInput:focus-visible + .customRadio {
   outline: 2px solid transparent;
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-owl-gray-900) 20%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-owl-blue-800) 20%, transparent);
 }

@@ -41,15 +41,15 @@
 }
 
 .label:hover .customCheckbox {
-  border-color: var(--color-owl-gray-900);
+  border-color: var(--color-owl-blue-800);
 }
 
 .label .input:focus-visible + .customCheckbox {
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-owl-gray-900) 25%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-owl-blue-800) 25%, transparent);
   outline: 2px solid transparent;
 }
 
 .customCheckboxValue {
   font: inherit;
-  color: var(--color-owl-gray-900);
+  color: var(--color-owl-blue-800);
 }

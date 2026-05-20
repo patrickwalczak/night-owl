@@ -24,18 +24,18 @@ $radio-size: var(--font-size-18);
 .customRadio {
   width: $radio-size;
   height: $radio-size;
-  border-color: var(--color-owl-gray-900);
+  border-color: var(--color-owl-blue-800);
   background: var(--color-owl-white);
 
   &::after {
     width: calc($radio-size / 2);
     height: calc($radio-size / 2);
-    background: var(--color-owl-gray-900);
+    background: var(--color-owl-blue-800);
   }
 }
 
 .sortLabel:hover .customRadio {
-  border-color: var(--color-owl-gray-900);
+  border-color: var(--color-owl-blue-800);
 }
 
 .labelText {

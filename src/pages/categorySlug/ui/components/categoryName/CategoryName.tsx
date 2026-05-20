@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import styles from './categoryName.module.scss';
 import { mergeClasses } from '@/utils/mergeClasses';
 import { useSafeContext } from '@/shared/hooks/useSafeContext';
