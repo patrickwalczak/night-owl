@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import { useRef, KeyboardEventHandler, MouseEventHandler } from 'react';
 import styles from './product.module.scss';
 import Cart from '@/shared/ui/icons/Cart';
 import Image from 'next/image';
@@ -46,7 +46,7 @@ export default function Product({ product }: { product: ListingProductType }) {
 
 	const onCardClick = () => goToProduct();
 
-	const onCardKeyDown: React.KeyboardEventHandler<HTMLElement> = (e) => {
+	const onCardKeyDown: KeyboardEventHandler<HTMLElement> = (e) => {
 		if (e.target !== e.currentTarget) return;
 
 		if (e.key === 'Enter') {
@@ -59,12 +59,12 @@ export default function Product({ product }: { product: ListingProductType }) {
 		}
 	};
 
-	const onCartClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+	const onCartClick: MouseEventHandler<HTMLButtonElement> = (e) => {
 		e.stopPropagation();
 		addProduct();
 	};
 
-	const onCartKeyDown: React.KeyboardEventHandler<HTMLButtonElement> = (e) => {
+	const onCartKeyDown: KeyboardEventHandler<HTMLButtonElement> = (e) => {
 		if (e.key === 'Enter' || e.key === ' ') e.stopPropagation();
 	};
 
@@ -77,14 +77,14 @@ export default function Product({ product }: { product: ListingProductType }) {
 			onClick={onCardClick}
 			onKeyDown={onCardKeyDown}
 		>
-			<div className={mergeClasses(styles.thumb, 'w-100')}>
+			<div className={mergeClasses(styles.thumb)}>
 				<Image ref={imgRef} src={'https://placehold.co/600x400.webp'} alt={product.name} fill className={styles.img} />
 			</div>
 
 			<div className={mergeClasses(styles.details, 'align-center')}>
-				<h3 title={product.name} className={mergeClasses(styles.title, 'truncate')}>
+				<h4 title={product.name} className={mergeClasses(styles.title, 'truncate')}>
 					{product.name}
-				</h3>
+				</h4>
 
 				<div className={styles.bottomContainer}>
 					<p className={styles.price}>${product.price}</p>
