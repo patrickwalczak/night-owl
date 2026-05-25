@@ -89,7 +89,7 @@
 .heroImage {
   width: 100%;
   min-height: 500px;
-  height: auto;
+  height: 100vh;
   object-fit: cover;
 
   @media (min-width: breakpoints.$breakpoint-1024) {

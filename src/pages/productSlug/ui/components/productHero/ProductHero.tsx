@@ -7,7 +7,6 @@ import { FullProduct } from '@/lib/serverActions/product';
 import { formatPrice } from '@/utils/format';
 import { mergeClasses } from '@/utils/mergeClasses';
 import Image from 'next/image';
-import { flyToCart } from '@/utils/flyToCart';
 import { useRef } from 'react';
 
 export default function ProductHero({ data }: { data: FullProduct }) {
@@ -27,16 +26,6 @@ export default function ProductHero({ data }: { data: FullProduct }) {
 				currency: product.currency,
 			})
 		);
-
-		const source = imgRef.current!;
-		const target = document.querySelector('[data-cart-icon]') as HTMLElement | null;
-		if (source && target) {
-			flyToCart(source, target, {
-				duration: 750,
-				curvature: 0.5,
-				shrinkTo: 0.01,
-			});
-		}
 	};
 
 	return (

@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { getProductFullBySlug } from '@/lib/serverActions/product';
 import { mergeClasses } from '@/utils/mergeClasses';
 import ProductHero from './components/productHero/ProductHero';
-import RelatedProducts from './components/relatedProducts/RelatedProducts';
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
 	const awaitedParams = await params;
@@ -29,7 +28,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 				</ol>
 			</nav>
 			<ProductHero data={data} />
-			<RelatedProducts products={data.related} />
 		</main>
 	);
 }

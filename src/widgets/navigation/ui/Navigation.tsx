@@ -53,6 +53,7 @@ const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) =
 
 	const openCartDrawer = () => dispatch(openCart());
 
+	// Hide dropdown on keys down
 	const onKeyDown = (e: React.KeyboardEvent) => {
 		if (e.key === 'Escape' || e.key === 'ArrowUp') {
 			e.stopPropagation();
@@ -62,12 +63,19 @@ const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) =
 	};
 
 	const handleKeyDownOnButton = (e: React.KeyboardEvent) => {
-		if (e.key === 'Enter' || e.key === 'ArrowDown') {
+		// Enter toggles dropdown
+		if (e.key === 'Enter') {
 			e.stopPropagation();
 			setIsExpanded((prev) => !prev);
+			// Arrow down expands dropdown
+		} else if (e.key === 'ArrowDown') {
+			e.stopPropagation();
+			expandDropdown();
 		}
 	};
 
+	// Keep the main content inactive while the navigation overlay is open
+	// so users cannot click or focus elements behind it.
 	useEffect(() => {
 		mainEl.current = document.querySelector('main');
 
@@ -145,8 +153,8 @@ function CartBadgeInline({ items }: { items: CartItem[] }) {
 
 	useEffect(() => {
 		if (!ref.current || items.length <= 0) return;
+
 		ref.current.classList.remove(styles.bump);
-		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		ref.current.offsetWidth;
 		ref.current.classList.add(styles.bump);
 	}, [items]);

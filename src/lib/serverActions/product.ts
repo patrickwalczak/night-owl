@@ -17,6 +17,7 @@ function toOrderBy(sort: SortOrderKeys) {
 		default:
 			return { createdAt: 'desc' as const };
 	}
+	``;
 }
 
 export async function getProductsForCategory(opts: {

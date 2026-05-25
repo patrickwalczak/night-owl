@@ -1,4 +1,3 @@
-import React from 'react';
 import NavigationButton from './NavigationButton';
 import SubcategoriesDropdown from '@/widgets/navigation/ui/desktop/categoriesDropdown/CategoriesDropdown';
 import { NavigationContext } from '@/widgets/navigation/ui/Navigation';

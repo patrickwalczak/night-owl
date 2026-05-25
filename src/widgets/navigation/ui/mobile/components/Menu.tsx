@@ -1,6 +1,5 @@
 import { mergeClasses } from '@/utils/mergeClasses';
 import Link from 'next/link';
-import React from 'react';
 import Modal from '../../../../../shared/ui/modal/Modal';
 import Cart from '../../../../../shared/ui/icons/Cart';
 import styles from '../navigation.module.scss';
