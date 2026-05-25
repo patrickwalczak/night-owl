@@ -1,0 +1,54 @@
+.banner {
+  display: grid;
+  place-items: center;
+  min-height: 50rem;
+  padding: 4rem 2rem;
+  background-color: var(--color-owl-blue-800);
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.content {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  max-width: 46rem;
+}
+
+.title {
+  font-size: var(--heading-3);
+  font-weight: var(--font-weight-400);
+}
+
+.description {
+  font-size: var(--regular-text);
+  font-weight: var(--font-weight-200);
+
+  @media (min-width: 1024px) {
+    font-size: var(--large-text);
+  }
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6em 1.8em;
+  border-radius: 25px;
+  background-color: white;
+  color: var(--color-owl-blue-800);
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+
+  &:hover {
+    transform: translateY(-0.1em);
+    opacity: 0.9;
+  }
+
+  &:focus-visible {
+    outline: 0.15em solid currentColor;
+    outline-offset: 0.2em;
+  }
+}
