@@ -10,8 +10,8 @@
   }
 
   @media (min-width: 1536px) {
-    gap: 1.5rem;
-    padding: 1.5rem 2.250rem;
+    gap: 1rem;
+    padding: 1.5rem;
   }
 }
 
@@ -58,17 +58,13 @@
 
 .title {
   margin-bottom: 0.5rem;
-  font-size: var(--heading-4);
   font-weight: var(--font-weight-400);
 }
 
 .description {
-  font-size: var(--regular-text);
   font-weight: var(--font-weight-200);
 
   @media (min-width: 1024px) {
     font-size: var(--large-text);
   }
 }
-
-.categoryBanner {}
