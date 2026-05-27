@@ -1,10 +1,15 @@
 .filtersContainer {
+  display: none;
   position: sticky;
   height: 100%;
 
   &[data-open="false"] {
     pointer-events: none;
     visibility: hidden;
+  }
+
+  @media (min-width: 1024) {
+    display: block;
   }
 }
 

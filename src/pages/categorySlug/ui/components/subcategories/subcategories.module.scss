@@ -1,6 +1,7 @@
 .ribbon {
   position: relative;
   overflow: hidden;
+  padding-inline: 1rem;
 }
 
 .scroller {
@@ -16,7 +17,7 @@
   display: none;
 }
 
-.pill {
+.subcategory {
   flex: 0 0 auto;
   white-space: nowrap;
 }

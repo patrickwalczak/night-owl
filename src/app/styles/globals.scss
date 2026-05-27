@@ -76,23 +76,26 @@
 		--color-background-inverted: var(--color-owl-blue-800);
 		--color-background-accent: var(--color-owl-purple-850);
 
+		// Main text color used for the most important content, such as headings, product titles, prices, and default page text.
 		--color-text-primary: var(--color-owl-blue-800);
+
+		// Secondary text color used for descriptions, supporting content, and information that is less important than the main text.
 		--color-text-secondary: var(--color-owl-gray-500);
+
+		// Muted text color used for the least important content, such as metadata, hints, SKU numbers, dates, or breadcrumbs.
 		--color-text-muted: var(--color-owl-gray-450);
+
+		// Inverted text color used on dark backgrounds, such as hero sections, overlays, dark cards, or dark buttons.
 		--color-text-inverted: var(--color-owl-white);
+
+		// Accent text color used sparingly for links, labels, active states, highlights, or important text fragments.
 		--color-text-accent: var(--color-owl-purple-850);
 
+		// Borders
 		--color-border-primary: var(--color-owl-gray-300);
 		--color-border-strong: var(--color-owl-gray-400);
 
-		--color-button-primary-background: var(--color-owl-blue-800);
-		--color-button-primary-text: var(--color-owl-white);
-
-		--color-button-secondary-background: transparent;
-		--color-button-secondary-text: var(--color-owl-blue-800);
-		--color-button-secondary-border: var(--color-owl-blue-800);
-
-		// Typography
+		// Heading typography
 		--typography-h1-size: var(--font-size-56);
 		--typography-h1-line-height: 1.15;
 		--typography-h1-letter-spacing: var(--letter-spacing-heading);
@@ -109,48 +112,44 @@
 		--typography-h4-line-height: 1.33;
 		--typography-h4-letter-spacing: var(--letter-spacing-heading);
 
-		--typography-body-small-size: var(--font-size-12);
-		--typography-body-small-line-height: var(--line-height-normal);
-		--typography-body-small-letter-spacing: var(--letter-spacing-none);
+		// Body typography
+		--typography-body-xs-size: var(--font-size-12);
+		--typography-body-xs-line-height: var(--line-height-normal);
+		--typography-body-xs-letter-spacing: var(--letter-spacing-none);
 
-		--typography-body-regular-size: var(--font-size-16);
-		--typography-body-regular-line-height: var(--line-height-normal);
-		--typography-body-regular-letter-spacing: var(--letter-spacing-none);
+		--typography-body-s-size: var(--font-size-14);
+		--typography-body-s-line-height: var(--line-height-normal);
+		--typography-body-s-letter-spacing: var(--letter-spacing-none);
 
-		--typography-body-large-size: var(--font-size-18);
-		--typography-body-large-line-height: var(--line-height-relaxed);
-		--typography-body-large-letter-spacing: var(--letter-spacing-none);
+		--typography-body-m-size: var(--font-size-16);
+		--typography-body-m-line-height: var(--line-height-normal);
+		--typography-body-m-letter-spacing: var(--letter-spacing-none);
+
+		--typography-body-l-size: var(--font-size-18);
+		--typography-body-l-line-height: var(--line-height-relaxed);
+		--typography-body-l-letter-spacing: var(--letter-spacing-none);
 
 		// Other
-		--navigation-height: 49px;
+		--navigation-height: 54px;
 	}
 
-	// [data-theme='dark'] {
-	// 	--color-background-primary: var(--color-owl-blue-800);
-	// 	--color-background-secondary: #262630;
-	// 	--color-background-inverted: var(--color-owl-white);
-	// 	--color-background-accent: var(--color-owl-purple-850);
+	[data-theme='dark'] {
+		--color-background-primary: var(--color-owl-blue-800);
+		--color-background-secondary: #262630;
+		--color-background-inverted: var(--color-owl-white);
+		--color-background-accent: var(--color-owl-purple-850);
 
-	// 	--color-text-primary: var(--color-owl-white);
-	// 	--color-text-secondary: var(--color-owl-gray-400);
-	// 	--color-text-muted: var(--color-owl-gray-425);
-	// 	--color-text-inverted: var(--color-owl-blue-800);
-	// 	--color-text-accent: var(--color-owl-purple-500);
+		--color-text-primary: var(--color-owl-white);
+		--color-text-secondary: var(--color-owl-gray-400);
+		--color-text-muted: var(--color-owl-gray-425);
+		--color-text-inverted: var(--color-owl-blue-800);
+		--color-text-accent: var(--color-owl-purple-500);
 
-	// 	--color-border-primary: rgb(255 255 255 / 12%);
-	// 	--color-border-strong: rgb(255 255 255 / 24%);
+		--color-border-primary: rgb(255 255 255 / 12%);
+		--color-border-strong: rgb(255 255 255 / 24%);
+	}
 
-	// 	--color-button-primary-background: var(--color-owl-white);
-	// 	--color-button-primary-text: var(--color-owl-blue-800);
-
-	// 	--color-button-secondary-background: transparent;
-	// 	--color-button-secondary-text: var(--color-owl-white);
-	// 	--color-button-secondary-border: var(--color-owl-white);
-	// }
-
-	*,
-	*::before,
-	*::after {
+	*, *::before, *::after {
 		box-sizing: border-box;
 	}
 
@@ -168,9 +167,9 @@
 		margin: auto;
 		background-color: var(--color-background-primary);
 		font-family: var(--font-family-inter);
-		font-size: var(--typography-body-regular-size);
-		line-height: var(--typography-body-regular-line-height);
-		letter-spacing: var(--typography-body-regular-letter-spacing);
+		font-size: var(--typography-body-m-size);
+		line-height: var(--typography-body-m-line-height);
+		letter-spacing: var(--typography-body-m-letter-spacing);
 		color: var(--color-text-primary);
 		-webkit-font-smoothing: antialiased;
 	}
@@ -185,68 +184,60 @@
 		font: inherit;
 	}
 
-	img,
-	picture,
-	video,
-	canvas,
-	svg {
+	img, picture, video, canvas, svg {
 		display: block;
 		max-width: 100%;
 	}
 
-	p,
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
+	p, h1, h2, h3, h4, h5, h6 {
 		overflow-wrap: break-word;
 	}
 
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		font-family: var(--font-family-playfair);
-		font-weight: var(--font-weight-700);
+	h1, h2, h3, h4, h5, h6 {
+		font-weight: var(--font-weight-400);
 		text-wrap: balance;
 	}
 
-	p {
-		font-size: var(--typography-body-regular-size);
-		line-height: var(--typography-body-regular-line-height);
-		letter-spacing: var(--typography-body-regular-letter-spacing);
+	.font-playfair {
+		font-family: var(--font-family-playfair);
 	}
 
-	h1 {
+	.font-inter {
+		font-family: var(--font-family-inter);
+	}
+
+	p {
+		font-size: var(--typography-body-m-size);
+		line-height: var(--typography-body-m-line-height);
+		letter-spacing: var(--typography-body-m-letter-spacing);
+		font-weight: var(--font-weight-200);
+	}
+
+	.h1 {
 		font-size: var(--typography-h1-size);
 		line-height: var(--typography-h1-line-height);
 		letter-spacing: var(--typography-h1-letter-spacing);
 	}
 
-	h2 {
+	.h2 {
 		font-size: var(--typography-h2-size);
 		line-height: var(--typography-h2-line-height);
 		letter-spacing: var(--typography-h2-letter-spacing);
 	}
 
-	h3 {
+	.h3 {
 		font-size: var(--typography-h3-size);
 		line-height: var(--typography-h3-line-height);
 		letter-spacing: var(--typography-h3-letter-spacing);
 	}
 
-	h4 {
+	.h4 {
 		font-size: var(--typography-h4-size);
 		line-height: var(--typography-h4-line-height);
 		letter-spacing: var(--typography-h4-letter-spacing);
 	}
 
-	#root,
-	#__next {
+	#root, #__next {
 		isolation: isolate;
 	}
 
@@ -254,8 +245,7 @@
 		list-style-type: none;
 	}
 
-	button,
-	a {
+	button, a {
 		cursor: pointer;
 	}
 }

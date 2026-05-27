@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import styles from './categoryBanner.module.scss';
+import { mergeClasses } from '@/utils/mergeClasses';
 
 type CategoryBannerType = {
 	href: string;
@@ -13,11 +14,11 @@ export const CategoryBanner = ({ href, title, description, linkLabel }: Category
 	return (
 		<section className={styles.banner}>
 			<div className={styles.content}>
-				<h2 className={styles.title}>{title}</h2>
+				<h3 className={mergeClasses(styles.title, 'h3', 'font-playfair')}>{title}</h3>
 
 				<p className={styles.description}>{description}</p>
 
-				<Link className={styles.link} href={href}>
+				<Link className={mergeClasses(styles.link)} href={href}>
 					{linkLabel}
 				</Link>
 			</div>

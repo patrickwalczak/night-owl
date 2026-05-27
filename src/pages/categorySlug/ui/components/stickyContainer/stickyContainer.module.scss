@@ -5,8 +5,8 @@
   z-index: zindex.$catalog-filters;
   position: sticky;
   column-gap: 1rem;
-  padding: 0.5rem;
-  background-color: var(--color-owl-gray-200);
+  padding: 0 1rem;
+  background-color: var(--color-background-primary);
 
   @media (min-width: breakpoints.$breakpoint-1024) {
     padding: 0.5rem 2rem;
@@ -14,5 +14,6 @@
 }
 
 .isStuck {
+  padding: 0.5rem 1rem;
   box-shadow: 0 10px 24px rgba(0, 0, 0, .06);
 }

@@ -12,7 +12,7 @@ const CategoryName = ({ isProductSum = false, isStuck = false }: { isProductSum?
 	} = useSafeContext(CatalogContext);
 
 	return (
-		<h2 className={mergeClasses(styles.categoryName, isStuck && styles.stuck, 'transition-200')}>
+		<h2 className={mergeClasses(styles.categoryName, isStuck && styles.stuck, 'transition-200', 'h4')}>
 			{name}
 			{isProductSum && ` (${productSum})`}
 		</h2>

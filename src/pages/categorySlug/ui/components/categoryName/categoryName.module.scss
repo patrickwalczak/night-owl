@@ -1,12 +1,9 @@
 .categoryName {
-  --fs-large: var(--font-size-26);
   --fs-small: var(--font-size-22);
 
-  color: var(--text-primary-dark);
-  font-weight: var(--font-weight-400);
-  font-size: var(--fs-large);
-  line-height: 1.2;
-  background-color: var(--color-owl-gray-200);
+  padding-inline: 1rem;
+
+  font-family: var(--font-family-inter);
 }
 
 .stuck {

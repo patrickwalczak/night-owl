@@ -5,26 +5,42 @@
 	max-width: 1920px;
 	margin: var(--navigation-height) auto 0;
 	row-gap: 1rem;
-
-	@media (max-width: breakpoints.$breakpoint-1024) {
-		padding: 2.5rem 1rem;
-	}
-
-	@media (min-width: breakpoints.$breakpoint-1024) {
-		padding-block: 3rem;
-	}
+	padding-block: 1rem;
 }
 
-.header {
+.mobileHeader {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
 	padding-inline: 1rem;
 
 	@media (min-width: breakpoints.$breakpoint-1024) {
-		padding-inline: 2rem;
+		display: none;
+	}
+}
+
+.desktopStickyContainer {
+	display: none;
+
+	@media (min-width: breakpoints.$breakpoint-1024) {
+		display: flex;
+	}
+}
+
+.mobileStickyContainer {
+	display: block;
+
+	@media (min-width: breakpoints.$breakpoint-1024) {
+		display: none;
 	}
 }
 
 .productsContainer {
+	display: flex;
+	padding-inline: 1rem;
+
 	@media (min-width: breakpoints.$breakpoint-1024) {
+		padding-inline: 0;
 		padding-right: 2rem;
 		gap: 2rem;
 	}

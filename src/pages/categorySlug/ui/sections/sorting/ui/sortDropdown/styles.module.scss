@@ -15,10 +15,9 @@
 }
 
 .sortBtn {
-	column-gap: 0.5rem;
+	column-gap: 0.25rem;
 	padding: 0.5rem 1rem;
-	font-size: var(--font-size-18);
-	font-weight: var(--font-weight-500);
+	font-size: var(--typography-body-m-size);
 
 	svg {
 		width: var(--font-size-26);
