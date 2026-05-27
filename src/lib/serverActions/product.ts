@@ -3,6 +3,7 @@
 import 'server-only';
 import { SortOrderKeys } from '@/types/catalog.models';
 import { prisma } from '../../shared/lib/db/prisma';
+import type { ProductStatus } from '@/shared/lib/db/generated/client';
 
 const PAGE_SIZE = 20;
 
@@ -79,7 +80,7 @@ export type ProductCard = {
 	slug: string;
 	price: number;
 	image: string;
-	status: import('@prisma/client').ProductStatus;
+	status: ProductStatus;
 };
 
 export type Breadcrumb = { id: string; name: string; slug: string };
