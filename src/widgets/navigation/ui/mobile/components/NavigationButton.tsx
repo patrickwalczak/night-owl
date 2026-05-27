@@ -1,6 +1,6 @@
-import { mergeClasses } from '@/utils/mergeClasses';
+import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
-import React from 'react';
+import { mergeClasses } from '@/utils/mergeClasses';
 
 const NavigationButton = ({
 	className = '',
@@ -8,7 +8,7 @@ const NavigationButton = ({
 	handleClick = () => {},
 }: {
 	className?: string;
-	children: React.ReactNode;
+	children: ReactNode;
 	handleClick?: () => void;
 }) => {
 	return (

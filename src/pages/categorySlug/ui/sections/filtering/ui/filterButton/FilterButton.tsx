@@ -1,12 +1,11 @@
 import Filters from '@/shared/ui/icons/Filters';
 import { mergeClasses } from '@/utils/mergeClasses';
 import styles from './filterButton.module.scss';
-import React from 'react';
 
 const FilterButton = ({
 	label,
 	handleClick,
-	className = '',
+	className,
 }: {
 	label: string;
 	handleClick: () => void;

@@ -1,26 +1,27 @@
 .btn {
   gap: 0.25rem;
-  padding: 0.25rem 0.75rem;
+  padding: 0.125rem 0.75rem;
   border-radius: 30px;
   border: 1px solid var(--color-owl-blue-800);
   font-size: var(--typography-body-s-size);
+
+  svg {
+    width: var(--font-size-22);
+    height: var(--font-size-22)
+  }
 
   svg path {
     stroke-width: 1px;
   }
 
-  @media (min-width: 768px) {
-    padding: 0.5rem 1rem;
+  @media (min-width: 1024px) {
+    padding: 0.5rem;
     border: none;
     font-size: var(--typography-body-m-size);
 
     svg {
       width: var(--font-size-26);
       height: var(--font-size-26)
-    }
-
-    svg path {
-      stroke-width: 1px;
     }
   }
 }

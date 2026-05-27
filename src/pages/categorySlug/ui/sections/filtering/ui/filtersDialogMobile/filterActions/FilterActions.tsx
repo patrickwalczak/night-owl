@@ -89,4 +89,5 @@ function Apply({ children = 'Show results', className, onClick = () => {}, ...re
 }
 
 const FilterActions = Object.assign(Root, { Reset, Apply });
+
 export default FilterActions;

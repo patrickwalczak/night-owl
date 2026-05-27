@@ -12,7 +12,7 @@ type CategoryBannerType = {
 
 export const CategoryBanner = ({ href, title, description, linkLabel }: CategoryBannerType) => {
 	return (
-		<section className={styles.banner}>
+		<div className={styles.banner}>
 			<div className={styles.content}>
 				<h3 className={mergeClasses(styles.title, 'h3', 'font-playfair')}>{title}</h3>
 
@@ -22,6 +22,6 @@ export const CategoryBanner = ({ href, title, description, linkLabel }: Category
 					{linkLabel}
 				</Link>
 			</div>
-		</section>
+		</div>
 	);
 };

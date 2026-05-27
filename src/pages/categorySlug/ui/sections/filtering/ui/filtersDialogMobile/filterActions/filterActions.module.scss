@@ -5,32 +5,33 @@
   position: sticky;
   bottom: 0;
   flex-direction: row;
-  gap: 0.75rem;
-  padding: 1rem;
   border-top: 1px solid var(--color-owl-gray-300);
-  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 
   @media (min-width: breakpoints.$breakpoint-1024) {
     flex-direction: column;
+    gap: 0.75rem;
   }
 }
 
 .filterBtn {
   display: block;
-  padding: 0.615rem 1rem;
-  border-radius: 2rem;
+  padding: 0.5rem 0.25rem;
   width: 50%;
   font-size: var(--font-size-16);
 
   @media (min-width: breakpoints.$breakpoint-1024) {
     width: 100%;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
   }
 }
 
 .showBtn {
   background-color: var(--color-owl-purple-500);
   color: var(--color-text-inverted);
-  border: none
+  font-weight: var(--font-weight-400);
+  border: 1px solid var(--color-owl-purple-500);
 }
 
 .resetBtn {

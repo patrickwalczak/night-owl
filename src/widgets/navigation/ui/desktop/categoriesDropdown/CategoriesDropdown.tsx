@@ -70,7 +70,7 @@ const Category = ({
 			<li key={category.id}>
 				<Link
 					onClick={handleClick}
-					className={mergeClasses('nav-hover-underline', isRootCategory && styles.isRootCategory)}
+					className={mergeClasses('nav-hover-underline', styles.dropdownLink, isRootCategory && styles.isRootCategory)}
 					href={`/category/${category.slug}`}
 				>
 					{category.name}

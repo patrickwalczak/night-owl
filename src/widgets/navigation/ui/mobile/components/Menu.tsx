@@ -5,7 +5,7 @@ import Cart from '../../../../../shared/ui/icons/Cart';
 import styles from '../navigation.module.scss';
 import { motion } from 'framer-motion';
 import NavigationButton from './NavigationButton';
-import { CategoriesDropdownController } from './CategoriesDropdownController';
+import { CategoriesDropdown } from './CategoriesDropdown';
 import { useAppDispatch } from '@/lib/store/hooks';
 import { openCart } from '@/lib/store/features/order/orderSlice';
 
@@ -34,7 +34,7 @@ const Menu = ({ isMenuOpened, closeMenu }: { isMenuOpened: boolean; closeMenu: (
 						animate="visible"
 					>
 						<HomeLink />
-						<CategoriesDropdownController />
+						<CategoriesDropdown />
 
 						<NavigationButton handleClick={openCartDrawer} className={'mobile-nav-element--border-bottom'}>
 							<Cart className={styles.cartSvg} />

@@ -40,7 +40,7 @@ const FiltersModal = ({ isOpened, close }: { isOpened: boolean; close: () => voi
 					transition={{ duration: 0.3 }}
 				>
 					<Modal.Header className={mergeClasses(styles.header, 'flex', 'align-center', 'justify-between')}>
-						<h3 className={styles.heading}>Filters</h3>
+						<h3 className={mergeClasses(styles.heading, 'h4')}>Filters</h3>
 						<Modal.CloseButton className={styles.closeModalBtn} />
 					</Modal.Header>
 

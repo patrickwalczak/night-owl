@@ -3,7 +3,7 @@ import SubcategoriesDropdown from '@/widgets/navigation/ui/desktop/categoriesDro
 import { NavigationContext } from '@/widgets/navigation/ui/Navigation';
 import { useSafeContext } from '@/shared/hooks/useSafeContext';
 
-export const CategoriesDropdownController = () => {
+export const CategoriesDropdown = () => {
 	const { categories, setIsExpanded, isExpanded } = useSafeContext(NavigationContext);
 
 	const handleClick = () => setIsExpanded((prev) => !prev);

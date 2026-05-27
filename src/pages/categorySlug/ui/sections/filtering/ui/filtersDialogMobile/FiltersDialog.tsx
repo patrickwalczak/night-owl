@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import FiltersModal from './filtersModal/FiltersModal';
 import FilterButton from '../filterButton/FilterButton';
 import useIsOpenState from '@/shared/hooks/useIsOpenState';

@@ -15,27 +15,25 @@
   position: sticky;
   top: 0;
   z-index: 2;
-  padding: 0.75rem 1rem;
-  background: var(--color-owl-gray-200);
+  padding: 0.5rem 0.75rem;
+  background: var(--color-background-accent);
   border-bottom: 1px solid var(--color-owl-gray-300);
+  color: var(--color-text-inverted);
 }
 
 .heading {
-  font-weight: var(--font-weight-400);
-  font-size: var(--font-size-18);
+  font-size: var(--font-size-20);
+  font-weight: var(--font-weight-300);
 }
 
 .closeModalBtn {
-  background-color: var(--color-owl-gray-300);
-  border-radius: 50%;
-
   svg {
-    width: var(--font-size-36);
-    height: var(--font-size-36);
+    width: var(--font-size-32);
+    height: var(--font-size-32);
   }
 
   path {
-    stroke: var(--color-owl-blue-800);
+    stroke: var(--color-text-inverted);
     stroke-width: 1px;
   }
 }
@@ -43,7 +41,7 @@
 .body {
   gap: 1.5rem;
   min-height: 0;
-  padding: 1.5rem 1rem;
+  padding: 1rem 0.75rem;
   overflow: auto;
 }
 

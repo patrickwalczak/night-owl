@@ -12,7 +12,7 @@ const StickyViewDesktop = () => {
 			{({ isStuck }) => (
 				<>
 					<CategoryName isStuck={isStuck} isProductSum />
-					<div className={mergeClasses('flex', 'align-center', 'gap-1')}>
+					<div className={mergeClasses('flex', 'align-center', 'gap-050')}>
 						<SideFiltersButton />
 						<SortDropdown />
 					</div>
