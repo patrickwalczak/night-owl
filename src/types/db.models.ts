@@ -1,4 +1,4 @@
-import { Category } from '@prisma/client';
+import { Category } from '@/shared/lib/db/generated/client';
 import { ProductStatus } from './product.model';
 import { ParameterModelType } from './parameter.model';
 

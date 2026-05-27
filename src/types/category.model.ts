@@ -1,4 +1,4 @@
-import { Product, CategoryParameter } from '@prisma/client';
+import type { Product, CategoryParameter } from '@/shared/lib/db/generated/client';
 
 export interface Category {
 	id: string;
