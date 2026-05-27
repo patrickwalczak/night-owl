@@ -10,10 +10,9 @@ import { mergeClasses } from '@/utils/mergeClasses';
 
 interface StickyContainerWrapperType {
 	children: ReactNode | ((props: { isStuck: boolean }) => ReactNode);
-	className?: string;
 }
 
-const StickyContainerWrapper = ({ children, className }: StickyContainerWrapperType) => {
+const StickyContainer = ({ children }: StickyContainerWrapperType) => {
 	const isNavigationOpen = useAppSelector((state) => state.app.isNavigationOpen);
 
 	const topPx = isNavigationOpen ? 0 : 48;
@@ -24,7 +23,7 @@ const StickyContainerWrapper = ({ children, className }: StickyContainerWrapperT
 
 	return (
 		<>
-			<div ref={sentinelRef} aria-hidden="true" className={className} />
+			<div ref={sentinelRef} aria-hidden="true" />
 
 			<div
 				className={mergeClasses(
@@ -33,8 +32,7 @@ const StickyContainerWrapper = ({ children, className }: StickyContainerWrapperT
 					'flex',
 					'align-center',
 					'justify-between',
-					'transition-200',
-					className
+					'transition-200'
 				)}
 				style={{ top: `${topPx}px` }}
 			>
@@ -44,4 +42,4 @@ const StickyContainerWrapper = ({ children, className }: StickyContainerWrapperT
 	);
 };
 
-export default StickyContainerWrapper;
+export default StickyContainer;

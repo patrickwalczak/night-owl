@@ -3,7 +3,7 @@ import { normalizeSearchParams, parseListingParams } from '@/utils/url';
 import { notFound } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { getCategoryPageData } from '@/entities/category/api/getCategoryPageData';
-import CatalogView from '@/pages/categorySlug/ui/CategorySlugView';
+import CatalogContainer from '@/pages/categorySlug/ui/components/pageView/CatalogContainer';
 import CatalogProvider from '../model/providers/CatalogProvider';
 import { CatalogUrlActionsProvider } from '../model/providers/CatalogUrlActionsProvider';
 
@@ -35,7 +35,7 @@ export default async function CategorySlugPage({
 				parameters={parameters}
 			>
 				<CatalogUrlActionsProvider>
-					<CatalogView />
+					<CatalogContainer />
 				</CatalogUrlActionsProvider>
 			</CatalogProvider>
 		);

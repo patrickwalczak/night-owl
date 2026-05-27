@@ -1,0 +1,19 @@
+@use '../../../../../app/styles/breakpoints';
+@use '../../../../../app/styles/zindex';
+
+.container {
+	max-width: 1920px;
+	margin: var(--navigation-height) auto 0;
+	row-gap: 0.75rem;
+}
+
+.productsContainer {
+	display: flex;
+	padding-inline: 1rem;
+
+	@media (min-width: breakpoints.$breakpoint-1024) {
+		padding-inline: 0;
+		padding-right: 2rem;
+		gap: 2rem;
+	}
+}

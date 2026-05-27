@@ -4,11 +4,11 @@ import { mergeClasses } from '@/utils/mergeClasses';
 import SideFiltersButton from '../../sections/filtering/ui/sideFiltersButton/SideFiltersButton';
 import CategoryName from '../categoryName/CategoryName';
 import SortDropdown from '../../sections/sorting/ui/sortDropdown/SortDropdown';
-import StickyContainerWrapper from './StickyContainerWrapper';
+import StickyContainer from './StickyContainer';
 
-const StickyContainerDesktop = ({ className }: { className?: string }) => {
+const StickyViewDesktop = () => {
 	return (
-		<StickyContainerWrapper className={className}>
+		<StickyContainer>
 			{({ isStuck }) => (
 				<>
 					<CategoryName isStuck={isStuck} isProductSum />
@@ -18,8 +18,8 @@ const StickyContainerDesktop = ({ className }: { className?: string }) => {
 					</div>
 				</>
 			)}
-		</StickyContainerWrapper>
+		</StickyContainer>
 	);
 };
 
-export default StickyContainerDesktop;
+export default StickyViewDesktop;

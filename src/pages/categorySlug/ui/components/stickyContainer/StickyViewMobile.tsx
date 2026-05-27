@@ -3,19 +3,19 @@
 import { mergeClasses } from '@/utils/mergeClasses';
 import CategoryProductsTotal from '../categoryProductsTotal/CategoryProductsTotal';
 import FiltersDialog from '../../sections/filtering/ui/filtersDialogMobile/FiltersDialog';
-import StickyContainerWrapper from './StickyContainerWrapper';
+import StickyContainer from './StickyContainer';
 
-const StickyContainerMobile = ({ className }: { className?: string }) => {
+const StickyViewMobile = () => {
 	return (
-		<StickyContainerWrapper className={className}>
+		<StickyContainer>
 			<>
 				<CategoryProductsTotal />
 				<div className={mergeClasses('flex', 'align-center', 'gap-1')}>
 					<FiltersDialog />
 				</div>
 			</>
-		</StickyContainerWrapper>
+		</StickyContainer>
 	);
 };
 
-export default StickyContainerMobile;
+export default StickyViewMobile;
