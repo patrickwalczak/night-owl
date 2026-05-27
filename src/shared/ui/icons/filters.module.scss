@@ -1,0 +1,16 @@
+.icon {
+  width: var(--filters-icon-width, 25px);
+  height: var(--filters-icon-height, 24px);
+  color: var(--filters-icon-color, var(--color-owl-blue-800));
+
+  path,
+  circle {
+    stroke: currentColor;
+    stroke-width: var(--filters-icon-stroke-width, 1px);
+  }
+
+  path {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}

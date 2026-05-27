@@ -1,51 +1,43 @@
-import React from "react";
-import styles from "./parameterGroup.module.scss";
-import { mergeClasses } from "@/utils/mergeClasses";
-import { FilterParameterType } from "@/types/parameter.model";
-import { createCheckboxGroup } from "../../../../../../../shared/ui/checkboxGroup/CheckboxGroup";
+import { Dispatch, SetStateAction } from 'react';
+import styles from './parameterGroup.module.scss';
+import { mergeClasses } from '@/utils/mergeClasses';
+import { FilterParameterType } from '@/types/parameter.model';
+import { Checkbox } from '@/shared/ui/checkboxGroup/Checkbox';
 
-const ParameterGroup = ({
-  parameter,
-  selectedParamIds,
-  setSelectedParamIds,
-}: {
-  parameter: FilterParameterType;
-  selectedParamIds: string[];
-  setSelectedParamIds: React.Dispatch<React.SetStateAction<string[]>>;
-}) => {
-  if (!parameter?.values?.length) return null;
+type ParameterGroupType = {
+	parameter: FilterParameterType;
+	selectedParamIds: string[];
+	setSelectedParamIds: Dispatch<SetStateAction<string[]>>;
+};
 
-  const CheckboxGroup = createCheckboxGroup<string>();
+const ParameterGroup = ({ parameter, selectedParamIds, setSelectedParamIds }: ParameterGroupType) => {
+	if (!parameter?.values?.length) return null;
 
-  return (
-    <CheckboxGroup.Root
-      values={selectedParamIds}
-      onValuesChange={setSelectedParamIds}
-      name={`parameter-${parameter.id}`}
-      className={styles.fieldset}
-    >
-      <CheckboxGroup.Legend className={mergeClasses(styles.legend, "truncate")}>
-        {parameter.name}
-      </CheckboxGroup.Legend>
-      <CheckboxGroup.List
-        className={mergeClasses(styles.list, "flex", "flex-col")}
-      >
-        {parameter.values.map((v) => (
-          <CheckboxGroup.Option
-            labelClassName={mergeClasses(styles.label, "truncate")}
-            inputClassName={mergeClasses(styles.input, "sr-only")}
-            customCheckboxClassName={styles.customCheckbox}
-            labelTextClassName={styles.customCheckboxValue}
-            key={v.id}
-            value={v.id}
-            count={v._count.products || 0}
-            label={v.value}
-            id={`parameter-${parameter.id}-${v.id}`}
-          />
-        ))}
-      </CheckboxGroup.List>
-    </CheckboxGroup.Root>
-  );
+	return (
+		<Checkbox.Root
+			values={selectedParamIds}
+			onValuesChange={setSelectedParamIds}
+			name={`parameter-${parameter.id}`}
+			className={styles.fieldset}
+		>
+			<Checkbox.Legend className={mergeClasses(styles.legend, 'truncate')}>{parameter.name}</Checkbox.Legend>
+			<Checkbox.List className={mergeClasses(styles.list, 'flex', 'flex-col')}>
+				{parameter.values.map((v) => (
+					<Checkbox.ListElement key={v.id}>
+						<Checkbox.Option
+							labelClassName={mergeClasses(styles.label, 'truncate')}
+							inputClassName={mergeClasses(styles.input, 'sr-only')}
+							customCheckboxClassName={styles.customCheckbox}
+							value={v.id}
+							count={v._count.products || 0}
+							label={v.value}
+							id={`parameter-${parameter.id}-${v.id}`}
+						/>
+					</Checkbox.ListElement>
+				))}
+			</Checkbox.List>
+		</Checkbox.Root>
+	);
 };
 
 export default ParameterGroup;

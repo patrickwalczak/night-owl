@@ -1,0 +1,29 @@
+.checkbox {
+  --checkbox-border-color: #8b8c89;
+  --checkbox-checked-color: #274c77;
+  --checkbox-hover-color: #a3cef1;
+  --checkbox-disabled-bg-color: #d9d9d9;
+
+}
+
+.container {
+  margin-left: 10rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.input {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-owl-purple-500);
+  background-color: transparent;
+  border-radius: 2px;
+
+  &:checked {
+    background-color: red;
+  }
+}
+
+.label {}
