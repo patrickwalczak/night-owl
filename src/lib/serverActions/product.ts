@@ -96,7 +96,7 @@ export type FullProduct = {
 		quantity: number;
 		inStock: boolean;
 		image: string;
-		status: import('@prisma/client').ProductStatus;
+		status: ProductStatus;
 		createdAt: Date;
 		updatedAt: Date;
 		categoryId: string;
