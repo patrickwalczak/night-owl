@@ -1,12 +1,13 @@
 'use client';
 
+import type React from 'react';
+
 import { useDeviceType } from '@/shared/hooks/useDeviceType';
-import React from 'react';
 
 const AppClient = ({ children }: { children: React.ReactNode }) => {
-	useDeviceType();
+    useDeviceType();
 
-	return <>{children}</>;
+    return <>{children}</>;
 };
 
 export default AppClient;

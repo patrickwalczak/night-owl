@@ -3,15 +3,15 @@
 import { useState } from 'react';
 
 const useOpenState = () => {
-	const [isOpened, setIsOpened] = useState<boolean>(false);
+    const [isOpened, setIsOpened] = useState<boolean>(false);
 
-	const toggle = () => setIsOpened((prevState) => !prevState);
+    const toggle = () => setIsOpened(prevState => !prevState);
 
-	const close = () => setIsOpened(false);
+    const close = () => setIsOpened(false);
 
-	const open = () => setIsOpened(true);
+    const open = () => setIsOpened(true);
 
-	return { isOpened, toggle, close, open };
+    return { isOpened, toggle, close, open };
 };
 
 export default useOpenState;

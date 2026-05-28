@@ -1,9 +1,9 @@
-import { useContext, Context } from 'react';
+import { useContext, type Context } from 'react';
 
 export function useSafeContext<T>(context: Context<T | null>): T {
-	const ctx = useContext(context);
+    const ctx = useContext(context);
 
-	if (!ctx) throw new Error('Context must be used within its Provider');
+    if (!ctx) throw new Error('Context must be used within its Provider');
 
-	return ctx;
+    return ctx;
 }
