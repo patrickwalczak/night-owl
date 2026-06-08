@@ -1,6 +1,6 @@
 'use client';
 
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import SideFiltersButton from '../../sections/filtering/ui/sideFiltersButton/SideFiltersButton';
 import SortDropdown from '../../sections/sorting/ui/sortDropdown/SortDropdown';
@@ -13,7 +13,7 @@ const StickyViewDesktop = () => {
 			{({ isStuck }) => (
 				<>
 					<CategoryName isStuck={isStuck} isProductSum />
-					<div className={mergeClasses('flex', 'align-center', 'gap-050')}>
+					<div className={cn('flex', 'align-center', 'gap-050')}>
 						<SideFiltersButton />
 						<SortDropdown />
 					</div>

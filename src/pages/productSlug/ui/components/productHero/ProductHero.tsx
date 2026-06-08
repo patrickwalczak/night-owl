@@ -7,7 +7,7 @@ import { type FullProduct } from '@/lib/serverActions/product';
 import { addItem } from '@/lib/store/features/order/orderSlice';
 import { useAppDispatch } from '@/lib/store/hooks';
 import { formatPrice } from '@/shared/lib/utils/format';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import styles from './productHero.module.scss';
 
@@ -55,7 +55,7 @@ export default function ProductHero({ data }: { data: FullProduct }) {
 
 				<button
 					onClick={addProduct}
-					className={mergeClasses(styles.addToCart, 'transition-200')}
+					className={cn(styles.addToCart, 'transition-200')}
 					disabled={!product.inStock}
 				>
 					{product.inStock ? 'Add to Cart' : 'Out of Stock'}

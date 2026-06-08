@@ -3,7 +3,7 @@
 import { createContext, type Dispatch, type ReactNode, type SetStateAction, useCallback, useId, useMemo } from 'react';
 
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import styles from './checkboxGroup.module.scss';
 
@@ -86,7 +86,7 @@ const CheckboxGroupRoot = <T extends CheckboxGroupValueType = CheckboxGroupValue
 
 	return (
 		<CheckboxGroupContext.Provider value={checkboxGroupContext}>
-			<fieldset aria-label={ariaLabel} className={mergeClasses(styles.root, className)}>
+			<fieldset aria-label={ariaLabel} className={cn(styles.root, className)}>
 				{children}
 			</fieldset>
 		</CheckboxGroupContext.Provider>
@@ -127,7 +127,7 @@ const CheckboxGroupOption = <T extends CheckboxGroupValueType = CheckboxGroupVal
 		<label
 			htmlFor={inputId}
 			title={fullLabel}
-			className={mergeClasses(styles.label, labelClassName, 'flex', 'align-center')}
+			className={cn(styles.label, labelClassName, 'flex', 'align-center')}
 		>
 			<input
 				id={inputId}
@@ -137,19 +137,19 @@ const CheckboxGroupOption = <T extends CheckboxGroupValueType = CheckboxGroupVal
 				checked={checked}
 				disabled={disabled}
 				onChange={() => checkboxGroupContext.toggle(value)}
-				className={mergeClasses('sr-only', styles.input, inputClassName)}
+				className={cn('sr-only', styles.input, inputClassName)}
 				aria-label={fullLabel}
 			/>
 
 			<span
 				aria-hidden={'true'}
-				className={mergeClasses(styles.customCheckbox, customCheckboxClassName, 'flex-shrink-0')}
+				className={cn(styles.customCheckbox, customCheckboxClassName, 'flex-shrink-0')}
 			/>
 
 			<span className={styles.textWrap}>
-				<span className={mergeClasses(styles.customCheckboxValue, labelTextClassName, 'truncate')}>{label}</span>
+				<span className={cn(styles.customCheckboxValue, labelTextClassName, 'truncate')}>{label}</span>
 
-				<span className={mergeClasses(styles.count, disabled && styles.countZero)} aria-hidden={'true'}>
+				<span className={cn(styles.count, disabled && styles.countZero)} aria-hidden={'true'}>
 					{'('}
 					{count.toLocaleString()}
 					{')'}

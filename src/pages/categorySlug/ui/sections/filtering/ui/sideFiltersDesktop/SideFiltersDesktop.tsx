@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import { CatalogContext } from '../../../../../model/providers/CatalogProvider';
 import { CatalogUrlActionsContext } from '../../../../../model/providers/CatalogUrlActionsProvider';
@@ -48,13 +48,13 @@ const SideFiltersDesktop = () => {
 			<div
 				ref={filtersRef}
 				style={{ height: scrollableHeight }}
-				className={mergeClasses(styles.filters, 'flex', 'flex-col')}
+				className={cn(styles.filters, 'flex', 'flex-col')}
 			>
-				<div className={mergeClasses(styles.content, 'flex', 'flex-col')}>
-					<div className={mergeClasses(styles.subcategories, 'flex', 'flex-col')}>
+				<div className={cn(styles.content, 'flex', 'flex-col')}>
+					<div className={cn(styles.subcategories, 'flex', 'flex-col')}>
 						{subcategories.map((subcategory) => (
 							<Link
-								className={mergeClasses(styles.subcategory, 'truncate')}
+								className={cn(styles.subcategory, 'truncate')}
 								key={subcategory.id}
 								href={`/category/${subcategory.slug}`}
 							>

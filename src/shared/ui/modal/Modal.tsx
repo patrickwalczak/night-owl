@@ -3,7 +3,7 @@
 import { createContext } from 'react';
 import { createPortal } from 'react-dom';
 
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import { useBodyOverflow } from '../../lib/hooks/useBodyOverflow';
 import { Close } from '../icons/Close';
@@ -38,7 +38,7 @@ const CloseButton = ({ className = '' }: { className?: string }) => {
 	const { onClose } = useSafeContext(ModalContext);
 
 	return (
-		<button className={mergeClasses('button-empty', className)} onClick={onClose} aria-label={'Close modal'}>
+		<button className={cn('button-empty', className)} onClick={onClose} aria-label={'Close modal'}>
 			<Close />
 		</button>
 	);
@@ -48,7 +48,7 @@ const Overlay = ({ className = '', children }: { className?: string; children: R
 	const { onClose } = useSafeContext(ModalContext);
 
 	return (
-		<div className={mergeClasses('backdrop', className)} onClick={onClose}>
+		<div className={cn('backdrop', className)} onClick={onClose}>
 			{children}
 		</div>
 	);
@@ -83,7 +83,7 @@ const Wrapper = ({ children, className = '', id = '', initial, animate, exit, tr
 	return (
 		<AnimatePresence>
 			<motion.div
-				className={mergeClasses(styles.modal, className)}
+				className={cn(styles.modal, className)}
 				initial={initial}
 				animate={animate}
 				exit={exit}

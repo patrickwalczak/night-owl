@@ -1,6 +1,6 @@
 import type { SVGProps } from 'react';
 
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import styles from './filters.module.scss';
 
@@ -10,7 +10,7 @@ const Filters = ({ className, ...props }: FiltersType) => {
 	return (
 		<svg
 			aria-hidden={'true'}
-			className={mergeClasses(styles.icon, className)}
+			className={cn(styles.icon, className)}
 			viewBox={'0 0 25 24'}
 			fill={'none'}
 			xmlns={'http://www.w3.org/2000/svg'}

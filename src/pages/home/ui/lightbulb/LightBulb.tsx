@@ -3,7 +3,7 @@
 import type React from 'react';
 
 import { useScrubbedInView } from '@/shared/lib/hooks/useScrubbedInView';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import styles from './styles.module.scss';
 
@@ -28,21 +28,21 @@ export default function LightBulb() {
 
 	return (
 		<div
-			className={mergeClasses(styles.container, 'section-dark')}
+			className={cn(styles.container, 'section-dark')}
 			style={{ ['--progress']: headingProgress } as React.CSSProperties}
 		>
-			<div ref={headingRef} className={mergeClasses(styles.titleContainer, 'flex-center')}>
-				<h2 className={mergeClasses(styles.heading, isHeadingOn && styles.headingOn)}>
+			<div ref={headingRef} className={cn(styles.titleContainer, 'flex-center')}>
+				<h2 className={cn(styles.heading, isHeadingOn && styles.headingOn)}>
 					{`Night isn't the end of the day. It's a different kind of beginning - with better`}{' '}
 					<span className={styles.highlight}>{'lighting.'}</span>
 				</h2>
 			</div>
-			<div ref={svgRef} className={mergeClasses('flex-center', styles.bulbContainer, isSvgOn && styles.isSvgOn)}>
+			<div ref={svgRef} className={cn('flex-center', styles.bulbContainer, isSvgOn && styles.isSvgOn)}>
 				<svg
 					viewBox={'0 0 128 128'}
 					width={'128'}
 					height={'128'}
-					className={mergeClasses(styles.svg)}
+					className={cn(styles.svg)}
 					xmlns={'http://www.w3.org/2000/svg'}
 				>
 					<defs>

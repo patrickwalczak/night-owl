@@ -1,6 +1,6 @@
 'use client';
 
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import FiltersDialog from '../../sections/filtering/ui/filtersDialogMobile/FiltersDialog';
 import CategoryProductsTotal from '../categoryProductsTotal/CategoryProductsTotal';
@@ -11,7 +11,7 @@ const StickyViewMobile = () => {
 		<StickyContainer>
 			<>
 				<CategoryProductsTotal />
-				<div className={mergeClasses('flex', 'align-center', 'gap-1')}>
+				<div className={cn('flex', 'align-center', 'gap-1')}>
 					<FiltersDialog />
 				</div>
 			</>

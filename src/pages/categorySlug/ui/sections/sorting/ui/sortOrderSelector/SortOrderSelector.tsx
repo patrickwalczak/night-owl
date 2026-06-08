@@ -2,7 +2,7 @@ import React, { type SetStateAction, type Dispatch } from 'react';
 
 import { SORT_OPTIONS } from '@/constants';
 import { type SortOrderKeys } from '@/types/catalog.models';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import { createRadioGroup } from '../../../../../../../shared/ui/radioGroup/RadioGroup';
 import styles from './sortOrderSelector.module.scss';
@@ -25,7 +25,7 @@ const SortOrderSelector = ({
 			className={styles.sortGroup}
 		>
 			<RadioGroup.Legend className={styles.sortLegend}>{'Sort by'}</RadioGroup.Legend>
-			<RadioGroup.List className={mergeClasses(styles.sortList, 'flex', 'flex-col')}>
+			<RadioGroup.List className={cn(styles.sortList, 'flex', 'flex-col')}>
 				{SORT_OPTIONS.map((option) => (
 					<RadioGroup.Option
 						key={option.value}

@@ -3,7 +3,7 @@ import type React from 'react';
 import { decrementItem, incrementItem, setQuantity, removeItem } from '@/lib/store/features/order/orderSlice';
 import { useAppDispatch } from '@/lib/store/hooks';
 import { type CartItem } from '@/types/cartItem';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import TrashBin from '../../../../shared/ui/icons/TrashBin';
 import styles from './amountController.module.scss';
@@ -32,7 +32,7 @@ const AmountController = ({ item }: { item: CartItem }) => {
 	};
 
 	return (
-		<div className={mergeClasses(styles.wrap, 'flex', 'align-center')}>
+		<div className={cn(styles.wrap, 'flex', 'align-center')}>
 			<button
 				type={'button'}
 				className={styles.iconBtn}

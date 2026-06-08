@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { getCategoriesAction } from '@/entities/category/api/getCategoriesAction';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import styles from './hero.module.scss';
 
@@ -10,7 +10,7 @@ export const Hero = async () => {
 	const categories = await getCategoriesAction();
 
 	return (
-		<section className={mergeClasses(styles.container, 'align-center', 'justify-center')}>
+		<section className={cn(styles.container, 'align-center', 'justify-center')}>
 			<div className={`${styles.textContentContainer} flex flex-col align-center justify-center`}>
 				<h1 className={styles.heading}>
 					<span>{'Lighting'}</span>
@@ -21,7 +21,7 @@ export const Hero = async () => {
 					<span>{'Darkness'}</span>
 				</h1>
 
-				<Link className={mergeClasses(styles.shopBtn, 'transition-200')} href={`/category/${categories[0].slug}`}>
+				<Link className={cn(styles.shopBtn, 'transition-200')} href={`/category/${categories[0].slug}`}>
 					{'Shop now'}
 				</Link>
 			</div>

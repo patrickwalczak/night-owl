@@ -3,7 +3,7 @@
 import React from 'react';
 
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
-import { setBoolCookieClient } from '@/shared/lib/utils/cookie';
+import { setBoolCookieClient } from '@/shared/lib/utils/cookie/client';
 
 import { CatalogContext } from '../../../../../model/providers/CatalogProvider';
 import FilterButton from '../filterButton/FilterButton';

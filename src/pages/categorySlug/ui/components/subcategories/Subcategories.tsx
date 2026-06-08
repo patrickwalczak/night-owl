@@ -3,7 +3,7 @@
 import Link from 'next/link';
 
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import { CatalogContext } from '../../../model/providers/CatalogProvider';
 import styles from './subcategories.module.scss';
@@ -20,7 +20,7 @@ const Subcategories = () => {
 					<Link
 						key={subcategory.id}
 						href={`/category/${subcategory.slug}`}
-						className={mergeClasses(styles.subcategory, 'text-xs')}
+						className={cn(styles.subcategory, 'text-xs')}
 					>
 						{subcategory.name}
 					</Link>

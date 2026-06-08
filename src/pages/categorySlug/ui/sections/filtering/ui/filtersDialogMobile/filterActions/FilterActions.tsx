@@ -7,7 +7,7 @@ import { createContext } from 'react';
 
 import { DEFAULT_SORT_ORDER } from '@/constants';
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import { CatalogUrlActionsContext } from '../../../../../../model/providers/CatalogUrlActionsProvider';
 import styles from './filterActions.module.scss';
@@ -46,7 +46,7 @@ function Root({
 
 	return (
 		<FilterActionsCtx.Provider value={{ onApply, onReset }}>
-			<footer className={mergeClasses(styles.container, 'flex', 'align-center', className)}>{children}</footer>
+			<footer className={cn(styles.container, 'flex', 'align-center', className)}>{children}</footer>
 		</FilterActionsCtx.Provider>
 	);
 }
@@ -64,7 +64,7 @@ function Reset({ children = 'Reset', className, onClick = () => {}, ...rest }: B
 	return (
 		<button
 			type={'button'}
-			className={mergeClasses(styles.resetBtn, styles.filterBtn, className)}
+			className={cn(styles.resetBtn, styles.filterBtn, className)}
 			onClick={handleClick}
 			{...rest}
 		>
@@ -84,7 +84,7 @@ function Apply({ children = 'Show results', className, onClick = () => {}, ...re
 	return (
 		<button
 			type={'button'}
-			className={mergeClasses(styles.showBtn, styles.filterBtn, className)}
+			className={cn(styles.showBtn, styles.filterBtn, className)}
 			onClick={handleClick}
 			{...rest}
 		>

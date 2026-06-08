@@ -4,7 +4,7 @@ import type React from 'react';
 
 import { useCallback } from 'react';
 
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import styles from './styles.module.scss';
 
@@ -37,7 +37,7 @@ export default function PulsingMask({
 	);
 
 	return (
-		<div className={mergeClasses(styles.wrap, wrapClassName)}>
+		<div className={cn(styles.wrap, wrapClassName)}>
 			<div ref={contentRef}>{children}</div>
 
 			{active && (

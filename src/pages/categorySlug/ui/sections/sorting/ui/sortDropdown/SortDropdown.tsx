@@ -8,7 +8,7 @@ import { DEFAULT_SORT_ORDER, SORT_OPTIONS, SORT_ORDER_OPTIONS } from '@/constant
 import { useOutsideClick } from '@/shared/lib/hooks/useOutsideClick';
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
 import { type SortOrderKeys } from '@/types/catalog.models';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import { CatalogUrlActionsContext } from '../../../../../model/providers/CatalogUrlActionsProvider';
 import styles from './styles.module.scss';
@@ -85,7 +85,7 @@ export default function SortDropdown({ className }: { className?: string }) {
 				<button
 					ref={buttonRef}
 					type={'button'}
-					className={mergeClasses(styles.sortBtn, 'flex', 'align-center', 'flex-row', 'button-empty')}
+					className={cn(styles.sortBtn, 'flex', 'align-center', 'flex-row', 'button-empty')}
 					aria-haspopup={'listbox'}
 					aria-expanded={open}
 					aria-controls={listboxId}
@@ -93,7 +93,7 @@ export default function SortDropdown({ className }: { className?: string }) {
 					onKeyDown={onButtonKeyDown}
 				>
 					<span>{'Sort By'}</span>
-					<CaretIcon className={mergeClasses(styles.caret, open ? styles.caretOpen : '')} />
+					<CaretIcon className={cn(styles.caret, open ? styles.caretOpen : '')} />
 				</button>
 
 				{open && (

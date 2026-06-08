@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { closeCart } from '@/lib/store/features/order/orderSlice';
 import { useAppDispatch, useAppSelector } from '@/lib/store/hooks';
 import { formatPrice } from '@/shared/lib/utils/format';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import Modal from '../../shared/ui/modal/Modal';
 import styles from './cartDrawer.module.scss';
@@ -24,7 +24,7 @@ const CartDrawer = () => {
 			<Modal.Overlay>
 				<Modal.Wrapper
 					id={'mobile-menu'}
-					className={mergeClasses(styles.modal, 'flex', 'flex-col')}
+					className={cn(styles.modal, 'flex', 'flex-col')}
 					initial={{ x: '100%' }}
 					animate={{ x: 0 }}
 					exit={{ x: '100%' }}
@@ -41,7 +41,7 @@ const CartDrawer = () => {
 							<CartSummary />
 						</div>
 					) : (
-						<div className={mergeClasses(styles.empty, 'flex', 'align-center', 'flex-col')}>
+						<div className={cn(styles.empty, 'flex', 'align-center', 'flex-col')}>
 							<h4 className={styles.emptyText}>{'Your cart is empty'}</h4>
 							<Link href={'/category/indoor-lighting'} className={styles.goToCatalog}>
 								{'Go to Catalog'}
@@ -55,12 +55,12 @@ const CartDrawer = () => {
 };
 
 const CartProducts = ({ children }: { children: React.ReactNode }) => {
-	return <div className={mergeClasses(styles.products, 'flex', 'flex-col')}>{children}</div>;
+	return <div className={cn(styles.products, 'flex', 'flex-col')}>{children}</div>;
 };
 
 const CartHeader = () => {
 	return (
-		<div className={mergeClasses(styles.header, 'flex', 'align-center', 'justify-between')}>
+		<div className={cn(styles.header, 'flex', 'align-center', 'justify-between')}>
 			<h3 className={styles.heading}>{'Cart'}</h3>
 			<Modal.CloseButton className={styles.closeModalBtn} />
 		</div>
@@ -73,8 +73,8 @@ const CartSummary = () => {
 	const formattedTotal = formatPrice(total, 'USD');
 
 	return (
-		<div className={mergeClasses('flex', 'flex-col', 'justify-between', 'align-center', styles.summary)}>
-			<div className={mergeClasses(styles.total, 'flex', 'align-center', 'justify-between')}>
+		<div className={cn('flex', 'flex-col', 'justify-between', 'align-center', styles.summary)}>
+			<div className={cn(styles.total, 'flex', 'align-center', 'justify-between')}>
 				<span className={styles.totalLabel}>{'Total:'}</span>
 				<span className={styles.totalValue}>{formattedTotal}</span>
 			</div>

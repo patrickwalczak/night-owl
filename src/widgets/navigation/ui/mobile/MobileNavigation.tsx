@@ -2,7 +2,7 @@
 
 import useOpenState from '@/shared/lib/hooks/useIsOpenState';
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 import { NavigationContext } from '@/widgets/navigation/ui/Navigation';
 
 import { Hamburger } from '../../../../shared/ui/icons/Hamburger';
@@ -27,7 +27,7 @@ const MobileNavigation = () => {
 				aria-expanded={isMenuOpened}
 				aria-controls={'mobile-menu'}
 				aria-haspopup={'true'}
-				className={mergeClasses(
+				className={cn(
 					styles.button,
 					'button-empty',
 					styles.hamburgerBtn,

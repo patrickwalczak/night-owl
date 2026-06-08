@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { openCart } from '@/lib/store/features/order/orderSlice';
 import { useAppDispatch } from '@/lib/store/hooks';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import Cart from '../../../../../shared/ui/icons/Cart';
 import Modal from '../../../../../shared/ui/modal/Modal';
@@ -28,7 +28,7 @@ const Menu = ({ isMenuOpened, closeMenu }: { isMenuOpened: boolean; closeMenu: (
 				>
 					<Modal.CloseButton className={styles.closeModalBtn} />
 					<motion.div
-						className={mergeClasses(styles.contentWrapper, 'flex', 'flex-col', 'align-center')}
+						className={cn(styles.contentWrapper, 'flex', 'flex-col', 'align-center')}
 						variants={{
 							visible: { transition: { staggerChildren: 0.1 } },
 						}}
@@ -52,14 +52,14 @@ export default Menu;
 
 const HomeLink = () => (
 	<motion.div
-		className={mergeClasses(styles.linkWrapper, 'block', 'w-100')}
+		className={cn(styles.linkWrapper, 'block', 'w-100')}
 		variants={{
 			hidden: { opacity: 0, rotate: -10, x: -20, y: -10 },
 			visible: { opacity: 1, rotate: 0, x: 0, y: 0 },
 		}}
 		transition={{ duration: 0.4, ease: 'easeOut' }}
 	>
-		<Link className={mergeClasses('mobile-nav-element', 'block', 'w-100')} href={'/'}>
+		<Link className={cn('mobile-nav-element', 'block', 'w-100')} href={'/'}>
 			{'Home'}
 		</Link>
 	</motion.div>

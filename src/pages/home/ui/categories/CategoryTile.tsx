@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import styles from './categories.module.scss';
 
@@ -22,8 +22,8 @@ export const CategoryTile = ({ href, title, description, image }: CategoryTileTy
 
 			<div className={styles.overlay} />
 
-			<div className={mergeClasses(styles.content, 'flex', 'flex-col')}>
-				<h3 className={mergeClasses(styles.title, 'h4', 'font-playfair')}>{title}</h3>
+			<div className={cn(styles.content, 'flex', 'flex-col')}>
+				<h3 className={cn(styles.title, 'h4', 'font-playfair')}>{title}</h3>
 				<p className={styles.description}>{description}</p>
 			</div>
 		</Link>

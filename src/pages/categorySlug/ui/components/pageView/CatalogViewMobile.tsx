@@ -1,4 +1,4 @@
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import ProductsInfinite from '../../sections/productList/ui/productsInfinite/ProductsInfinite';
 import CategoryName from '../categoryName/CategoryName';
@@ -8,7 +8,7 @@ import styles from './catalogView.module.scss';
 
 export default function CatalogViewMobile() {
 	return (
-		<main className={mergeClasses(styles.container, 'flex', 'flex-col')}>
+		<main className={cn(styles.container, 'flex', 'flex-col')}>
 			<CategoryName />
 			<Subcategories />
 			<StickyViewMobile />

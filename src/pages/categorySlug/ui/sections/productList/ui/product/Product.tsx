@@ -8,7 +8,7 @@ import { addItem } from '@/lib/store/features/order/orderSlice';
 import { useAppDispatch } from '@/lib/store/hooks';
 import Cart from '@/shared/ui/icons/Cart';
 import { type ListingProductType } from '@/types/product.model';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import styles from './product.module.scss';
 
@@ -60,19 +60,19 @@ export default function Product({ product }: { product: ListingProductType }) {
 
 	return (
 		<article
-			className={mergeClasses(styles.card, 'transition-200')}
+			className={cn(styles.card, 'transition-200')}
 			tabIndex={0}
 			role={'link'}
 			aria-label={`Open ${product.name}`}
 			onClick={onCardClick}
 			onKeyDown={onCardKeyDown}
 		>
-			<div className={mergeClasses(styles.thumb)}>
+			<div className={cn(styles.thumb)}>
 				<Image src={'https://placehold.co/600x400.webp'} alt={product.name} fill className={styles.img} />
 			</div>
 
-			<div className={mergeClasses(styles.details, 'align-center')}>
-				<h4 title={product.name} className={mergeClasses(styles.title, 'truncate')}>
+			<div className={cn(styles.details, 'align-center')}>
+				<h4 title={product.name} className={cn(styles.title, 'truncate')}>
 					{product.name}
 				</h4>
 
@@ -84,7 +84,7 @@ export default function Product({ product }: { product: ListingProductType }) {
 
 					<button
 						type={'button'}
-						className={mergeClasses(styles.cartBtn, 'button-empty', 'transition-200', 'flex-center')}
+						className={cn(styles.cartBtn, 'button-empty', 'transition-200', 'flex-center')}
 						aria-label={`Add “${product.name}” to cart`}
 						onClick={onCartClick}
 						onKeyDown={onCartKeyDown}

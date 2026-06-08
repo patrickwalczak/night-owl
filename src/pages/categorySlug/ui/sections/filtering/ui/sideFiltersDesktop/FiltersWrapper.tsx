@@ -6,7 +6,7 @@ import { useEffect, useRef } from 'react';
 
 import { useAppSelector } from '@/lib/store/hooks';
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import { CatalogContext } from '../../../../../model/providers/CatalogProvider';
 import styles from './sideFiltersDesktop.module.scss';
@@ -27,7 +27,7 @@ const FiltersWrapper = ({ children }: { children: React.ReactNode }) => {
 		<div
 			ref={containerRef}
 			data-open={areFiltersOpen}
-			className={mergeClasses(styles.filtersContainer, 'transition-200', areFiltersOpen && styles.opened)}
+			className={cn(styles.filtersContainer, 'transition-200', areFiltersOpen && styles.opened)}
 			style={{
 				width: areFiltersOpen ? '300px' : '0px',
 				top: isNavigationOpen ? '58px' : '101px',

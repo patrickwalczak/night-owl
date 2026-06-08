@@ -1,212 +1,213 @@
 'use server';
-
 import 'server-only';
 
 import type { ProductStatus } from '@/shared/lib/db/generated/client';
-
-import { type SortOrderKeys } from '@/types/catalog.models';
+import type { SortOrderKeys } from '@/types/catalog.models';
 
 import { prisma } from '../../shared/lib/db/prisma';
 
 const PAGE_SIZE = 20;
 
 function toOrderBy(sort: SortOrderKeys) {
-    switch (sort) {
-        case 'price_asc':
-            return { price: 'asc' as const };
-        case 'price_desc':
-            return { price: 'desc' as const };
-        case 'newest':
-            return { createdAt: 'desc' as const };
-        default:
-            return { createdAt: 'desc' as const };
-    }
-    ``;
+	switch (sort) {
+		case 'price_asc':
+			return { price: 'asc' as const };
+		case 'price_desc':
+			return { price: 'desc' as const };
+		case 'newest':
+			return { createdAt: 'desc' as const };
+		default:
+			return { createdAt: 'desc' as const };
+	}
+	``;
 }
 
 export async function getProductsForCategory(opts: {
-    categoryId: string;
-    page: number;
-    sort: SortOrderKeys;
-    paramValueIds?: string[];
-    query?: string;
+	categoryId: string;
+	page: number;
+	sort: SortOrderKeys;
+	paramValueIds?: string[];
+	query?: string;
 }) {
-    const children = await prisma.category.findMany({
-        where: { parentId: opts.categoryId },
-        select: { id: true },
-    });
-    const categoryIds = [opts.categoryId, ...children.map(c => c.id)];
+	const children = await prisma.category.findMany({
+		where: { parentId: opts.categoryId },
+		select: { id: true },
+	});
+	const categoryIds = [opts.categoryId, ...children.map((c) => c.id)];
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const where: any = { categoryId: { in: categoryIds }, inStock: true };
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const where: any = { categoryId: { in: categoryIds }, inStock: true };
 
-    if (opts.query) where.name = { contains: opts.query, mode: 'insensitive' };
+	if (opts.query) where.name = { contains: opts.query, mode: 'insensitive' };
 
-    if (opts.paramValueIds?.length) {
-        where.parameterValues = {
-            some: { parameterValueId: { in: opts.paramValueIds } },
-        };
-    }
+	if (opts.paramValueIds?.length) {
+		where.parameterValues = {
+			some: { parameterValueId: { in: opts.paramValueIds } },
+		};
+	}
 
-    const [items, total] = await Promise.all([
-        prisma.product.findMany({
-            where,
-            orderBy: toOrderBy(opts.sort),
-            skip: (opts.page - 1) * PAGE_SIZE,
-            take: PAGE_SIZE,
-            select: {
-                id: true,
-                name: true,
-                slug: true,
-                price: true,
-                image: true,
-                status: true,
-            },
-        }),
-        prisma.product.count({ where }),
-    ]);
+	const [items, total] = await Promise.all([
+		prisma.product.findMany({
+			where,
+			orderBy: toOrderBy(opts.sort),
+			skip: (opts.page - 1) * PAGE_SIZE,
+			take: PAGE_SIZE,
+			select: {
+				id: true,
+				name: true,
+				slug: true,
+				price: true,
+				image: true,
+				status: true,
+			},
+		}),
+		prisma.product.count({ where }),
+	]);
 
-    return { items, total, pageSize: PAGE_SIZE };
+	return { items, total, pageSize: PAGE_SIZE };
 }
 
-/** Shape you can use on the page */
 export interface ProductAttribute {
-    parameterId: string;
-    parameterName: string;
-    valueId: string;
-    value: string;
+	parameterId: string;
+	parameterName: string;
+	valueId: string;
+	value: string;
 }
 
 export interface ProductCard {
-    id: string;
-    name: string;
-    slug: string;
-    price: number;
-    image: string;
-    status: ProductStatus;
+	id: string;
+	name: string;
+	slug: string;
+	price: number;
+	image: string;
+	status: ProductStatus;
 }
 
-export interface Breadcrumb { id: string; name: string; slug: string }
+export interface Breadcrumb {
+	id: string;
+	name: string;
+	slug: string;
+}
 
 export interface FullProduct {
-    product: {
-        id: string;
-        name: string;
-        description: string | null;
-        price: number;
-        currency: string;
-        slug: string;
-        quantity: number;
-        inStock: boolean;
-        image: string;
-        status: ProductStatus;
-        createdAt: Date;
-        updatedAt: Date;
-        categoryId: string;
-        category: { id: string; name: string; slug: string; parentId: string | null };
-    };
-    attributes: ProductAttribute[];
-    breadcrumbs: Breadcrumb[];
-    related: ProductCard[];
+	product: {
+		id: string;
+		name: string;
+		description: string | null;
+		price: number;
+		currency: string;
+		slug: string;
+		quantity: number;
+		inStock: boolean;
+		image: string;
+		status: ProductStatus;
+		createdAt: Date;
+		updatedAt: Date;
+		categoryId: string;
+		category: { id: string; name: string; slug: string; parentId: string | null };
+	};
+	attributes: ProductAttribute[];
+	breadcrumbs: Breadcrumb[];
+	related: ProductCard[];
 }
 
 async function getBreadcrumbs(categoryId: string): Promise<Breadcrumb[]> {
-    const crumbs: Breadcrumb[] = [];
-    let current = await prisma.category.findUnique({
-        where: { id: categoryId },
-        select: { id: true, name: true, slug: true, parentId: true },
-    });
+	const crumbs: Breadcrumb[] = [];
+	let current = await prisma.category.findUnique({
+		where: { id: categoryId },
+		select: { id: true, name: true, slug: true, parentId: true },
+	});
 
-    while (current) {
-        crumbs.push({ id: current.id, name: current.name, slug: current.slug });
-        if (!current.parentId) break;
-        current = await prisma.category.findUnique({
-            where: { id: current.parentId },
-            select: { id: true, name: true, slug: true, parentId: true },
-        });
-    }
+	while (current) {
+		crumbs.push({ id: current.id, name: current.name, slug: current.slug });
+		if (!current.parentId) break;
+		current = await prisma.category.findUnique({
+			where: { id: current.parentId },
+			select: { id: true, name: true, slug: true, parentId: true },
+		});
+	}
 
-    return crumbs.reverse();
+	return crumbs.reverse();
 }
 
 async function getRelatedFromCategory(categoryId: string, excludeId: string, take = 8): Promise<ProductCard[]> {
-    const items = await prisma.product.findMany({
-        where: { categoryId, inStock: true, NOT: { id: excludeId } },
-        orderBy: { createdAt: 'desc' },
-        take,
-        select: { id: true, name: true, slug: true, price: true, image: true, status: true },
-    });
-    return items;
+	const items = await prisma.product.findMany({
+		where: { categoryId, inStock: true, NOT: { id: excludeId } },
+		orderBy: { createdAt: 'desc' },
+		take,
+		select: { id: true, name: true, slug: true, price: true, image: true, status: true },
+	});
+	return items;
 }
 
 const productInclude = {
-    category: { select: { id: true, name: true, slug: true, parentId: true } },
-    parameterValues: {
-        include: {
-            parameterValue: {
-                select: {
-                    id: true,
-                    value: true,
-                    parameter: { select: { id: true, name: true } },
-                },
-            },
-        },
-    },
+	category: { select: { id: true, name: true, slug: true, parentId: true } },
+	parameterValues: {
+		include: {
+			parameterValue: {
+				select: {
+					id: true,
+					value: true,
+					parameter: { select: { id: true, name: true } },
+				},
+			},
+		},
+	},
 } as const;
 
 function mapAttributes(
-    pv: { parameterValue: { id: string; value: string; parameter: { id: string; name: string } } }[],
+	pv: { parameterValue: { id: string; value: string; parameter: { id: string; name: string } } }[]
 ): ProductAttribute[] {
-    return pv.map(({ parameterValue }) => ({
-        parameterId: parameterValue.parameter.id,
-        parameterName: parameterValue.parameter.name,
-        valueId: parameterValue.id,
-        value: parameterValue.value,
-    }));
+	return pv.map(({ parameterValue }) => ({
+		parameterId: parameterValue.parameter.id,
+		parameterName: parameterValue.parameter.name,
+		valueId: parameterValue.id,
+		value: parameterValue.value,
+	}));
 }
 
 export async function getProductFullById(id: string): Promise<FullProduct | null> {
-    if (!id) return null;
+	if (!id) return null;
 
-    const product = await prisma.product.findUnique({
-        where: { id },
-        include: productInclude,
-    });
+	const product = await prisma.product.findUnique({
+		where: { id },
+		include: productInclude,
+	});
 
-    if (!product) return null;
+	if (!product) return null;
 
-    const [breadcrumbs, related] = await Promise.all([
-        getBreadcrumbs(product.categoryId),
-        getRelatedFromCategory(product.categoryId, product.id),
-    ]);
+	const [breadcrumbs, related] = await Promise.all([
+		getBreadcrumbs(product.categoryId),
+		getRelatedFromCategory(product.categoryId, product.id),
+	]);
 
-    return {
-        product,
-        attributes: mapAttributes(product.parameterValues),
-        breadcrumbs,
-        related,
-    };
+	return {
+		product,
+		attributes: mapAttributes(product.parameterValues),
+		breadcrumbs,
+		related,
+	};
 }
 
 export async function getProductFullBySlug(slug: string): Promise<FullProduct | null> {
-    if (!slug) return null;
+	if (!slug) return null;
 
-    const product = await prisma.product.findUnique({
-        where: { slug },
-        include: productInclude,
-    });
+	const product = await prisma.product.findUnique({
+		where: { slug },
+		include: productInclude,
+	});
 
-    if (!product) return null;
+	if (!product) return null;
 
-    const [breadcrumbs, related] = await Promise.all([
-        getBreadcrumbs(product.categoryId),
-        getRelatedFromCategory(product.categoryId, product.id),
-    ]);
+	const [breadcrumbs, related] = await Promise.all([
+		getBreadcrumbs(product.categoryId),
+		getRelatedFromCategory(product.categoryId, product.id),
+	]);
 
-    return {
-        product,
-        attributes: mapAttributes(product.parameterValues),
-        breadcrumbs,
-        related,
-    };
+	return {
+		product,
+		attributes: mapAttributes(product.parameterValues),
+		breadcrumbs,
+		related,
+	};
 }

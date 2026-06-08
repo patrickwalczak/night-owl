@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import { type CartItem } from '@/types/cartItem';
 import { formatPrice } from '@/shared/lib/utils/format';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import AmountController from '../amountController/AmountController';
 import styles from './cartProduct.module.scss';
@@ -12,8 +12,8 @@ const CartProduct = ({ item }: { item: CartItem }) => {
 	const formattedTotal = formatPrice(total, item.currency);
 
 	return (
-		<div className={mergeClasses(styles.product, 'flex')}>
-			<div className={mergeClasses(styles.thumb, 'w-100')}>
+		<div className={cn(styles.product, 'flex')}>
+			<div className={cn(styles.thumb, 'w-100')}>
 				<Image
 					src={'https://placehold.co/600x400.webp'}
 					alt={'product.name'}
@@ -22,9 +22,9 @@ const CartProduct = ({ item }: { item: CartItem }) => {
 					className={styles.img}
 				/>
 			</div>
-			<span className={mergeClasses(styles.productName, 'truncate')}>{item.name}</span>
+			<span className={cn(styles.productName, 'truncate')}>{item.name}</span>
 			<AmountController item={item} />
-			<span className={mergeClasses(styles.productPrice)}>{formattedTotal}</span>
+			<span className={cn(styles.productPrice)}>{formattedTotal}</span>
 		</div>
 	);
 };

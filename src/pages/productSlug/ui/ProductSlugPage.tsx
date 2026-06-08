@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { getProductFullBySlug } from '@/lib/serverActions/product';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import ProductHero from './components/productHero/ProductHero';
 import styles from './styles.module.scss';
@@ -16,7 +16,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 	const { breadcrumbs } = data;
 
 	return (
-		<main className={mergeClasses(styles.page, 'flex', 'flex-col')}>
+		<main className={cn(styles.page, 'flex', 'flex-col')}>
 			<nav className={styles.breadcrumbs} aria-label={'Breadcrumb'}>
 				<ol className={'flex'}>
 					<li>

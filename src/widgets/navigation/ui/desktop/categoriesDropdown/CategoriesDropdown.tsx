@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
 import { type SimpleCategoryModelType } from '@/types/category.model';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import { NavigationContext } from '../../Navigation';
 import styles from './categoriesDropdown.module.scss';
@@ -39,7 +39,7 @@ const CategoriesDropdown = ({
 					className={styles.dropdown}
 				>
 					{categories.length ? (
-						<ul className={mergeClasses(styles.wrapper)}>
+						<ul className={cn(styles.wrapper)}>
 							{categories.map((category) => (
 								<Category key={category.id} category={category} isRootCategory />
 							))}
@@ -73,7 +73,7 @@ const Category = ({
 			<li key={category.id}>
 				<Link
 					onClick={handleClick}
-					className={mergeClasses('nav-hover-underline', styles.dropdownLink, isRootCategory && styles.isRootCategory)}
+					className={cn('nav-hover-underline', styles.dropdownLink, isRootCategory && styles.isRootCategory)}
 					href={`/category/${category.slug}`}
 				>
 					{category.name}
@@ -88,5 +88,5 @@ const Category = ({
 };
 
 const NoCategoriesMessage = () => (
-	<p className={mergeClasses('mobile-nav-element', styles.noCategories)}>{'No categories available'}</p>
+	<p className={cn('mobile-nav-element', styles.noCategories)}>{'No categories available'}</p>
 );

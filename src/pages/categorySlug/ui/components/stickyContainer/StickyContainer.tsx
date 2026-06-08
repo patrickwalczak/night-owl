@@ -4,7 +4,7 @@ import { type ReactNode } from 'react';
 
 import { useAppSelector } from '@/lib/store/hooks';
 import { useIsSticky } from '@/shared/lib/hooks/useIsSticky';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import styles from './stickyContainer.module.scss';
 
@@ -26,7 +26,7 @@ const StickyContainer = ({ children }: StickyContainerWrapperType) => {
 			<div ref={sentinelRef} aria-hidden={'true'} />
 
 			<div
-				className={mergeClasses(
+				className={cn(
 					styles.stickyContainer,
 					isStuck && styles.isStuck,
 					'flex',

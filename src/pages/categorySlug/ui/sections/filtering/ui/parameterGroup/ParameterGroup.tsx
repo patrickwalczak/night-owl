@@ -2,7 +2,7 @@ import { type Dispatch, type SetStateAction } from 'react';
 
 import { Checkbox } from '@/shared/ui/checkboxGroup/Checkbox';
 import { type FilterParameterType } from '@/types/parameter.model';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import styles from './parameterGroup.module.scss';
 
@@ -22,13 +22,13 @@ const ParameterGroup = ({ parameter, selectedParamIds, setSelectedParamIds }: Pa
 			name={`parameter-${parameter.id}`}
 			className={styles.fieldset}
 		>
-			<Checkbox.Legend className={mergeClasses(styles.legend, 'truncate')}>{parameter.name}</Checkbox.Legend>
-			<Checkbox.List className={mergeClasses(styles.list, 'flex', 'flex-col')}>
+			<Checkbox.Legend className={cn(styles.legend, 'truncate')}>{parameter.name}</Checkbox.Legend>
+			<Checkbox.List className={cn(styles.list, 'flex', 'flex-col')}>
 				{parameter.values.map((v) => (
 					<Checkbox.ListElement key={v.id}>
 						<Checkbox.Option
-							labelClassName={mergeClasses(styles.label, 'truncate')}
-							inputClassName={mergeClasses(styles.input, 'sr-only')}
+							labelClassName={cn(styles.label, 'truncate')}
+							inputClassName={cn(styles.input, 'sr-only')}
 							customCheckboxClassName={styles.customCheckbox}
 							value={v.id}
 							count={v._count.products || 0}

@@ -4,7 +4,7 @@ import type React from 'react';
 import { createContext, useId } from 'react';
 
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import styles from './radioGroup.module.scss';
 
@@ -30,7 +30,7 @@ export function createRadioGroup<T extends string>() {
 		const ctx: RadioGroupContextType<T> = { name, value, setValue: onValueChange };
 		return (
 			<RadioGroupContext.Provider value={ctx}>
-				<fieldset role={'radiogroup'} aria-label={ariaLabel} className={mergeClasses(className)}>
+				<fieldset role={'radiogroup'} aria-label={ariaLabel} className={cn(className)}>
 					{children}
 				</fieldset>
 			</RadioGroupContext.Provider>
@@ -58,7 +58,7 @@ export function createRadioGroup<T extends string>() {
 		const id = useId();
 		return (
 			<li>
-				<label htmlFor={id} className={mergeClasses(styles.sortLabel, labelClassName)}>
+				<label htmlFor={id} className={cn(styles.sortLabel, labelClassName)}>
 					<input
 						id={id}
 						type={'radio'}
@@ -66,10 +66,10 @@ export function createRadioGroup<T extends string>() {
 						value={value}
 						checked={selected === value}
 						onChange={() => setValue(value)}
-						className={mergeClasses('sr-only', styles.radioInput)}
+						className={cn('sr-only', styles.radioInput)}
 					/>
-					<span aria-hidden className={mergeClasses(styles.customRadio, customRadioClassName)} />
-					<span className={mergeClasses(labelTextClassName)}>{label}</span>
+					<span aria-hidden className={cn(styles.customRadio, customRadioClassName)} />
+					<span className={cn(labelTextClassName)}>{label}</span>
 				</label>
 			</li>
 		);

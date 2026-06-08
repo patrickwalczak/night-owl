@@ -5,7 +5,7 @@ import { DEFAULT_SORT_ORDER } from '@/constants';
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
 import Modal from '@/shared/ui/modal/Modal';
 import { type SortOrderKeys } from '@/types/catalog.models';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import { CatalogContext } from '../../../../../../model/providers/CatalogProvider';
 import SortOrderSelector from '../../../../sorting/ui/sortOrderSelector/SortOrderSelector';
@@ -35,18 +35,18 @@ const FiltersModal = ({ isOpened, close }: { isOpened: boolean; close: () => voi
 			<Modal.Overlay>
 				<Modal.Wrapper
 					id={'filters-modal'}
-					className={mergeClasses(styles.modal)}
+					className={cn(styles.modal)}
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0, scale: 0.9 }}
 					transition={{ duration: 0.3 }}
 				>
-					<Modal.Header className={mergeClasses(styles.header, 'flex', 'align-center', 'justify-between')}>
-						<h3 className={mergeClasses(styles.heading, 'h4')}>{'Filters'}</h3>
+					<Modal.Header className={cn(styles.header, 'flex', 'align-center', 'justify-between')}>
+						<h3 className={cn(styles.heading, 'h4')}>{'Filters'}</h3>
 						<Modal.CloseButton className={styles.closeModalBtn} />
 					</Modal.Header>
 
-					<div className={mergeClasses(styles.body, 'flex', 'flex-col')}>
+					<div className={cn(styles.body, 'flex', 'flex-col')}>
 						<SortOrderSelector sort={sort} setSort={setSort} />
 						{parameters.map((param) => (
 							<ParameterGroup

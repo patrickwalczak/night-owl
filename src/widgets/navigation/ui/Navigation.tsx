@@ -11,7 +11,7 @@ import { openCart } from '@/lib/store/features/order/orderSlice';
 import { useAppDispatch, useAppSelector } from '@/lib/store/hooks';
 import { type CartItem } from '@/types/cartItem';
 import { type SimpleCategoryModelType } from '@/types/category.model';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import Cart from '../../../shared/ui/icons/Cart';
 import CartDrawer from '../../cartDrawer/CartDrawer';
@@ -95,7 +95,7 @@ const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) =
 	return (
 		<NavigationContext.Provider value={ctx}>
 			<header
-				className={mergeClasses(
+				className={cn(
 					styles.header,
 					isHomepage && styles.isHomepage,
 					isScrolled && styles.isScrolled,
@@ -106,18 +106,18 @@ const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) =
 				onPointerLeave={hideDropdown}
 				onKeyDown={onKeyDown}
 			>
-				<nav className={mergeClasses(styles.nav, 'transition-200')} aria-label={'Main navigation'}>
-					<Link className={mergeClasses(styles.logoLink)} href={'/'}>
-						<span className={mergeClasses(styles.logo, 'transition-200')}>{'Night Owl'}</span>
+				<nav className={cn(styles.nav, 'transition-200')} aria-label={'Main navigation'}>
+					<Link className={cn(styles.logoLink)} href={'/'}>
+						<span className={cn(styles.logo, 'transition-200')}>{'Night Owl'}</span>
 					</Link>
 
 					{isDesktop && (
-						<div className={mergeClasses(styles.listWrapper, 'flex', 'align-center')}>
+						<div className={cn(styles.listWrapper, 'flex', 'align-center')}>
 							<button
 								ref={catalogBtnRef}
 								onPointerEnter={expandDropdown}
 								type={'button'}
-								className={mergeClasses(styles.catalogButton, 'button-empty')}
+								className={cn(styles.catalogButton, 'button-empty')}
 								aria-haspopup={'true'}
 								aria-expanded={isExpanded}
 								aria-controls={'catalog-dropdown'}
@@ -129,7 +129,7 @@ const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) =
 							<button
 								onClick={openCartDrawer}
 								type={'button'}
-								className={mergeClasses(styles.cartButton, 'button-empty')}
+								className={cn(styles.cartButton, 'button-empty')}
 								aria-label={'Open cart'}
 								data-cart-icon
 							>

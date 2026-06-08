@@ -1,7 +1,7 @@
 import { createContext, type ReactNode } from 'react';
 
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
-import { mergeClasses } from '@/shared/lib/utils/mergeClasses';
+import { cn } from '@/shared/lib/utils/cn';
 
 import styles from './checkbox.module.scss';
 
@@ -40,7 +40,7 @@ const Input = ({ className, ...props }: InputType) => {
 		<input
 			type={'checkbox'}
 			{...props}
-			className={mergeClasses(styles.input, className)}
+			className={cn(styles.input, className)}
 			checked={props.id === checkedValue}
 			onChange={() => {}}
 		/>
@@ -49,7 +49,7 @@ const Input = ({ className, ...props }: InputType) => {
 
 const Label = ({ id, text, className }: any) => {
 	return (
-		<label className={mergeClasses(styles.label, className)} htmlFor={id}>
+		<label className={cn(styles.label, className)} htmlFor={id}>
 			{text}
 		</label>
 	);
