@@ -2,7 +2,7 @@
 
 import { type ReactNode } from 'react';
 
-import { useAppSelector } from '@/lib/store/hooks';
+import { useAppSelector } from '@/shared/lib/redux';
 import { useIsSticky } from '@/shared/lib/hooks/useIsSticky';
 import { cn } from '@/shared/lib/utils/cn';
 

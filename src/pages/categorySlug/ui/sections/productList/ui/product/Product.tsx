@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { type KeyboardEventHandler, type MouseEventHandler } from 'react';
 
-import { addItem } from '@/lib/store/features/order/orderSlice';
-import { useAppDispatch } from '@/lib/store/hooks';
+import { addItem } from '@/features/orderState/model/orderSlice';
+import { useAppDispatch } from '@/shared/lib/redux';
 import Cart from '@/shared/ui/icons/Cart';
 import { type ListingProductType } from '@/types/product.model';
 import { cn } from '@/shared/lib/utils/cn';

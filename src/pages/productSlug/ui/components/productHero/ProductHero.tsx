@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { useRef } from 'react';
 
 import { type FullProduct } from '@/lib/serverActions/product';
-import { addItem } from '@/lib/store/features/order/orderSlice';
-import { useAppDispatch } from '@/lib/store/hooks';
+import { addItem } from '@/features/orderState/model/orderSlice';
+import { useAppDispatch } from '@/shared/lib/redux';
 import { formatPrice } from '@/shared/lib/utils/format';
 import { cn } from '@/shared/lib/utils/cn';
 
@@ -53,11 +53,7 @@ export default function ProductHero({ data }: { data: FullProduct }) {
 
 				{product.description && <p className={styles.desc}>{product.description}</p>}
 
-				<button
-					onClick={addProduct}
-					className={cn(styles.addToCart, 'transition-200')}
-					disabled={!product.inStock}
-				>
+				<button onClick={addProduct} className={cn(styles.addToCart, 'transition-200')} disabled={!product.inStock}>
 					{product.inStock ? 'Add to Cart' : 'Out of Stock'}
 				</button>
 			</aside>

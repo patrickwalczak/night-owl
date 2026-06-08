@@ -7,8 +7,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { createContext, useEffect, useMemo, useRef } from 'react';
 
-import { openCart } from '@/lib/store/features/order/orderSlice';
-import { useAppDispatch, useAppSelector } from '@/lib/store/hooks';
+import { openCart } from '@/features/orderState/model/orderSlice';
+import { useAppDispatch, useAppSelector } from '@/shared/lib/redux';
 import { type CartItem } from '@/types/cartItem';
 import { type SimpleCategoryModelType } from '@/types/category.model';
 import { cn } from '@/shared/lib/utils/cn';

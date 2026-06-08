@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-import { openCart } from '@/lib/store/features/order/orderSlice';
-import { useAppDispatch } from '@/lib/store/hooks';
+import { openCart } from '@/features/orderState/model/orderSlice';
+import { useAppDispatch } from '@/shared/lib/redux';
 import { cn } from '@/shared/lib/utils/cn';
 
 import Cart from '../../../../../shared/ui/icons/Cart';

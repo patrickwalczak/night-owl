@@ -4,7 +4,7 @@ import type React from 'react';
 
 import { useEffect, useRef } from 'react';
 
-import { useAppSelector } from '@/lib/store/hooks';
+import { useAppSelector } from '@/shared/lib/redux';
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
 import { cn } from '@/shared/lib/utils/cn';
 

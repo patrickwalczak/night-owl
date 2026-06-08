@@ -1,7 +1,7 @@
 import type React from 'react';
 
-import { decrementItem, incrementItem, setQuantity, removeItem } from '@/lib/store/features/order/orderSlice';
-import { useAppDispatch } from '@/lib/store/hooks';
+import { decrementItem, incrementItem, setQuantity, removeItem } from '@/features/orderState/model/orderSlice';
+import { useAppDispatch } from '@/shared/lib/redux';
 import { type CartItem } from '@/types/cartItem';
 import { cn } from '@/shared/lib/utils/cn';
 
