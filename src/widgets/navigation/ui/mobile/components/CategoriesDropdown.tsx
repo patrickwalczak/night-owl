@@ -1,20 +1,20 @@
-import { useSafeContext } from '@/shared/hooks/useSafeContext';
+import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
 import SubcategoriesDropdown from '@/widgets/navigation/ui/desktop/categoriesDropdown/CategoriesDropdown';
 import { NavigationContext } from '@/widgets/navigation/ui/Navigation';
 
 import NavigationButton from './NavigationButton';
 
 export const CategoriesDropdown = () => {
-    const { categories, setIsExpanded, isExpanded } = useSafeContext(NavigationContext);
+	const { categories, setIsExpanded, isExpanded } = useSafeContext(NavigationContext);
 
-    const handleClick = () => setIsExpanded(prev => !prev);
+	const handleClick = () => setIsExpanded((prev) => !prev);
 
-    return (
-        <>
-            <NavigationButton className={isExpanded ? '' : 'mobile-nav-element--border-bottom'} handleClick={handleClick}>
-                {'Catalog'}
-            </NavigationButton>
-            <SubcategoriesDropdown categories={categories} isExpanded={isExpanded} />
-        </>
-    );
+	return (
+		<>
+			<NavigationButton className={isExpanded ? '' : 'mobile-nav-element--border-bottom'} handleClick={handleClick}>
+				{'Catalog'}
+			</NavigationButton>
+			<SubcategoriesDropdown categories={categories} isExpanded={isExpanded} />
+		</>
+	);
 };

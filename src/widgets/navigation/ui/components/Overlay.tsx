@@ -2,23 +2,23 @@
 
 import { createPortal } from 'react-dom';
 
-import { useBodyOverflow } from '@/shared/hooks/useBodyOverflow';
+import { useBodyOverflow } from '@/shared/lib/hooks/useBodyOverflow';
 
 export default function Overlay({
-    open,
-    onClose,
-    zIndex = 50,
+	open,
+	onClose,
+	zIndex = 50,
 }: {
-    open: boolean;
-    onClose: () => void;
-    zIndex?: number;
+	open: boolean;
+	onClose: () => void;
+	zIndex?: number;
 }) {
-    useBodyOverflow(open);
+	useBodyOverflow(open);
 
-    if (!open) return null;
+	if (!open) return null;
 
-    return createPortal(
-        <div className={'backdrop'} style={{ zIndex }} onClick={onClose} aria-hidden={'true'} />,
-        document.body,
-    );
+	return createPortal(
+		<div className={'backdrop'} style={{ zIndex }} onClick={onClose} aria-hidden={'true'} />,
+		document.body
+	);
 }
