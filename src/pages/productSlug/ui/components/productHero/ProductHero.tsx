@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useRef } from 'react';
 
-import { type FullProduct } from '@/lib/serverActions/product';
+import { type FullProduct } from '@/entities/product/api/product';
 import { addItem } from '@/features/orderState/model/orderSlice';
 import { useAppDispatch } from '@/shared/lib/redux';
 import { formatPrice } from '@/shared/lib/utils/format';

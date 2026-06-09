@@ -4,7 +4,7 @@ import 'server-only';
 import type { ProductStatus } from '@/shared/lib/db/generated/client';
 import type { SortOrderKeys } from '@/types/catalog.models';
 
-import { prisma } from '../../shared/lib/db/prisma';
+import { prisma } from '../../../shared/lib/db/prisma';
 
 const PAGE_SIZE = 20;
 

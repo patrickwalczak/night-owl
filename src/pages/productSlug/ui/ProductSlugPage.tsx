@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { getProductFullBySlug } from '@/lib/serverActions/product';
+import { getProductFullBySlug } from '@/entities/product/api/product';
 import { cn } from '@/shared/lib/utils/cn';
 
 import ProductHero from './components/productHero/ProductHero';

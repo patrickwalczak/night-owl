@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import { getCategoryBySlug } from '@/entities/category/api/getCategoryBySlug';
-import { getProductsForCategory } from '@/lib/serverActions/product';
+import { getProductsForCategory } from '@/entities/product/api/product';
 import { parseListingParams } from '@/shared/lib/utils/url';
 
 export async function GET(req: Request, ctx: { params: Promise<{ category_slug: string }> }) {

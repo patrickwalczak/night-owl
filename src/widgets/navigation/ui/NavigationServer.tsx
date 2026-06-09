@@ -1,11 +1,11 @@
-import { getCategoriesAction } from '@/entities/category/api/getCategoriesAction';
+import { getCategories } from '@/entities/category/api/getCategories';
 
 import Navigation from './Navigation';
 
 const NavigationServer = async () => {
-    const categories = await getCategoriesAction();
+	const categories = await getCategories();
 
-    return <Navigation categories={categories} />;
+	return <Navigation categories={categories} />;
 };
 
 export default NavigationServer;

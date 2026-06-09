@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
-import { getCategoryPageData } from '@/entities/category/api/getCategoryPageData';
+import { getPageData } from '@/pages/categorySlug/api/getPageData';
 import CatalogContainer from '@/pages/categorySlug/ui/components/pageView/CatalogContainer';
 import { type UrlParamType, type SearchParamsType } from '@/types/catalog.models';
 import { normalizeSearchParams, parseListingParams } from '@/shared/lib/utils/url';
@@ -23,7 +23,7 @@ export default async function CategorySlugPage({
 	const parsed = parseListingParams(search);
 
 	try {
-		const { category, parameters, products } = await getCategoryPageData(category_slug, parsed);
+		const { category, parameters, products } = await getPageData(category_slug, parsed);
 
 		if (!category) notFound();
 

@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { getCategoriesAction } from '@/entities/category/api/getCategoriesAction';
+import { getCategories } from '@/entities/category/api/getCategories';
 import { cn } from '@/shared/lib/utils/cn';
 
 import styles from './hero.module.scss';
 
 export const Hero = async () => {
-	const categories = await getCategoriesAction();
+	const categories = await getCategories();
 
 	return (
 		<section className={cn(styles.container, 'align-center', 'justify-center')}>
