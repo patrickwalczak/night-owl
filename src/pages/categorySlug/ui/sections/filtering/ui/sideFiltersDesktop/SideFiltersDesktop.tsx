@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
 import { cn } from '@/shared/lib/utils/cn';
@@ -12,13 +12,7 @@ import FilterActions from '../filtersDialogMobile/filterActions/FilterActions';
 import ParameterGroup from '../parameterGroup/ParameterGroup';
 import FiltersWrapper from './FiltersWrapper';
 import styles from './sideFiltersDesktop.module.scss';
-
-function parseIds(sp: URLSearchParams): string[] {
-	return (sp.get('params') ?? '')
-		.split(',')
-		.map((s) => s.trim())
-		.filter(Boolean);
-}
+import { getIdsFromSearchParams } from '@/shared/lib/utils/url';
 
 const SideFiltersDesktop = () => {
 	const { subcategories, parameters } = useSafeContext(CatalogContext);
@@ -26,10 +20,10 @@ const SideFiltersDesktop = () => {
 	const filtersRef = useRef<HTMLDivElement | null>(null);
 	const [scrollableHeight, setScrollableHeight] = useState('100vh');
 
-	const [selectedParamIds, setSelectedParamIds] = useState<string[]>(() => parseIds(searchParams));
+	const [selectedParamIds, setSelectedParamIds] = useState<string[]>(() => getIdsFromSearchParams(searchParams));
 
 	useEffect(() => {
-		setSelectedParamIds(parseIds(searchParams));
+		setSelectedParamIds(getIdsFromSearchParams(searchParams));
 	}, [searchParams]);
 
 	useEffect(() => {
@@ -38,30 +32,30 @@ const SideFiltersDesktop = () => {
 			const rect = filtersRef.current.getBoundingClientRect();
 			setScrollableHeight(`${window.innerHeight - rect.y}px`);
 		};
+
 		onScroll();
 		window.addEventListener('scroll', onScroll);
+
 		return () => window.removeEventListener('scroll', onScroll);
 	}, []);
 
 	return (
 		<FiltersWrapper>
-			<div
-				ref={filtersRef}
-				style={{ height: scrollableHeight }}
-				className={cn(styles.filters, 'flex', 'flex-col')}
-			>
+			<div ref={filtersRef} style={{ height: scrollableHeight }} className={cn(styles.filters, 'flex', 'flex-col')}>
 				<div className={cn(styles.content, 'flex', 'flex-col')}>
-					<div className={cn(styles.subcategories, 'flex', 'flex-col')}>
-						{subcategories.map((subcategory) => (
-							<Link
-								className={cn(styles.subcategory, 'truncate')}
-								key={subcategory.id}
-								href={`/category/${subcategory.slug}`}
-							>
-								{subcategory.name}
-							</Link>
-						))}
-					</div>
+					{subcategories.length > 0 && (
+						<div className={cn(styles.subcategories, 'flex', 'flex-col')}>
+							{subcategories.map((subcategory) => (
+								<Link
+									className={cn(styles.subcategory, 'truncate')}
+									key={subcategory.id}
+									href={`/category/${subcategory.slug}`}
+								>
+									{subcategory.name}
+								</Link>
+							))}
+						</div>
+					)}
 
 					{parameters.map((param) => (
 						<ParameterGroup
@@ -73,10 +67,10 @@ const SideFiltersDesktop = () => {
 					))}
 				</div>
 
-				<FilterActions className={styles.actions} selectedParamIds={selectedParamIds}>
+				<FilterActions.Root className={styles.actions} selectedParamIds={selectedParamIds}>
 					<FilterActions.Apply />
 					<FilterActions.Reset />
-				</FilterActions>
+				</FilterActions.Root>
 			</div>
 		</FiltersWrapper>
 	);

@@ -7,6 +7,7 @@ import { createContext, useCallback, useMemo } from 'react';
 import { DEFAULT_SORT_ORDER, SEARCH_PARAMS_KEYS } from '@/constants';
 import { useShallowSearchParams } from '@/shared/lib/hooks/useShallowSearchParams';
 import { type SearchParamsTypeKeys } from '@/types/catalog.models';
+import { getIdsFromSearchParams } from '@/shared/lib/utils/url';
 
 interface ApplyArgs {
 	sort?: string | null;
@@ -110,10 +111,8 @@ export function CatalogUrlActionsProvider({ children }: { children: React.ReactN
 		(id: string) => {
 			replace((searchParams) => {
 				searchParams.delete('page');
-				const list = (searchParams.get('params') || '')
-					.split(',')
-					.map((searchParam) => searchParam.trim())
-					.filter(Boolean);
+				const list = getIdsFromSearchParams(searchParams);
+
 				if (!list.includes(id)) list.push(id);
 				if (list.length) searchParams.set('params', list.join(','));
 				else searchParams.delete('params');
@@ -126,11 +125,8 @@ export function CatalogUrlActionsProvider({ children }: { children: React.ReactN
 		(id: string) => {
 			replace((searchParams) => {
 				searchParams.delete('page');
-				const list = (searchParams.get('params') || '')
-					.split(',')
-					.map((searchParam) => searchParam.trim())
-					.filter(Boolean)
-					.filter((x) => x !== id);
+				const list = getIdsFromSearchParams(searchParams).filter((x) => x !== id);
+
 				if (list.length) searchParams.set('params', list.join(','));
 				else searchParams.delete('params');
 			});

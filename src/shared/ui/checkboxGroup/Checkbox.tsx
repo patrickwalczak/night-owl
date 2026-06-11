@@ -115,44 +115,35 @@ const CheckboxGroupOption = <T extends CheckboxGroupValueType = CheckboxGroupVal
 	labelTextClassName,
 	count = 0,
 }: CheckboxGroupOptionType<T>) => {
-	const checkboxGroupContext = useCheckboxGroupContext();
+	const { selected, toggle, name } = useCheckboxGroupContext();
 
 	const autoId = useId();
-	const inputId = id ?? `${checkboxGroupContext.name}-${autoId}`;
-	const checked = checkboxGroupContext.selected.has(value);
+	const inputId = id ?? `${name}-${autoId}`;
+	const checked = selected.has(value);
 	const disabled = !checked && count === 0;
 	const fullLabel = `${label} (${count})`;
 
 	return (
-		<label
-			htmlFor={inputId}
-			title={fullLabel}
-			className={cn(styles.label, labelClassName, 'flex', 'align-center')}
-		>
+		<label htmlFor={inputId} title={fullLabel} className={cn(styles.label, labelClassName, 'flex', 'align-center')}>
 			<input
 				id={inputId}
 				type={'checkbox'}
-				name={checkboxGroupContext.name}
+				name={name}
 				value={value}
 				checked={checked}
 				disabled={disabled}
-				onChange={() => checkboxGroupContext.toggle(value)}
+				onChange={() => toggle(value)}
 				className={cn('sr-only', styles.input, inputClassName)}
 				aria-label={fullLabel}
 			/>
 
-			<span
-				aria-hidden={'true'}
-				className={cn(styles.customCheckbox, customCheckboxClassName, 'flex-shrink-0')}
-			/>
+			<span aria-hidden={'true'} className={cn(styles.customCheckbox, customCheckboxClassName, 'flex-shrink-0')} />
 
 			<span className={styles.textWrap}>
 				<span className={cn(styles.customCheckboxValue, labelTextClassName, 'truncate')}>{label}</span>
 
 				<span className={cn(styles.count, disabled && styles.countZero)} aria-hidden={'true'}>
-					{'('}
-					{count.toLocaleString()}
-					{')'}
+					{`(${count.toLocaleString()})`}
 				</span>
 			</span>
 		</label>

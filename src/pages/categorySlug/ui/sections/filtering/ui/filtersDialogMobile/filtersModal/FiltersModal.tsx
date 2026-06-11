@@ -57,10 +57,10 @@ const FiltersModal = ({ isOpened, close }: { isOpened: boolean; close: () => voi
 							/>
 						))}
 					</div>
-					<FilterActions sort={sort} selectedParamIds={selectedParamIds}>
+					<FilterActions.Root sort={sort} selectedParamIds={selectedParamIds}>
 						<FilterActions.Apply onClick={close} />
 						<FilterActions.Reset onClick={reset} />
-					</FilterActions>
+					</FilterActions.Root>
 				</Modal.Wrapper>
 			</Modal.Overlay>
 		</Modal>

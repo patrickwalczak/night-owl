@@ -46,7 +46,7 @@ function Root({
 
 	return (
 		<FilterActionsCtx.Provider value={{ onApply, onReset }}>
-			<footer className={cn(styles.container, 'flex', 'align-center', className)}>{children}</footer>
+			<div className={cn(styles.container, 'flex', 'align-center', className)}>{children}</div>
 		</FilterActionsCtx.Provider>
 	);
 }
@@ -56,7 +56,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & { className?:
 function Reset({ children = 'Reset', className, onClick = () => {}, ...rest }: ButtonProps) {
 	const { onReset } = useSafeContext(FilterActionsCtx);
 
-	const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
 		onReset();
 		onClick(e);
 	};
@@ -76,23 +76,22 @@ function Reset({ children = 'Reset', className, onClick = () => {}, ...rest }: B
 function Apply({ children = 'Show results', className, onClick = () => {}, ...rest }: ButtonProps) {
 	const { onApply } = useSafeContext(FilterActionsCtx);
 
-	const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
 		onApply();
 		onClick(e);
 	};
 
 	return (
-		<button
-			type={'button'}
-			className={cn(styles.showBtn, styles.filterBtn, className)}
-			onClick={handleClick}
-			{...rest}
-		>
+		<button type={'button'} className={cn(styles.showBtn, styles.filterBtn, className)} onClick={handleClick} {...rest}>
 			{children}
 		</button>
 	);
 }
 
-const FilterActions = Object.assign(Root, { Reset, Apply });
+const FilterActions = {
+	Root,
+	Reset,
+	Apply,
+};
 
 export default FilterActions;
