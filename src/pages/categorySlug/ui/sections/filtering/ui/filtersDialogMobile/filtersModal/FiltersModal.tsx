@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { DEFAULT_SORT_ORDER } from '@/constants';
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
 import Modal from '@/shared/ui/modal/Modal';
-import { type SortOrderKeys } from '@/types/catalog.models';
+import { type CatalogSortOrderType } from '@/types/catalog.models';
 import { cn } from '@/shared/lib/utils/cn';
 
 import { CatalogContext } from '../../../../../../model/providers/CatalogProvider';
@@ -19,9 +19,9 @@ const FiltersModal = ({ isOpened, close }: { isOpened: boolean; close: () => voi
 	const searchParams = useSearchParams();
 
 	const initialSort = searchParams?.get('sort') || DEFAULT_SORT_ORDER;
-	const initialParamIds = (searchParams?.get('params') ?? '').split(',').filter(Boolean);
+	const initialParamIds = (searchParams?.get('filters') ?? '').split(',').filter(Boolean);
 
-	const [sort, setSort] = useState<SortOrderKeys>(initialSort as SortOrderKeys);
+	const [sort, setSort] = useState<CatalogSortOrderType>(initialSort as CatalogSortOrderType);
 	const [selectedParamIds, setSelectedParamIds] = useState<string[]>(initialParamIds);
 
 	const reset = () => {

@@ -2,13 +2,13 @@
 import 'server-only';
 
 import type { ProductStatus } from '@/shared/lib/db/generated/client';
-import type { SortOrderKeys } from '@/types/catalog.models';
+import type { CatalogSortOrderType } from '@/types/catalog.models';
 
 import { prisma } from '../../../shared/lib/db/prisma';
 
 const PAGE_SIZE = 20;
 
-function toOrderBy(sort: SortOrderKeys) {
+function toOrderBy(sort: CatalogSortOrderType) {
 	switch (sort) {
 		case 'price_asc':
 			return { price: 'asc' as const };
@@ -25,7 +25,7 @@ function toOrderBy(sort: SortOrderKeys) {
 export async function getProductsForCategory(opts: {
 	categoryId: string;
 	page: number;
-	sort: SortOrderKeys;
+	sort: CatalogSortOrderType;
 	paramValueIds?: string[];
 	query?: string;
 }) {

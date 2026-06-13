@@ -4,9 +4,9 @@ import type React from 'react';
 
 import { createContext, useCallback, useMemo } from 'react';
 
-import { DEFAULT_SORT_ORDER, SEARCH_PARAMS_KEYS } from '@/constants';
+import { DEFAULT_SORT_ORDER, CATALOG_SEARCH_PARAMS_KEYS } from '@/constants';
 import { useShallowSearchParams } from '@/shared/lib/hooks/useShallowSearchParams';
-import { type SearchParamsTypeKeys } from '@/types/catalog.models';
+import { type CatalogSearchParamKeyType } from '@/types/catalog.models';
 import { getIdsFromSearchParams } from '@/shared/lib/utils/url';
 
 interface ApplyArgs {
@@ -65,7 +65,7 @@ interface CatalogUrlActionsContextType {
 	 * Resets selected catalog search params.
 	 * You can keep chosen params by passing them in `ignoredSearchParamsKeys`.
 	 */
-	reset: (ignoredSearchParamsKeys?: SearchParamsTypeKeys[]) => void;
+	reset: (ignoredSearchParamsKeys?: CatalogSearchParamKeyType[]) => void;
 
 	/**
 	 * Applies multiple filter-related search params at once.
@@ -100,8 +100,8 @@ export function CatalogUrlActionsProvider({ children }: { children: React.ReactN
 		(ids: string[]) => {
 			replace((sp) => {
 				sp.delete('page');
-				if (ids.length) sp.set('params', ids.join(','));
-				else sp.delete('params');
+				if (ids.length) sp.set('filters', ids.join(','));
+				else sp.delete('filters');
 			});
 		},
 		[replace]
@@ -114,8 +114,8 @@ export function CatalogUrlActionsProvider({ children }: { children: React.ReactN
 				const list = getIdsFromSearchParams(searchParams);
 
 				if (!list.includes(id)) list.push(id);
-				if (list.length) searchParams.set('params', list.join(','));
-				else searchParams.delete('params');
+				if (list.length) searchParams.set('filters', list.join(','));
+				else searchParams.delete('filters');
 			});
 		},
 		[replace]
@@ -127,8 +127,8 @@ export function CatalogUrlActionsProvider({ children }: { children: React.ReactN
 				searchParams.delete('page');
 				const list = getIdsFromSearchParams(searchParams).filter((x) => x !== id);
 
-				if (list.length) searchParams.set('params', list.join(','));
-				else searchParams.delete('params');
+				if (list.length) searchParams.set('filters', list.join(','));
+				else searchParams.delete('filters');
 			});
 		},
 		[replace]
@@ -147,9 +147,11 @@ export function CatalogUrlActionsProvider({ children }: { children: React.ReactN
 	);
 
 	const reset = useCallback(
-		(ignoredSearchParamsKeys: SearchParamsTypeKeys[] = []) => {
+		(ignoredSearchParamsKeys: CatalogSearchParamKeyType[] = []) => {
 			replace((sp) => {
-				SEARCH_PARAMS_KEYS.filter((k) => !ignoredSearchParamsKeys.includes(k)).forEach((k) => sp.delete(k));
+				Object.values(CATALOG_SEARCH_PARAMS_KEYS)
+					.filter((k) => !ignoredSearchParamsKeys.includes(k))
+					.forEach((k) => sp.delete(k));
 			});
 		},
 		[replace]
@@ -162,8 +164,8 @@ export function CatalogUrlActionsProvider({ children }: { children: React.ReactN
 				if (!sort || sort === DEFAULT_SORT_ORDER) sp.delete('sort');
 				else sp.set('sort', sort);
 
-				if (ids && ids.length) sp.set('params', ids.join(','));
-				else if (ids) sp.delete('params');
+				if (ids && ids.length) sp.set('filters', ids.join(','));
+				else if (ids) sp.delete('filters');
 
 				const clean = (query ?? '').trim();
 				if (clean) sp.set('query', clean);

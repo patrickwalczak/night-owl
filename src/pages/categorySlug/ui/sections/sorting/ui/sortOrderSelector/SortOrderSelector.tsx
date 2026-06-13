@@ -1,7 +1,7 @@
-import React, { type SetStateAction, type Dispatch } from 'react';
+import { type SetStateAction, type Dispatch } from 'react';
 
-import { SORT_OPTIONS } from '@/constants';
-import { type SortOrderKeys } from '@/types/catalog.models';
+import { CATALOG_SORT_OPTIONS } from '@/constants';
+import { type CatalogSortOrderType } from '@/types/catalog.models';
 import { cn } from '@/shared/lib/utils/cn';
 
 import { createRadioGroup } from '../../../../../../../shared/ui/radioGroup/RadioGroup';
@@ -11,10 +11,10 @@ const SortOrderSelector = ({
 	sort,
 	setSort,
 }: {
-	sort: SortOrderKeys;
-	setSort: Dispatch<SetStateAction<SortOrderKeys>>;
+	sort: CatalogSortOrderType;
+	setSort: Dispatch<SetStateAction<CatalogSortOrderType>>;
 }) => {
-	const RadioGroup = createRadioGroup<SortOrderKeys>();
+	const RadioGroup = createRadioGroup<CatalogSortOrderType>();
 
 	return (
 		<RadioGroup.RadioGroup
@@ -26,7 +26,7 @@ const SortOrderSelector = ({
 		>
 			<RadioGroup.Legend className={styles.sortLegend}>{'Sort by'}</RadioGroup.Legend>
 			<RadioGroup.List className={cn(styles.sortList, 'flex', 'flex-col')}>
-				{SORT_OPTIONS.map((option) => (
+				{CATALOG_SORT_OPTIONS.map((option) => (
 					<RadioGroup.Option
 						key={option.value}
 						value={option.value}

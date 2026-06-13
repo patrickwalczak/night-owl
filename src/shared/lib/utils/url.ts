@@ -1,16 +1,16 @@
 import { DEFAULT_SORT_ORDER } from '@/constants';
-import { type SearchParamsType, type SortOrderKeys } from '@/types/catalog.models';
+import { type CatalogSearchParamsType, type CatalogSortOrderType } from '@/types/catalog.models';
 
 export function parseListingParams(searchParams: URLSearchParams) {
 	const page = Math.max(1, Number(searchParams.get('page') ?? 1) || 1);
-	const sort = (searchParams.get('sort') as SortOrderKeys) ?? DEFAULT_SORT_ORDER;
+	const sort = (searchParams.get('sort') as CatalogSortOrderType) ?? DEFAULT_SORT_ORDER;
 	const query = searchParams.get('query') ?? '';
-	const paramsCsv = searchParams.get('params') ?? '';
+	const paramsCsv = searchParams.get('filters') ?? '';
 	const paramValueIds = paramsCsv ? paramsCsv.split(',').filter(Boolean) : [];
 	return { page, sort, query, paramValueIds };
 }
 
-export const normalizeSearchParams = (searchParams: SearchParamsType) => {
+export const normalizeSearchParams = (searchParams: CatalogSearchParamsType) => {
 	return new URLSearchParams(
 		Object.entries(searchParams).flatMap(([paramKey, paramValue]) =>
 			!paramValue
@@ -31,7 +31,7 @@ export const normalizeSearchParams = (searchParams: SearchParamsType) => {
  * @returns A list of parsed IDs.
  */
 export const getIdsFromSearchParams = (searchParams: URLSearchParams): string[] => {
-	return (searchParams.get('params') ?? '')
+	return (searchParams.get('filters') ?? '')
 		.split(',')
 		.map((s) => s.trim())
 		.filter(Boolean);

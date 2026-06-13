@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { getPageData } from '@/pages/categorySlug/api/getPageData';
 import CatalogContainer from '@/pages/categorySlug/ui/components/pageView/CatalogContainer';
-import { type UrlParamType, type SearchParamsType } from '@/types/catalog.models';
+import { type CatalogRouteParamsType, type CatalogSearchParamsType } from '@/types/catalog.models';
 import { normalizeSearchParams, parseListingParams } from '@/shared/lib/utils/url';
 
 import CatalogProvider from '../model/providers/CatalogProvider';
@@ -13,8 +13,8 @@ export default async function CategorySlugPage({
 	params,
 	searchParams,
 }: {
-	params: Promise<UrlParamType>;
-	searchParams: Promise<SearchParamsType>;
+	params: Promise<CatalogRouteParamsType>;
+	searchParams: Promise<CatalogSearchParamsType>;
 }) {
 	const [awaitedParams, awaitedSearchParams] = await Promise.all([params, searchParams]);
 
