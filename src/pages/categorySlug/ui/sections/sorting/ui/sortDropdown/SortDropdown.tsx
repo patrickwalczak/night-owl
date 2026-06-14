@@ -6,8 +6,8 @@ import { useId, useRef, useState } from 'react';
 
 import {
     DEFAULT_SORT_ORDER,
-    CATALOG_SORT_OPTIONS,
-    CATALOG_SORT_VALUES,
+    SORT_OPTIONS,
+    SORT_VALUES,
 } from '@/pages/categorySlug/config/searchParams';
 import { type SortOrderType } from '@/pages/categorySlug/model/searchParams.types';
 import { useOutsideClick } from '@/shared/lib/hooks/useOutsideClick';
@@ -23,7 +23,7 @@ export default function SortDropdown({ className }: { className?: string }) {
     const initialSort = () => {
         const sortParam = searchParams.get('sort') as SortOrderType;
 
-        if (sortParam && CATALOG_SORT_VALUES.includes(sortParam)) {
+        if (sortParam && SORT_VALUES.includes(sortParam)) {
             return sortParam;
         }
 
@@ -48,7 +48,7 @@ export default function SortDropdown({ className }: { className?: string }) {
             setActiveIndex(
                 Math.max(
                     0,
-                    CATALOG_SORT_OPTIONS.findIndex(o => o.value === sortKey),
+                    SORT_OPTIONS.findIndex(o => o.value === sortKey),
                 ),
             );
             requestAnimationFrame(() => itemsRef.current[activeIndex]?.focus());
@@ -58,19 +58,19 @@ export default function SortDropdown({ className }: { className?: string }) {
     function onItemKeyDown(e: React.KeyboardEvent, idx: number) {
         if (e.key === 'ArrowDown') {
             e.preventDefault();
-            const next = (idx + 1) % CATALOG_SORT_OPTIONS.length;
+            const next = (idx + 1) % SORT_OPTIONS.length;
             setActiveIndex(next);
             itemsRef.current[next]?.focus();
         }
         else if (e.key === 'ArrowUp') {
             e.preventDefault();
-            const prev = (idx - 1 + CATALOG_SORT_OPTIONS.length) % CATALOG_SORT_OPTIONS.length;
+            const prev = (idx - 1 + SORT_OPTIONS.length) % SORT_OPTIONS.length;
             setActiveIndex(prev);
             itemsRef.current[prev]?.focus();
         }
         else if (e.key === 'Enter') {
             e.preventDefault();
-            select(CATALOG_SORT_OPTIONS[idx].value);
+            select(SORT_OPTIONS[idx].value);
         }
         else if (e.key === 'Escape') {
             e.preventDefault();
@@ -105,7 +105,7 @@ export default function SortDropdown({ className }: { className?: string }) {
 
                 {open && (
                     <ul id={listboxId} role={'listbox'} className={styles.menu} aria-label={'Sortowanie'}>
-                        {CATALOG_SORT_OPTIONS.map((opt, i) => (
+                        {SORT_OPTIONS.map((opt, i) => (
                             <li
                                 key={opt.value}
                                 role={'option'}

@@ -1,6 +1,6 @@
 import { type SetStateAction, type Dispatch } from 'react';
 
-import { CATALOG_SORT_OPTIONS } from '@/pages/categorySlug/config/searchParams';
+import { SORT_OPTIONS } from '@/pages/categorySlug/config/searchParams';
 import { type SortOrderType } from '@/pages/categorySlug/model/searchParams.types';
 import { cn } from '@/shared/lib/utils/cn';
 
@@ -26,7 +26,7 @@ const SortOrderSelector = ({
         >
             <RadioGroup.Legend className={styles.sortLegend}>{'Sort by'}</RadioGroup.Legend>
             <RadioGroup.List className={cn(styles.sortList, 'flex', 'flex-col')}>
-                {CATALOG_SORT_OPTIONS.map(option => (
+                {SORT_OPTIONS.map(option => (
                     <RadioGroup.Option
                         key={option.value}
                         value={option.value}

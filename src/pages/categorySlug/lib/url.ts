@@ -1,8 +1,8 @@
-import { SEARCH_PARAMS_KEYS, CATALOG_SORT_VALUES, DEFAULT_SORT_ORDER } from '../config/searchParams';
+import { SEARCH_PARAMS_KEYS, SORT_VALUES, DEFAULT_SORT_ORDER } from '../config/searchParams';
 import { type SearchParamsType, type SortOrderType } from '../model/searchParams.types';
 
 export const isCatalogSortOrder = (value: string | null): value is SortOrderType => {
-    return CATALOG_SORT_VALUES.includes(value as SortOrderType);
+    return SORT_VALUES.includes(value as SortOrderType);
 };
 
 export function parseListingParams(searchParams: URLSearchParams) {

@@ -5,7 +5,6 @@ import Link from 'next/link';
 
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
 import { cn } from '@/shared/lib/utils/cn';
-import { type SimpleCategoryModelType } from '@/shared/model/category.model';
 
 import { NavigationContext } from '../../Navigation';
 import styles from './categoriesDropdown.module.scss';
@@ -16,7 +15,7 @@ const CategoriesDropdown = ({
     controllerBtnRef,
 }: {
     isExpanded: boolean;
-    categories: SimpleCategoryModelType[];
+    categories: any;
     controllerBtnRef?: React.RefObject<HTMLButtonElement | null>;
 }) => {
     const refCallback = () => {
@@ -61,7 +60,7 @@ const Category = ({
     category,
     isRootCategory = false,
 }: {
-    category: Pick<SimpleCategoryModelType, 'id' | 'name' | 'slug' | 'children'>;
+    category: any;
     isRootCategory?: boolean;
 }) => {
     const { setIsExpanded } = useSafeContext(NavigationContext);

@@ -2,9 +2,7 @@
 
 import { useState, createContext, type ReactNode } from 'react';
 
-import { type ListingProductType } from '@/entities/product/model/product.types';
-import { type SimpleCategoryModelType, type SubcategoryType } from '@/shared/model/category.model';
-import { type FilterParameterType } from '@/shared/model/parameter.model';
+import { type ListingProductType } from '@/pages/categorySlug/model/product.types';
 
 interface CategoryMini {
     id: string;
@@ -16,8 +14,8 @@ interface CategoryMini {
 interface CatalogContextType {
     initialProducts: ListingProductType[];
     areFiltersOpen: boolean;
-    parameters: FilterParameterType[];
-    subcategories: SubcategoryType;
+    parameters: any[];
+    subcategories: any;
     category: CategoryMini;
     productSum: number;
     page: number;
@@ -26,8 +24,8 @@ interface CatalogContextType {
     nextPage: number | null;
     setAreFiltersOpen: (v: boolean) => void;
     toggleFilters: () => void;
-    setParameters: (v: FilterParameterType[]) => void;
-    setSubcategories: (v: SubcategoryType) => void;
+    setParameters: (v: any[]) => void;
+    setSubcategories: (v: any) => void;
     setCategory: (v: CategoryMini) => void;
     setProductSum: (v: number) => void;
     setPage: (v: number) => void;
@@ -45,8 +43,8 @@ const CatalogProvider = ({
 }: {
     children: ReactNode;
     areFiltersOpen: boolean;
-    parameters: FilterParameterType[];
-    category: SimpleCategoryModelType;
+    parameters: any[];
+    category: any;
     initialProductsProp: {
         items: ListingProductType[];
         total: number;
@@ -55,8 +53,8 @@ const CatalogProvider = ({
     };
 }) => {
     const [areFiltersOpen, setAreFiltersOpen] = useState<boolean>(areFiltersOpenProp);
-    const [parameters, setParameters] = useState<FilterParameterType[]>(parametersProp);
-    const [subcategories, setSubcategories] = useState<SubcategoryType>(categoryProp.children);
+    const [parameters, setParameters] = useState<any[]>(parametersProp);
+    const [subcategories, setSubcategories] = useState<any>(categoryProp.children);
     const [category, setCategory] = useState<CategoryMini>({
         id: categoryProp.id,
         name: categoryProp.name,

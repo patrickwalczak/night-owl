@@ -11,7 +11,6 @@ import { openCart } from '@/features/orderState/model/orderSlice';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/redux';
 import { cn } from '@/shared/lib/utils/cn';
 import { type CartItem } from '@/shared/model/cartItem';
-import { type SimpleCategoryModelType } from '@/shared/model/category.model';
 
 import Cart from '../../../shared/ui/icons/Cart';
 import CartDrawer from '../../cartDrawer/CartDrawer';
@@ -23,7 +22,7 @@ import MobileNavigation from './mobile/MobileNavigation';
 import styles from './navigation.module.scss';
 
 interface NavigationContextType {
-    categories: SimpleCategoryModelType[];
+    categories: any;
     isExpanded: boolean;
     isScrolled: boolean;
     setIsExpanded: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,7 +31,7 @@ interface NavigationContextType {
 
 export const NavigationContext = createContext<NavigationContextType | null>(null);
 
-const Navigation = ({ categories }: { categories: SimpleCategoryModelType[] }) => {
+const Navigation = ({ categories }: { categories: any }) => {
     const isDesktop = useAppSelector(state => state.app.isDesktop);
     const items = useAppSelector(state => state.order.items);
     const dispatch = useAppDispatch();

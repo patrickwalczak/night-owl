@@ -1,11 +1,10 @@
 import { cn } from '@/shared/lib/utils/cn';
-import { type FilterParameterType } from '@/shared/model/parameter.model';
 import { Checkbox } from '@/shared/ui/checkboxGroup/Checkbox';
 
 import styles from './parameterGroup.module.scss';
 
 interface ParameterGroupType {
-    parameter: FilterParameterType;
+    parameter: any;
     selectedParamIds: string[];
     setSelectedFilters: (ids: string[]) => void;
 }

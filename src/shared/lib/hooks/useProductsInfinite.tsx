@@ -3,7 +3,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useMemo, useRef } from 'react';
 
-import { type ListingProductType } from '@/entities/product/model/product.types';
+import { type ListingProductType } from '@/pages/categorySlug/model/product.types';
 import { DEFAULT_SORT_ORDER } from '@/pages/categorySlug/config/searchParams';
 import { CatalogContext } from '@/pages/categorySlug/model/providers/CatalogProvider';
 import { CatalogUrlActionsContext } from '@/pages/categorySlug/model/providers/CatalogUrlActionsProvider';

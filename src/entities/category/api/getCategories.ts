@@ -1,11 +1,10 @@
 import 'server-only';
 import { cache } from 'react';
 
-import { type SimpleCategoryModelType } from '@/shared/model/category.model';
-
 import { prisma } from '../../../shared/lib/db/prisma';
 
-export const getCategories = cache(async function getCategories(): Promise<SimpleCategoryModelType[]> {
+// TODO
+export const getCategories = cache(async function getCategories(): Promise<any[]> {
     try {
         return prisma.category.findMany({
             where: { parentId: null },

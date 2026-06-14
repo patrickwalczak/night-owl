@@ -39,7 +39,7 @@ const useScrollState = (offset = 60, threshold = 8) => {
 
         window.addEventListener('scroll', onScroll, { passive: true });
         return () => window.removeEventListener('scroll', onScroll);
-    }, [offset, threshold]);
+    }, [offset, threshold, dispatch]);
 
     return { isScrolled, direction };
 };
