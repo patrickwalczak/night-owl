@@ -5,19 +5,19 @@ export type CatalogSortOrderType = (typeof CATALOG_SORT_OPTIONS)[number]['value'
 export type CatalogSearchParamKeyType = (typeof CATALOG_SEARCH_PARAMS_KEYS)[keyof typeof CATALOG_SEARCH_PARAMS_KEYS];
 
 export interface SearchParamsType {
-    query?: string;
-    sort?: CatalogSortOrderType;
-    page?: string;
-    filters?: string;
+	query?: string;
+	sort?: CatalogSortOrderType;
+	page?: string;
+	filters?: string;
 }
 
 export interface CatalogSearchParamsType {
-    [CATALOG_SEARCH_PARAMS_KEYS.QUERY]?: string;
-    [CATALOG_SEARCH_PARAMS_KEYS.SORT]?: CatalogSortOrderType;
-    [CATALOG_SEARCH_PARAMS_KEYS.PAGE]?: string;
-    [CATALOG_SEARCH_PARAMS_KEYS.FILTERS]?: string;
+	[CATALOG_SEARCH_PARAMS_KEYS.QUERY]?: string;
+	[CATALOG_SEARCH_PARAMS_KEYS.SORT]?: CatalogSortOrderType;
+	[CATALOG_SEARCH_PARAMS_KEYS.PAGE]?: string;
+	[CATALOG_SEARCH_PARAMS_KEYS.FILTERS]?: string;
 }
 
 export interface CatalogRouteParamsType {
-    category_slug: string;
+	category_slug: string;
 }

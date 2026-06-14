@@ -8,28 +8,28 @@ import ProductHero from './components/productHero/ProductHero';
 import styles from './styles.module.scss';
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
-    const awaitedParams = await params;
-    const data = await getProductFullBySlug(awaitedParams.slug);
+	const awaitedParams = await params;
+	const data = await getProductFullBySlug(awaitedParams.slug);
 
-    if (!data) return notFound();
+	if (!data) return notFound();
 
-    const { breadcrumbs } = data;
+	const { breadcrumbs } = data;
 
-    return (
-        <main className={cn(styles.page, 'flex', 'flex-col')}>
-            <nav className={styles.breadcrumbs} aria-label={'Breadcrumb'}>
-                <ol className={'flex'}>
-                    <li>
-                        <Link href={'/'}>{'Home'}</Link>
-                    </li>
-                    {breadcrumbs.map(c => (
-                        <li key={c.id}>
-                            <a href={`/category/${c.slug}`}>{c.name}</a>
-                        </li>
-                    ))}
-                </ol>
-            </nav>
-            <ProductHero data={data} />
-        </main>
-    );
+	return (
+		<main className={cn(styles.page, 'flex', 'flex-col')}>
+			<nav className={styles.breadcrumbs} aria-label={'Breadcrumb'}>
+				<ol className={'flex'}>
+					<li>
+						<Link href={'/'}>{'Home'}</Link>
+					</li>
+					{breadcrumbs.map((c) => (
+						<li key={c.id}>
+							<a href={`/category/${c.slug}`}>{c.name}</a>
+						</li>
+					))}
+				</ol>
+			</nav>
+			<ProductHero data={data} />
+		</main>
+	);
 }

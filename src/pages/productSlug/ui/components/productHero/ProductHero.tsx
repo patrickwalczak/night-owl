@@ -12,51 +12,51 @@ import { formatPrice } from '@/shared/lib/utils/format';
 import styles from './productHero.module.scss';
 
 export default function ProductHero({ data }: { data: FullProduct }) {
-    const dispatch = useAppDispatch();
-    const { product } = data;
-    const imgRef = useRef(null);
+	const dispatch = useAppDispatch();
+	const { product } = data;
+	const imgRef = useRef(null);
 
-    const addProduct = () => {
-        dispatch(
-            addItem({
-                id: product.id,
-                name: product.name,
-                image: '',
-                price: product.price,
-                quantity: 1,
-                stock: 99,
-                currency: product.currency,
-            }),
-        );
-    };
+	const addProduct = () => {
+		dispatch(
+			addItem({
+				id: product.id,
+				name: product.name,
+				image: '',
+				price: product.price,
+				quantity: 1,
+				stock: 99,
+				currency: product.currency,
+			})
+		);
+	};
 
-    return (
-        <section className={styles.wrap}>
-            <figure className={styles.stage}>
-                <Image ref={imgRef} src={'https://placehold.co/600x400.webp'} alt={product.name} fill className={styles.img} />
-                {product.status !== 'DEFAULT' && (
-                    <div className={styles.badge}>
-                        {product.status === 'NEW' && 'New'}
-                        {product.status === 'SALE' && 'Sale'}
-                        {product.status === 'PROMOTION' && 'Promotion'}
-                    </div>
-                )}
-            </figure>
+	return (
+		<section className={styles.wrap}>
+			<figure className={styles.stage}>
+				<Image ref={imgRef} src={'https://placehold.co/600x400.webp'} alt={product.name} fill className={styles.img} />
+				{product.status !== 'DEFAULT' && (
+					<div className={styles.badge}>
+						{product.status === 'NEW' && 'New'}
+						{product.status === 'SALE' && 'Sale'}
+						{product.status === 'PROMOTION' && 'Promotion'}
+					</div>
+				)}
+			</figure>
 
-            <aside className={styles.box}>
-                <h1 className={styles.title}>{product.name}</h1>
-                <p className={styles.category}>
-                    <a href={`/category/${product.category.slug}`}>{product.category.name}</a>
-                </p>
+			<aside className={styles.box}>
+				<h1 className={styles.title}>{product.name}</h1>
+				<p className={styles.category}>
+					<a href={`/category/${product.category.slug}`}>{product.category.name}</a>
+				</p>
 
-                <p className={styles.price}>{formatPrice(product.price, product.currency)}</p>
+				<p className={styles.price}>{formatPrice(product.price, product.currency)}</p>
 
-                {product.description && <p className={styles.desc}>{product.description}</p>}
+				{product.description && <p className={styles.desc}>{product.description}</p>}
 
-                <button onClick={addProduct} className={cn(styles.addToCart, 'transition-200')} disabled={!product.inStock}>
-                    {product.inStock ? 'Add to Cart' : 'Out of Stock'}
-                </button>
-            </aside>
-        </section>
-    );
+				<button onClick={addProduct} className={cn(styles.addToCart, 'transition-200')} disabled={!product.inStock}>
+					{product.inStock ? 'Add to Cart' : 'Out of Stock'}
+				</button>
+			</aside>
+		</section>
+	);
 }
