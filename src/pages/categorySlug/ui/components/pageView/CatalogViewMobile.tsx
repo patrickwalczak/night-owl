@@ -7,14 +7,14 @@ import Subcategories from '../subcategories/Subcategories';
 import styles from './catalogView.module.scss';
 
 export default function CatalogViewMobile() {
-	return (
-		<main className={cn(styles.container, 'flex', 'flex-col')}>
-			<CategoryName />
-			<Subcategories />
-			<StickyViewMobile />
-			<div className={styles.productsContainer}>
-				<ProductsInfinite />
-			</div>
-		</main>
-	);
+    return (
+        <main className={cn(styles.container, 'flex', 'flex-col')}>
+            <CategoryName />
+            <Subcategories />
+            <StickyViewMobile />
+            <div className={styles.productsContainer}>
+                <ProductsInfinite />
+            </div>
+        </main>
+    );
 }

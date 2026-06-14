@@ -4,38 +4,38 @@ import type React from 'react';
 
 import { useEffect, useRef } from 'react';
 
-import { useAppSelector } from '@/shared/lib/redux';
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
+import { useAppSelector } from '@/shared/lib/redux';
 import { cn } from '@/shared/lib/utils/cn';
 
 import { CatalogContext } from '../../../../../model/providers/CatalogProvider';
 import styles from './sideFiltersDesktop.module.scss';
 
 const FiltersWrapper = ({ children }: { children: React.ReactNode }) => {
-	const isNavigationOpen = useAppSelector((s) => s.app.isNavigationOpen);
-	const { areFiltersOpen } = useSafeContext(CatalogContext);
-	const containerRef = useRef<HTMLDivElement>(null);
+    const isNavigationOpen = useAppSelector(s => s.app.isNavigationOpen);
+    const { areFiltersOpen } = useSafeContext(CatalogContext);
+    const containerRef = useRef<HTMLDivElement>(null);
 
-	useEffect(() => {
-		const el = containerRef.current;
-		if (!el) return;
-		el.toggleAttribute('inert', !areFiltersOpen);
-		el.setAttribute('aria-hidden', String(!areFiltersOpen));
-	}, [areFiltersOpen]);
+    useEffect(() => {
+        const el = containerRef.current;
+        if (!el) return;
+        el.toggleAttribute('inert', !areFiltersOpen);
+        el.setAttribute('aria-hidden', String(!areFiltersOpen));
+    }, [areFiltersOpen]);
 
-	return (
-		<div
-			ref={containerRef}
-			data-open={areFiltersOpen}
-			className={cn(styles.filtersContainer, 'transition-200', areFiltersOpen && styles.opened)}
-			style={{
-				width: areFiltersOpen ? '300px' : '0px',
-				top: isNavigationOpen ? '58px' : '101px',
-			}}
-		>
-			{children}
-		</div>
-	);
+    return (
+        <div
+            ref={containerRef}
+            data-open={areFiltersOpen}
+            className={cn(styles.filtersContainer, 'transition-200', areFiltersOpen && styles.opened)}
+            style={{
+                width: areFiltersOpen ? '300px' : '0px',
+                top: isNavigationOpen ? '58px' : '101px',
+            }}
+        >
+            {children}
+        </div>
+    );
 };
 
 export default FiltersWrapper;

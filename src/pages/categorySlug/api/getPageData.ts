@@ -1,5 +1,4 @@
 import { cache } from 'react';
-
 import 'server-only';
 
 import { type CatalogSortOrderType } from '@/types/catalog.models';
@@ -9,86 +8,86 @@ import { prisma } from '../../../shared/lib/db/prisma';
 const PAGE_SIZE = 20;
 
 function toOrderBy(sort: CatalogSortOrderType) {
-	switch (sort) {
-		case 'price_asc':
-			return { price: 'asc' as const };
-		case 'price_desc':
-			return { price: 'desc' as const };
-		case 'newest':
-			return { createdAt: 'desc' as const };
-		default:
-			return { createdAt: 'desc' as const };
-	}
+    switch (sort) {
+        case 'price_asc':
+            return { price: 'asc' as const };
+        case 'price_desc':
+            return { price: 'desc' as const };
+        case 'newest':
+            return { createdAt: 'desc' as const };
+        default:
+            return { createdAt: 'desc' as const };
+    }
 }
 
 interface FetchOpts {
-	page?: number;
-	sort: CatalogSortOrderType;
-	paramValueIds?: string[];
-	query?: string;
+    page?: number;
+    sort: CatalogSortOrderType;
+    paramValueIds?: string[];
+    query?: string;
 }
 
 export const getPageData = cache(async (slug: string, opts: FetchOpts) => {
-	const page = Math.max(1, opts.page ?? 1);
+    const page = Math.max(1, opts.page ?? 1);
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const whereProducts: any = {
-		OR: [{ category: { slug } }, { category: { parent: { slug } } }],
-	};
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const whereProducts: any = {
+        OR: [{ category: { slug } }, { category: { parent: { slug } } }],
+    };
 
-	if (opts.paramValueIds?.length) {
-		whereProducts.parameterValues = {
-			some: { parameterValueId: { in: opts.paramValueIds } },
-		};
-	}
+    if (opts.paramValueIds?.length) {
+        whereProducts.parameterValues = {
+            some: { parameterValueId: { in: opts.paramValueIds } },
+        };
+    }
 
-	const [category, items, total, parameters] = await prisma.$transaction(
-		[
-			prisma.category.findUnique({
-				where: { slug },
-				select: {
-					id: true,
-					name: true,
-					slug: true,
-					parentId: true,
-					children: { select: { id: true, name: true, slug: true, _count: { select: { products: true } } } },
-				},
-			}),
-			prisma.product.findMany({
-				where: whereProducts,
-				orderBy: toOrderBy(opts.sort),
-				skip: (page - 1) * PAGE_SIZE,
-				take: PAGE_SIZE,
-				select: { id: true, name: true, slug: true, price: true, image: true, status: true, currency: true },
-			}),
-			prisma.product.count({ where: whereProducts }),
-			prisma.parameter.findMany({
-				where: {
-					categories: {
-						some: {
-							category: {
-								OR: [{ slug }, { parent: { slug } }],
-							},
-						},
-					},
-				},
-				orderBy: { name: 'asc' },
-				select: {
-					id: true,
-					name: true,
-					values: {
-						select: { id: true, value: true, _count: { select: { products: true } } },
-						orderBy: { value: 'asc' },
-					},
-				},
-			}),
-		],
-		{ isolationLevel: 'RepeatableRead' }
-	);
+    const [category, items, total, parameters] = await prisma.$transaction(
+        [
+            prisma.category.findUnique({
+                where: { slug },
+                select: {
+                    id: true,
+                    name: true,
+                    slug: true,
+                    parentId: true,
+                    children: { select: { id: true, name: true, slug: true, _count: { select: { products: true } } } },
+                },
+            }),
+            prisma.product.findMany({
+                where: whereProducts,
+                orderBy: toOrderBy(opts.sort),
+                skip: (page - 1) * PAGE_SIZE,
+                take: PAGE_SIZE,
+                select: { id: true, name: true, slug: true, price: true, image: true, status: true, currency: true },
+            }),
+            prisma.product.count({ where: whereProducts }),
+            prisma.parameter.findMany({
+                where: {
+                    categories: {
+                        some: {
+                            category: {
+                                OR: [{ slug }, { parent: { slug } }],
+                            },
+                        },
+                    },
+                },
+                orderBy: { name: 'asc' },
+                select: {
+                    id: true,
+                    name: true,
+                    values: {
+                        select: { id: true, value: true, _count: { select: { products: true } } },
+                        orderBy: { value: 'asc' },
+                    },
+                },
+            }),
+        ],
+        { isolationLevel: 'RepeatableRead' },
+    );
 
-	return {
-		category,
-		products: { items, total, pageSize: PAGE_SIZE, page },
-		parameters,
-	};
+    return {
+        category,
+        products: { items, total, pageSize: PAGE_SIZE, page },
+        parameters,
+    };
 });

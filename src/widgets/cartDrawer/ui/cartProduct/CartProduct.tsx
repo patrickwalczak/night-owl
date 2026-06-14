@@ -1,32 +1,32 @@
 import Image from 'next/image';
 
-import { type CartItem } from '@/types/cartItem';
-import { formatPrice } from '@/shared/lib/utils/format';
 import { cn } from '@/shared/lib/utils/cn';
+import { formatPrice } from '@/shared/lib/utils/format';
+import { type CartItem } from '@/types/cartItem';
 
 import AmountController from '../amountController/AmountController';
 import styles from './cartProduct.module.scss';
 
 const CartProduct = ({ item }: { item: CartItem }) => {
-	const total = item.price * item.quantity;
-	const formattedTotal = formatPrice(total, item.currency);
+    const total = item.price * item.quantity;
+    const formattedTotal = formatPrice(total, item.currency);
 
-	return (
-		<div className={cn(styles.product, 'flex')}>
-			<div className={cn(styles.thumb, 'w-100')}>
-				<Image
-					src={'https://placehold.co/600x400.webp'}
-					alt={'product.name'}
-					fill
-					priority={false}
-					className={styles.img}
-				/>
-			</div>
-			<span className={cn(styles.productName, 'truncate')}>{item.name}</span>
-			<AmountController item={item} />
-			<span className={cn(styles.productPrice)}>{formattedTotal}</span>
-		</div>
-	);
+    return (
+        <div className={cn(styles.product, 'flex')}>
+            <div className={cn(styles.thumb, 'w-100')}>
+                <Image
+                    src={'https://placehold.co/600x400.webp'}
+                    alt={'product.name'}
+                    fill
+                    priority={false}
+                    className={styles.img}
+                />
+            </div>
+            <span className={cn(styles.productName, 'truncate')}>{item.name}</span>
+            <AmountController item={item} />
+            <span className={cn(styles.productPrice)}>{formattedTotal}</span>
+        </div>
+    );
 };
 
 export default CartProduct;

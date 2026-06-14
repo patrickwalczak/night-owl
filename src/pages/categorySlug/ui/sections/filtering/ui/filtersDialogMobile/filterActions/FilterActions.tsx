@@ -13,85 +13,85 @@ import { CatalogUrlActionsContext } from '../../../../../../model/providers/Cata
 import styles from './filterActions.module.scss';
 
 interface RootProps {
-	sort?: string;
-	selectedParamIds: string[];
-	defaultSort?: string;
-	className?: string;
+    sort?: string;
+    selectedParamIds: string[];
+    defaultSort?: string;
+    className?: string;
 }
 
 interface ActionsContextType {
-	onApply: () => void;
-	onReset: () => void;
+    onApply: () => void;
+    onReset: () => void;
 }
 
 const FilterActionsCtx = createContext<ActionsContextType | null>(null);
 
 function Root({
-	children,
-	sort,
-	selectedParamIds,
-	defaultSort = DEFAULT_SORT_ORDER,
-	className,
+    children,
+    sort,
+    selectedParamIds,
+    defaultSort = DEFAULT_SORT_ORDER,
+    className,
 }: PropsWithChildren<RootProps>) {
-	const { applyFilters, reset } = useSafeContext(CatalogUrlActionsContext);
+    const { applyFilters, reset } = useSafeContext(CatalogUrlActionsContext);
 
-	const onApply = () => {
-		applyFilters({
-			sort: sort && sort !== defaultSort ? sort : null,
-			ids: selectedParamIds,
-		});
-	};
+    const onApply = () => {
+        applyFilters({
+            sort: sort && sort !== defaultSort ? sort : null,
+            ids: selectedParamIds,
+        });
+    };
 
-	const onReset = () => reset(sort ? [] : ['sort']);
+    const onReset = () => reset(sort ? [] : ['sort']);
 
-	return (
-		<FilterActionsCtx.Provider value={{ onApply, onReset }}>
-			<div className={cn(styles.container, 'flex', 'align-center', className)}>{children}</div>
-		</FilterActionsCtx.Provider>
-	);
+    return (
+        <FilterActionsCtx.Provider value={{ onApply, onReset }}>
+            <div className={cn(styles.container, 'flex', 'align-center', className)}>{children}</div>
+        </FilterActionsCtx.Provider>
+    );
 }
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & { className?: string };
 
 function Reset({ children = 'Reset', className, onClick = () => {}, ...rest }: ButtonProps) {
-	const { onReset } = useSafeContext(FilterActionsCtx);
+    const { onReset } = useSafeContext(FilterActionsCtx);
 
-	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-		onReset();
-		onClick(e);
-	};
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        onReset();
+        onClick(e);
+    };
 
-	return (
-		<button
-			type={'button'}
-			className={cn(styles.resetBtn, styles.filterBtn, className)}
-			onClick={handleClick}
-			{...rest}
-		>
-			{children}
-		</button>
-	);
+    return (
+        <button
+            type={'button'}
+            className={cn(styles.resetBtn, styles.filterBtn, className)}
+            onClick={handleClick}
+            {...rest}
+        >
+            {children}
+        </button>
+    );
 }
 
 function Apply({ children = 'Show results', className, onClick = () => {}, ...rest }: ButtonProps) {
-	const { onApply } = useSafeContext(FilterActionsCtx);
+    const { onApply } = useSafeContext(FilterActionsCtx);
 
-	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-		onApply();
-		onClick(e);
-	};
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        onApply();
+        onClick(e);
+    };
 
-	return (
-		<button type={'button'} className={cn(styles.showBtn, styles.filterBtn, className)} onClick={handleClick} {...rest}>
-			{children}
-		</button>
-	);
+    return (
+        <button type={'button'} className={cn(styles.showBtn, styles.filterBtn, className)} onClick={handleClick} {...rest}>
+            {children}
+        </button>
+    );
 }
 
 const FilterActions = {
-	Root,
-	Reset,
-	Apply,
+    Root,
+    Reset,
+    Apply,
 };
 
 export default FilterActions;

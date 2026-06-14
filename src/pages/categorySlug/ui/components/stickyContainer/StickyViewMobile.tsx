@@ -7,16 +7,16 @@ import CategoryProductsTotal from '../categoryProductsTotal/CategoryProductsTota
 import StickyContainer from './StickyContainer';
 
 const StickyViewMobile = () => {
-	return (
-		<StickyContainer>
-			<>
-				<CategoryProductsTotal />
-				<div className={cn('flex', 'align-center', 'gap-1')}>
-					<FiltersDialog />
-				</div>
-			</>
-		</StickyContainer>
-	);
+    return (
+        <StickyContainer>
+            <>
+                <CategoryProductsTotal />
+                <div className={cn('flex', 'align-center', 'gap-1')}>
+                    <FiltersDialog />
+                </div>
+            </>
+        </StickyContainer>
+    );
 };
 
 export default StickyViewMobile;

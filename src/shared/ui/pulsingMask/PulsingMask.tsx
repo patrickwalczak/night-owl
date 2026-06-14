@@ -9,42 +9,42 @@ import { cn } from '@/shared/lib/utils/cn';
 import styles from './styles.module.scss';
 
 export default function PulsingMask({
-	active,
-	label = 'Loading...',
-	wrapClassName,
-	children,
+    active,
+    label = 'Loading...',
+    wrapClassName,
+    children,
 }: {
-	active: boolean;
-	label?: string;
-	wrapClassName?: string;
-	children: React.ReactNode;
+    active: boolean;
+    label?: string;
+    wrapClassName?: string;
+    children: React.ReactNode;
 }) {
-	const contentRef = useCallback(
-		(node: HTMLElement | null) => {
-			if (node) {
-				node.toggleAttribute('inert', active);
-				node.setAttribute('aria-busy', String(active));
-			}
+    const contentRef = useCallback(
+        (node: HTMLElement | null) => {
+            if (node) {
+                node.toggleAttribute('inert', active);
+                node.setAttribute('aria-busy', String(active));
+            }
 
-			return () => {
-				if (node) {
-					node.toggleAttribute('inert', false);
-					node.removeAttribute('aria-busy');
-				}
-			};
-		},
-		[active]
-	);
+            return () => {
+                if (node) {
+                    node.toggleAttribute('inert', false);
+                    node.removeAttribute('aria-busy');
+                }
+            };
+        },
+        [active],
+    );
 
-	return (
-		<div className={cn(styles.wrap, wrapClassName)}>
-			<div ref={contentRef}>{children}</div>
+    return (
+        <div className={cn(styles.wrap, wrapClassName)}>
+            <div ref={contentRef}>{children}</div>
 
-			{active && (
-				<div className={styles.mask} role={'status'} aria-live={'polite'} aria-label={label}>
-					<span className={'sr-only'}>{label}</span>
-				</div>
-			)}
-		</div>
-	);
+            {active && (
+                <div className={styles.mask} role={'status'} aria-live={'polite'} aria-label={label}>
+                    <span className={'sr-only'}>{label}</span>
+                </div>
+            )}
+        </div>
+    );
 }

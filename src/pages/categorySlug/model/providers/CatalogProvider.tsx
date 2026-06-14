@@ -2,10 +2,7 @@
 
 import { useState, createContext, type ReactNode } from 'react';
 
-import {
-    type SimpleCategoryModelType,
-    type SubcategoryType,
-} from '@/types/category.model';
+import { type SimpleCategoryModelType, type SubcategoryType } from '@/types/category.model';
 import { type FilterParameterType } from '@/types/parameter.model';
 import { type ListingProductType } from '@/types/product.model';
 
@@ -57,13 +54,9 @@ const CatalogProvider = ({
         page: number;
     };
 }) => {
-    const [areFiltersOpen, setAreFiltersOpen]
-        = useState<boolean>(areFiltersOpenProp);
-    const [parameters, setParameters]
-        = useState<FilterParameterType[]>(parametersProp);
-    const [subcategories, setSubcategories] = useState<SubcategoryType>(
-        categoryProp.children,
-    );
+    const [areFiltersOpen, setAreFiltersOpen] = useState<boolean>(areFiltersOpenProp);
+    const [parameters, setParameters] = useState<FilterParameterType[]>(parametersProp);
+    const [subcategories, setSubcategories] = useState<SubcategoryType>(categoryProp.children);
     const [category, setCategory] = useState<CategoryMini>({
         id: categoryProp.id,
         name: categoryProp.name,
@@ -71,13 +64,9 @@ const CatalogProvider = ({
         parentId: categoryProp.parentId ?? null,
     });
 
-    const [productSum, setProductSum] = useState<number>(
-        initialProductsProp.total,
-    );
+    const [productSum, setProductSum] = useState<number>(initialProductsProp.total);
     const [page, setPage] = useState<number>(initialProductsProp.page);
-    const [pageSize, setPageSize] = useState<number>(
-        initialProductsProp.pageSize,
-    );
+    const [pageSize, setPageSize] = useState<number>(initialProductsProp.pageSize);
     const [initialProducts] = useState(initialProductsProp.items);
 
     const totalPages = Math.max(1, Math.ceil(productSum / pageSize));
@@ -104,9 +93,7 @@ const CatalogProvider = ({
         setPageSize,
     };
 
-    return (
-        <CatalogContext.Provider value={value}>{children}</CatalogContext.Provider>
-    );
+    return <CatalogContext.Provider value={value}>{children}</CatalogContext.Provider>;
 };
 
 export default CatalogProvider;

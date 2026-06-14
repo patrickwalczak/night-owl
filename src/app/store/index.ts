@@ -6,13 +6,13 @@ import orderSlice from '../../features/orderState/model/orderSlice';
 type PreloadedStateType = PreloadedStateShapeFromReducersMapObject<typeof rootReducer>;
 
 const rootReducer = combineReducers({
-	order: orderSlice,
-	app: appSlice,
+    order: orderSlice,
+    app: appSlice,
 });
 
 export const makeStore = (preloadedState: PreloadedStateType) => {
-	return configureStore({
-		reducer: rootReducer,
-		preloadedState,
-	});
+    return configureStore({
+        reducer: rootReducer,
+        preloadedState,
+    });
 };

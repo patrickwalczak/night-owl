@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation';
 
 import { getPageData } from '@/pages/categorySlug/api/getPageData';
 import CatalogContainer from '@/pages/categorySlug/ui/components/pageView/CatalogContainer';
-import { type CatalogRouteParamsType, type CatalogSearchParamsType } from '@/types/catalog.models';
 import { normalizeSearchParams, parseListingParams } from '@/shared/lib/utils/url';
+import { type CatalogRouteParamsType, type CatalogSearchParamsType } from '@/types/catalog.models';
 
 import CatalogProvider from '../model/providers/CatalogProvider';
 import { CatalogUrlActionsProvider } from '../model/providers/CatalogUrlActionsProvider';
