@@ -1,5 +1,3 @@
-import { type Dispatch, type SetStateAction } from 'react';
-
 import { cn } from '@/shared/lib/utils/cn';
 import { type FilterParameterType } from '@/shared/model/parameter.model';
 import { Checkbox } from '@/shared/ui/checkboxGroup/Checkbox';

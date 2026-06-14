@@ -19,7 +19,6 @@ function toOrderBy(sort: SortOrderType) {
         default:
             return { createdAt: 'desc' as const };
     }
-    ``;
 }
 
 export async function getProductsForCategory(opts: {

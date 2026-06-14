@@ -9,7 +9,7 @@ import Product from '../product/Product';
 import styles from './productsInfinite.module.scss';
 
 export default function ProductsInfinite() {
-    const { hasNextPage, fetchNextPage, data, status, isFetching } = useProductsInfinite();
+    const { hasNextPage, fetchNextPage, data, status } = useProductsInfinite();
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {

@@ -161,7 +161,6 @@ function CartBadgeInline({ items }: { items: CartItem[] }) {
         if (!ref.current || items.length <= 0) return;
 
         ref.current.classList.remove(styles.bump);
-        ref.current.offsetWidth;
         ref.current.classList.add(styles.bump);
     }, [items]);
 

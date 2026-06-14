@@ -1,7 +1,5 @@
 'use client';
 
-import React from 'react';
-
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
 import { setBoolCookieClient } from '@/shared/lib/utils/cookie/client';
 

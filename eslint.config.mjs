@@ -239,6 +239,8 @@ export default defineConfig([
                     allowIndentationTabs: true,
                 },
             ],
+
+            '@typescript-eslint/no-empty-function': 'off',
         },
     },
 

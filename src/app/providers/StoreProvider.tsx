@@ -1,4 +1,5 @@
 'use client';
+
 import 'client-only';
 import { useRef, type ReactNode } from 'react';
 import { Provider } from 'react-redux';
