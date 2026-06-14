@@ -2,9 +2,9 @@
 
 import { useState, createContext, type ReactNode } from 'react';
 
-import { type SimpleCategoryModelType, type SubcategoryType } from '@/types/category.model';
-import { type FilterParameterType } from '@/types/parameter.model';
-import { type ListingProductType } from '@/types/product.model';
+import { type ListingProductType } from '@/entities/product/model/product.types';
+import { type SimpleCategoryModelType, type SubcategoryType } from '@/shared/model/category.model';
+import { type FilterParameterType } from '@/shared/model/parameter.model';
 
 interface CategoryMini {
     id: string;

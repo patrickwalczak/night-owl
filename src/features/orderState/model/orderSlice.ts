@@ -1,8 +1,11 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-import { type CartItem } from '@/types/cartItem';
+import { type CartItem } from '@/shared/model/cartItem';
 
-interface OrderState { items: CartItem[]; isCartOpen: boolean }
+interface OrderState {
+    items: CartItem[];
+    isCartOpen: boolean;
+}
 
 const initialState: OrderState = { items: [], isCartOpen: false };
 

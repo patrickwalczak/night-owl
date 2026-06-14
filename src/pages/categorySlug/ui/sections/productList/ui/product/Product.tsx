@@ -4,11 +4,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { type KeyboardEventHandler, type MouseEventHandler } from 'react';
 
+import { type ListingProductType } from '@/entities/product/model/product.types';
 import { addItem } from '@/features/orderState/model/orderSlice';
 import { useAppDispatch } from '@/shared/lib/redux';
 import { cn } from '@/shared/lib/utils/cn';
 import Cart from '@/shared/ui/icons/Cart';
-import { type ListingProductType } from '@/types/product.model';
 
 import styles from './product.module.scss';
 

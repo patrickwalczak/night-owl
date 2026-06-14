@@ -4,7 +4,7 @@ import { Playfair_Display, Inter } from 'next/font/google';
 import { headers } from 'next/headers';
 
 import AppClient from '@/app/ui/AppClient';
-import { type DeviceType } from '@/types/device.model';
+import { type DeviceType } from '@/shared/model/device.model';
 import NavigationServer from '@/widgets/navigation/ui/NavigationServer';
 
 import StoreProvider from '../src/app/providers/StoreProvider';

@@ -2,10 +2,10 @@
 
 import { useEffect, useRef } from 'react';
 
-import { DESKTOP_BREAKPOINT, TABLET_BREAKPOINT } from '@/constants';
 import { setDevice } from '@/features/appState/model/appSlice';
+import { DESKTOP_BREAKPOINT, TABLET_BREAKPOINT } from '@/shared/config/breakpoints';
 import { useAppDispatch } from '@/shared/lib/redux';
-import { type DeviceType } from '@/types/device.model';
+import { type DeviceType } from '@/shared/model/device.model';
 
 const THROTTLE_MS = 120;
 

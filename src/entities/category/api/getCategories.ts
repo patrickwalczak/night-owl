@@ -1,7 +1,7 @@
 import 'server-only';
 import { cache } from 'react';
 
-import { type SimpleCategoryModelType } from '@/types/category.model';
+import { type SimpleCategoryModelType } from '@/shared/model/category.model';
 
 import { prisma } from '../../../shared/lib/db/prisma';
 

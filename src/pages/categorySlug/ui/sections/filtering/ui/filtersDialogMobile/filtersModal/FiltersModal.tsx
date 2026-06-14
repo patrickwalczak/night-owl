@@ -1,11 +1,11 @@
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
-import { DEFAULT_SORT_ORDER } from '@/constants';
+import { DEFAULT_SORT_ORDER } from '@/pages/categorySlug/config/searchParams';
+import { type SortOrderType } from '@/pages/categorySlug/model/searchParams.types';
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
 import { cn } from '@/shared/lib/utils/cn';
 import Modal from '@/shared/ui/modal/Modal';
-import { type CatalogSortOrderType } from '@/types/catalog.models';
 
 import { CatalogContext } from '../../../../../../model/providers/CatalogProvider';
 import SortOrderSelector from '../../../../sorting/ui/sortOrderSelector/SortOrderSelector';
@@ -21,7 +21,7 @@ const FiltersModal = ({ isOpened, close }: { isOpened: boolean; close: () => voi
     const initialSort = searchParams?.get('sort') || DEFAULT_SORT_ORDER;
     const initialParamIds = (searchParams?.get('filters') ?? '').split(',').filter(Boolean);
 
-    const [sort, setSort] = useState<CatalogSortOrderType>(initialSort as CatalogSortOrderType);
+    const [sort, setSort] = useState<SortOrderType>(initialSort as SortOrderType);
     const [selectedParamIds, setSelectedParamIds] = useState<string[]>(initialParamIds);
 
     const reset = () => {
@@ -53,7 +53,7 @@ const FiltersModal = ({ isOpened, close }: { isOpened: boolean; close: () => voi
                                 key={param.id}
                                 parameter={param}
                                 selectedParamIds={selectedParamIds}
-                                setSelectedParamIds={setSelectedParamIds}
+                                setSelectedFilters={setSelectedParamIds}
                             />
                         ))}
                     </div>

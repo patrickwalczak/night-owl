@@ -5,7 +5,7 @@ import type React from 'react';
 import { type PropsWithChildren } from 'react';
 import { createContext } from 'react';
 
-import { DEFAULT_SORT_ORDER } from '@/constants';
+import { DEFAULT_SORT_ORDER } from '@/pages/categorySlug/config/searchParams';
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
 import { cn } from '@/shared/lib/utils/cn';
 

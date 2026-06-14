@@ -4,11 +4,15 @@ import type React from 'react';
 
 import { useId, useRef, useState } from 'react';
 
-import { DEFAULT_SORT_ORDER, CATALOG_SORT_OPTIONS, CATALOG_SORT_VALUES } from '@/constants';
+import {
+    DEFAULT_SORT_ORDER,
+    CATALOG_SORT_OPTIONS,
+    CATALOG_SORT_VALUES,
+} from '@/pages/categorySlug/config/searchParams';
+import { type SortOrderType } from '@/pages/categorySlug/model/searchParams.types';
 import { useOutsideClick } from '@/shared/lib/hooks/useOutsideClick';
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
 import { cn } from '@/shared/lib/utils/cn';
-import { type CatalogSortOrderType } from '@/types/catalog.models';
 
 import { CatalogUrlActionsContext } from '../../../../../model/providers/CatalogUrlActionsProvider';
 import styles from './styles.module.scss';
@@ -17,7 +21,7 @@ export default function SortDropdown({ className }: { className?: string }) {
     const { searchParams, setSort } = useSafeContext(CatalogUrlActionsContext);
 
     const initialSort = () => {
-        const sortParam = searchParams.get('sort') as CatalogSortOrderType;
+        const sortParam = searchParams.get('sort') as SortOrderType;
 
         if (sortParam && CATALOG_SORT_VALUES.includes(sortParam)) {
             return sortParam;
@@ -27,7 +31,7 @@ export default function SortDropdown({ className }: { className?: string }) {
     };
 
     const [open, setOpen] = useState(false);
-    const [sortKey, setSortKey] = useState<CatalogSortOrderType>(() => initialSort());
+    const [sortKey, setSortKey] = useState<SortOrderType>(() => initialSort());
     const [activeIndex, setActiveIndex] = useState<number>(0);
 
     const rootRef = useOutsideClick(() => setOpen(false));
@@ -75,7 +79,7 @@ export default function SortDropdown({ className }: { className?: string }) {
         }
     }
 
-    function select(v: CatalogSortOrderType) {
+    function select(v: SortOrderType) {
         setSortKey(v);
         setSort(v);
         setOpen(false);

@@ -1,13 +1,13 @@
 import { cache } from 'react';
 import 'server-only';
 
-import { type CatalogSortOrderType } from '@/types/catalog.models';
+import { type SortOrderType } from '@/pages/categorySlug/model/searchParams.types';
 
 import { prisma } from '../../../shared/lib/db/prisma';
 
 const PAGE_SIZE = 20;
 
-function toOrderBy(sort: CatalogSortOrderType) {
+function toOrderBy(sort: SortOrderType) {
     switch (sort) {
         case 'price_asc':
             return { price: 'asc' as const };
@@ -22,7 +22,7 @@ function toOrderBy(sort: CatalogSortOrderType) {
 
 interface FetchOpts {
     page?: number;
-    sort: CatalogSortOrderType;
+    sort: SortOrderType;
     paramValueIds?: string[];
     query?: string;
 }
