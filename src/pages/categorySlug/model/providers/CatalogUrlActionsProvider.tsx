@@ -6,7 +6,7 @@ import { createContext, useCallback, useMemo } from 'react';
 
 import { DEFAULT_SORT_ORDER, SEARCH_PARAMS_KEYS } from '@/pages/categorySlug/config/searchParams';
 import { getIdsFromSearchParams } from '@/pages/categorySlug/lib/url';
-import { type CatalogSearchParamKeyType } from '@/pages/categorySlug/model/searchParams.types';
+import { type SearchParamsKeys } from '@/pages/categorySlug/model/searchParams.types';
 import { useShallowSearchParams } from '@/shared/lib/hooks/useShallowSearchParams';
 
 interface ApplyArgs {
@@ -65,7 +65,7 @@ interface CatalogUrlActionsContextType {
 	 * Resets selected catalog search params.
 	 * You can keep chosen params by passing them in `ignoredSearchParamsKeys`.
 	 */
-    reset: (ignoredSearchParamsKeys?: CatalogSearchParamKeyType[]) => void;
+    reset: (ignoredSearchParamsKeys?: SearchParamsKeys[]) => void;
 
     /**
 	 * Applies multiple filter-related search params at once.
@@ -147,7 +147,7 @@ export function CatalogUrlActionsProvider({ children }: { children: React.ReactN
     );
 
     const reset = useCallback(
-        (ignoredSearchParamsKeys: CatalogSearchParamKeyType[] = []) => {
+        (ignoredSearchParamsKeys: SearchParamsKeys[] = []) => {
             replace((sp) => {
                 Object.values(SEARCH_PARAMS_KEYS)
                     .filter(k => !ignoredSearchParamsKeys.includes(k))

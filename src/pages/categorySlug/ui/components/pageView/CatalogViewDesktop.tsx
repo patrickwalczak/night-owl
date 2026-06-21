@@ -9,10 +9,10 @@ import styles from './catalogView.module.scss';
 export default function CatalogContainer() {
     return (
         <main className={cn(styles.container, 'flex', 'flex-col')}>
-            <Checkbox.Root id={'color_red'} checkedValue={''}>
+            {/* <Checkbox.Root id={'color_red'} checkedValue={''}>
                 <Checkbox.Input id={'color_red'} name={'color'} value={'color_red'} />
                 <Checkbox.Label id={'color_red'} text={'Red'} className={''} />
-            </Checkbox.Root>
+            </Checkbox.Root> */}
             <StickyViewDesktop />
 
             <div className={styles.productsContainer}>

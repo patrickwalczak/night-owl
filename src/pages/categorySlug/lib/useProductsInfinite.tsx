@@ -3,12 +3,11 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useMemo, useRef } from 'react';
 
-import { type ListingProductType } from '@/pages/categorySlug/model/product.types';
-import { DEFAULT_SORT_ORDER } from '@/pages/categorySlug/config/searchParams';
-import { CatalogContext } from '@/pages/categorySlug/model/providers/CatalogProvider';
-import { CatalogUrlActionsContext } from '@/pages/categorySlug/model/providers/CatalogUrlActionsProvider';
-
-import { useSafeContext } from './useSafeContext';
+import { useSafeContext } from '../../../shared/lib/hooks/useSafeContext';
+import { DEFAULT_SORT_ORDER, SEARCH_PARAMS_KEYS } from '../config/searchParams';
+import { type ListingProductType } from '../model/product.types';
+import { CatalogContext } from '../model/providers/CatalogProvider';
+import { CatalogUrlActionsContext } from '../model/providers/CatalogUrlActionsProvider';
 
 interface PagePayload {
     items: ListingProductType[];
@@ -39,20 +38,23 @@ export function useProductsInfinite() {
     };
 
     const { sort, params, query } = useMemo(() => {
-        const sort = searchParams.get('sort') ?? DEFAULT_SORT_ORDER;
-        const params = searchParams.get('filters') ?? '';
-        const query = searchParams.get('query') ?? '';
+        const sort = searchParams.get(SEARCH_PARAMS_KEYS.SORT) ?? DEFAULT_SORT_ORDER;
+        const params = searchParams.get(SEARCH_PARAMS_KEYS.FILTERS) ?? '';
+        const query = searchParams.get(SEARCH_PARAMS_KEYS.QUERY) ?? '';
+
         return { sort, params, query };
     }, [searchParams]);
 
     const queryKey = useMemo(
-        () => ['categoryProducts', categorySlug, sort, params, query] as const,
+        () => ['categoryProducts', categorySlug, sort, params, query],
         [categorySlug, sort, params, query],
     );
 
     const firstKeyRef = useRef<string | null>(null);
     const keyStr = JSON.stringify(queryKey);
+
     if (firstKeyRef.current == null) firstKeyRef.current = keyStr;
+
     const shouldUseInitial = firstKeyRef.current === keyStr;
 
     const fetchPage = async ({
@@ -63,7 +65,7 @@ export function useProductsInfinite() {
         signal?: AbortSignal;
     }): Promise<PagePayload> => {
         const searchParamsCloned = new URLSearchParams(searchParams.toString());
-        searchParamsCloned.set('page', String(pageParam));
+        searchParamsCloned.set(SEARCH_PARAMS_KEYS.PAGE, String(pageParam));
 
         const res = await fetch(`/api/category/${categorySlug}/products?` + searchParamsCloned.toString(), {
             cache: 'no-store',

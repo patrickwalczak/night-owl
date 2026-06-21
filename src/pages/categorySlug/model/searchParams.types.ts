@@ -2,7 +2,7 @@ import { type SORT_OPTIONS, type SEARCH_PARAMS_KEYS } from '@/pages/categorySlug
 
 export type SortOrderType = (typeof SORT_OPTIONS)[number]['value'];
 
-export type CatalogSearchParamKeyType = (typeof SEARCH_PARAMS_KEYS)[keyof typeof SEARCH_PARAMS_KEYS];
+export type SearchParamsKeys = (typeof SEARCH_PARAMS_KEYS)[keyof typeof SEARCH_PARAMS_KEYS];
 
 export interface SearchParamsType {
     query?: string;

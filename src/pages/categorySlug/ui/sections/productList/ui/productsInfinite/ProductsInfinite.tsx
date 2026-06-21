@@ -2,8 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-import { useProductsInfinite } from '@/shared/lib/hooks/useProductsInfinite';
-import PulsingMask from '@/shared/ui/pulsingMask/PulsingMask';
+import { useProductsInfinite } from '@/pages/categorySlug/lib/useProductsInfinite';
 
 import Product from '../product/Product';
 import styles from './productsInfinite.module.scss';
@@ -31,7 +30,7 @@ export default function ProductsInfinite() {
     if (items.length === 0) return <p>{'No products found.'}</p>;
 
     return (
-        <PulsingMask active={false} wrapClassName={styles.container}>
+        <div className={styles.container}>
             <div className={styles.productsContainer}>
                 {items.map(p => (
                     <Product key={p.id} product={p} />
@@ -42,6 +41,6 @@ export default function ProductsInfinite() {
                     <div className={styles.loader}></div>
                 </div>
             )}
-        </PulsingMask>
+        </div>
     );
 }

@@ -21,10 +21,10 @@ export default async function CategorySlugPage({
 
     const { category_slug } = awaitedParams;
     const search = normalizeSearchParams(awaitedSearchParams);
-    const parsed = parseListingParams(search);
+    const parsedParams = parseListingParams(search);
 
     try {
-        const { category, parameters, products } = await getPageData(category_slug, parsed);
+        const { category, parameters, products } = await getPageData(category_slug, parsedParams);
 
         if (!category) notFound();
 
