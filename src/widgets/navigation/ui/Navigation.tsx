@@ -5,15 +5,11 @@ import type React from 'react';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { createContext, useEffect, useMemo, useRef } from 'react';
+import { createContext, useEffect, useRef } from 'react';
 
-import { openCart } from '@/features/orderState/model/orderSlice';
-import { useAppDispatch, useAppSelector } from '@/shared/lib/redux';
+import { useAppSelector } from '@/shared/lib/redux';
 import { cn } from '@/shared/lib/utils/cn';
-import { type CartItem } from '@/shared/model/cartItem';
 
-import Cart from '../../../shared/ui/icons/Cart';
-import CartDrawer from '../../cartDrawer/CartDrawer';
 import useIsDropdownExpanded from '../hooks/useIsDropdownExpanded';
 import useIsScrolled from '../hooks/useIsScrolled';
 import Overlay from './components/Overlay';
@@ -33,8 +29,6 @@ export const NavigationContext = createContext<NavigationContextType | null>(nul
 
 const Navigation = ({ categories }: { categories: any }) => {
     const isDesktop = useAppSelector(state => state.app.isDesktop);
-    const items = useAppSelector(state => state.order.items);
-    const dispatch = useAppDispatch();
 
     const { isScrolled, direction } = useIsScrolled();
     const { expandDropdown, hideDropdown, isExpanded, setIsExpanded } = useIsDropdownExpanded();
@@ -53,8 +47,6 @@ const Navigation = ({ categories }: { categories: any }) => {
         setIsExpanded,
         hideDropdown,
     };
-
-    const openCartDrawer = () => dispatch(openCart());
 
     // Hide dropdown on keys down
     const onKeyDown = (e: React.KeyboardEvent) => {
@@ -127,23 +119,12 @@ const Navigation = ({ categories }: { categories: any }) => {
                             >
                                 {'Catalog'}
                             </button>
-                            <button
-                                onClick={openCartDrawer}
-                                type={'button'}
-                                className={cn(styles.cartButton, 'button-empty')}
-                                aria-label={'Open cart'}
-                                data-cart-icon
-                            >
-                                <Cart />
-                                <CartBadgeInline items={items} />
-                            </button>
                         </div>
                     )}
 
                     {!isDesktop && <MobileNavigation />}
                 </nav>
                 <CategoriesDropdown controllerBtnRef={catalogBtnRef} isExpanded={isExpanded} categories={categories} />
-                <CartDrawer />
             </header>
             <Overlay open={isExpanded} onClose={hideDropdown} zIndex={2} />
         </NavigationContext.Provider>
@@ -151,25 +132,3 @@ const Navigation = ({ categories }: { categories: any }) => {
 };
 
 export default Navigation;
-
-function CartBadgeInline({ items }: { items: CartItem[] }) {
-    const ref = useRef<HTMLSpanElement>(null);
-    const countTotal = useMemo(() => items.reduce((acc, i) => acc + i.quantity, 0), [items]);
-
-    useEffect(() => {
-        if (!ref.current || items.length <= 0) return;
-
-        ref.current.classList.remove(styles.bump);
-        ref.current.classList.add(styles.bump);
-    }, [items]);
-
-    if (items.length <= 0) return null;
-
-    const display = countTotal > 99 ? '99+' : String(countTotal);
-
-    return (
-        <span ref={ref} className={styles.badge} aria-live={'polite'} aria-atomic={'true'}>
-            {display}
-        </span>
-    );
-}

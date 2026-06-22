@@ -1,20 +1,13 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-import { openCart } from '@/features/orderState/model/orderSlice';
-import { useAppDispatch } from '@/shared/lib/redux';
 import { cn } from '@/shared/lib/utils/cn';
 
-import Cart from '../../../../../shared/ui/icons/Cart';
 import Modal from '../../../../../shared/ui/modal/Modal';
 import styles from '../navigation.module.scss';
 import { CategoriesDropdown } from './CategoriesDropdown';
-import NavigationButton from './NavigationButton';
 
 const Menu = ({ isMenuOpened, closeMenu }: { isMenuOpened: boolean; closeMenu: () => void }) => {
-    const dispatch = useAppDispatch();
-    const openCartDrawer = () => dispatch(openCart());
-
     return (
         <Modal open={isMenuOpened} onClose={closeMenu}>
             <Modal.Overlay>
@@ -37,10 +30,6 @@ const Menu = ({ isMenuOpened, closeMenu }: { isMenuOpened: boolean; closeMenu: (
                     >
                         <HomeLink />
                         <CategoriesDropdown />
-
-                        <NavigationButton handleClick={openCartDrawer} className={'mobile-nav-element--border-bottom'}>
-                            <Cart className={styles.cartSvg} />
-                        </NavigationButton>
                     </motion.div>
                 </Modal.Wrapper>
             </Modal.Overlay>

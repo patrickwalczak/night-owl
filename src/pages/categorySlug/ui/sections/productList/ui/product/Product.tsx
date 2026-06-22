@@ -4,33 +4,16 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { type KeyboardEventHandler, type MouseEventHandler } from 'react';
 
-import { addItem } from '@/features/orderState/model/orderSlice';
 import { type ListingProductType } from '@/pages/categorySlug/model/product.types';
-import { useAppDispatch } from '@/shared/lib/redux';
 import { cn } from '@/shared/lib/utils/cn';
 import Cart from '@/shared/ui/icons/Cart';
 
 import styles from './product.module.scss';
 
 export default function Product({ product }: { product: ListingProductType }) {
-    const dispatch = useAppDispatch();
     const router = useRouter();
 
     const productUrl = `/product/${product.slug}`;
-
-    const addProduct = () => {
-        dispatch(
-            addItem({
-                id: product.id,
-                name: product.name,
-                image: '',
-                price: product.price,
-                quantity: 1,
-                stock: 99,
-                currency: product.currency,
-            }),
-        );
-    };
 
     const goToProduct = () => router.push(productUrl);
 
@@ -51,7 +34,6 @@ export default function Product({ product }: { product: ListingProductType }) {
 
     const onCartClick: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.stopPropagation();
-        addProduct();
     };
 
     const onCartKeyDown: KeyboardEventHandler<HTMLButtonElement> = (e) => {
