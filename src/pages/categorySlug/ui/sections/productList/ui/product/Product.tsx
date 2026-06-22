@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { type KeyboardEventHandler, type MouseEventHandler } from 'react';
 
 import { type ListingProductType } from '@/pages/categorySlug/model/product.types';
@@ -11,27 +10,6 @@ import Cart from '@/shared/ui/icons/Cart';
 import styles from './product.module.scss';
 
 export default function Product({ product }: { product: ListingProductType }) {
-    const router = useRouter();
-
-    const productUrl = `/product/${product.slug}`;
-
-    const goToProduct = () => router.push(productUrl);
-
-    const onCardClick = () => goToProduct();
-
-    const onCardKeyDown: KeyboardEventHandler<HTMLElement> = (e) => {
-        if (e.target !== e.currentTarget) return;
-
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            goToProduct();
-        }
-        if (e.key === ' ') {
-            e.preventDefault();
-            goToProduct();
-        }
-    };
-
     const onCartClick: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.stopPropagation();
     };
@@ -46,8 +24,6 @@ export default function Product({ product }: { product: ListingProductType }) {
             tabIndex={0}
             role={'link'}
             aria-label={`Open ${product.name}`}
-            onClick={onCardClick}
-            onKeyDown={onCardKeyDown}
         >
             <div className={cn(styles.thumb)}>
                 <Image src={'https://placehold.co/600x400.webp'} alt={product.name} fill className={styles.img} />

@@ -1,5 +1,4 @@
 import { cn } from '@/shared/lib/utils/cn';
-import { Checkbox } from '@/shared/ui/checkbox/Checkbox';
 
 import SideFiltersDesktop from '../../sections/filtering/ui/sideFiltersDesktop/SideFiltersDesktop';
 import ProductsInfinite from '../../sections/productList/ui/productsInfinite/ProductsInfinite';
@@ -9,10 +8,7 @@ import styles from './catalogView.module.scss';
 export default function CatalogContainer() {
     return (
         <main className={cn(styles.container, 'flex', 'flex-col')}>
-            {/* <Checkbox.Root id={'color_red'} checkedValue={''}>
-                <Checkbox.Input id={'color_red'} name={'color'} value={'color_red'} />
-                <Checkbox.Label id={'color_red'} text={'Red'} className={''} />
-            </Checkbox.Root> */}
+
             <StickyViewDesktop />
 
             <div className={styles.productsContainer}>

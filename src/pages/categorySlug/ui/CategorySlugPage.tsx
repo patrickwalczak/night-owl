@@ -5,7 +5,6 @@ import { normalizeSearchParams, parseListingParams } from '@/pages/categorySlug/
 
 import { getPageData } from '../api/getPageData';
 import CatalogProvider from '../model/providers/CatalogProvider';
-import { CatalogUrlActionsProvider } from '../model/providers/CatalogUrlActionsProvider';
 import { type RouteParamsType } from '../model/routeParams.types';
 import { type SearchParamsType } from '../model/searchParams.types';
 import CatalogContainer from '../ui/components/pageView/CatalogContainer';
@@ -37,9 +36,7 @@ export default async function CategorySlugPage({
                 areFiltersOpen={areFiltersOpen}
                 parameters={parameters}
             >
-                <CatalogUrlActionsProvider>
-                    <CatalogContainer />
-                </CatalogUrlActionsProvider>
+                <CatalogContainer />
             </CatalogProvider>
         );
     }
