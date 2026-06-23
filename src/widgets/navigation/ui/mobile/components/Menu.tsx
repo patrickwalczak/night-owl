@@ -5,7 +5,7 @@ import { cn } from '@/shared/lib/utils/cn';
 
 import Modal from '../../../../../shared/ui/modal/Modal';
 import styles from '../navigation.module.scss';
-import { CategoriesDropdown } from './CategoriesDropdown';
+import NavigationButton from './NavigationButton';
 
 const Menu = ({ isMenuOpened, closeMenu }: { isMenuOpened: boolean; closeMenu: () => void }) => {
     return (
@@ -29,7 +29,9 @@ const Menu = ({ isMenuOpened, closeMenu }: { isMenuOpened: boolean; closeMenu: (
                         animate={'visible'}
                     >
                         <HomeLink />
-                        <CategoriesDropdown />
+                        <NavigationButton className={'mobile-nav-element--border-bottom'}>
+                            {'Catalog'}
+                        </NavigationButton>
                     </motion.div>
                 </Modal.Wrapper>
             </Modal.Overlay>

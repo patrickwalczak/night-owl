@@ -5,7 +5,7 @@ import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
 import { cn } from '@/shared/lib/utils/cn';
 import { NavigationContext } from '@/widgets/navigation/ui/Navigation';
 
-import { Hamburger } from '../../../../shared/ui/icons/Hamburger';
+import { Hamburger as HamburgerIcon } from '../../../../shared/ui/icons/Hamburger';
 import Menu from './components/Menu';
 import styles from './navigation.module.scss';
 
@@ -36,7 +36,7 @@ const MobileNavigation = () => {
                 )}
                 onClick={openMenu}
             >
-                <Hamburger />
+                <HamburgerIcon />
             </button>
         </>
     );
