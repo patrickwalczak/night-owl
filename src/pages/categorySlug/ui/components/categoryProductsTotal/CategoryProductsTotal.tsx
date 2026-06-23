@@ -9,9 +9,7 @@ const CategoryProductsTotal = () => {
 
     return (
         <span className={'text-sm'}>
-            {productSum}
-            {' '}
-            {'results'}
+            {`${productSum} results`}
         </span>
     );
 };
