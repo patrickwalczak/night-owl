@@ -6,7 +6,7 @@ import styles from './filters.module.scss';
 
 type FiltersType = SVGProps<SVGSVGElement>;
 
-const Filters = ({ className, ...props }: FiltersType) => {
+export const FiltersIcon = ({ className, ...props }: FiltersType) => {
     return (
         <svg
             aria-hidden={'true'}
@@ -25,5 +25,3 @@ const Filters = ({ className, ...props }: FiltersType) => {
         </svg>
     );
 };
-
-export default Filters;

@@ -5,7 +5,7 @@ import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
 import { cn } from '@/shared/lib/utils/cn';
 import { NavigationContext } from '@/widgets/navigation/ui/Navigation';
 
-import { HamburgerIcon } from '../../../../shared/ui/icons/HamburgerIcon';
+import { HamburgerIcon } from '../../../../shared/ui/icons';
 import Menu from './components/Menu';
 import styles from './navigation.module.scss';
 

@@ -1,4 +1,4 @@
-const ArrowDown = ({ className = '' }: { className?: string }) => {
+export const ArrowDownIcon = ({ className = '' }: { className?: string }) => {
     return (
         <svg
             aria-hidden={'true'}
@@ -26,5 +26,3 @@ const ArrowDown = ({ className = '' }: { className?: string }) => {
         </svg>
     );
 };
-
-export default ArrowDown;

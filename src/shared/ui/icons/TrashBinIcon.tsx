@@ -1,4 +1,4 @@
-const TrashBin = () => {
+export const TrashBinIcon = () => {
     return (
         <svg aria-hidden={'true'} width={'24'} height={'24'} viewBox={'0 0 24 24'} fill={'none'} xmlns={'http://www.w3.org/2000/svg'}>
             <g clipPath={'url(#clip0_1_20431)'}>
@@ -22,5 +22,3 @@ const TrashBin = () => {
         </svg>
     );
 };
-
-export default TrashBin;

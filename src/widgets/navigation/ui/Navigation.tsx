@@ -5,11 +5,10 @@ import type React from 'react';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { createContext, useEffect, useRef, useState } from 'react';
+import { createContext, useEffect, useRef } from 'react';
 
 import { useAppSelector } from '@/shared/lib/redux';
 import { cn } from '@/shared/lib/utils/cn';
-import { Dialog } from '@/shared/ui/dialog/Dialog';
 
 import useIsDropdownExpanded from '../hooks/useIsDropdownExpanded';
 import useIsScrolled from '../hooks/useIsScrolled';

@@ -5,7 +5,7 @@ import { type KeyboardEventHandler, type MouseEventHandler } from 'react';
 
 import { type ListingProductType } from '@/pages/categorySlug/model/product.types';
 import { cn } from '@/shared/lib/utils/cn';
-import Cart from '@/shared/ui/icons/Cart';
+import { CartIcon } from '@/shared/ui/icons';
 
 import styles from './product.module.scss';
 
@@ -47,7 +47,7 @@ export default function Product({ product }: { product: ListingProductType }) {
                         onClick={onCartClick}
                         onKeyDown={onCartKeyDown}
                     >
-                        <Cart />
+                        <CartIcon />
                         <span className={'sr-only'}>{'Add to cart'}</span>
                     </button>
                 </div>

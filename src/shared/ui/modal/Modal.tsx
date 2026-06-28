@@ -6,7 +6,7 @@ import { createPortal } from 'react-dom';
 import { cn } from '@/shared/lib/utils/cn';
 
 import { useBodyOverflow } from '../../lib/hooks/useBodyOverflow';
-import { Close } from '../icons/Close';
+import { CloseIcon } from '../icons';
 import styles from './modal.module.scss';
 import { useHandleEscape } from './useHandleEscape';
 
@@ -39,7 +39,7 @@ const CloseButton = ({ className = '' }: { className?: string }) => {
 
     return (
         <button className={cn('button-empty', className)} onClick={onClose} aria-label={'Close modal'}>
-            <Close />
+            <CloseIcon />
         </button>
     );
 };
