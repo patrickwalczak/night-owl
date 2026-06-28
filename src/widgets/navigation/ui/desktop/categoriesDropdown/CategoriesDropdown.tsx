@@ -1,22 +1,20 @@
-import type React from 'react';
-
 import { AnimatePresence, motion } from 'framer-motion';
-import Link from 'next/link';
+import { type RefObject } from 'react';
 
-import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
 import { cn } from '@/shared/lib/utils/cn';
 
-import { NavigationContext } from '../../Navigation';
 import styles from './categoriesDropdown.module.scss';
+import { DropdownCategory } from './DropdownCategory';
+import { NoCategoriesMessage } from './NoCategoriesMsg';
 
-const CategoriesDropdown = ({
+export const CategoriesDropdown = ({
     isExpanded,
     categories,
     controllerBtnRef,
 }: {
     isExpanded: boolean;
     categories: any;
-    controllerBtnRef?: React.RefObject<HTMLButtonElement | null>;
+    controllerBtnRef?: RefObject<HTMLButtonElement | null>;
 }) => {
     const refCallback = () => {
         return () => {
@@ -41,7 +39,7 @@ const CategoriesDropdown = ({
                         ? (
                             <ul className={cn(styles.wrapper)}>
                                 {categories.map(category => (
-                                    <Category key={category.id} category={category} isRootCategory />
+                                    <DropdownCategory key={category.id} category={category} isRootCategory />
                                 ))}
                             </ul>
                         )
@@ -53,41 +51,3 @@ const CategoriesDropdown = ({
         </AnimatePresence>
     );
 };
-
-export default CategoriesDropdown;
-
-const Category = ({
-    category,
-    isRootCategory = false,
-}: {
-    category: any;
-    isRootCategory?: boolean;
-}) => {
-    const { setIsExpanded } = useSafeContext(NavigationContext);
-
-    const handleClick = () => {
-        setIsExpanded(false);
-    };
-
-    return (
-        <>
-            <li key={category.id}>
-                <Link
-                    onClick={handleClick}
-                    className={cn('nav-hover-underline', styles.dropdownLink, isRootCategory && styles.isRootCategory)}
-                    href={`/category/${category.slug}`}
-                >
-                    {category.name}
-                </Link>
-            </li>
-
-            {category.children.length
-                ? category.children.map(child => <Category key={child.id} category={{ children: [], ...child }} />)
-                : null}
-        </>
-    );
-};
-
-const NoCategoriesMessage = () => (
-    <p className={cn('mobile-nav-element', styles.noCategories)}>{'No categories available'}</p>
-);

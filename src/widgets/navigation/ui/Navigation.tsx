@@ -5,15 +5,16 @@ import type React from 'react';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { createContext, useEffect, useRef } from 'react';
+import { createContext, useEffect, useRef, useState } from 'react';
 
 import { useAppSelector } from '@/shared/lib/redux';
 import { cn } from '@/shared/lib/utils/cn';
+import { Dialog } from '@/shared/ui/dialog/Dialog';
 
 import useIsDropdownExpanded from '../hooks/useIsDropdownExpanded';
 import useIsScrolled from '../hooks/useIsScrolled';
 import Overlay from './components/Overlay';
-import CategoriesDropdown from './desktop/categoriesDropdown/CategoriesDropdown';
+import { CategoriesDropdown } from './desktop/categoriesDropdown/CategoriesDropdown';
 import MobileNavigation from './mobile/MobileNavigation';
 import styles from './navigation.module.scss';
 
@@ -70,6 +71,8 @@ const Navigation = ({ categories }: { categories: any }) => {
         }
     };
 
+    const toggleDropdown = () => setIsExpanded(prev => !prev);
+
     // Keep the main content inactive while the navigation overlay is open
     // so users cannot click or focus elements behind it.
     useEffect(() => {
@@ -96,7 +99,6 @@ const Navigation = ({ categories }: { categories: any }) => {
                     direction === 'down' && styles.isHidden,
                     'transition-200',
                 )}
-                onPointerLeave={hideDropdown}
                 onKeyDown={onKeyDown}
             >
                 <nav className={cn(styles.nav, 'transition-200')} aria-label={'Main navigation'}>
@@ -108,7 +110,7 @@ const Navigation = ({ categories }: { categories: any }) => {
                         <div className={cn(styles.listWrapper, 'flex', 'align-center')}>
                             <button
                                 ref={catalogBtnRef}
-                                onPointerEnter={expandDropdown}
+                                onClick={toggleDropdown}
                                 type={'button'}
                                 className={cn(styles.catalogButton, 'button-empty')}
                                 aria-haspopup={'true'}
