@@ -17,7 +17,7 @@ export const CategoryBanner = ({ href, title, description, linkLabel }: Category
             <div className={styles.content}>
                 <h3 className={cn(styles.title, 'h3', 'font-playfair')}>{title}</h3>
 
-                <p className={styles.description}>{description}</p>
+                <p className={cn(styles.description, 'p')}>{description}</p>
 
                 <Link className={cn(styles.link)} href={href}>
                     {linkLabel}

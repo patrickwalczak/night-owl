@@ -1,0 +1,127 @@
+@layer base {
+  :root {
+    // Font families
+    --font-family-inter: var(--font-inter), sans-serif;
+    --font-family-playfair: var(--font-playfair), serif;
+
+    // Font sizes
+    --font-size-8: 0.5rem;
+    --font-size-12: 0.75rem;
+    --font-size-14: 0.875rem;
+    --font-size-15: 0.9375rem;
+    --font-size-16: 1rem;
+    --font-size-18: 1.125rem;
+    --font-size-20: 1.25rem;
+    --font-size-22: 1.375rem;
+    --font-size-24: 1.5rem;
+    --font-size-26: 1.625rem;
+    --font-size-28: 1.75rem;
+    --font-size-32: 2rem;
+    --font-size-36: 2.25rem;
+    --font-size-42: 2.625rem;
+    --font-size-48: 3rem;
+    --font-size-54: 3.375rem;
+    --font-size-56: 3.5rem;
+    --font-size-64: 4rem;
+    --font-size-72: 4.5rem;
+    --font-size-76: 4.75rem;
+    --font-size-80: 5rem;
+    --font-size-96: 6rem;
+
+    // Font weights
+    --font-weight-100: 100;
+    --font-weight-200: 200;
+    --font-weight-300: 300;
+    --font-weight-400: 400;
+    --font-weight-500: 500;
+    --font-weight-600: 600;
+    --font-weight-700: 700;
+    --font-weight-800: 800;
+    --font-weight-900: 900;
+
+    // Line heights
+    --line-height-none: 1;
+    --line-height-tight: 1.1;
+    --line-height-snug: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.65;
+
+    // Letter spacing
+    --letter-spacing-none: 0;
+    --letter-spacing-subtle: 0.01em;
+    --letter-spacing-heading: 0.02em;
+    --letter-spacing-label: 0.08em;
+
+    // Raw colors
+    --color-owl-white: #ffffff;
+
+    --color-owl-gray-200: #fafafa;
+    --color-owl-gray-300: #f1f1f1;
+    --color-owl-gray-400: #cccccc;
+    --color-owl-gray-425: #a9a9a9;
+    --color-owl-gray-450: #979797;
+    --color-owl-gray-500: #5f5f5f;
+    --color-owl-gray-600: #4c4c4c;
+
+    --color-owl-blue-100: #f3f4f6;
+    --color-owl-blue-500: #262630;
+    --color-owl-blue-800: #1d1d23;
+
+    --color-owl-purple-500: #a387c8;
+    --color-owl-purple-500-faded: #a387c8ea;
+    --color-owl-purple-850: #73618c;
+
+    // Semantic colors
+    --color-background-primary: var(--color-owl-gray-200);
+    --color-background-secondary: var(--color-owl-white);
+    --color-background-inverted: var(--color-owl-blue-800);
+    --color-background-accent: var(--color-owl-purple-850);
+
+    --color-text-primary: var(--color-owl-blue-800);
+    --color-text-secondary: var(--color-owl-gray-500);
+    --color-text-muted: var(--color-owl-gray-450);
+    --color-text-inverted: var(--color-owl-white);
+    --color-text-accent: var(--color-owl-purple-850);
+
+    // Borders
+    --color-border-primary: var(--color-owl-gray-300);
+    --color-border-strong: var(--color-owl-gray-400);
+
+    // Heading typography
+    --typography-h1-size: var(--font-size-56);
+    --typography-h1-line-height: 1.15;
+    --typography-h1-letter-spacing: var(--letter-spacing-heading);
+
+    --typography-h2-size: var(--font-size-48);
+    --typography-h2-line-height: 1.15;
+    --typography-h2-letter-spacing: var(--letter-spacing-heading);
+
+    --typography-h3-size: var(--font-size-32);
+    --typography-h3-line-height: 1.25;
+    --typography-h3-letter-spacing: var(--letter-spacing-heading);
+
+    --typography-h4-size: var(--font-size-24);
+    --typography-h4-line-height: 1.33;
+    --typography-h4-letter-spacing: var(--letter-spacing-heading);
+
+    // Body typography
+    --typography-body-xs-size: var(--font-size-12);
+    --typography-body-xs-line-height: var(--line-height-normal);
+    --typography-body-xs-letter-spacing: var(--letter-spacing-none);
+
+    --typography-body-s-size: var(--font-size-14);
+    --typography-body-s-line-height: var(--line-height-normal);
+    --typography-body-s-letter-spacing: var(--letter-spacing-none);
+
+    --typography-body-m-size: var(--font-size-16);
+    --typography-body-m-line-height: var(--line-height-normal);
+    --typography-body-m-letter-spacing: var(--letter-spacing-none);
+
+    --typography-body-l-size: var(--font-size-18);
+    --typography-body-l-line-height: var(--line-height-relaxed);
+    --typography-body-l-letter-spacing: var(--letter-spacing-none);
+
+    // Layout
+    --navigation-height: 54px;
+  }
+}

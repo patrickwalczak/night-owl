@@ -1,0 +1,24 @@
+.element {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-size: var(--font-size-32);
+  color: var(--color-text-inverted);
+}
+
+.button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.borderBottom {
+  border-bottom: 1px solid var(--color-owl-purple-500);
+}

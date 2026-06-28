@@ -48,7 +48,7 @@ const Overlay = ({ className = '', children }: { className?: string; children: R
     const { onClose } = useSafeContext(ModalContext);
 
     return (
-        <div className={cn('backdrop', className)} onClick={onClose}>
+        <div className={cn(styles.backdrop, className)} onClick={onClose}>
             {children}
         </div>
     );

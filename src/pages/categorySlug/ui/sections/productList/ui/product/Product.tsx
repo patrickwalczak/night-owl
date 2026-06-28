@@ -35,7 +35,7 @@ export default function Product({ product }: { product: ListingProductType }) {
                 </h4>
 
                 <div className={styles.bottomContainer}>
-                    <p className={styles.price}>
+                    <p className={cn(styles.price, 'p')}>
                         {'$'}
                         {product.price}
                     </p>

@@ -1,0 +1,17 @@
+@layer base {
+  [data-theme='dark'] {
+    --color-background-primary: var(--color-owl-blue-800);
+    --color-background-secondary: #262630;
+    --color-background-inverted: var(--color-owl-white);
+    --color-background-accent: var(--color-owl-purple-850);
+
+    --color-text-primary: var(--color-owl-white);
+    --color-text-secondary: var(--color-owl-gray-400);
+    --color-text-muted: var(--color-owl-gray-425);
+    --color-text-inverted: var(--color-owl-blue-800);
+    --color-text-accent: var(--color-owl-purple-500);
+
+    --color-border-primary: rgb(255 255 255 / 12%);
+    --color-border-strong: rgb(255 255 255 / 24%);
+  }
+}

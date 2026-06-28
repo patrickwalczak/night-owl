@@ -5,7 +5,6 @@ import { cn } from '@/shared/lib/utils/cn';
 
 import styles from './categoriesDropdown.module.scss';
 import { DropdownCategory } from './DropdownCategory';
-import { NoCategoriesMessage } from './NoCategoriesMsg';
 
 export const CategoriesDropdown = ({
     isExpanded,
@@ -44,7 +43,7 @@ export const CategoriesDropdown = ({
                             </ul>
                         )
                         : (
-                            <NoCategoriesMessage />
+                            null
                         )}
                 </motion.nav>
             )}

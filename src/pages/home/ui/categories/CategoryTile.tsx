@@ -24,7 +24,7 @@ export const CategoryTile = ({ href, title, description, image }: CategoryTileTy
 
             <div className={cn(styles.content, 'flex', 'flex-col')}>
                 <h3 className={cn(styles.title, 'h4', 'font-playfair')}>{title}</h3>
-                <p className={styles.description}>{description}</p>
+                <p className={cn(styles.description, 'p')}>{description}</p>
             </div>
         </Link>
     );

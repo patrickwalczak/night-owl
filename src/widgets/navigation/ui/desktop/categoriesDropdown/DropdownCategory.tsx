@@ -24,7 +24,7 @@ export const DropdownCategory = ({
             <li>
                 <Link
                     onClick={handleClick}
-                    className={cn('nav-hover-underline', styles.dropdownLink, { [styles.isRootCategory]: isRootCategory })}
+                    className={cn(styles.dropdownLink, { [styles.isRootCategory]: isRootCategory })}
                     href={`/category/${category.slug}`}
                 >
                     {category.name}
