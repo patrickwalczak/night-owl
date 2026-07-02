@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server';
 
 import { getCategoryBySlug } from '@/entities/category/api/getCategoryBySlug';
-import { getProductsForCategory } from '@/entities/product/api/product';
+import { getProductsForCategory } from '@/entities/product/server';
+import { toOrderBy } from '@/pages/categorySlug/api/lib/getOrderBy';
+import { PAGE_SIZE } from '@/pages/categorySlug/config/constants';
 import { parseListingParams } from '@/pages/categorySlug/lib/url';
 
 export async function GET(req: Request, ctx: { params: Promise<{ category_slug: string }> }) {
@@ -19,9 +21,10 @@ export async function GET(req: Request, ctx: { params: Promise<{ category_slug: 
     const { items, total, pageSize } = await getProductsForCategory({
         categoryId: category.id,
         page: parsed.page,
-        sort: parsed.sort,
+        sort: toOrderBy(parsed.sort),
         query: parsed.query,
         paramValueIds: parsed.paramValueIds,
+        pageSize: PAGE_SIZE,
     });
 
     const totalPages = Math.max(1, Math.ceil(total / pageSize));

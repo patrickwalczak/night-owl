@@ -1,4 +1,4 @@
-import { getCategories } from '@/entities/category/api/getCategories';
+import { getCategories } from '@/entities/category/server';
 
 import Navigation from './Navigation';
 

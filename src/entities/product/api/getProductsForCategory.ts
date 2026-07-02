@@ -1,31 +1,19 @@
 'use server';
 import 'server-only';
 
-import type { SortOrderType } from '@/pages/categorySlug/model/searchParams.types';
+import type { Prisma } from '@prisma/client';
 
 import { prisma } from '../../../shared/lib/db/prisma';
 
-const PAGE_SIZE = 20;
-
-function toOrderBy(sort: SortOrderType) {
-    switch (sort) {
-        case 'price_asc':
-            return { price: 'asc' as const };
-        case 'price_desc':
-            return { price: 'desc' as const };
-        case 'newest':
-            return { createdAt: 'desc' as const };
-        default:
-            return { createdAt: 'desc' as const };
-    }
-}
+type ProductOrderBy = Prisma.ProductOrderByWithRelationInput;
 
 export async function getProductsForCategory(opts: {
     categoryId: string;
     page: number;
-    sort: SortOrderType;
+    sort: ProductOrderBy;
     paramValueIds?: string[];
     query?: string;
+    pageSize: number;
 }) {
     const children = await prisma.category.findMany({
         where: { parentId: opts.categoryId },
@@ -33,7 +21,6 @@ export async function getProductsForCategory(opts: {
     });
     const categoryIds = [opts.categoryId, ...children.map(c => c.id)];
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const where: any = { categoryId: { in: categoryIds }, inStock: true };
 
     if (opts.query) where.name = { contains: opts.query, mode: 'insensitive' };
@@ -47,9 +34,9 @@ export async function getProductsForCategory(opts: {
     const [items, total] = await Promise.all([
         prisma.product.findMany({
             where,
-            orderBy: toOrderBy(opts.sort),
-            skip: (opts.page - 1) * PAGE_SIZE,
-            take: PAGE_SIZE,
+            orderBy: opts.sort,
+            skip: (opts.page - 1) * opts.pageSize,
+            take: opts.pageSize,
             select: {
                 id: true,
                 name: true,
@@ -62,5 +49,5 @@ export async function getProductsForCategory(opts: {
         prisma.product.count({ where }),
     ]);
 
-    return { items, total, pageSize: PAGE_SIZE };
+    return { items, total, pageSize: opts.pageSize };
 }

@@ -1,36 +1,14 @@
 import { cache } from 'react';
 import 'server-only';
 
-import { type SortOrderType } from '@/pages/categorySlug/model/searchParams.types';
-
 import { prisma } from '../../../shared/lib/db/prisma';
+import { PAGE_SIZE } from '../config/constants';
+import { toOrderBy } from './lib/getOrderBy';
+import { type GetPageDataOptions } from './model/types';
 
-const PAGE_SIZE = 20;
-
-function toOrderBy(sort: SortOrderType) {
-    switch (sort) {
-        case 'price_asc':
-            return { price: 'asc' as const };
-        case 'price_desc':
-            return { price: 'desc' as const };
-        case 'newest':
-            return { createdAt: 'desc' as const };
-        default:
-            return { createdAt: 'desc' as const };
-    }
-}
-
-interface FetchOpts {
-    page?: number;
-    sort: SortOrderType;
-    paramValueIds?: string[];
-    query?: string;
-}
-
-export const getPageData = cache(async (slug: string, opts: FetchOpts) => {
+export const getPageData = cache(async (slug: string, opts: GetPageDataOptions) => {
     const page = Math.max(1, opts.page ?? 1);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const whereProducts: any = {
         OR: [{ category: { slug } }, { category: { parent: { slug } } }],
     };

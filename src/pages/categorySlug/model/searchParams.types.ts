@@ -1,6 +1,6 @@
-import { type SORT_OPTIONS, type SEARCH_PARAMS_KEYS } from '@/pages/categorySlug/config/searchParams';
+import { type SEARCH_PARAMS_KEYS, type SORT_VALUE } from '@/pages/categorySlug/config/searchParams';
 
-export type SortOrderType = (typeof SORT_OPTIONS)[number]['value'];
+export type SortOrderType = (typeof SORT_VALUE)[keyof typeof SORT_VALUE];
 
 export type SearchParamsKeys = (typeof SEARCH_PARAMS_KEYS)[keyof typeof SEARCH_PARAMS_KEYS];
 

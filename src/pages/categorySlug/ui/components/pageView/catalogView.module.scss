@@ -11,6 +11,7 @@
 .productsContainer {
 	display: flex;
 	padding-inline: 1rem;
+	min-height: 400rem;
 
 	@media (min-width: breakpoints.$breakpoint-1024) {
 		padding-inline: 0;

@@ -70,6 +70,10 @@
     transition: opacity 200ms ease-in-out;
   }
 
+  .transition-200 {
+    transition: all 200ms ease-in-out;
+  }
+
   .sr-only {
     position: absolute;
     inline-size: 1px;

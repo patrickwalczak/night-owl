@@ -1,4 +1,4 @@
-import '@/shared/styles/index.scss';
+import '../src/shared/styles/index.scss';
 import { Playfair_Display, Inter } from 'next/font/google';
 import { headers } from 'next/headers';
 
