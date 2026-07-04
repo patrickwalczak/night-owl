@@ -4,8 +4,9 @@ import { useEffect, useRef } from 'react';
 
 import { useAppDispatch } from '@/app/store/client';
 import { DESKTOP_BREAKPOINT, TABLET_BREAKPOINT } from '@/shared/config';
+import { type DeviceType } from '@/shared/model/device.model';
 
-import { setDevice, type DeviceType } from '../model/appSlice';
+import { setDevice } from '../model/appSlice';
 
 const THROTTLE_MS = 120;
 

@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-export type DeviceType = 'mobile' | 'tablet' | 'desktop';
+import { type DeviceType } from '@/shared/model/device.model';
 
 export interface AppState {
     device: DeviceType;
