@@ -2,7 +2,7 @@
 
 import { type ReactNode } from 'react';
 
-import { useAppSelector } from '@/app/store/client';
+import { useIsNavigationOpen } from '@/features/appState/client';
 import { useIsSticky } from '@/shared/lib/hooks/client';
 import { cn } from '@/shared/lib/utils';
 
@@ -13,7 +13,7 @@ interface StickyContainerWrapperType {
 }
 
 const StickyContainer = ({ children }: StickyContainerWrapperType) => {
-    const isNavigationOpen = useAppSelector(state => state.app.isNavigationOpen);
+    const isNavigationOpen = useIsNavigationOpen();
 
     const topPx = isNavigationOpen ? 0 : 48;
 

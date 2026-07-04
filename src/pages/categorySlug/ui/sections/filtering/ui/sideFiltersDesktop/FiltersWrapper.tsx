@@ -4,7 +4,7 @@ import type React from 'react';
 
 import { useEffect, useRef } from 'react';
 
-import { useAppSelector } from '@/app/store/client';
+import { useIsNavigationOpen } from '@/features/appState/client';
 import { useSafeContext } from '@/shared/lib/hooks/client';
 import { cn } from '@/shared/lib/utils';
 
@@ -12,7 +12,7 @@ import { CatalogContext } from '../../../../../model/providers/CatalogProvider';
 import styles from './sideFiltersDesktop.module.scss';
 
 const FiltersWrapper = ({ children }: { children: React.ReactNode }) => {
-    const isNavigationOpen = useAppSelector(s => s.app.isNavigationOpen);
+    const isNavigationOpen = useIsNavigationOpen();
     const { areFiltersOpen } = useSafeContext(CatalogContext);
     const containerRef = useRef<HTMLDivElement>(null);
 

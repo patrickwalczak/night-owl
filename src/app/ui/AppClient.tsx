@@ -2,7 +2,7 @@
 
 import type React from 'react';
 
-import { useDeviceType } from '@/features/appState/lib/useDeviceType';
+import { useDeviceType } from '@/app/lib/useDeviceType';
 
 const AppClient = ({ children }: { children: React.ReactNode }) => {
     useDeviceType();

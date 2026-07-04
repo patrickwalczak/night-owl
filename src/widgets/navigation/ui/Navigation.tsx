@@ -8,7 +8,7 @@ import { createContext, useEffect, useRef } from 'react';
 
 import type { CategoryTree } from '@/entities/category';
 
-import { useAppSelector } from '@/app/store/client';
+import { useIsDesktop } from '@/features/appState/client';
 import { cn } from '@/shared/lib/utils';
 
 import useIsDropdownExpanded from '../hooks/useIsDropdownExpanded';
@@ -29,7 +29,7 @@ interface NavigationContextType {
 export const NavigationContext = createContext<NavigationContextType | null>(null);
 
 const Navigation = ({ categories }: { categories: CategoryTree }) => {
-    const isDesktop = useAppSelector(state => state.app.isDesktop);
+    const isDesktop = useIsDesktop();
 
     const { isScrolled, direction } = useIsScrolled();
     const { expandDropdown, hideDropdown, isExpanded, setIsExpanded } = useIsDropdownExpanded();

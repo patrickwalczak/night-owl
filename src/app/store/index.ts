@@ -1,11 +1,11 @@
 import { configureStore, type PreloadedStateShapeFromReducersMapObject, combineReducers } from '@reduxjs/toolkit';
 
-import appSlice from '../../features/appState/model/appSlice';
+import { appReducer } from '@/features/appState';
 
 type PreloadedStateType = PreloadedStateShapeFromReducersMapObject<typeof rootReducer>;
 
 const rootReducer = combineReducers({
-    app: appSlice,
+    app: appReducer,
 });
 
 export const makeStore = (preloadedState: PreloadedStateType) => {

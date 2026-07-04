@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { useAppDispatch } from '@/app/store/client';
-import { toggleNavigation } from '@/features/appState/model/appSlice';
+import { useSetNavigationOpen } from '@/features/appState/client';
 
 type ScrollDirection = 'up' | 'down';
 
 const useScrollState = (offset = 60, threshold = 8) => {
-    const dispatch = useAppDispatch();
+    const setNavigationOpen = useSetNavigationOpen();
     const [isScrolled, setIsScrolled] = useState(false);
     const [direction, setDirection] = useState<ScrollDirection>('up');
 
@@ -23,7 +22,7 @@ const useScrollState = (offset = 60, threshold = 8) => {
 
                     const diff = y - lastY.current;
                     if (Math.abs(diff) >= threshold) {
-                        dispatch(toggleNavigation({ isNavigationOpen: diff > 0 }));
+                        setNavigationOpen(diff > 0);
                         setDirection(diff > 0 ? 'down' : 'up');
                         lastY.current = y;
                     }
@@ -39,7 +38,7 @@ const useScrollState = (offset = 60, threshold = 8) => {
 
         window.addEventListener('scroll', onScroll, { passive: true });
         return () => window.removeEventListener('scroll', onScroll);
-    }, [offset, threshold, dispatch]);
+    }, [offset, threshold, setNavigationOpen]);
 
     return { isScrolled, direction };
 };

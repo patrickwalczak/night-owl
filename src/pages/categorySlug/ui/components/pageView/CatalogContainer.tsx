@@ -1,12 +1,12 @@
 'use client';
 
-import { useAppSelector } from '@/app/store/client';
+import { useIsDesktop } from '@/features/appState/client';
 
 import CatalogViewDesktop from './CatalogViewDesktop';
 import CatalogViewMobile from './CatalogViewMobile';
 
 export default function CatalogContainer() {
-    const isDesktop = useAppSelector(state => state.app.isDesktop);
+    const isDesktop = useIsDesktop();
 
     return isDesktop ? <CatalogViewDesktop /> : <CatalogViewMobile />;
 }
