@@ -1,2 +1,1 @@
-export { type Product } from '@/shared/lib/db/generated/browser';
-export { ProductStatus } from '@/shared/lib/db/generated/enums';
+export { ProductStatus, type Product } from '@/shared/lib/db';

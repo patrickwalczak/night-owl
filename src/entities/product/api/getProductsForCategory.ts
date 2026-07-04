@@ -1,16 +1,12 @@
 'use server';
 import 'server-only';
 
-import type { Prisma } from '@prisma/client';
-
-import { prisma } from '@/shared/lib/db/server';
-
-type ProductOrderBy = Prisma.ProductOrderByWithRelationInput;
+import { prisma, type ProductOrderByWithRelationInput } from '@/shared/lib/db/server';
 
 export async function getProductsForCategory(opts: {
     categoryId: string;
     page: number;
-    sort: ProductOrderBy;
+    sort: ProductOrderByWithRelationInput;
     paramValueIds?: string[];
     query?: string;
     pageSize: number;

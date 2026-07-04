@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { createContext, useEffect, useRef } from 'react';
 
+import type { CategoryTree } from '@/entities/category';
+
 import { useAppSelector } from '@/shared/lib/redux/client';
 import { cn } from '@/shared/lib/utils';
 
@@ -17,7 +19,7 @@ import MobileNavigation from './mobile/MobileNavigation';
 import styles from './navigation.module.scss';
 
 interface NavigationContextType {
-    categories: any;
+    categories: CategoryTree;
     isExpanded: boolean;
     isScrolled: boolean;
     setIsExpanded: React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,7 +28,7 @@ interface NavigationContextType {
 
 export const NavigationContext = createContext<NavigationContextType | null>(null);
 
-const Navigation = ({ categories }: { categories: any }) => {
+const Navigation = ({ categories }: { categories: CategoryTree }) => {
     const isDesktop = useAppSelector(state => state.app.isDesktop);
 
     const { isScrolled, direction } = useIsScrolled();

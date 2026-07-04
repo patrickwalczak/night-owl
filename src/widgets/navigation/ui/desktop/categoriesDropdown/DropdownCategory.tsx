@@ -1,16 +1,24 @@
 import Link from 'next/link';
 
+import type { CategoryTree } from '@/entities/category';
+
 import { useSafeContext } from '@/shared/lib/hooks/client';
 import { cn } from '@/shared/lib/utils';
 
 import { NavigationContext } from '../../Navigation';
 import styles from './categoriesDropdown.module.scss';
 
+type RootCategory = CategoryTree[number];
+type ChildCategory = RootCategory['children'][number] & {
+    children: [];
+};
+type DropdownCategoryType = RootCategory | ChildCategory;
+
 export const DropdownCategory = ({
     category,
     isRootCategory = false,
 }: {
-    category: any;
+    category: DropdownCategoryType;
     isRootCategory?: boolean;
 }) => {
     const { setIsExpanded } = useSafeContext(NavigationContext);

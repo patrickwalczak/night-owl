@@ -76,8 +76,16 @@ const manufacturers = [
     'NexaLux',
 ];
 
-const generateProducts = () => {
-    const products = [];
+interface ProductSeed {
+    categorySlug: string;
+    price: number;
+    parameterName: string;
+    parameterValue: string;
+    productName: string;
+}
+
+const generateProducts = (): ProductSeed[] => {
+    const products: ProductSeed[] = [];
     let globalCounter = 1;
 
     for (const category of categories) {
