@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { cn } from '@/shared/lib/utils/cn';
+import { cn } from '@/shared/lib/utils';
 
 import styles from './categoryBanner.module.scss';
 

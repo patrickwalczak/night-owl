@@ -4,9 +4,9 @@ import type React from 'react';
 
 import { useEffect, useRef } from 'react';
 
-import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
-import { useAppSelector } from '@/shared/lib/redux';
-import { cn } from '@/shared/lib/utils/cn';
+import { useSafeContext } from '@/shared/lib/hooks/client';
+import { useAppSelector } from '@/shared/lib/redux/client';
+import { cn } from '@/shared/lib/utils';
 
 import { CatalogContext } from '../../../../../model/providers/CatalogProvider';
 import styles from './sideFiltersDesktop.module.scss';

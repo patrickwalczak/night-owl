@@ -1,7 +1,7 @@
 import { cache } from 'react';
 import 'server-only';
 
-import { prisma } from '../../../shared/lib/db/prisma';
+import { prisma } from '@/shared/lib/db/server';
 import { PAGE_SIZE } from '../config/constants';
 import { toOrderBy } from './lib/getOrderBy';
 import { type GetPageDataOptions } from './model/types';

@@ -1,7 +1,7 @@
 import 'server-only';
 import { cache } from 'react';
 
-import { prisma } from '../../../shared/lib/db/prisma';
+import { prisma } from '@/shared/lib/db/server';
 
 // TODO
 export const getCategories = cache(async function getCategories(): Promise<any[]> {

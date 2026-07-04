@@ -1,4 +1,4 @@
-import { cn } from '@/shared/lib/utils/cn';
+import { cn } from '@/shared/lib/utils';
 
 import SideFiltersDesktop from '../../sections/filtering/ui/sideFiltersDesktop/SideFiltersDesktop';
 import ProductsInfinite from '../../sections/productList/ui/productsInfinite/ProductsInfinite';

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import { cn } from '@/shared/lib/utils/cn';
+import { cn } from '@/shared/lib/utils';
 
 import FiltersWrapper from './FiltersWrapper';
 import styles from './sideFiltersDesktop.module.scss';

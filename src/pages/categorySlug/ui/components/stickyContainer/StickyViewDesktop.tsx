@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/shared/lib/utils/cn';
+import { cn } from '@/shared/lib/utils';
 
 import SideFiltersButton from '../../sections/filtering/ui/sideFiltersButton/SideFiltersButton';
 import CategoryName from '../categoryName/CategoryName';

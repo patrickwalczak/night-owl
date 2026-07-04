@@ -1,7 +1,9 @@
+'use client';
+
 import { createContext, type ReactNode } from 'react';
 
-import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
-import { cn } from '@/shared/lib/utils/cn';
+import { useSafeContext } from '@/shared/lib/hooks/client';
+import { cn } from '@/shared/lib/utils';
 
 import styles from './checkbox.module.scss';
 

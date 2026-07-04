@@ -1,6 +1,6 @@
 'use client';
 
-import { useAppSelector } from '@/shared/lib/redux';
+import { useAppSelector } from '@/shared/lib/redux/client';
 
 import CatalogViewDesktop from './CatalogViewDesktop';
 import CatalogViewMobile from './CatalogViewMobile';

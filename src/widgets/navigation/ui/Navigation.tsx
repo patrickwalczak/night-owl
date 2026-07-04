@@ -6,8 +6,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { createContext, useEffect, useRef } from 'react';
 
-import { useAppSelector } from '@/shared/lib/redux';
-import { cn } from '@/shared/lib/utils/cn';
+import { useAppSelector } from '@/shared/lib/redux/client';
+import { cn } from '@/shared/lib/utils';
 
 import useIsDropdownExpanded from '../hooks/useIsDropdownExpanded';
 import useIsScrolled from '../hooks/useIsScrolled';

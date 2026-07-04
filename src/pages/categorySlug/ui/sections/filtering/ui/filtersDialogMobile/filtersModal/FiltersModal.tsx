@@ -1,5 +1,5 @@
-import { cn } from '@/shared/lib/utils/cn';
-import Modal from '@/shared/ui/modal/Modal';
+import { cn } from '@/shared/lib/utils';
+import Modal from '@/shared/ui/modal/client';
 
 import styles from './filtersModal.module.scss';
 

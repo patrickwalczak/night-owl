@@ -1,8 +1,7 @@
 'use client';
 
-import useOpenState from '@/shared/lib/hooks/useIsOpenState';
-import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
-import { cn } from '@/shared/lib/utils/cn';
+import { useIsOpenState, useSafeContext } from '@/shared/lib/hooks/client';
+import { cn } from '@/shared/lib/utils';
 import { NavigationContext } from '@/widgets/navigation/ui/Navigation';
 
 import { HamburgerIcon } from '../../../../shared/ui/icons';
@@ -11,7 +10,7 @@ import styles from './navigation.module.scss';
 
 const MobileNavigation = () => {
     const { isScrolled, hideDropdown } = useSafeContext(NavigationContext);
-    const { isOpened: isMenuOpened, close: closeMenu, open: openMenu } = useOpenState();
+    const { isOpened: isMenuOpened, close: closeMenu, open: openMenu } = useIsOpenState();
 
     const handleCloseMenu = () => {
         closeMenu();

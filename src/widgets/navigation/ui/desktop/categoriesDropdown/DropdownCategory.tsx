@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
-import { cn } from '@/shared/lib/utils/cn';
+import { useSafeContext } from '@/shared/lib/hooks/client';
+import { cn } from '@/shared/lib/utils';
 
 import { NavigationContext } from '../../Navigation';
 import styles from './categoriesDropdown.module.scss';

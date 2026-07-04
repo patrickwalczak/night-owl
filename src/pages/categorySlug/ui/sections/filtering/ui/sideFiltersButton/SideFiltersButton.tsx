@@ -1,6 +1,6 @@
 'use client';
 
-import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
+import { useSafeContext } from '@/shared/lib/hooks/client';
 import { setBoolCookieClient } from '@/shared/lib/utils/cookie/client';
 
 import { CatalogContext } from '../../../../../model/providers/CatalogProvider';

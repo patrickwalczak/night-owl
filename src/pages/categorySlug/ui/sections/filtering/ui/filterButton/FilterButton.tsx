@@ -1,4 +1,4 @@
-import { cn } from '@/shared/lib/utils/cn';
+import { cn } from '@/shared/lib/utils';
 import { FiltersIcon } from '@/shared/ui/icons';
 
 import styles from './filterButton.module.scss';

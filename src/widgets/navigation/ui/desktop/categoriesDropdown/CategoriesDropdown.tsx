@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { type RefObject } from 'react';
 
-import { cn } from '@/shared/lib/utils/cn';
+import { cn } from '@/shared/lib/utils';
 
 import styles from './categoriesDropdown.module.scss';
 import { DropdownCategory } from './DropdownCategory';

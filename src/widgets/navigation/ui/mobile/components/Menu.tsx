@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 
-import { cn } from '@/shared/lib/utils/cn';
+import { cn } from '@/shared/lib/utils';
 
-import Modal from '../../../../../shared/ui/modal/Modal';
+import Modal from '@/shared/ui/modal/client';
 import styles from '../navigation.module.scss';
 import { MobileNavButton } from './MobileNavButton';
 import { MobileNavLink } from './MobileNavLink';

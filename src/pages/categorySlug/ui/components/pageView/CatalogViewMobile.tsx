@@ -1,4 +1,4 @@
-import { cn } from '@/shared/lib/utils/cn';
+import { cn } from '@/shared/lib/utils';
 
 import ProductsInfinite from '../../sections/productList/ui/productsInfinite/ProductsInfinite';
 import CategoryName from '../categoryName/CategoryName';

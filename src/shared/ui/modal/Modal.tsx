@@ -3,9 +3,9 @@
 import { createContext } from 'react';
 import { createPortal } from 'react-dom';
 
-import { cn } from '@/shared/lib/utils/cn';
+import { useBodyOverflow, useSafeContext } from '@/shared/lib/hooks/client';
+import { cn } from '@/shared/lib/utils';
 
-import { useBodyOverflow } from '../../lib/hooks/useBodyOverflow';
 import { CloseIcon } from '../icons';
 import styles from './modal.module.scss';
 import { useHandleEscape } from './useHandleEscape';
@@ -55,8 +55,6 @@ const Overlay = ({ className = '', children }: { className?: string; children: R
 };
 
 import { motion, AnimatePresence, type TargetAndTransition, type Transition, type VariantLabels } from 'framer-motion';
-
-import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
 
 interface WrapperPropsType {
     initial?: boolean | TargetAndTransition | VariantLabels;

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-const useOpenState = () => {
+export const useIsOpenState = () => {
     const [isOpened, setIsOpened] = useState<boolean>(false);
 
     const toggle = () => setIsOpened(prevState => !prevState);
@@ -13,5 +13,3 @@ const useOpenState = () => {
 
     return { isOpened, toggle, close, open };
 };
-
-export default useOpenState;

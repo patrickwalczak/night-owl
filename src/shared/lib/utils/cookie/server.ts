@@ -1,4 +1,3 @@
-'use server';
 import 'server-only';
 import { cookies } from 'next/headers';
 
@@ -28,8 +27,8 @@ export async function setCookieServer(name: string, value: string, opts: ServerC
     (await cookies()).set({ name, value, ...opts });
 }
 
-export function setBoolCookieServer(name: string, value: boolean, opts?: ServerCookieOptions) {
-    setCookieServer(name, value ? '1' : '0', opts);
+export async function setBoolCookieServer(name: string, value: boolean, opts?: ServerCookieOptions) {
+    await setCookieServer(name, value ? '1' : '0', opts);
 }
 
 export async function deleteCookieServer(name: string, path = '/') {

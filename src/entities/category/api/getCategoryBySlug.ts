@@ -3,7 +3,7 @@
 import 'server-only';
 import { cache } from 'react';
 
-import { prisma } from '../../../shared/lib/db/prisma';
+import { prisma } from '@/shared/lib/db/server';
 
 export const getCategoryBySlug = cache(async (slug: string) => {
     return prisma.category.findUnique({

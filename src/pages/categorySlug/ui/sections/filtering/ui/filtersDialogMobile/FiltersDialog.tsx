@@ -1,6 +1,6 @@
 'use client';
 
-import useIsOpenState from '@/shared/lib/hooks/useIsOpenState';
+import { useIsOpenState } from '@/shared/lib/hooks/client';
 
 import FilterButton from '../filterButton/FilterButton';
 import FiltersModal from './filtersModal/FiltersModal';

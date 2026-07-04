@@ -7,7 +7,7 @@ import {
     useRef,
 } from 'react';
 
-import { mergeRefs } from '@/shared/lib/utils/mergeRefs';
+import { mergeRefs } from '@/shared/lib/utils';
 
 type DialogAccessibilityType
     = | {

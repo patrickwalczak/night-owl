@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import Link, { type LinkProps } from 'next/link';
 import { type ComponentPropsWithRef, type PropsWithChildren } from 'react';
 
-import { cn } from '@/shared/lib/utils/cn';
+import { cn } from '@/shared/lib/utils';
 
 import styles from './mobileNavElement.module.scss';
 

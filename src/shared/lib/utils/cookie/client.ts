@@ -47,6 +47,7 @@ export function getBoolCookieClient(name: string, fallback = false) {
     const v = getCookieClient(name);
     return v == null ? fallback : v === '1' || v.toLowerCase() === 'true';
 }
+
 export function setBoolCookieClient(name: string, value: boolean, opts?: CookieOptions) {
     setCookieClient(name, value ? '1' : '0', opts);
 }
