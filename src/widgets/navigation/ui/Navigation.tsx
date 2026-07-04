@@ -8,7 +8,7 @@ import { createContext, useEffect, useRef } from 'react';
 
 import type { CategoryTree } from '@/entities/category';
 
-import { useAppSelector } from '@/shared/lib/redux/client';
+import { useAppSelector } from '@/app/store/client';
 import { cn } from '@/shared/lib/utils';
 
 import useIsDropdownExpanded from '../hooks/useIsDropdownExpanded';

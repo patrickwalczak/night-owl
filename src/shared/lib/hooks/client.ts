@@ -2,7 +2,6 @@
 import 'client-only';
 
 export { useBodyOverflow } from './useBodyOverflow';
-export { useDeviceType } from './useDeviceType';
 export { useInViewProgress } from './useInViewProgress';
 export { useIsOpenState } from './useIsOpenState';
 export { useIsSticky } from './useIsSticky';

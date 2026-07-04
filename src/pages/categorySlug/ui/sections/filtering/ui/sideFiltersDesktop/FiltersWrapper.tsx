@@ -4,8 +4,8 @@ import type React from 'react';
 
 import { useEffect, useRef } from 'react';
 
+import { useAppSelector } from '@/app/store/client';
 import { useSafeContext } from '@/shared/lib/hooks/client';
-import { useAppSelector } from '@/shared/lib/redux/client';
 import { cn } from '@/shared/lib/utils';
 
 import { CatalogContext } from '../../../../../model/providers/CatalogProvider';

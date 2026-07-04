@@ -2,8 +2,8 @@
 
 import { type ReactNode } from 'react';
 
+import { useAppSelector } from '@/app/store/client';
 import { useIsSticky } from '@/shared/lib/hooks/client';
-import { useAppSelector } from '@/shared/lib/redux/client';
 import { cn } from '@/shared/lib/utils';
 
 import styles from './stickyContainer.module.scss';

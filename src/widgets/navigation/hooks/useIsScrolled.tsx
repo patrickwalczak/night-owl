@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
+import { useAppDispatch } from '@/app/store/client';
 import { toggleNavigation } from '@/features/appState/model/appSlice';
-import { useAppDispatch } from '@/shared/lib/redux/client';
 
 type ScrollDirection = 'up' | 'down';
 

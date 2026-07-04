@@ -1,8 +1,9 @@
 'use client';
 import 'client-only';
+
 import { useDispatch, useSelector, useStore } from 'react-redux';
 
-import type { AppDispatch, AppStore, RootState } from '../../model/redux';
+import type { AppDispatch, AppStore, RootState } from '.';
 
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 export const useAppSelector = useSelector.withTypes<RootState>();
