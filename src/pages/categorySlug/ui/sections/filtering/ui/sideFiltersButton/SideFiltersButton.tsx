@@ -1,14 +1,13 @@
 'use client';
 
-import { useSafeContext } from '@/shared/lib/hooks/client';
 import { setBoolCookieClient } from '@/shared/lib/utils/cookie/client';
 
-import { CatalogContext } from '../../../../../model/providers/CatalogProvider';
+import { useCatalog } from '../../../../../model/providers/CatalogProvider';
 import FilterButton from '../filterButton/FilterButton';
 import styles from './sideFiltersButton.module.scss';
 
 const SideFiltersButton = () => {
-    const { areFiltersOpen, toggleFilters } = useSafeContext(CatalogContext);
+    const { areFiltersOpen, toggleFilters } = useCatalog();
     const label = areFiltersOpen ? 'Hide filters' : 'Show filters';
 
     const handleClick = () => {

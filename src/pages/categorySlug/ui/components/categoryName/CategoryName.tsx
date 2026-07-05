@@ -1,7 +1,6 @@
 'use client';
 
-import { CatalogContext } from '@/pages/categorySlug/model/providers/CatalogProvider';
-import { useSafeContext } from '@/shared/lib/hooks/client';
+import { useCatalog } from '@/pages/categorySlug/model/providers/CatalogProvider';
 import { cn } from '@/shared/lib/utils';
 
 import styles from './categoryName.module.scss';
@@ -13,7 +12,7 @@ const CategoryName = ({ isProductSum = false, isStuck = false }: {
     const {
         productSum,
         category: { name },
-    } = useSafeContext(CatalogContext);
+    } = useCatalog();
 
     return (
         <h2 className={cn(styles.categoryName, isStuck && styles.stuck, 'transition-200', 'h4')}>

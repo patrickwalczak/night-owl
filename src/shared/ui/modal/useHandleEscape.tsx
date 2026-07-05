@@ -10,5 +10,5 @@ export const useHandleEscape = (open: boolean, onClose: () => void) => {
             window.addEventListener('keydown', handleKeyDown);
         }
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [open]);
+    }, [open, onClose]);
 };

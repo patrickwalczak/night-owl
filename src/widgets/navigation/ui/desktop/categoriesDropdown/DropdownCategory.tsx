@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import type { CategoryTree } from '@/entities/category';
+import type { RootCategoriesWithChildren } from '@/entities/category';
 
 import { useSafeContext } from '@/shared/lib/hooks/client';
 import { cn } from '@/shared/lib/utils';
@@ -8,7 +8,7 @@ import { cn } from '@/shared/lib/utils';
 import { NavigationContext } from '../../Navigation';
 import styles from './categoriesDropdown.module.scss';
 
-type RootCategory = CategoryTree[number];
+type RootCategory = RootCategoriesWithChildren[number];
 type ChildCategory = RootCategory['children'][number] & {
     children: [];
 };

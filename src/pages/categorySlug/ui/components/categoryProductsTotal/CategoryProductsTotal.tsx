@@ -1,11 +1,9 @@
 'use client';
 
-import { useSafeContext } from '@/shared/lib/hooks/client';
-
-import { CatalogContext } from '../../../model/providers/CatalogProvider';
+import { useCatalog } from '../../../model/providers/CatalogProvider';
 
 const CategoryProductsTotal = () => {
-    const { productSum } = useSafeContext(CatalogContext);
+    const { productSum } = useCatalog();
 
     return (
         <span className={'text-sm'}>

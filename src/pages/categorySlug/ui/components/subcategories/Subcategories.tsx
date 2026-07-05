@@ -2,14 +2,13 @@
 
 import Link from 'next/link';
 
-import { useSafeContext } from '@/shared/lib/hooks/client';
 import { cn } from '@/shared/lib/utils';
 
-import { CatalogContext } from '../../../model/providers/CatalogProvider';
+import { useCatalog } from '../../../model/providers/CatalogProvider';
 import styles from './subcategories.module.scss';
 
 const Subcategories = () => {
-    const { subcategories } = useSafeContext(CatalogContext);
+    const { subcategories } = useCatalog();
 
     if (!subcategories.length) return null;
 

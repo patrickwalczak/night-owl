@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { getCategories } from '@/entities/category/server';
+import { getRootCategoriesWithChildren } from '@/entities/category/server';
 import { cn } from '@/shared/lib/utils';
 
 import styles from './hero.module.scss';
 
 export const Hero = async () => {
-    const categories = await getCategories();
+    const categories = await getRootCategoriesWithChildren();
 
     return (
         <section className={cn(styles.container, 'align-center', 'justify-center')}>

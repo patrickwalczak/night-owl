@@ -1,13 +1,12 @@
 import Link from 'next/link';
 
-import { CatalogContext } from '@/pages/categorySlug/model/providers/CatalogProvider';
-import { useSafeContext } from '@/shared/lib/hooks/client';
+import { useCatalog } from '@/pages/categorySlug/model/providers/CatalogProvider';
 import { cn } from '@/shared/lib/utils';
 
 import styles from './sideFiltersDesktop.module.scss';
 
 export const Subcategories = () => {
-    const { subcategories } = useSafeContext(CatalogContext);
+    const { subcategories } = useCatalog();
 
     if (subcategories.length === 0) return null;
 

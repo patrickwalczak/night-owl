@@ -1,2 +1,2 @@
 export { type Category } from '@/shared/lib/db';
-export type { CategoryTree, CategoryTreeItem } from './model/categoryTree.type';
+export type { CategoryWithChildren, RootCategoriesWithChildren } from './model/type';

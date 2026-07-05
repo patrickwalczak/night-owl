@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { type RefObject } from 'react';
 
-import type { CategoryTree } from '@/entities/category';
+import type { RootCategoriesWithChildren } from '@/entities/category';
 
 import { cn } from '@/shared/lib/utils';
 
@@ -14,7 +14,7 @@ export const CategoriesDropdown = ({
     controllerBtnRef,
 }: {
     isExpanded: boolean;
-    categories: CategoryTree;
+    categories: RootCategoriesWithChildren;
     controllerBtnRef?: RefObject<HTMLButtonElement | null>;
 }) => {
     const refCallback = () => {

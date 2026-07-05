@@ -22,26 +22,20 @@ export default async function CategorySlugPage({
     const search = normalizeSearchParams(awaitedSearchParams);
     const parsedParams = parseCatalogSearchParams(search);
 
-    try {
-        const { category, parameters, products } = await getCatalogPageData(category_slug, parsedParams);
+    const { category, parameters, products } = await getCatalogPageData(category_slug, parsedParams);
 
-        if (!category) notFound();
+    if (!category) notFound();
 
-        const areFiltersOpen = (await cookies()).get('areFiltersOpen')?.value === '1';
+    const areFiltersOpen = (await cookies()).get('areFiltersOpen')?.value === '1';
 
-        return (
-            <CatalogProvider
-                initialProductsProp={products}
-                category={category}
-                areFiltersOpen={areFiltersOpen}
-                parameters={parameters}
-            >
-                <CatalogContainer />
-            </CatalogProvider>
-        );
-    }
-    catch (error) {
-        console.log(error);
-        notFound();
-    }
+    return (
+        <CatalogProvider
+            initialProductsProp={products}
+            category={category}
+            areFiltersOpen={areFiltersOpen}
+            parameters={parameters}
+        >
+            <CatalogContainer />
+        </CatalogProvider>
+    );
 }

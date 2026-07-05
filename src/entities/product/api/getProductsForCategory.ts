@@ -1,16 +1,26 @@
 'use server';
 import 'server-only';
 
-import { prisma, type ProductOrderByWithRelationInput } from '@/shared/lib/db/server';
+import {
+    prisma,
+    type ProductOrderByWithRelationInput,
+    type ProductWhereInput,
+} from '@/shared/lib/db/server';
 
-export async function getProductsForCategory(opts: {
+import { productListItemSelect } from '../model/productListItem.select';
+import { type ProductListPage } from '../model/productListItem.type';
+
+interface GetProductsForCategoryOptions {
     categoryId: string;
     page: number;
     sort: ProductOrderByWithRelationInput;
-    filters?: string[];
     query?: string;
     pageSize: number;
-}) {
+}
+
+export async function getProductsForCategory(opts: GetProductsForCategoryOptions): Promise<ProductListPage> {
+    const page = Math.max(1, opts.page);
+
     const children = await prisma.category.findMany({
         where: {
             parentId: opts.categoryId,
@@ -21,7 +31,7 @@ export async function getProductsForCategory(opts: {
     });
     const categoryIds = [opts.categoryId, ...children.map(c => c.id)];
 
-    const where: any = {
+    const where: ProductWhereInput = {
         categoryId: {
             in: categoryIds,
         },
@@ -33,30 +43,13 @@ export async function getProductsForCategory(opts: {
         mode: 'insensitive',
     };
 
-    if (opts.filters?.length) {
-        where.parameterValues = {
-            some: {
-                parameterValueId: {
-                    in: opts.filters,
-                },
-            },
-        };
-    }
-
     const [items, total] = await Promise.all([
         prisma.product.findMany({
             where,
             orderBy: opts.sort,
-            skip: (opts.page - 1) * opts.pageSize,
+            skip: (page - 1) * opts.pageSize,
             take: opts.pageSize,
-            select: {
-                id: true,
-                name: true,
-                slug: true,
-                price: true,
-                image: true,
-                status: true,
-            },
+            select: productListItemSelect,
         }),
         prisma.product.count({
             where,
@@ -67,5 +60,6 @@ export async function getProductsForCategory(opts: {
         items,
         total,
         pageSize: opts.pageSize,
+        page,
     };
 }

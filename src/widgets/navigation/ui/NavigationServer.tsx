@@ -1,9 +1,9 @@
-import { getCategories } from '@/entities/category/server';
+import { getRootCategoriesWithChildren } from '@/entities/category/server';
 
 import Navigation from './Navigation';
 
 const NavigationServer = async () => {
-    const categories = await getCategories();
+    const categories = await getRootCategoriesWithChildren();
 
     return <Navigation categories={categories} />;
 };

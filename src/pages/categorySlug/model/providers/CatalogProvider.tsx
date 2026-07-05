@@ -10,6 +10,7 @@ import {
     type CatalogProductsPage,
     type CatalogSubcategory,
 } from '@/pages/categorySlug/model/catalog.types';
+import { useSafeContext } from '@/shared/lib/hooks/client';
 
 interface CatalogContextType {
     initialProducts: CatalogProduct[];
@@ -40,7 +41,9 @@ interface CatalogProviderProps {
     initialProductsProp: CatalogProductsPage;
 }
 
-export const CatalogContext = createContext<CatalogContextType | null>(null);
+const CatalogContext = createContext<CatalogContextType | null>(null);
+
+export const useCatalog = () => useSafeContext(CatalogContext);
 
 const CatalogProvider = ({
     children,

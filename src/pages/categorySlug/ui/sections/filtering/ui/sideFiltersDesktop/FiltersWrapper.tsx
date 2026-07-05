@@ -5,15 +5,14 @@ import type React from 'react';
 import { useEffect, useRef } from 'react';
 
 import { useIsNavigationOpen } from '@/features/appState/client';
-import { useSafeContext } from '@/shared/lib/hooks/client';
 import { cn } from '@/shared/lib/utils';
 
-import { CatalogContext } from '../../../../../model/providers/CatalogProvider';
+import { useCatalog } from '../../../../../model/providers/CatalogProvider';
 import styles from './sideFiltersDesktop.module.scss';
 
 const FiltersWrapper = ({ children }: { children: React.ReactNode }) => {
     const isNavigationOpen = useIsNavigationOpen();
-    const { areFiltersOpen } = useSafeContext(CatalogContext);
+    const { areFiltersOpen } = useCatalog();
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {

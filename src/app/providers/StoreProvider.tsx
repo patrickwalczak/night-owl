@@ -1,20 +1,18 @@
 'use client';
 
 import 'client-only';
-import { useRef, type ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Provider } from 'react-redux';
 
-import { makeStore, type AppStore } from '@/app/store';
+import { makeStore } from '@/app/store';
 import { type DeviceType } from '@/shared/model/device.model';
 
 export default function StoreProvider({ children, device }: { children: ReactNode; device: DeviceType }) {
-    const storeRef = useRef<AppStore | null>(null);
-
-    if (!storeRef.current) {
-        storeRef.current = makeStore({
+    const [store] = useState(() => {
+        return makeStore({
             app: { device, isMobile: device === 'mobile', isTablet: device === 'tablet', isDesktop: device === 'desktop' },
         });
-    }
+    });
 
-    return <Provider store={storeRef.current}>{children}</Provider>;
+    return <Provider store={store}>{children}</Provider>;
 }

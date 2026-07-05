@@ -1,6 +1,6 @@
 import type { CategorySelect } from '@/shared/lib/db';
 
-export const categoryTreeSelect = {
+export const categoryWithChildrenSelect = {
     id: true,
     name: true,
     slug: true,

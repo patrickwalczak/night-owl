@@ -102,11 +102,15 @@ export function useInViewProgress<T extends Element>(
         const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         if (!enabled || prefersReducedMotion) {
-            setRatio(1);
-            if (!didCompleteRef.current) {
-                didCompleteRef.current = true;
-                if (typeof onComplete === 'function') onComplete();
-            }
+            clearAnimationFrame();
+            animationFrameIdRef.current = requestAnimationFrame(() => {
+                animationFrameIdRef.current = null;
+                setRatio(1);
+                if (!didCompleteRef.current) {
+                    didCompleteRef.current = true;
+                    if (typeof onComplete === 'function') onComplete();
+                }
+            });
             return;
         }
 
@@ -130,7 +134,7 @@ export function useInViewProgress<T extends Element>(
 
         observerRef.current = observer;
         observer.observe(element);
-    }, [enabled, root, rootMargin, thresholds, applyLatest, onComplete]);
+    }, [enabled, root, rootMargin, thresholds, applyLatest, onComplete, clearAnimationFrame]);
 
     useEffect(() => {
         connect();

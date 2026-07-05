@@ -1,6 +1,5 @@
 'use client';
 
-import Product from '../product/Product';
 import styles from './productsInfinite.module.scss';
 
 export default function ProductsInfinite() {
