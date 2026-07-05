@@ -180,6 +180,7 @@ export type CategoryParameterOrderByWithRelationInput = {
 
 export type CategoryParameterWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  categoryId_parameterId?: Prisma.CategoryParameterCategoryIdParameterIdCompoundUniqueInput
   AND?: Prisma.CategoryParameterWhereInput | Prisma.CategoryParameterWhereInput[]
   OR?: Prisma.CategoryParameterWhereInput[]
   NOT?: Prisma.CategoryParameterWhereInput | Prisma.CategoryParameterWhereInput[]
@@ -187,7 +188,7 @@ export type CategoryParameterWhereUniqueInput = Prisma.AtLeast<{
   parameterId?: Prisma.StringFilter<"CategoryParameter"> | string
   category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
   parameter?: Prisma.XOR<Prisma.ParameterScalarRelationFilter, Prisma.ParameterWhereInput>
-}, "id">
+}, "id" | "categoryId_parameterId">
 
 export type CategoryParameterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -255,6 +256,11 @@ export type CategoryParameterListRelationFilter = {
 
 export type CategoryParameterOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type CategoryParameterCategoryIdParameterIdCompoundUniqueInput = {
+  categoryId: string
+  parameterId: string
 }
 
 export type CategoryParameterCountOrderByAggregateInput = {

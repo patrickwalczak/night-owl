@@ -19,17 +19,21 @@ model Product {
   category   Category @relation(fields: [categoryId], references: [id])
 
   parameterValues ProductParameterValue[]
+
+  @@index([categoryId])
 }
 
 model ParameterValue {
   id    String @id @default(cuid())
   value String
-  count Float
 
   parameterId String
   parameter   Parameter @relation(fields: [parameterId], references: [id])
 
   products ProductParameterValue[]
+
+  @@unique([parameterId, value])
+  @@index([parameterId])
 }
 
 model ProductParameterValue {
@@ -39,6 +43,10 @@ model ProductParameterValue {
 
   product        Product        @relation(fields: [productId], references: [id])
   parameterValue ParameterValue @relation(fields: [parameterValueId], references: [id])
+
+  @@unique([productId, parameterValueId])
+  @@index([productId])
+  @@index([parameterValueId])
 }
 
 model Parameter {
@@ -58,6 +66,10 @@ model CategoryParameter {
 
   category  Category  @relation(fields: [categoryId], references: [id])
   parameter Parameter @relation(fields: [parameterId], references: [id])
+
+  @@unique([categoryId, parameterId])
+  @@index([categoryId])
+  @@index([parameterId])
 }
 
 model Category {
@@ -73,4 +85,6 @@ model Category {
   createdAt         DateTime            @default(now())
   updatedAt         DateTime            @updatedAt
   CategoryParameter CategoryParameter[]
+
+  @@index([parentId])
 }

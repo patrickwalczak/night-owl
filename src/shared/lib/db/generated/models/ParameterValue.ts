@@ -20,69 +20,45 @@ export type ParameterValueModel = runtime.Types.Result.DefaultSelection<Prisma.$
 
 export type AggregateParameterValue = {
   _count: ParameterValueCountAggregateOutputType | null
-  _avg: ParameterValueAvgAggregateOutputType | null
-  _sum: ParameterValueSumAggregateOutputType | null
   _min: ParameterValueMinAggregateOutputType | null
   _max: ParameterValueMaxAggregateOutputType | null
-}
-
-export type ParameterValueAvgAggregateOutputType = {
-  count: number | null
-}
-
-export type ParameterValueSumAggregateOutputType = {
-  count: number | null
 }
 
 export type ParameterValueMinAggregateOutputType = {
   id: string | null
   value: string | null
-  count: number | null
   parameterId: string | null
 }
 
 export type ParameterValueMaxAggregateOutputType = {
   id: string | null
   value: string | null
-  count: number | null
   parameterId: string | null
 }
 
 export type ParameterValueCountAggregateOutputType = {
   id: number
   value: number
-  count: number
   parameterId: number
   _all: number
 }
 
 
-export type ParameterValueAvgAggregateInputType = {
-  count?: true
-}
-
-export type ParameterValueSumAggregateInputType = {
-  count?: true
-}
-
 export type ParameterValueMinAggregateInputType = {
   id?: true
   value?: true
-  count?: true
   parameterId?: true
 }
 
 export type ParameterValueMaxAggregateInputType = {
   id?: true
   value?: true
-  count?: true
   parameterId?: true
 }
 
 export type ParameterValueCountAggregateInputType = {
   id?: true
   value?: true
-  count?: true
   parameterId?: true
   _all?: true
 }
@@ -125,18 +101,6 @@ export type ParameterValueAggregateArgs<ExtArgs extends runtime.Types.Extensions
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: ParameterValueAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: ParameterValueSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: ParameterValueMinAggregateInputType
@@ -167,8 +131,6 @@ export type ParameterValueGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   _count?: ParameterValueCountAggregateInputType | true
-  _avg?: ParameterValueAvgAggregateInputType
-  _sum?: ParameterValueSumAggregateInputType
   _min?: ParameterValueMinAggregateInputType
   _max?: ParameterValueMaxAggregateInputType
 }
@@ -176,11 +138,8 @@ export type ParameterValueGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 export type ParameterValueGroupByOutputType = {
   id: string
   value: string
-  count: number
   parameterId: string
   _count: ParameterValueCountAggregateOutputType | null
-  _avg: ParameterValueAvgAggregateOutputType | null
-  _sum: ParameterValueSumAggregateOutputType | null
   _min: ParameterValueMinAggregateOutputType | null
   _max: ParameterValueMaxAggregateOutputType | null
 }
@@ -206,7 +165,6 @@ export type ParameterValueWhereInput = {
   NOT?: Prisma.ParameterValueWhereInput | Prisma.ParameterValueWhereInput[]
   id?: Prisma.StringFilter<"ParameterValue"> | string
   value?: Prisma.StringFilter<"ParameterValue"> | string
-  count?: Prisma.FloatFilter<"ParameterValue"> | number
   parameterId?: Prisma.StringFilter<"ParameterValue"> | string
   parameter?: Prisma.XOR<Prisma.ParameterScalarRelationFilter, Prisma.ParameterWhereInput>
   products?: Prisma.ProductParameterValueListRelationFilter
@@ -215,7 +173,6 @@ export type ParameterValueWhereInput = {
 export type ParameterValueOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   value?: Prisma.SortOrder
-  count?: Prisma.SortOrder
   parameterId?: Prisma.SortOrder
   parameter?: Prisma.ParameterOrderByWithRelationInput
   products?: Prisma.ProductParameterValueOrderByRelationAggregateInput
@@ -223,26 +180,23 @@ export type ParameterValueOrderByWithRelationInput = {
 
 export type ParameterValueWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  parameterId_value?: Prisma.ParameterValueParameterIdValueCompoundUniqueInput
   AND?: Prisma.ParameterValueWhereInput | Prisma.ParameterValueWhereInput[]
   OR?: Prisma.ParameterValueWhereInput[]
   NOT?: Prisma.ParameterValueWhereInput | Prisma.ParameterValueWhereInput[]
   value?: Prisma.StringFilter<"ParameterValue"> | string
-  count?: Prisma.FloatFilter<"ParameterValue"> | number
   parameterId?: Prisma.StringFilter<"ParameterValue"> | string
   parameter?: Prisma.XOR<Prisma.ParameterScalarRelationFilter, Prisma.ParameterWhereInput>
   products?: Prisma.ProductParameterValueListRelationFilter
-}, "id">
+}, "id" | "parameterId_value">
 
 export type ParameterValueOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   value?: Prisma.SortOrder
-  count?: Prisma.SortOrder
   parameterId?: Prisma.SortOrder
   _count?: Prisma.ParameterValueCountOrderByAggregateInput
-  _avg?: Prisma.ParameterValueAvgOrderByAggregateInput
   _max?: Prisma.ParameterValueMaxOrderByAggregateInput
   _min?: Prisma.ParameterValueMinOrderByAggregateInput
-  _sum?: Prisma.ParameterValueSumOrderByAggregateInput
 }
 
 export type ParameterValueScalarWhereWithAggregatesInput = {
@@ -251,14 +205,12 @@ export type ParameterValueScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ParameterValueScalarWhereWithAggregatesInput | Prisma.ParameterValueScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"ParameterValue"> | string
   value?: Prisma.StringWithAggregatesFilter<"ParameterValue"> | string
-  count?: Prisma.FloatWithAggregatesFilter<"ParameterValue"> | number
   parameterId?: Prisma.StringWithAggregatesFilter<"ParameterValue"> | string
 }
 
 export type ParameterValueCreateInput = {
   id?: string
   value: string
-  count: number
   parameter: Prisma.ParameterCreateNestedOneWithoutValuesInput
   products?: Prisma.ProductParameterValueCreateNestedManyWithoutParameterValueInput
 }
@@ -266,7 +218,6 @@ export type ParameterValueCreateInput = {
 export type ParameterValueUncheckedCreateInput = {
   id?: string
   value: string
-  count: number
   parameterId: string
   products?: Prisma.ProductParameterValueUncheckedCreateNestedManyWithoutParameterValueInput
 }
@@ -274,7 +225,6 @@ export type ParameterValueUncheckedCreateInput = {
 export type ParameterValueUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   value?: Prisma.StringFieldUpdateOperationsInput | string
-  count?: Prisma.FloatFieldUpdateOperationsInput | number
   parameter?: Prisma.ParameterUpdateOneRequiredWithoutValuesNestedInput
   products?: Prisma.ProductParameterValueUpdateManyWithoutParameterValueNestedInput
 }
@@ -282,7 +232,6 @@ export type ParameterValueUpdateInput = {
 export type ParameterValueUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   value?: Prisma.StringFieldUpdateOperationsInput | string
-  count?: Prisma.FloatFieldUpdateOperationsInput | number
   parameterId?: Prisma.StringFieldUpdateOperationsInput | string
   products?: Prisma.ProductParameterValueUncheckedUpdateManyWithoutParameterValueNestedInput
 }
@@ -290,50 +239,41 @@ export type ParameterValueUncheckedUpdateInput = {
 export type ParameterValueCreateManyInput = {
   id?: string
   value: string
-  count: number
   parameterId: string
 }
 
 export type ParameterValueUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   value?: Prisma.StringFieldUpdateOperationsInput | string
-  count?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ParameterValueUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   value?: Prisma.StringFieldUpdateOperationsInput | string
-  count?: Prisma.FloatFieldUpdateOperationsInput | number
   parameterId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type ParameterValueParameterIdValueCompoundUniqueInput = {
+  parameterId: string
+  value: string
 }
 
 export type ParameterValueCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   value?: Prisma.SortOrder
-  count?: Prisma.SortOrder
   parameterId?: Prisma.SortOrder
-}
-
-export type ParameterValueAvgOrderByAggregateInput = {
-  count?: Prisma.SortOrder
 }
 
 export type ParameterValueMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   value?: Prisma.SortOrder
-  count?: Prisma.SortOrder
   parameterId?: Prisma.SortOrder
 }
 
 export type ParameterValueMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   value?: Prisma.SortOrder
-  count?: Prisma.SortOrder
   parameterId?: Prisma.SortOrder
-}
-
-export type ParameterValueSumOrderByAggregateInput = {
-  count?: Prisma.SortOrder
 }
 
 export type ParameterValueScalarRelationFilter = {
@@ -349,14 +289,6 @@ export type ParameterValueListRelationFilter = {
 
 export type ParameterValueOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type FloatFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
 }
 
 export type ParameterValueCreateNestedOneWithoutProductsInput = {
@@ -418,14 +350,12 @@ export type ParameterValueUncheckedUpdateManyWithoutParameterNestedInput = {
 export type ParameterValueCreateWithoutProductsInput = {
   id?: string
   value: string
-  count: number
   parameter: Prisma.ParameterCreateNestedOneWithoutValuesInput
 }
 
 export type ParameterValueUncheckedCreateWithoutProductsInput = {
   id?: string
   value: string
-  count: number
   parameterId: string
 }
 
@@ -448,28 +378,24 @@ export type ParameterValueUpdateToOneWithWhereWithoutProductsInput = {
 export type ParameterValueUpdateWithoutProductsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   value?: Prisma.StringFieldUpdateOperationsInput | string
-  count?: Prisma.FloatFieldUpdateOperationsInput | number
   parameter?: Prisma.ParameterUpdateOneRequiredWithoutValuesNestedInput
 }
 
 export type ParameterValueUncheckedUpdateWithoutProductsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   value?: Prisma.StringFieldUpdateOperationsInput | string
-  count?: Prisma.FloatFieldUpdateOperationsInput | number
   parameterId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ParameterValueCreateWithoutParameterInput = {
   id?: string
   value: string
-  count: number
   products?: Prisma.ProductParameterValueCreateNestedManyWithoutParameterValueInput
 }
 
 export type ParameterValueUncheckedCreateWithoutParameterInput = {
   id?: string
   value: string
-  count: number
   products?: Prisma.ProductParameterValueUncheckedCreateNestedManyWithoutParameterValueInput
 }
 
@@ -505,34 +431,29 @@ export type ParameterValueScalarWhereInput = {
   NOT?: Prisma.ParameterValueScalarWhereInput | Prisma.ParameterValueScalarWhereInput[]
   id?: Prisma.StringFilter<"ParameterValue"> | string
   value?: Prisma.StringFilter<"ParameterValue"> | string
-  count?: Prisma.FloatFilter<"ParameterValue"> | number
   parameterId?: Prisma.StringFilter<"ParameterValue"> | string
 }
 
 export type ParameterValueCreateManyParameterInput = {
   id?: string
   value: string
-  count: number
 }
 
 export type ParameterValueUpdateWithoutParameterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   value?: Prisma.StringFieldUpdateOperationsInput | string
-  count?: Prisma.FloatFieldUpdateOperationsInput | number
   products?: Prisma.ProductParameterValueUpdateManyWithoutParameterValueNestedInput
 }
 
 export type ParameterValueUncheckedUpdateWithoutParameterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   value?: Prisma.StringFieldUpdateOperationsInput | string
-  count?: Prisma.FloatFieldUpdateOperationsInput | number
   products?: Prisma.ProductParameterValueUncheckedUpdateManyWithoutParameterValueNestedInput
 }
 
 export type ParameterValueUncheckedUpdateManyWithoutParameterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   value?: Prisma.StringFieldUpdateOperationsInput | string
-  count?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 
@@ -569,7 +490,6 @@ export type ParameterValueCountOutputTypeCountProductsArgs<ExtArgs extends runti
 export type ParameterValueSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   value?: boolean
-  count?: boolean
   parameterId?: boolean
   parameter?: boolean | Prisma.ParameterDefaultArgs<ExtArgs>
   products?: boolean | Prisma.ParameterValue$productsArgs<ExtArgs>
@@ -579,7 +499,6 @@ export type ParameterValueSelect<ExtArgs extends runtime.Types.Extensions.Intern
 export type ParameterValueSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   value?: boolean
-  count?: boolean
   parameterId?: boolean
   parameter?: boolean | Prisma.ParameterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["parameterValue"]>
@@ -587,7 +506,6 @@ export type ParameterValueSelectCreateManyAndReturn<ExtArgs extends runtime.Type
 export type ParameterValueSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   value?: boolean
-  count?: boolean
   parameterId?: boolean
   parameter?: boolean | Prisma.ParameterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["parameterValue"]>
@@ -595,11 +513,10 @@ export type ParameterValueSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
 export type ParameterValueSelectScalar = {
   id?: boolean
   value?: boolean
-  count?: boolean
   parameterId?: boolean
 }
 
-export type ParameterValueOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "value" | "count" | "parameterId", ExtArgs["result"]["parameterValue"]>
+export type ParameterValueOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "value" | "parameterId", ExtArgs["result"]["parameterValue"]>
 export type ParameterValueInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   parameter?: boolean | Prisma.ParameterDefaultArgs<ExtArgs>
   products?: boolean | Prisma.ParameterValue$productsArgs<ExtArgs>
@@ -621,7 +538,6 @@ export type $ParameterValuePayload<ExtArgs extends runtime.Types.Extensions.Inte
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     value: string
-    count: number
     parameterId: string
   }, ExtArgs["result"]["parameterValue"]>
   composites: {}
@@ -1050,7 +966,6 @@ export interface Prisma__ParameterValueClient<T, Null = never, ExtArgs extends r
 export interface ParameterValueFieldRefs {
   readonly id: Prisma.FieldRef<"ParameterValue", 'String'>
   readonly value: Prisma.FieldRef<"ParameterValue", 'String'>
-  readonly count: Prisma.FieldRef<"ParameterValue", 'Float'>
   readonly parameterId: Prisma.FieldRef<"ParameterValue", 'String'>
 }
     
