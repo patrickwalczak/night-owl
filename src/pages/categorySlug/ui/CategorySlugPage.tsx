@@ -1,9 +1,8 @@
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
-import { normalizeSearchParams, parseCatalogSearchParams } from '@/pages/categorySlug/lib/url';
-
 import { getCatalogPageData } from '../api/getCatalogPageData';
+import { normalizeSearchParams, parseCatalogSearchParams } from '../lib/url';
 import CatalogProvider from '../model/providers/CatalogProvider';
 import { type RouteParamsType } from '../model/routeParams.types';
 import { type RawUrlSearchParams } from '../model/searchParams.types';

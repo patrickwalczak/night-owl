@@ -4,7 +4,7 @@ import { headers } from 'next/headers';
 
 import AppClient from '@/app/ui/AppClient';
 import { type DeviceType } from '@/shared/model/device.model';
-import NavigationServer from '@/widgets/navigation/ui/NavigationServer';
+import { NavigationServer } from '@/widgets/navigation/server';
 
 import StoreProvider from '../src/app/providers/StoreProvider';
 

@@ -6,6 +6,5 @@ export const productListItemSelect = {
     slug: true,
     price: true,
     image: true,
-    status: true,
     currency: true,
 } as const satisfies ProductSelect;

@@ -48,7 +48,6 @@ export type ProductMinAggregateOutputType = {
   image: string | null
   createdAt: Date | null
   updatedAt: Date | null
-  status: $Enums.ProductStatus | null
   categoryId: string | null
 }
 
@@ -64,7 +63,6 @@ export type ProductMaxAggregateOutputType = {
   image: string | null
   createdAt: Date | null
   updatedAt: Date | null
-  status: $Enums.ProductStatus | null
   categoryId: string | null
 }
 
@@ -80,7 +78,6 @@ export type ProductCountAggregateOutputType = {
   image: number
   createdAt: number
   updatedAt: number
-  status: number
   categoryId: number
   _all: number
 }
@@ -108,7 +105,6 @@ export type ProductMinAggregateInputType = {
   image?: true
   createdAt?: true
   updatedAt?: true
-  status?: true
   categoryId?: true
 }
 
@@ -124,7 +120,6 @@ export type ProductMaxAggregateInputType = {
   image?: true
   createdAt?: true
   updatedAt?: true
-  status?: true
   categoryId?: true
 }
 
@@ -140,7 +135,6 @@ export type ProductCountAggregateInputType = {
   image?: true
   createdAt?: true
   updatedAt?: true
-  status?: true
   categoryId?: true
   _all?: true
 }
@@ -243,7 +237,6 @@ export type ProductGroupByOutputType = {
   image: string
   createdAt: Date
   updatedAt: Date
-  status: $Enums.ProductStatus
   categoryId: string
   _count: ProductCountAggregateOutputType | null
   _avg: ProductAvgAggregateOutputType | null
@@ -282,7 +275,6 @@ export type ProductWhereInput = {
   image?: Prisma.StringFilter<"Product"> | string
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Product"> | Date | string
-  status?: Prisma.EnumProductStatusFilter<"Product"> | $Enums.ProductStatus
   categoryId?: Prisma.StringFilter<"Product"> | string
   category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
   parameterValues?: Prisma.ProductParameterValueListRelationFilter
@@ -300,7 +292,6 @@ export type ProductOrderByWithRelationInput = {
   image?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   category?: Prisma.CategoryOrderByWithRelationInput
   parameterValues?: Prisma.ProductParameterValueOrderByRelationAggregateInput
@@ -321,7 +312,6 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   image?: Prisma.StringFilter<"Product"> | string
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Product"> | Date | string
-  status?: Prisma.EnumProductStatusFilter<"Product"> | $Enums.ProductStatus
   categoryId?: Prisma.StringFilter<"Product"> | string
   category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
   parameterValues?: Prisma.ProductParameterValueListRelationFilter
@@ -339,7 +329,6 @@ export type ProductOrderByWithAggregationInput = {
   image?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   _count?: Prisma.ProductCountOrderByAggregateInput
   _avg?: Prisma.ProductAvgOrderByAggregateInput
@@ -363,7 +352,6 @@ export type ProductScalarWhereWithAggregatesInput = {
   image?: Prisma.StringWithAggregatesFilter<"Product"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Product"> | Date | string
-  status?: Prisma.EnumProductStatusWithAggregatesFilter<"Product"> | $Enums.ProductStatus
   categoryId?: Prisma.StringWithAggregatesFilter<"Product"> | string
 }
 
@@ -379,7 +367,6 @@ export type ProductCreateInput = {
   image: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  status?: $Enums.ProductStatus
   category: Prisma.CategoryCreateNestedOneWithoutProductsInput
   parameterValues?: Prisma.ProductParameterValueCreateNestedManyWithoutProductInput
 }
@@ -396,7 +383,6 @@ export type ProductUncheckedCreateInput = {
   image: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  status?: $Enums.ProductStatus
   categoryId: string
   parameterValues?: Prisma.ProductParameterValueUncheckedCreateNestedManyWithoutProductInput
 }
@@ -413,7 +399,6 @@ export type ProductUpdateInput = {
   image?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
   category?: Prisma.CategoryUpdateOneRequiredWithoutProductsNestedInput
   parameterValues?: Prisma.ProductParameterValueUpdateManyWithoutProductNestedInput
 }
@@ -430,7 +415,6 @@ export type ProductUncheckedUpdateInput = {
   image?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
   parameterValues?: Prisma.ProductParameterValueUncheckedUpdateManyWithoutProductNestedInput
 }
@@ -447,7 +431,6 @@ export type ProductCreateManyInput = {
   image: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  status?: $Enums.ProductStatus
   categoryId: string
 }
 
@@ -463,7 +446,6 @@ export type ProductUpdateManyMutationInput = {
   image?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
 }
 
 export type ProductUncheckedUpdateManyInput = {
@@ -478,7 +460,6 @@ export type ProductUncheckedUpdateManyInput = {
   image?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -494,7 +475,6 @@ export type ProductCountOrderByAggregateInput = {
   image?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
 }
 
@@ -515,7 +495,6 @@ export type ProductMaxOrderByAggregateInput = {
   image?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
 }
 
@@ -531,7 +510,6 @@ export type ProductMinOrderByAggregateInput = {
   image?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
 }
 
@@ -585,10 +563,6 @@ export type BoolFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
-}
-
-export type EnumProductStatusFieldUpdateOperationsInput = {
-  set?: $Enums.ProductStatus
 }
 
 export type ProductCreateNestedOneWithoutParameterValuesInput = {
@@ -659,7 +633,6 @@ export type ProductCreateWithoutParameterValuesInput = {
   image: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  status?: $Enums.ProductStatus
   category: Prisma.CategoryCreateNestedOneWithoutProductsInput
 }
 
@@ -675,7 +648,6 @@ export type ProductUncheckedCreateWithoutParameterValuesInput = {
   image: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  status?: $Enums.ProductStatus
   categoryId: string
 }
 
@@ -707,7 +679,6 @@ export type ProductUpdateWithoutParameterValuesInput = {
   image?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
   category?: Prisma.CategoryUpdateOneRequiredWithoutProductsNestedInput
 }
 
@@ -723,7 +694,6 @@ export type ProductUncheckedUpdateWithoutParameterValuesInput = {
   image?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -739,7 +709,6 @@ export type ProductCreateWithoutCategoryInput = {
   image: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  status?: $Enums.ProductStatus
   parameterValues?: Prisma.ProductParameterValueCreateNestedManyWithoutProductInput
 }
 
@@ -755,7 +724,6 @@ export type ProductUncheckedCreateWithoutCategoryInput = {
   image: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  status?: $Enums.ProductStatus
   parameterValues?: Prisma.ProductParameterValueUncheckedCreateNestedManyWithoutProductInput
 }
 
@@ -800,7 +768,6 @@ export type ProductScalarWhereInput = {
   image?: Prisma.StringFilter<"Product"> | string
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Product"> | Date | string
-  status?: Prisma.EnumProductStatusFilter<"Product"> | $Enums.ProductStatus
   categoryId?: Prisma.StringFilter<"Product"> | string
 }
 
@@ -816,7 +783,6 @@ export type ProductCreateManyCategoryInput = {
   image: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  status?: $Enums.ProductStatus
 }
 
 export type ProductUpdateWithoutCategoryInput = {
@@ -831,7 +797,6 @@ export type ProductUpdateWithoutCategoryInput = {
   image?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
   parameterValues?: Prisma.ProductParameterValueUpdateManyWithoutProductNestedInput
 }
 
@@ -847,7 +812,6 @@ export type ProductUncheckedUpdateWithoutCategoryInput = {
   image?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
   parameterValues?: Prisma.ProductParameterValueUncheckedUpdateManyWithoutProductNestedInput
 }
 
@@ -863,7 +827,6 @@ export type ProductUncheckedUpdateManyWithoutCategoryInput = {
   image?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
 }
 
 
@@ -909,7 +872,6 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   image?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  status?: boolean
   categoryId?: boolean
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
   parameterValues?: boolean | Prisma.Product$parameterValuesArgs<ExtArgs>
@@ -928,7 +890,6 @@ export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   image?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  status?: boolean
   categoryId?: boolean
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["product"]>
@@ -945,7 +906,6 @@ export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   image?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  status?: boolean
   categoryId?: boolean
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["product"]>
@@ -962,11 +922,10 @@ export type ProductSelectScalar = {
   image?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  status?: boolean
   categoryId?: boolean
 }
 
-export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "price" | "currency" | "slug" | "quantity" | "inStock" | "image" | "createdAt" | "updatedAt" | "status" | "categoryId", ExtArgs["result"]["product"]>
+export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "price" | "currency" | "slug" | "quantity" | "inStock" | "image" | "createdAt" | "updatedAt" | "categoryId", ExtArgs["result"]["product"]>
 export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
   parameterValues?: boolean | Prisma.Product$parameterValuesArgs<ExtArgs>
@@ -997,7 +956,6 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     image: string
     createdAt: Date
     updatedAt: Date
-    status: $Enums.ProductStatus
     categoryId: string
   }, ExtArgs["result"]["product"]>
   composites: {}
@@ -1435,7 +1393,6 @@ export interface ProductFieldRefs {
   readonly image: Prisma.FieldRef<"Product", 'String'>
   readonly createdAt: Prisma.FieldRef<"Product", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Product", 'DateTime'>
-  readonly status: Prisma.FieldRef<"Product", 'ProductStatus'>
   readonly categoryId: Prisma.FieldRef<"Product", 'String'>
 }
     

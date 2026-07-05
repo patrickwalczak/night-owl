@@ -2,9 +2,9 @@
 
 import { useIsOpenState, useSafeContext } from '@/shared/lib/hooks/client';
 import { cn } from '@/shared/lib/utils';
-import { NavigationContext } from '@/widgets/navigation/ui/Navigation';
+import { HamburgerIcon } from '@/shared/ui/icons';
 
-import { HamburgerIcon } from '../../../../shared/ui/icons';
+import { NavigationContext } from '../Navigation';
 import Menu from './components/Menu';
 import styles from './navigation.module.scss';
 

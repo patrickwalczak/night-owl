@@ -3,10 +3,10 @@
 import Image from 'next/image';
 import { type KeyboardEventHandler, type MouseEventHandler } from 'react';
 
-import { type CatalogProduct } from '@/pages/categorySlug/model/catalog.types';
 import { cn } from '@/shared/lib/utils';
 import { CartIcon } from '@/shared/ui/icons';
 
+import { type CatalogProduct } from '../../../../../model/catalog.types';
 import styles from './product.module.scss';
 
 export default function Product({ product }: { product: CatalogProduct }) {

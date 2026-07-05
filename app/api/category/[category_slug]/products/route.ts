@@ -1,10 +1,8 @@
 import { NextResponse } from 'next/server';
 
-import { getCategoryBySlug } from '@/entities/category/api/getCategoryBySlug';
+import { getCategoryBySlug } from '@/entities/category/server';
 import { getProductsForCategory } from '@/entities/product/server';
-import { toOrderBy } from '@/pages/categorySlug/api/lib/getOrderBy';
-import { PAGE_SIZE } from '@/pages/categorySlug/config/constants';
-import { parseCatalogSearchParams } from '@/pages/categorySlug/lib/url';
+import { toOrderBy, PAGE_SIZE, parseCatalogSearchParams } from '@/pages/categorySlug/server';
 
 export async function GET(req: Request, ctx: { params: Promise<{ category_slug: string }> }) {
     const params = await ctx.params;

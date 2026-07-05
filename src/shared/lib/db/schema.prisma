@@ -7,26 +7,18 @@ generator client {
   output   = "./generated"
 }
 
-enum ProductStatus {
-  NEW
-  SALE
-  PROMOTION
-  DEFAULT
-}
-
 model Product {
-  id          String        @id @default(cuid())
+  id          String   @id @default(cuid())
   name        String
   description String?
   price       Float
-  currency    String        @default("USD")
-  slug        String        @unique
-  quantity    Int           @default(100)
-  inStock     Boolean       @default(true)
+  currency    String   @default("USD")
+  slug        String   @unique
+  quantity    Int      @default(100)
+  inStock     Boolean  @default(true)
   image       String
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  status      ProductStatus @default(DEFAULT)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   categoryId String
   category   Category @relation(fields: [categoryId], references: [id])

@@ -2,6 +2,8 @@
 
 import { useState, createContext, type Dispatch, type ReactNode, type SetStateAction } from 'react';
 
+import { useSafeContext } from '@/shared/lib/hooks/client';
+
 import {
     type CatalogCategory,
     type CatalogCategorySummary,
@@ -9,8 +11,7 @@ import {
     type CatalogProduct,
     type CatalogProductsPage,
     type CatalogSubcategory,
-} from '@/pages/categorySlug/model/catalog.types';
-import { useSafeContext } from '@/shared/lib/hooks/client';
+} from '../../model/catalog.types';
 
 interface CatalogContextType {
     initialProducts: CatalogProduct[];

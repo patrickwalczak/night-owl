@@ -4,9 +4,16 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
-		"build": "prisma generate --schema=src/shared/lib/db/schema.prisma && next build",
+		"build": "npm run db:generate && next build",
 		"start": "next start",
-		"lint": "eslint ."
+		"lint": "eslint .",
+		"db:validate": "prisma validate --config=src/shared/lib/db/prisma.config.ts",
+		"db:format": "prisma format --config=src/shared/lib/db/prisma.config.ts",
+		"db:generate": "prisma generate --config=src/shared/lib/db/prisma.config.ts",
+		"db:push": "prisma db push --config=src/shared/lib/db/prisma.config.ts",
+		"db:push:loss": "prisma db push --config=src/shared/lib/db/prisma.config.ts --accept-data-loss",
+		"db:reset": "prisma db push --config=src/shared/lib/db/prisma.config.ts --force-reset",
+		"db:studio": "prisma studio --config=src/shared/lib/db/prisma.config.ts"
 	},
 	"prisma": {
 		"seed": "tsx prisma/seed.ts"
