@@ -35,7 +35,6 @@ export async function getProductsForCategory(opts: GetProductsForCategoryOptions
         categoryId: {
             in: categoryIds,
         },
-        inStock: true,
     };
 
     if (opts.query) where.name = {

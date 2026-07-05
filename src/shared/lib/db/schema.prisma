@@ -14,8 +14,6 @@ model Product {
   price       Float
   currency    String   @default("USD")
   slug        String   @unique
-  quantity    Int      @default(100)
-  inStock     Boolean  @default(true)
   image       String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
