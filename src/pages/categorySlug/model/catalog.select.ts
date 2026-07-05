@@ -22,10 +22,12 @@ export const catalogCategorySelect = {
 export const catalogParameterSelect = {
     id: true,
     name: true,
+    slug: true,
     values: {
         select: {
             id: true,
             value: true,
+            slug: true,
             _count: {
                 select: {
                     products: true,

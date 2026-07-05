@@ -36,3 +36,14 @@
 - Warianty produktów, tylko jeśli pojawią się realne wymagania.
 - Kolekcje/tagi/landing page'e dla grupowań marketingowych.
 - Admin albo importery do backfillowania parametrów, zdjęć, cen i innych przyszłych danych.
+
+
+Co Nadal Jest Otwarte
+Największe decyzje, które kiedyś mogą wymagać refactoru:
+czy produkt ma jedną kategorię, czy wiele kategorii,
+czy parametry zostają tylko tekstowe, czy dochodzą typy liczbowe/boolean,
+jak będą liczone facety,
+czy produkt będzie miał warianty,
+jak będą wyglądać ceny,
+jak będzie wyglądać galeria zdjęć,
+czy produkty będą miały widoczność/status publikacji.
