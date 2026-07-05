@@ -3,13 +3,13 @@
 import Image from 'next/image';
 import { type KeyboardEventHandler, type MouseEventHandler } from 'react';
 
-import { type ListingProductType } from '@/pages/categorySlug/model/product.types';
+import { type CatalogProduct } from '@/pages/categorySlug/model/catalog.types';
 import { cn } from '@/shared/lib/utils';
 import { CartIcon } from '@/shared/ui/icons';
 
 import styles from './product.module.scss';
 
-export default function Product({ product }: { product: ListingProductType }) {
+export default function Product({ product }: { product: CatalogProduct }) {
     const onCartClick: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.stopPropagation();
     };

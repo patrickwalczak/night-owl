@@ -4,9 +4,16 @@ export type SortOrderType = (typeof SORT_VALUE)[keyof typeof SORT_VALUE];
 
 export type SearchParamsKeys = (typeof SEARCH_PARAMS_KEYS)[keyof typeof SEARCH_PARAMS_KEYS];
 
-export interface SearchParamsType {
-    [SEARCH_PARAMS_KEYS.QUERY]?: string;
-    [SEARCH_PARAMS_KEYS.SORT]?: SortOrderType;
-    [SEARCH_PARAMS_KEYS.PAGE]?: string;
-    [SEARCH_PARAMS_KEYS.FILTERS]?: string;
+export type SearchParamValue = string | string[] | undefined;
+
+export interface RawUrlSearchParams {
+    [SEARCH_PARAMS_KEYS.QUERY]?: SearchParamValue;
+    [SEARCH_PARAMS_KEYS.SORT]?: SearchParamValue;
+    [SEARCH_PARAMS_KEYS.PAGE]?: SearchParamValue;
+}
+
+export interface ParsedCatalogSearchParams {
+    [SEARCH_PARAMS_KEYS.PAGE]: number;
+    [SEARCH_PARAMS_KEYS.SORT]: SortOrderType;
+    [SEARCH_PARAMS_KEYS.QUERY]: string;
 }

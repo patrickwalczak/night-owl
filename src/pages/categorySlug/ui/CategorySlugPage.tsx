@@ -1,12 +1,12 @@
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
-import { normalizeSearchParams, parseListingParams } from '@/pages/categorySlug/lib/url';
+import { normalizeSearchParams, parseCatalogSearchParams } from '@/pages/categorySlug/lib/url';
 
-import { getPageData } from '../api/getPageData';
+import { getCatalogPageData } from '../api/getCatalogPageData';
 import CatalogProvider from '../model/providers/CatalogProvider';
 import { type RouteParamsType } from '../model/routeParams.types';
-import { type SearchParamsType } from '../model/searchParams.types';
+import { type RawUrlSearchParams } from '../model/searchParams.types';
 import CatalogContainer from '../ui/components/pageView/CatalogContainer';
 
 export default async function CategorySlugPage({
@@ -14,16 +14,16 @@ export default async function CategorySlugPage({
     searchParams,
 }: {
     params: Promise<RouteParamsType>;
-    searchParams: Promise<SearchParamsType>;
+    searchParams: Promise<RawUrlSearchParams>;
 }) {
     const [awaitedParams, awaitedSearchParams] = await Promise.all([params, searchParams]);
 
     const { category_slug } = awaitedParams;
     const search = normalizeSearchParams(awaitedSearchParams);
-    const parsedParams = parseListingParams(search);
+    const parsedParams = parseCatalogSearchParams(search);
 
     try {
-        const { category, parameters, products } = await getPageData(category_slug, parsedParams);
+        const { category, parameters, products } = await getCatalogPageData(category_slug, parsedParams);
 
         if (!category) notFound();
 

@@ -93,7 +93,9 @@ export default defineConfig([
        * This helps prevent accidental debug logs from staying in the code,
        * while still allowing intentional warning/error logging.
        */
-            'no-console': ['warn', { allow: ['warn', 'error'] }],
+            'no-console': ['warn', {
+                allow: ['warn', 'error'],
+            }],
 
             /**
        * Warn when a debugger statement is left in the code.
@@ -189,7 +191,9 @@ export default defineConfig([
                 4,
                 {
                     ArrayExpression: 1,
-                    CallExpression: { arguments: 1 },
+                    CallExpression: {
+                        arguments: 1,
+                    },
                     flatTernaryExpressions: false,
                     FunctionDeclaration: {
                         body: 1,
@@ -213,6 +217,38 @@ export default defineConfig([
                     VariableDeclarator: 1,
                 },
             ],
+
+            // '@stylistic/object-curly-newline': [
+            //     'error',
+            //     {
+            //         ObjectExpression: 'always',
+
+            //         ObjectPattern: {
+            //             multiline: true,
+            //         },
+
+            //         ImportDeclaration: {
+            //             multiline: true,
+            //             minProperties: 4,
+            //         },
+
+            //         TSTypeLiteral: {
+            //             multiline: true,
+            //         },
+
+            //         ExportDeclaration: {
+            //             multiline: true,
+            //             minProperties: 4,
+            //         },
+            //     },
+            // ],
+
+            // '@stylistic/object-property-newline': [
+            //     'error',
+            //     {
+            //         allowAllPropertiesOnSameLine: false,
+            //     },
+            // ],
 
             '@stylistic/jsx-curly-brace-presence': [
                 'error',

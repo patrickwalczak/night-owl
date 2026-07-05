@@ -15,7 +15,9 @@ export const useSetNavigationOpen = () => {
 
     return useCallback(
         (isNavigationOpen: boolean) => {
-            dispatch(toggleNavigation({ isNavigationOpen }));
+            dispatch(toggleNavigation({
+                isNavigationOpen,
+            }));
         },
         [dispatch],
     );

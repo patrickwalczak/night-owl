@@ -4,13 +4,13 @@ import { getCategoryBySlug } from '@/entities/category/api/getCategoryBySlug';
 import { getProductsForCategory } from '@/entities/product/server';
 import { toOrderBy } from '@/pages/categorySlug/api/lib/getOrderBy';
 import { PAGE_SIZE } from '@/pages/categorySlug/config/constants';
-import { parseListingParams } from '@/pages/categorySlug/lib/url';
+import { parseCatalogSearchParams } from '@/pages/categorySlug/lib/url';
 
 export async function GET(req: Request, ctx: { params: Promise<{ category_slug: string }> }) {
     const params = await ctx.params;
     const { searchParams } = new URL(req.url);
 
-    const parsed = parseListingParams(searchParams);
+    const parsed = parseCatalogSearchParams(searchParams);
 
     const category = await getCategoryBySlug(params.category_slug);
 
@@ -23,7 +23,6 @@ export async function GET(req: Request, ctx: { params: Promise<{ category_slug: 
         page: parsed.page,
         sort: toOrderBy(parsed.sort),
         query: parsed.query,
-        paramValueIds: parsed.paramValueIds,
         pageSize: PAGE_SIZE,
     });
 

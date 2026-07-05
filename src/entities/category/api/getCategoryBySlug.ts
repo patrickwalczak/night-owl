@@ -7,13 +7,26 @@ import { prisma } from '@/shared/lib/db/server';
 
 export const getCategoryBySlug = cache(async (slug: string) => {
     return prisma.category.findUnique({
-        where: { slug },
+        where: {
+            slug,
+        },
         select: {
             id: true,
             name: true,
             slug: true,
             parentId: true,
-            children: { select: { id: true, name: true, slug: true, _count: { select: { products: true } } } },
+            children: {
+                select: {
+                    id: true,
+                    name: true,
+                    slug: true,
+                    _count: {
+                        select: {
+                            products: true,
+                        },
+                    },
+                },
+            },
         },
     });
 });

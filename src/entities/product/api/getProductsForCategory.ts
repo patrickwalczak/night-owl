@@ -7,23 +7,39 @@ export async function getProductsForCategory(opts: {
     categoryId: string;
     page: number;
     sort: ProductOrderByWithRelationInput;
-    paramValueIds?: string[];
+    filters?: string[];
     query?: string;
     pageSize: number;
 }) {
     const children = await prisma.category.findMany({
-        where: { parentId: opts.categoryId },
-        select: { id: true },
+        where: {
+            parentId: opts.categoryId,
+        },
+        select: {
+            id: true,
+        },
     });
     const categoryIds = [opts.categoryId, ...children.map(c => c.id)];
 
-    const where: any = { categoryId: { in: categoryIds }, inStock: true };
+    const where: any = {
+        categoryId: {
+            in: categoryIds,
+        },
+        inStock: true,
+    };
 
-    if (opts.query) where.name = { contains: opts.query, mode: 'insensitive' };
+    if (opts.query) where.name = {
+        contains: opts.query,
+        mode: 'insensitive',
+    };
 
-    if (opts.paramValueIds?.length) {
+    if (opts.filters?.length) {
         where.parameterValues = {
-            some: { parameterValueId: { in: opts.paramValueIds } },
+            some: {
+                parameterValueId: {
+                    in: opts.filters,
+                },
+            },
         };
     }
 
@@ -42,8 +58,14 @@ export async function getProductsForCategory(opts: {
                 status: true,
             },
         }),
-        prisma.product.count({ where }),
+        prisma.product.count({
+            where,
+        }),
     ]);
 
-    return { items, total, pageSize: opts.pageSize };
+    return {
+        items,
+        total,
+        pageSize: opts.pageSize,
+    };
 }

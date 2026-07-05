@@ -5,7 +5,7 @@ import ProductsInfinite from '../../sections/productList/ui/productsInfinite/Pro
 import StickyViewDesktop from '../stickyContainer/StickyViewDesktop';
 import styles from './catalogView.module.scss';
 
-export default function CatalogContainer() {
+export default function CatalogViewDesktop() {
     return (
         <main className={cn(styles.container, 'flex', 'flex-col')}>
 

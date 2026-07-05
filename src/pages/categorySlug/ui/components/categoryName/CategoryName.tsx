@@ -6,7 +6,10 @@ import { cn } from '@/shared/lib/utils';
 
 import styles from './categoryName.module.scss';
 
-const CategoryName = ({ isProductSum = false, isStuck = false }: { isProductSum?: boolean; isStuck?: boolean }) => {
+const CategoryName = ({ isProductSum = false, isStuck = false }: {
+    isProductSum?: boolean;
+    isStuck?: boolean;
+}) => {
     const {
         productSum,
         category: { name },

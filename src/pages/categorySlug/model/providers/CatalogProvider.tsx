@@ -1,35 +1,43 @@
 'use client';
 
-import { useState, createContext, type ReactNode } from 'react';
+import { useState, createContext, type Dispatch, type ReactNode, type SetStateAction } from 'react';
 
-import { type ListingProductType } from '@/pages/categorySlug/model/product.types';
-
-interface CategoryMini {
-    id: string;
-    name: string;
-    slug: string;
-    parentId: string | null;
-}
+import {
+    type CatalogCategory,
+    type CatalogCategorySummary,
+    type CatalogParameter,
+    type CatalogProduct,
+    type CatalogProductsPage,
+    type CatalogSubcategory,
+} from '@/pages/categorySlug/model/catalog.types';
 
 interface CatalogContextType {
-    initialProducts: ListingProductType[];
+    initialProducts: CatalogProduct[];
     areFiltersOpen: boolean;
-    parameters: any[];
-    subcategories: any;
-    category: CategoryMini;
+    parameters: CatalogParameter[];
+    subcategories: CatalogSubcategory[];
+    category: CatalogCategorySummary;
     productSum: number;
     page: number;
     pageSize: number;
     totalPages: number;
     nextPage: number | null;
-    setAreFiltersOpen: (v: boolean) => void;
+    setAreFiltersOpen: Dispatch<SetStateAction<boolean>>;
     toggleFilters: () => void;
-    setParameters: (v: any[]) => void;
-    setSubcategories: (v: any) => void;
-    setCategory: (v: CategoryMini) => void;
-    setProductSum: (v: number) => void;
-    setPage: (v: number) => void;
-    setPageSize: (v: number) => void;
+    setParameters: Dispatch<SetStateAction<CatalogParameter[]>>;
+    setSubcategories: Dispatch<SetStateAction<CatalogSubcategory[]>>;
+    setCategory: Dispatch<SetStateAction<CatalogCategorySummary>>;
+    setProductSum: Dispatch<SetStateAction<number>>;
+    setPage: Dispatch<SetStateAction<number>>;
+    setPageSize: Dispatch<SetStateAction<number>>;
+}
+
+interface CatalogProviderProps {
+    children: ReactNode;
+    areFiltersOpen: boolean;
+    parameters: CatalogParameter[];
+    category: CatalogCategory;
+    initialProductsProp: CatalogProductsPage;
 }
 
 export const CatalogContext = createContext<CatalogContextType | null>(null);
@@ -40,22 +48,11 @@ const CatalogProvider = ({
     initialProductsProp,
     parameters: parametersProp,
     category: categoryProp,
-}: {
-    children: ReactNode;
-    areFiltersOpen: boolean;
-    parameters: any[];
-    category: any;
-    initialProductsProp: {
-        items: ListingProductType[];
-        total: number;
-        pageSize: number;
-        page: number;
-    };
-}) => {
+}: CatalogProviderProps) => {
     const [areFiltersOpen, setAreFiltersOpen] = useState<boolean>(areFiltersOpenProp);
-    const [parameters, setParameters] = useState<any[]>(parametersProp);
-    const [subcategories, setSubcategories] = useState<any>(categoryProp.children);
-    const [category, setCategory] = useState<CategoryMini>({
+    const [parameters, setParameters] = useState<CatalogParameter[]>(parametersProp);
+    const [subcategories, setSubcategories] = useState<CatalogSubcategory[]>(categoryProp.children);
+    const [category, setCategory] = useState<CatalogCategorySummary>({
         id: categoryProp.id,
         name: categoryProp.name,
         slug: categoryProp.slug,
@@ -70,7 +67,7 @@ const CatalogProvider = ({
     const totalPages = Math.max(1, Math.ceil(productSum / pageSize));
     const nextPage = page < totalPages ? page + 1 : null;
 
-    const value = {
+    const value: CatalogContextType = {
         initialProducts,
         areFiltersOpen,
         parameters,
