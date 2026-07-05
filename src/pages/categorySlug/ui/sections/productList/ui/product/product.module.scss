@@ -37,13 +37,8 @@
 }
 
 .bottomContainer {
-	display: grid;
-	grid-template-columns: 1fr auto;
-	align-items: center;
-}
-
-.price {
-	font-weight: var(--font-weight-500);
+	display: flex;
+	justify-content: flex-end;
 }
 
 .cartBtn {

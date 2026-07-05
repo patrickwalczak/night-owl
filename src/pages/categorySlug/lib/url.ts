@@ -41,9 +41,9 @@ export function parseCatalogSearchParams(searchParams: URLSearchParams): ParsedC
  * query entries with the same key.
  *
  * Example:
- * { sort: 'price_asc', query: '' }
+ * { sort: 'newest', query: '' }
  * becomes:
- * ?sort=price_asc
+ * ?sort=newest
  */
 export const normalizeSearchParams = (searchParams: RawUrlSearchParams): URLSearchParams => {
     const normalizedSearchParamsEntries = Object.entries(searchParams).flatMap(([paramKey, paramValue]) => {

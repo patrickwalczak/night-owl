@@ -351,6 +351,14 @@ export type ParameterValueOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type FloatFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type ParameterValueCreateNestedOneWithoutProductsInput = {
   create?: Prisma.XOR<Prisma.ParameterValueCreateWithoutProductsInput, Prisma.ParameterValueUncheckedCreateWithoutProductsInput>
   connectOrCreate?: Prisma.ParameterValueCreateOrConnectWithoutProductsInput

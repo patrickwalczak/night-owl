@@ -35,11 +35,6 @@ export default function Product({ product }: { product: CatalogProduct }) {
                 </h4>
 
                 <div className={styles.bottomContainer}>
-                    <p className={cn(styles.price, 'p')}>
-                        {'$'}
-                        {product.price}
-                    </p>
-
                     <button
                         type={'button'}
                         className={cn(styles.cartBtn, 'button-empty', 'transition-200', 'flex-center')}

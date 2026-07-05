@@ -10,9 +10,6 @@ generator client {
 model Product {
   id          String   @id @default(cuid())
   name        String
-  description String?
-  price       Float
-  currency    String   @default("USD")
   slug        String   @unique
   image       String
   createdAt   DateTime @default(now())
@@ -47,7 +44,6 @@ model ProductParameterValue {
 model Parameter {
   id          String   @id @default(cuid())
   name        String   @unique
-  description String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

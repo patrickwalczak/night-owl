@@ -14,7 +14,6 @@ async function addProduct(
     parameterName: string,
     parameterValue: string,
     productName: string,
-    price: number,
 ) {
     const category = await prisma.category.findUnique({
         where: { slug: categorySlug },
@@ -33,9 +32,6 @@ async function addProduct(
     const product = await prisma.product.create({
         data: {
             name: productName,
-            description:
-				'This pendant lamp is the essence of style and elegance. Beautifully crafted as part of a stunning collection, it was designed to bring sophistication and charm to any space. Its composition fits seamlessly into both modern and classic interiors, creating a harmonious balance with other pieces in the series.',
-            price,
             image: '',
             slug: slugify(productName, { lower: true }),
             category: { connect: { id: category.id } },
@@ -78,7 +74,6 @@ const manufacturers = [
 
 interface ProductSeed {
     categorySlug: string;
-    price: number;
     parameterName: string;
     parameterValue: string;
     productName: string;
@@ -99,7 +94,6 @@ const generateProducts = (): ProductSeed[] => {
 
                 const product = {
                     categorySlug,
-                    price: +(Math.random() * 100 + 50).toFixed(2),
                     parameterName: 'Manufacturer',
                     parameterValue: manufacturer,
                     productName: name,
@@ -124,7 +118,6 @@ export async function seedProducts() {
                 product.parameterName,
                 product.parameterValue,
                 product.productName,
-                product.price,
             );
         }
         catch (error) {

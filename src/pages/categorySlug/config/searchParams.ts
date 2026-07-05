@@ -1,8 +1,6 @@
 export const SORT_VALUE = {
     POPULARITY: 'popularity',
     NEWEST: 'newest',
-    PRICE_DESC: 'price_desc',
-    PRICE_ASC: 'price_asc',
 } as const;
 
 export const SORT_OPTIONS = [
@@ -13,14 +11,6 @@ export const SORT_OPTIONS = [
     {
         value: SORT_VALUE.NEWEST,
         label: 'Newest',
-    },
-    {
-        value: SORT_VALUE.PRICE_DESC,
-        label: 'Price: High-Low',
-    },
-    {
-        value: SORT_VALUE.PRICE_ASC,
-        label: 'Price: Low-High',
     },
 ] as const;
 

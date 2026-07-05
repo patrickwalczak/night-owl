@@ -27,7 +27,6 @@ export type AggregateParameter = {
 export type ParameterMinAggregateOutputType = {
   id: string | null
   name: string | null
-  description: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -35,7 +34,6 @@ export type ParameterMinAggregateOutputType = {
 export type ParameterMaxAggregateOutputType = {
   id: string | null
   name: string | null
-  description: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -43,7 +41,6 @@ export type ParameterMaxAggregateOutputType = {
 export type ParameterCountAggregateOutputType = {
   id: number
   name: number
-  description: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -53,7 +50,6 @@ export type ParameterCountAggregateOutputType = {
 export type ParameterMinAggregateInputType = {
   id?: true
   name?: true
-  description?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -61,7 +57,6 @@ export type ParameterMinAggregateInputType = {
 export type ParameterMaxAggregateInputType = {
   id?: true
   name?: true
-  description?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -69,7 +64,6 @@ export type ParameterMaxAggregateInputType = {
 export type ParameterCountAggregateInputType = {
   id?: true
   name?: true
-  description?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -150,7 +144,6 @@ export type ParameterGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 export type ParameterGroupByOutputType = {
   id: string
   name: string
-  description: string | null
   createdAt: Date
   updatedAt: Date
   _count: ParameterCountAggregateOutputType | null
@@ -179,7 +172,6 @@ export type ParameterWhereInput = {
   NOT?: Prisma.ParameterWhereInput | Prisma.ParameterWhereInput[]
   id?: Prisma.StringFilter<"Parameter"> | string
   name?: Prisma.StringFilter<"Parameter"> | string
-  description?: Prisma.StringNullableFilter<"Parameter"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Parameter"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Parameter"> | Date | string
   categories?: Prisma.CategoryParameterListRelationFilter
@@ -189,7 +181,6 @@ export type ParameterWhereInput = {
 export type ParameterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  description?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   categories?: Prisma.CategoryParameterOrderByRelationAggregateInput
@@ -202,7 +193,6 @@ export type ParameterWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ParameterWhereInput | Prisma.ParameterWhereInput[]
   OR?: Prisma.ParameterWhereInput[]
   NOT?: Prisma.ParameterWhereInput | Prisma.ParameterWhereInput[]
-  description?: Prisma.StringNullableFilter<"Parameter"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Parameter"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Parameter"> | Date | string
   categories?: Prisma.CategoryParameterListRelationFilter
@@ -212,7 +202,6 @@ export type ParameterWhereUniqueInput = Prisma.AtLeast<{
 export type ParameterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  description?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ParameterCountOrderByAggregateInput
@@ -226,7 +215,6 @@ export type ParameterScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ParameterScalarWhereWithAggregatesInput | Prisma.ParameterScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Parameter"> | string
   name?: Prisma.StringWithAggregatesFilter<"Parameter"> | string
-  description?: Prisma.StringNullableWithAggregatesFilter<"Parameter"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Parameter"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Parameter"> | Date | string
 }
@@ -234,7 +222,6 @@ export type ParameterScalarWhereWithAggregatesInput = {
 export type ParameterCreateInput = {
   id?: string
   name: string
-  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   categories?: Prisma.CategoryParameterCreateNestedManyWithoutParameterInput
@@ -244,7 +231,6 @@ export type ParameterCreateInput = {
 export type ParameterUncheckedCreateInput = {
   id?: string
   name: string
-  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   categories?: Prisma.CategoryParameterUncheckedCreateNestedManyWithoutParameterInput
@@ -254,7 +240,6 @@ export type ParameterUncheckedCreateInput = {
 export type ParameterUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   categories?: Prisma.CategoryParameterUpdateManyWithoutParameterNestedInput
@@ -264,7 +249,6 @@ export type ParameterUpdateInput = {
 export type ParameterUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   categories?: Prisma.CategoryParameterUncheckedUpdateManyWithoutParameterNestedInput
@@ -274,7 +258,6 @@ export type ParameterUncheckedUpdateInput = {
 export type ParameterCreateManyInput = {
   id?: string
   name: string
-  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -282,7 +265,6 @@ export type ParameterCreateManyInput = {
 export type ParameterUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -290,7 +272,6 @@ export type ParameterUpdateManyMutationInput = {
 export type ParameterUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -303,7 +284,6 @@ export type ParameterScalarRelationFilter = {
 export type ParameterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -311,7 +291,6 @@ export type ParameterCountOrderByAggregateInput = {
 export type ParameterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -319,7 +298,6 @@ export type ParameterMaxOrderByAggregateInput = {
 export type ParameterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -355,7 +333,6 @@ export type ParameterUpdateOneRequiredWithoutCategoriesNestedInput = {
 export type ParameterCreateWithoutValuesInput = {
   id?: string
   name: string
-  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   categories?: Prisma.CategoryParameterCreateNestedManyWithoutParameterInput
@@ -364,7 +341,6 @@ export type ParameterCreateWithoutValuesInput = {
 export type ParameterUncheckedCreateWithoutValuesInput = {
   id?: string
   name: string
-  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   categories?: Prisma.CategoryParameterUncheckedCreateNestedManyWithoutParameterInput
@@ -389,7 +365,6 @@ export type ParameterUpdateToOneWithWhereWithoutValuesInput = {
 export type ParameterUpdateWithoutValuesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   categories?: Prisma.CategoryParameterUpdateManyWithoutParameterNestedInput
@@ -398,7 +373,6 @@ export type ParameterUpdateWithoutValuesInput = {
 export type ParameterUncheckedUpdateWithoutValuesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   categories?: Prisma.CategoryParameterUncheckedUpdateManyWithoutParameterNestedInput
@@ -407,7 +381,6 @@ export type ParameterUncheckedUpdateWithoutValuesInput = {
 export type ParameterCreateWithoutCategoriesInput = {
   id?: string
   name: string
-  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   values?: Prisma.ParameterValueCreateNestedManyWithoutParameterInput
@@ -416,7 +389,6 @@ export type ParameterCreateWithoutCategoriesInput = {
 export type ParameterUncheckedCreateWithoutCategoriesInput = {
   id?: string
   name: string
-  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   values?: Prisma.ParameterValueUncheckedCreateNestedManyWithoutParameterInput
@@ -441,7 +413,6 @@ export type ParameterUpdateToOneWithWhereWithoutCategoriesInput = {
 export type ParameterUpdateWithoutCategoriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   values?: Prisma.ParameterValueUpdateManyWithoutParameterNestedInput
@@ -450,7 +421,6 @@ export type ParameterUpdateWithoutCategoriesInput = {
 export type ParameterUncheckedUpdateWithoutCategoriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   values?: Prisma.ParameterValueUncheckedUpdateManyWithoutParameterNestedInput
@@ -499,7 +469,6 @@ export type ParameterCountOutputTypeCountValuesArgs<ExtArgs extends runtime.Type
 export type ParameterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   categories?: boolean | Prisma.Parameter$categoriesArgs<ExtArgs>
@@ -510,7 +479,6 @@ export type ParameterSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type ParameterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["parameter"]>
@@ -518,7 +486,6 @@ export type ParameterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type ParameterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["parameter"]>
@@ -526,12 +493,11 @@ export type ParameterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type ParameterSelectScalar = {
   id?: boolean
   name?: boolean
-  description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ParameterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["parameter"]>
+export type ParameterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["parameter"]>
 export type ParameterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   categories?: boolean | Prisma.Parameter$categoriesArgs<ExtArgs>
   values?: boolean | Prisma.Parameter$valuesArgs<ExtArgs>
@@ -549,7 +515,6 @@ export type $ParameterPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
-    description: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["parameter"]>
@@ -979,7 +944,6 @@ export interface Prisma__ParameterClient<T, Null = never, ExtArgs extends runtim
 export interface ParameterFieldRefs {
   readonly id: Prisma.FieldRef<"Parameter", 'String'>
   readonly name: Prisma.FieldRef<"Parameter", 'String'>
-  readonly description: Prisma.FieldRef<"Parameter", 'String'>
   readonly createdAt: Prisma.FieldRef<"Parameter", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Parameter", 'DateTime'>
 }
