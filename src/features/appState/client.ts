@@ -13,12 +13,9 @@ export const useIsNavigationOpen = () => useSelector(selectIsNavigationOpen);
 export const useSetNavigationOpen = () => {
     const dispatch = useDispatch();
 
-    return useCallback(
-        (isNavigationOpen: boolean) => {
-            dispatch(toggleNavigation({
-                isNavigationOpen,
-            }));
-        },
-        [dispatch],
+    return useCallback((isNavigationOpen: boolean) => {
+        dispatch(toggleNavigation({ isNavigationOpen }));
+    },
+    [dispatch],
     );
 };
