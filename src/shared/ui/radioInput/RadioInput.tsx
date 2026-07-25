@@ -34,10 +34,11 @@ export const RadioInput = ({ className, inputClassName, labelClassName, label, i
 
 type LabelProps = ComponentPropsWithRef<'label'>;
 
-const Label = ({ children, className }: LabelProps) => {
+const Label = ({ children, className, ...props }: LabelProps) => {
     return (
         <label
             className={cn(styles.label, className)}
+            {...props}
         >
             {children}
         </label>

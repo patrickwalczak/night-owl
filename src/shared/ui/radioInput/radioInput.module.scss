@@ -1,9 +1,86 @@
+:root {
+    --radio-border-color: var(--color-owl-purple-850);
+    --radio-checked-color: var(--color-owl-purple-500-faded);
+    --radio-hover-color: var(--color-owl-purple-200);
+    --radio-disabled-bg-color: var(--color-owl-gray-300);
+}
+
 .container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
 }
 
 .input {
+    width: var(--radio-width, 20px);
+    height: var(--radio-height, 20px);
+    border-radius: 50%;
+    border-color: var(--radio-border-color);
+    border-width: 2px;
+    border-style: solid;
     appearance: none;
+    background-color: transparent;
+    outline: none;
+    transition: outline 0.2s;
+
+    &:not(:disabled):checked {
+        border-color: var(--radio-checked-color);
+        background-color: var(--radio-checked-color);
+        background-clip: content-box;
+        padding: 2px;
+        background-image: radial-gradient(circle,
+                var(--radio-checked-color) 0%,
+                var(--radio-checked-color) 50%,
+                transparent 60%,
+                transparent 100%);
+    }
+
+    &:disabled {
+        --radio-border-color: var(--color-owl-gray-450);
+        background-color: var(--radio-disabled-bg-color);
+        border-color: var(--radio-border-color);
+    }
+
+    &:disabled:checked {
+        --radio-border-color: var(--color-owl-gray-400);
+
+        background-image: radial-gradient(circle,
+                var(--radio-border-color) 0%,
+                var(--radio-border-color) 50%,
+                transparent 50%,
+                transparent 100%);
+    }
+
+    @media (hover: hover) {
+        &:not(:disabled):hover {
+            background-color: var(--radio-hover-color);
+            outline: 6px solid var(--radio-hover-color);
+            transform: scale(1.05);
+        }
+    }
+
+    &:focus-visible {
+        background-color: var(--radio-hover-color);
+        outline: 6px solid var(--radio-hover-color);
+        transform: scale(1.05);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+
+        &:focus-visible {
+            transform: scale(1);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) and (hover: hover) {
+        &:not(:disabled):hover {
+            transform: scale(1);
+        }
+    }
 }
 
-.label {
+.input:disabled + .label {
+    color: var(--color-owl-gray-450);
 }
