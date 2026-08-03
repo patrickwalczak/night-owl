@@ -1,38 +1,40 @@
 'use client';
 
-import { type ComponentPropsWithRef } from 'react';
+import { useId } from 'react';
 
 import { cn } from '@/shared/lib/utils';
 
 import styles from './radioInput.module.scss';
+import { type InputProps, type LabelProps, type RadioInputProps } from './types';
 
-type RadioInputProps = ComponentPropsWithRef<'input'> & {
-    label: string;
-    labelClassName?: string;
-    inputClassName?: string;
-};
+export const RadioInput = ({
+    classNames,
+    label,
+    testClassNames,
+    id: providedId,
+    value,
+    ...props
+}: RadioInputProps) => {
+    const generatedId = useId();
+    const id = providedId ?? generatedId;
 
-export const RadioInput = ({ className, inputClassName, labelClassName, label, id, value, name, ...props }: RadioInputProps) => {
     return (
-        <div className={cn(styles.container, className)}>
+        <div className={cn(styles.container, classNames?.wrapper)}>
             <Input
                 value={value}
-                name={name}
                 id={id}
+                className={cn(classNames?.input, testClassNames?.input)}
                 {...props}
-                className={inputClassName}
             />
             <Label
                 htmlFor={id}
-                className={labelClassName}
+                className={cn(classNames?.label, testClassNames?.label)}
             >
                 {label}
             </Label>
         </div>
     );
 };
-
-type LabelProps = ComponentPropsWithRef<'label'>;
 
 const Label = ({ children, className, ...props }: LabelProps) => {
     return (
@@ -44,8 +46,6 @@ const Label = ({ children, className, ...props }: LabelProps) => {
         </label>
     );
 };
-
-type InputProps = ComponentPropsWithRef<'input'>;
 
 const Input = ({ className, ...props }: InputProps) => {
     return (

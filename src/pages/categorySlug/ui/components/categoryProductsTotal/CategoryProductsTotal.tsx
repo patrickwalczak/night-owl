@@ -1,9 +1,9 @@
 'use client';
 
-import { useCatalog } from '../../../model/providers/CatalogProvider';
+import { useCatalogSelector } from '../../../model/client';
 
 const CategoryProductsTotal = () => {
-    const { productSum } = useCatalog();
+    const productSum = useCatalogSelector(state => state.catalog.productSum);
 
     return (
         <span className={'text-sm'}>

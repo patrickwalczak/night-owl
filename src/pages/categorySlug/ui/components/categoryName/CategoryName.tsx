@@ -1,6 +1,6 @@
 'use client';
 
-import { useCatalog } from '@/pages/categorySlug/model/providers/CatalogProvider';
+import { useCatalogSelector } from '@/pages/categorySlug/model/client';
 import { cn } from '@/shared/lib/utils';
 
 import styles from './categoryName.module.scss';
@@ -9,10 +9,8 @@ const CategoryName = ({ isProductSum = false, isStuck = false }: {
     isProductSum?: boolean;
     isStuck?: boolean;
 }) => {
-    const {
-        productSum,
-        category: { name },
-    } = useCatalog();
+    const name = useCatalogSelector(state => state.catalog.category.name);
+    const productSum = useCatalogSelector(state => state.catalog.productSum);
 
     return (
         <h2 className={cn(styles.categoryName, isStuck && styles.stuck, 'transition-200', 'h4')}>

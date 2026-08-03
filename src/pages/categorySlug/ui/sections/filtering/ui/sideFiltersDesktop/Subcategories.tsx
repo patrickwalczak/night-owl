@@ -1,12 +1,12 @@
 import Link from 'next/link';
 
-import { useCatalog } from '@/pages/categorySlug/model/providers/CatalogProvider';
+import { useCatalogSelector } from '@/pages/categorySlug/model/client';
 import { cn } from '@/shared/lib/utils';
 
 import styles from './sideFiltersDesktop.module.scss';
 
 export const Subcategories = () => {
-    const { subcategories } = useCatalog();
+    const subcategories = useCatalogSelector(state => state.catalog.subcategories);
 
     if (subcategories.length === 0) return null;
 

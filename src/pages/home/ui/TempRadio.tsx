@@ -12,12 +12,10 @@ export const TempRadio = () => {
     return (
         <div style={{ height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <RadioInput
-                id={'radio'}
-                label={'Label'}
-                value={'value_1'}
-                defaultChecked={true}
+                label={'Color 1'}
+                value={'color_1'}
+                name={'color'}
                 onChange={e => setRadioValue(e.target.value)}
-                disabled
             />
         </div>
     );

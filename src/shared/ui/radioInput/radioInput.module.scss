@@ -1,5 +1,5 @@
 :root {
-    --radio-border-color: var(--color-owl-purple-850);
+    --radio-border-color: var(--color-owl-purple-500);
     --radio-checked-color: var(--color-owl-purple-500-faded);
     --radio-hover-color: var(--color-owl-purple-200);
     --radio-disabled-bg-color: var(--color-owl-gray-300);
@@ -21,8 +21,8 @@
     border-style: solid;
     appearance: none;
     background-color: transparent;
-    outline: none;
-    transition: outline 0.2s;
+    outline: 2px solid transparent;
+    transition: outline 200ms ease-in;
 
     &:not(:disabled):checked {
         border-color: var(--radio-checked-color);
@@ -37,9 +37,13 @@
     }
 
     &:disabled {
-        --radio-border-color: var(--color-owl-gray-450);
+        --radio-border-color: var(--color-text-muted);
         background-color: var(--radio-disabled-bg-color);
         border-color: var(--radio-border-color);
+
+        & + .label {
+            color: var(--color-text-muted);
+        }
     }
 
     &:disabled:checked {
@@ -79,8 +83,4 @@
             transform: scale(1);
         }
     }
-}
-
-.input:disabled + .label {
-    color: var(--color-owl-gray-450);
 }
