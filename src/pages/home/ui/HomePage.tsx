@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { CategoriesSection } from './categories/CategoriesSection';
 import { Hero } from './hero/Hero';
 import { TempRadio } from './TempRadio';
