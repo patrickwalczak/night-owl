@@ -17,8 +17,8 @@ import type * as Prisma from "./prismaNamespace"
 
 const config: runtime.GetPrismaClientConfig = {
   "previewFeatures": [],
-  "clientVersion": "7.6.0",
-  "engineVersion": "75cbdc1eb7150937890ad5465d861175c6624711",
+  "clientVersion": "7.9.1",
+  "engineVersion": "e922089b7d7502aff4249d5da3420f6fa55fc6ad",
   "activeProvider": "postgresql",
   "inlineSchema": "datasource db {\n  provider = \"postgresql\"\n}\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"./generated\"\n}\n\nmodel Product {\n  id        String   @id @default(cuid())\n  name      String\n  slug      String   @unique\n  image     String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  categoryId String\n  category   Category @relation(fields: [categoryId], references: [id])\n\n  parameterValues ProductParameterValue[]\n\n  @@index([categoryId])\n}\n\nmodel ParameterValue {\n  id    String @id @default(cuid())\n  value String\n  slug  String\n\n  parameterId String\n  parameter   Parameter @relation(fields: [parameterId], references: [id])\n\n  products ProductParameterValue[]\n\n  @@unique([parameterId, value])\n  @@unique([parameterId, slug])\n  @@index([parameterId])\n}\n\nmodel ProductParameterValue {\n  id               String @id @default(cuid())\n  productId        String\n  parameterValueId String\n\n  product        Product        @relation(fields: [productId], references: [id])\n  parameterValue ParameterValue @relation(fields: [parameterValueId], references: [id])\n\n  @@unique([productId, parameterValueId])\n  @@index([productId])\n  @@index([parameterValueId])\n}\n\nmodel Parameter {\n  id        String   @id @default(cuid())\n  name      String   @unique\n  slug      String   @unique\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  categories CategoryParameter[]\n  values     ParameterValue[]\n}\n\nmodel CategoryParameter {\n  id          String @id @default(cuid())\n  categoryId  String\n  parameterId String\n\n  category  Category  @relation(fields: [categoryId], references: [id])\n  parameter Parameter @relation(fields: [parameterId], references: [id])\n\n  @@unique([categoryId, parameterId])\n  @@index([categoryId])\n  @@index([parameterId])\n}\n\nmodel Category {\n  id       String     @id @default(cuid())\n  name     String\n  parentId String?\n  slug     String     @unique\n  parent   Category?  @relation(\"Subcategories\", fields: [parentId], references: [id])\n  children Category[] @relation(\"Subcategories\")\n\n  products Product[]\n\n  createdAt         DateTime            @default(now())\n  updatedAt         DateTime            @updatedAt\n  CategoryParameter CategoryParameter[]\n\n  @@index([parentId])\n}\n",
   "runtimeDataModel": {
@@ -82,7 +82,7 @@ export interface PrismaClientConstructor {
     LogOpts extends LogOptions<Options> = LogOptions<Options>,
     OmitOpts extends Prisma.PrismaClientOptions['omit'] = Options extends { omit: infer U } ? U : Prisma.PrismaClientOptions['omit'],
     ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs
-  >(options: Prisma.Subset<Options, Prisma.PrismaClientOptions> ): PrismaClient<LogOpts, OmitOpts, ExtArgs>
+  >(options: Prisma.PrismaClientConstructorArgs<Options>): PrismaClient<LogOpts, OmitOpts, ExtArgs>
 }
 
 /**
@@ -103,7 +103,7 @@ export interface PrismaClientConstructor {
 
 export interface PrismaClient<
   in LogOpts extends Prisma.LogLevel = never,
-  in out OmitOpts extends Prisma.PrismaClientOptions['omit'] = undefined,
+  in out OmitOpts extends Prisma.PrismaClientOptions['omit'] = Prisma.PrismaClientOptions['omit'],
   in out ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs
 > {
   [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
@@ -180,7 +180,7 @@ export interface PrismaClient<
    * 
    * Read more in our [docs](https://www.prisma.io/docs/orm/prisma-client/queries/transactions).
    */
-  $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): runtime.Types.Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
+  $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): runtime.Types.Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
 
   $transaction<R>(fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => runtime.Types.Utils.JsPromise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): runtime.Types.Utils.JsPromise<R>
 
