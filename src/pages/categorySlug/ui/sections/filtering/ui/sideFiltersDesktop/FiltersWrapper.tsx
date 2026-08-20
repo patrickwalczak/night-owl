@@ -7,12 +7,12 @@ import { useEffect, useRef } from 'react';
 import { useIsNavigationOpen } from '@/features/appState/client';
 import { cn } from '@/shared/lib/utils';
 
-import { useCatalog } from '../../../../../model/providers/CatalogProvider';
+import { useCatalogSelector } from '../../../../../model/client';
 import styles from './sideFiltersDesktop.module.scss';
 
 const FiltersWrapper = ({ children }: { children: React.ReactNode }) => {
     const isNavigationOpen = useIsNavigationOpen();
-    const { areFiltersOpen } = useCatalog();
+    const areFiltersOpen = useCatalogSelector(state => state.catalog.areFiltersOpen);
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {

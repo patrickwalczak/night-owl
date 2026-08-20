@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { getCatalogPageData } from '../api/getCatalogPageData';
 import { normalizeSearchParams, parseCatalogSearchParams } from '../lib/url';
-import CatalogProvider from '../model/providers/CatalogProvider';
+import CatalogStoreProvider from '../model/CatalogStoreProvider';
 import { type RouteParamsType } from '../model/routeParams.types';
 import { type RawUrlSearchParams } from '../model/searchParams.types';
 import CatalogContainer from '../ui/components/pageView/CatalogContainer';
@@ -28,13 +28,13 @@ export default async function CategorySlugPage({
     const areFiltersOpen = (await cookies()).get('areFiltersOpen')?.value === '1';
 
     return (
-        <CatalogProvider
-            initialProductsProp={products}
+        <CatalogStoreProvider
+            initialProducts={products}
             category={category}
             areFiltersOpen={areFiltersOpen}
             parameters={parameters}
         >
             <CatalogContainer />
-        </CatalogProvider>
+        </CatalogStoreProvider>
     );
 }

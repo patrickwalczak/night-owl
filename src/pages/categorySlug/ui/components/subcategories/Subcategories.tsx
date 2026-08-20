@@ -4,11 +4,11 @@ import Link from 'next/link';
 
 import { cn } from '@/shared/lib/utils';
 
-import { useCatalog } from '../../../model/providers/CatalogProvider';
+import { useCatalogSelector } from '../../../model/client';
 import styles from './subcategories.module.scss';
 
 const Subcategories = () => {
-    const { subcategories } = useCatalog();
+    const subcategories = useCatalogSelector(state => state.catalog.subcategories);
 
     if (!subcategories.length) return null;
 

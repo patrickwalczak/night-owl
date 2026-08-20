@@ -1,15 +1,17 @@
 'use client';
 
-import { useCatalog } from '../../../../../model/providers/CatalogProvider';
+import { toggleFilters } from '../../../../../model/catalogSlice';
+import { useCatalogDispatch, useCatalogSelector } from '../../../../../model/client';
 import FilterButton from '../filterButton/FilterButton';
 import styles from './sideFiltersButton.module.scss';
 
 const SideFiltersButton = () => {
-    const { areFiltersOpen, toggleFilters } = useCatalog();
+    const dispatch = useCatalogDispatch();
+    const areFiltersOpen = useCatalogSelector(state => state.catalog.areFiltersOpen);
     const label = areFiltersOpen ? 'Hide filters' : 'Show filters';
 
     const handleClick = () => {
-        toggleFilters();
+        dispatch(toggleFilters());
     };
 
     return <FilterButton label={label} handleClick={handleClick} className={styles.btn} />;

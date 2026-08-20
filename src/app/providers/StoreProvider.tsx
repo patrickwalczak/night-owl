@@ -10,7 +10,14 @@ import { type DeviceType } from '@/shared/model/device.model';
 export default function StoreProvider({ children, device }: { children: ReactNode; device: DeviceType }) {
     const [store] = useState(() => {
         return makeStore({
-            app: { device, isMobile: device === 'mobile', isTablet: device === 'tablet', isDesktop: device === 'desktop' },
+            app: {
+                device,
+                isMobile: device === 'mobile',
+                isTablet: device === 'tablet',
+                isDesktop: device === 'desktop',
+                isNavigationOpen: false,
+                demoGlobalCount: 0,
+            },
         });
     });
 

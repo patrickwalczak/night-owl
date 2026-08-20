@@ -8,6 +8,7 @@ export default function HomePage() {
             <Hero />
             <CategoriesSection />
             <TempRadio />
+            <Link href={'/product/demo-one'}>{'Product'}</Link>
         </main>
     );
 }
