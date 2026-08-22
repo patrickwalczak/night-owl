@@ -34,7 +34,7 @@ const Navigation = ({ categories }: { categories: RootCategoriesWithChildren }) 
     const { isScrolled, direction } = useIsScrolled();
     const { expandDropdown, hideDropdown, isExpanded, setIsExpanded } = useIsDropdownExpanded();
 
-    const catalogBtnRef = useRef<HTMLButtonElement | null>(null);
+    const categoriesButtonRef = useRef<HTMLButtonElement | null>(null);
 
     const mainEl = useRef<HTMLElement | null>(null);
 
@@ -54,7 +54,7 @@ const Navigation = ({ categories }: { categories: RootCategoriesWithChildren }) 
         if (e.key === 'Escape' || e.key === 'ArrowUp') {
             e.stopPropagation();
             hideDropdown();
-            catalogBtnRef.current?.focus();
+            categoriesButtonRef.current?.focus();
         }
     };
 
@@ -109,24 +109,24 @@ const Navigation = ({ categories }: { categories: RootCategoriesWithChildren }) 
                     {isDesktop && (
                         <div className={cn(styles.listWrapper, 'flex', 'align-center')}>
                             <button
-                                ref={catalogBtnRef}
+                                ref={categoriesButtonRef}
                                 onClick={toggleDropdown}
                                 type={'button'}
-                                className={cn(styles.catalogButton, 'button-empty')}
+                                className={cn(styles.categoriesButton, 'button-empty')}
                                 aria-haspopup={'true'}
                                 aria-expanded={isExpanded}
-                                aria-controls={'catalog-dropdown'}
-                                id={'catalog-button'}
+                                aria-controls={'categories-dropdown'}
+                                id={'categories-button'}
                                 onKeyDown={handleKeyDownOnButton}
                             >
-                                {'Catalog'}
+                                {'Categories'}
                             </button>
                         </div>
                     )}
 
                     {!isDesktop && <MobileNavigation />}
                 </nav>
-                <CategoriesDropdown controllerBtnRef={catalogBtnRef} isExpanded={isExpanded} categories={categories} />
+                <CategoriesDropdown controllerBtnRef={categoriesButtonRef} isExpanded={isExpanded} categories={categories} />
             </header>
             <Overlay open={isExpanded} onClose={hideDropdown} zIndex={2} />
         </NavigationContext.Provider>

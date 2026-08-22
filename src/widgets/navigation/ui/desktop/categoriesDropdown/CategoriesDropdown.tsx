@@ -28,8 +28,8 @@ export const CategoriesDropdown = ({
             {isExpanded && (
                 <motion.nav
                     ref={refCallback}
-                    id={'catalog-dropdown'}
-                    aria-labelledby={'catalog-button'}
+                    id={'categories-dropdown'}
+                    aria-labelledby={'categories-button'}
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}

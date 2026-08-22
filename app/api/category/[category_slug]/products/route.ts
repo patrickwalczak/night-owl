@@ -2,13 +2,13 @@ import { NextResponse } from 'next/server';
 
 import { getCategoryBySlug } from '@/entities/category/server';
 import { getProductsForCategory } from '@/entities/product/server';
-import { toOrderBy, PAGE_SIZE, parseCatalogSearchParams } from '@/pages/categorySlug/server';
+import { toOrderBy, PAGE_SIZE, parseCategorySearchParams } from '@/pages/category/server';
 
 export async function GET(req: Request, ctx: { params: Promise<{ category_slug: string }> }) {
     const params = await ctx.params;
     const { searchParams } = new URL(req.url);
 
-    const parsed = parseCatalogSearchParams(searchParams);
+    const parsed = parseCategorySearchParams(searchParams);
 
     const category = await getCategoryBySlug(params.category_slug);
 

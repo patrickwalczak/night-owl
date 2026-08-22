@@ -17,7 +17,7 @@
 
 ## Drzewo Kategorii
 
-- W UI katalogu celowo pokazujemy tylko bezpośrednie podkategorie aktualnej kategorii.
+- W UI strony kategorii celowo pokazujemy tylko bezpośrednie podkategorie aktualnej kategorii.
 - Obecny model z `parentId` obsługuje głębsze zagnieżdżenia. Osobno trzeba później zdecydować, czy lista produktów i liczniki filtrów mają obejmować tylko aktualną kategorię z bezpośrednimi dziećmi, czy całe głębsze drzewo kategorii.
 - Zdecydować później, czy URL-e kategorii zostają płaskie po `slug`, czy przechodzą na ścieżki z pełnym drzewem kategorii.
 

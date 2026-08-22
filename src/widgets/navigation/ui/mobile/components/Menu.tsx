@@ -33,7 +33,7 @@ const Menu = ({ isMenuOpened, closeMenu }: { isMenuOpened: boolean; closeMenu: (
                         </MobileNavLink>
 
                         <MobileNavButton hasBorderBottom>
-                            {'Catalog'}
+                            {'Categories'}
                         </MobileNavButton>
                     </motion.nav>
                 </Modal.Wrapper>

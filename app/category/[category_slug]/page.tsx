@@ -1,1 +1,1 @@
-export { CategorySlugPage as default } from '@/pages/categorySlug';
+export { CategoryPage as default } from '@/pages/category';
