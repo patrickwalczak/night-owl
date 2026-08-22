@@ -17,7 +17,8 @@
 		"db:push": "prisma db push --config=src/shared/lib/db/prisma.config.ts",
 		"db:push:loss": "prisma db push --config=src/shared/lib/db/prisma.config.ts --accept-data-loss",
 		"db:reset": "prisma db push --config=src/shared/lib/db/prisma.config.ts --force-reset",
-		"db:studio": "prisma studio --config=src/shared/lib/db/prisma.config.ts"
+		"db:studio": "prisma studio --config=src/shared/lib/db/prisma.config.ts",
+		"test": "vitest"
 	},
 	"prisma": {
 		"seed": "tsx prisma/seed.ts"
@@ -42,9 +43,12 @@
 	},
 	"devDependencies": {
 		"@stylistic/eslint-plugin": "^5.10.0",
+		"@testing-library/dom": "^10.4.1",
+		"@testing-library/react": "^16.3.2",
 		"@types/node": "^25.9.5",
 		"@types/react": "^19.2.18",
 		"@types/react-dom": "^19.2.4",
+		"@vitejs/plugin-react": "^6.1.0",
 		"eslint": "^9.39.5",
 		"eslint-config-next": "^16.3.1",
 		"eslint-import-resolver-typescript": "^4.4.5",
@@ -53,10 +57,13 @@
 		"eslint-plugin-perfectionist": "^5.10.1",
 		"eslint-plugin-react": "^7.37.5",
 		"eslint-plugin-react-hooks": "^7.1.1",
+		"jsdom": "^29.1.1",
 		"prisma": "^7.9.1",
 		"sass": "^1.103.0",
 		"tsx": "^4.23.12",
 		"typescript": "^6.0.3",
-		"typescript-eslint": "^8.67.0"
+		"typescript-eslint": "^8.67.0",
+		"vite-tsconfig-paths": "^6.1.1",
+		"vitest": "^4.1.11"
 	}
 }
