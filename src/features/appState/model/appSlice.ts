@@ -8,7 +8,6 @@ export interface AppState {
     isTablet: boolean;
     isDesktop: boolean;
     isNavigationOpen: boolean;
-    demoGlobalCount: number;
 }
 
 const initialState: AppState = {
@@ -17,7 +16,6 @@ const initialState: AppState = {
     isTablet: false,
     isDesktop: true,
     isNavigationOpen: false,
-    demoGlobalCount: 0,
 };
 
 const appSlice = createSlice({
@@ -33,11 +31,8 @@ const appSlice = createSlice({
         toggleNavigation: (state, action) => {
             state.isNavigationOpen = action.payload.isNavigationOpen;
         },
-        incrementDemoGlobalCount(state) {
-            state.demoGlobalCount += 1;
-        },
     },
 });
 
-export const { incrementDemoGlobalCount, setDevice, toggleNavigation } = appSlice.actions;
+export const { setDevice, toggleNavigation } = appSlice.actions;
 export default appSlice.reducer;

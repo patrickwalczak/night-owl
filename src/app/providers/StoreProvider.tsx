@@ -16,7 +16,6 @@ export default function StoreProvider({ children, device }: { children: ReactNod
                 isTablet: device === 'tablet',
                 isDesktop: device === 'desktop',
                 isNavigationOpen: false,
-                demoGlobalCount: 0,
             },
         });
     });
