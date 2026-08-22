@@ -7,14 +7,19 @@ import { Provider } from 'react-redux';
 import { makeStore } from '@/app/store';
 import { type DeviceType } from '@/shared/model/device.model';
 
-export default function StoreProvider({ children, device }: { children: ReactNode; device: DeviceType }) {
+export default function StoreProvider({
+    children,
+    initialDeviceType,
+}: {
+    children: ReactNode;
+    initialDeviceType: DeviceType;
+}) {
     const [store] = useState(() => {
         return makeStore({
             app: {
-                device,
-                isMobile: device === 'mobile',
-                isTablet: device === 'tablet',
-                isDesktop: device === 'desktop',
+                initialDeviceType,
+                viewportType: initialDeviceType,
+                isViewportReady: false,
                 isNavigationOpen: false,
             },
         });

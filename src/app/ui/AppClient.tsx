@@ -2,10 +2,10 @@
 
 import type React from 'react';
 
-import { useDeviceType } from '@/app/lib/useDeviceType';
+import { useSyncViewportType } from '@/app/lib/useSyncViewportType';
 
 const AppClient = ({ children }: { children: React.ReactNode }) => {
-    useDeviceType();
+    useSyncViewportType();
 
     return children;
 };

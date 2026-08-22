@@ -1,20 +1,18 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-import { type DeviceType } from '@/shared/model/device.model';
+import { type DeviceType, type ViewportType } from '@/shared/model/device.model';
 
 export interface AppState {
-    device: DeviceType;
-    isMobile: boolean;
-    isTablet: boolean;
-    isDesktop: boolean;
+    initialDeviceType: DeviceType;
+    viewportType: ViewportType;
+    isViewportReady: boolean;
     isNavigationOpen: boolean;
 }
 
 const initialState: AppState = {
-    device: 'desktop',
-    isMobile: false,
-    isTablet: false,
-    isDesktop: true,
+    initialDeviceType: 'desktop',
+    viewportType: 'desktop',
+    isViewportReady: false,
     isNavigationOpen: false,
 };
 
@@ -22,11 +20,9 @@ const appSlice = createSlice({
     name: 'app',
     initialState,
     reducers: {
-        setDevice(state, action: PayloadAction<DeviceType>) {
-            state.device = action.payload;
-            state.isDesktop = action.payload === 'desktop';
-            state.isTablet = action.payload === 'tablet';
-            state.isMobile = action.payload === 'mobile';
+        setViewportType(state, action: PayloadAction<ViewportType>) {
+            state.viewportType = action.payload;
+            state.isViewportReady = true;
         },
         toggleNavigation: (state, action) => {
             state.isNavigationOpen = action.payload.isNavigationOpen;
@@ -34,5 +30,5 @@ const appSlice = createSlice({
     },
 });
 
-export const { setDevice, toggleNavigation } = appSlice.actions;
+export const { setViewportType, toggleNavigation } = appSlice.actions;
 export default appSlice.reducer;

@@ -3,7 +3,7 @@ import { Playfair_Display, Inter } from 'next/font/google';
 import { headers } from 'next/headers';
 
 import AppClient from '@/app/ui/AppClient';
-import { type DeviceType } from '@/shared/model/device.model';
+import { isDeviceType } from '@/shared/model/device.model';
 import { NavigationServer } from '@/widgets/navigation/server';
 
 import StoreProvider from '../src/app/providers/StoreProvider';
@@ -25,12 +25,13 @@ export default async function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const device = (await headers()).get('x-device-type') as DeviceType;
+    const deviceTypeHeader = (await headers()).get('x-device-type');
+    const initialDeviceType = isDeviceType(deviceTypeHeader) ? deviceTypeHeader : 'desktop';
 
     return (
         <html lang={'en'} className={`${inter.variable} ${playfair.variable}`}>
             <body>
-                <StoreProvider device={device}>
+                <StoreProvider initialDeviceType={initialDeviceType}>
                     <AppClient>
                         <NavigationServer />
                         {children}

@@ -1,7 +1,16 @@
 export {
     default as appReducer,
-    setDevice,
+    setViewportType,
     toggleNavigation,
 } from './model/appSlice';
-export { selectIsDesktop, selectIsNavigationOpen } from './model/selectors';
+export {
+    selectInitialDeviceType,
+    selectIsDesktop,
+    selectIsMobile,
+    selectIsNavigationOpen,
+    selectIsTablet,
+    selectIsViewportReady,
+    selectResponsiveType,
+    selectViewportType,
+} from './model/selectors';
 export type { AppState } from './model/appSlice';
