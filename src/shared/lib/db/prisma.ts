@@ -1,19 +1,14 @@
 import 'dotenv/config';
 import { PrismaPg } from '@prisma/adapter-pg';
 
+import { serverEnv } from '../../config/env';
 import { PrismaClient } from './generated/client';
-
-const connectionString = process.env.DATABASE_URL;
-
-if (!connectionString) {
-    throw new Error('Missing DATABASE_URL');
-}
 
 const globalForPrisma = globalThis as typeof globalThis & {
     prisma?: PrismaClient;
 };
 
-const adapter = new PrismaPg({ connectionString });
+const adapter = new PrismaPg({ connectionString: serverEnv.databaseUrl });
 
 export const prisma
     = globalForPrisma.prisma
