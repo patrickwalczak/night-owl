@@ -21,10 +21,10 @@ export const DropdownCategory = ({
     category: DropdownCategoryType;
     isRootCategory?: boolean;
 }) => {
-    const { setIsExpanded } = useSafeContext(NavigationContext);
+    const { hideDropdown } = useSafeContext(NavigationContext);
 
     const handleClick = () => {
-        setIsExpanded(false);
+        hideDropdown();
     };
 
     return (

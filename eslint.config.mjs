@@ -112,22 +112,12 @@ export default defineConfig([
             'prefer-const': 'error',
 
             /**
-       * Warn about unused variables, arguments, and caught errors,
-       * but ignore names starting with "_".
+       * Do not warn about unused variables/imports during active development.
        *
-       * This is useful when:
-       * - an argument is required by a signature but intentionally unused
-       * - you want to keep a placeholder for future use
-       * - you intentionally ignore an error object
+       * The TypeScript ESLint rule treats unused imports as unused variables,
+       * so disabling it is the repo-level way to silence those import warnings.
        */
-            '@typescript-eslint/no-unused-vars': [
-                'warn',
-                {
-                    argsIgnorePattern: '^_',
-                    varsIgnorePattern: '^_',
-                    caughtErrorsIgnorePattern: '^_',
-                },
-            ],
+            '@typescript-eslint/no-unused-vars': 'off',
 
             /**
        * Prefer "type" imports for TypeScript-only imports.

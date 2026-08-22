@@ -1,8 +1,8 @@
 'use client';
 
-import { createPortal } from 'react-dom';
-
 import { useBodyOverflow } from '@/shared/lib/hooks/client';
+
+import styles from './overlay.module.scss';
 
 export default function Overlay({
     open,
@@ -17,8 +17,12 @@ export default function Overlay({
 
     if (!open) return null;
 
-    return createPortal(
-        <div className={'backdrop'} style={{ zIndex }} onClick={onClose} aria-hidden={'true'} />,
-        document.body,
+    return (
+        <div
+            className={styles.overlay}
+            style={{ zIndex }}
+            onClick={onClose}
+            aria-hidden={'true'}
+        />
     );
 }

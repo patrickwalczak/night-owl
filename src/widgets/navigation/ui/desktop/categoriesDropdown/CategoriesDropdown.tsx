@@ -44,9 +44,7 @@ export const CategoriesDropdown = ({
                                 ))}
                             </ul>
                         )
-                        : (
-                            null
-                        )}
+                        : null}
                 </motion.nav>
             )}
         </AnimatePresence>

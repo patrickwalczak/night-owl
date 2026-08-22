@@ -49,7 +49,6 @@ const Navigation = ({ categories }: { categories: RootCategoriesWithChildren }) 
         hideDropdown,
     };
 
-    // Hide dropdown on keys down
     const onKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === 'Escape' || e.key === 'ArrowUp') {
             e.stopPropagation();
@@ -59,19 +58,15 @@ const Navigation = ({ categories }: { categories: RootCategoriesWithChildren }) 
     };
 
     const handleKeyDownOnButton = (e: React.KeyboardEvent) => {
-        // Enter toggles dropdown
-        if (e.key === 'Enter') {
-            e.stopPropagation();
-            setIsExpanded(prev => !prev);
-            // Arrow down expands dropdown
-        }
-        else if (e.key === 'ArrowDown') {
+        if (e.key === 'ArrowDown') {
             e.stopPropagation();
             expandDropdown();
         }
     };
 
-    const toggleDropdown = () => setIsExpanded(prev => !prev);
+    const toggleDropdown = () => {
+        setIsExpanded(prev => !prev);
+    };
 
     // Keep the main content inactive while the navigation overlay is open
     // so users cannot click or focus elements behind it.
@@ -126,7 +121,7 @@ const Navigation = ({ categories }: { categories: RootCategoriesWithChildren }) 
 
                     {!isDesktop && <MobileNavigation />}
                 </nav>
-                <CategoriesDropdown controllerBtnRef={categoriesButtonRef} isExpanded={isExpanded} categories={categories} />
+                {isDesktop && <CategoriesDropdown controllerBtnRef={categoriesButtonRef} isExpanded={isExpanded} categories={categories} />}
             </header>
             <Overlay open={isExpanded} onClose={hideDropdown} zIndex={2} />
         </NavigationContext.Provider>
