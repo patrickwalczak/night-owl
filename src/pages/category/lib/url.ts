@@ -52,7 +52,13 @@ export const normalizeSearchParams = (searchParams: RawUrlSearchParams): URLSear
         }
 
         if (Array.isArray(paramValue)) {
-            return paramValue.map(nestedParamValue => [paramKey, nestedParamValue]);
+            return paramValue.flatMap((nestedParamValue) => {
+                if (!nestedParamValue) {
+                    return [];
+                }
+
+                return [[paramKey, nestedParamValue]];
+            });
         }
 
         return [[paramKey, paramValue]];

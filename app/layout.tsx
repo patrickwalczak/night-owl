@@ -2,6 +2,7 @@ import '../src/shared/styles/index.scss';
 import { Playfair_Display, Inter } from 'next/font/google';
 import { headers } from 'next/headers';
 
+import ReactQueryProvider from '@/app/providers/ReactQueryProvider';
 import AppClient from '@/app/ui/AppClient';
 import { isDeviceType } from '@/shared/model/device.model';
 import { NavigationServer } from '@/widgets/navigation/server';
@@ -32,10 +33,12 @@ export default async function RootLayout({
         <html lang={'en'} className={`${inter.variable} ${playfair.variable}`}>
             <body>
                 <StoreProvider initialDeviceType={initialDeviceType}>
-                    <AppClient>
-                        <NavigationServer />
-                        {children}
-                    </AppClient>
+                    <ReactQueryProvider>
+                        <AppClient>
+                            <NavigationServer />
+                            {children}
+                        </AppClient>
+                    </ReactQueryProvider>
                 </StoreProvider>
             </body>
         </html>

@@ -108,7 +108,6 @@ const Navigation = ({ categories }: { categories: RootCategoriesWithChildren }) 
                                 onClick={toggleDropdown}
                                 type={'button'}
                                 className={cn(styles.categoriesButton, 'button-empty')}
-                                aria-haspopup={'true'}
                                 aria-expanded={isExpanded}
                                 aria-controls={'categories-dropdown'}
                                 id={'categories-button'}
