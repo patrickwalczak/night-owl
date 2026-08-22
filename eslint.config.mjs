@@ -282,6 +282,20 @@ export default defineConfig([
     },
 
     /**
+   * Seed scripts are operational/development utilities.
+   *
+   * They often need console output and temporary helper functions,
+   * so we keep the app rules strict while avoiding noise in seed files.
+   */
+    {
+        files: ['prisma/seeds/**/*.ts'],
+        rules: {
+            'no-console': 'off',
+            '@typescript-eslint/no-unused-vars': 'off',
+        },
+    },
+
+    /**
    * Globally ignored files and folders.
    *
    * We ignore:
