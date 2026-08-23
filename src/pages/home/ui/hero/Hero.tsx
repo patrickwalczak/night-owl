@@ -32,6 +32,7 @@ export const Hero = async () => {
                 width={3600}
                 height={4500}
                 sizes={'(max-width: 1023px) 100vw, 40vw'}
+                loading={'eager'}
                 preload
             />
         </section>

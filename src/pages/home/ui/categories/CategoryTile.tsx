@@ -18,7 +18,14 @@ interface CategoryTileType {
 export const CategoryTile = ({ href, title, description, image }: CategoryTileType) => {
     return (
         <Link className={styles.tile} href={href}>
-            <Image className={styles.image} src={image.src} alt={image.alt} fill />
+            <Image
+                className={styles.image}
+                src={image.src}
+                alt={image.alt}
+                fill
+                sizes={'(max-width: 1023px) 100vw, (max-width: 1535px) calc((100vw - 2.25rem) / 2), calc((100vw - 4rem) / 2)'}
+                loading={'lazy'}
+            />
 
             <div className={styles.overlay} />
 
