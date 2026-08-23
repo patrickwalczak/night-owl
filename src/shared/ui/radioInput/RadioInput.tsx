@@ -19,7 +19,7 @@ export const RadioInput = ({
     const id = providedId ?? generatedId;
 
     return (
-        <div className={cn(styles.container, classNames?.wrapper)}>
+        <div className={cn(styles.container, classNames?.wrapper, testClassNames?.wrapper)}>
             <Input
                 value={value}
                 id={id}
@@ -50,9 +50,9 @@ const Label = ({ children, className, ...props }: LabelProps) => {
 const Input = ({ className, ...props }: InputProps) => {
     return (
         <input
-            type={'radio'}
             className={cn(styles.input, className)}
             {...props}
+            type={'radio'}
         />
     );
 };
