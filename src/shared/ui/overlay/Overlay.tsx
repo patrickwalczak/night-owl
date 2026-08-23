@@ -4,7 +4,7 @@ import { useBodyOverflow } from '@/shared/lib/hooks/client';
 
 import styles from './overlay.module.scss';
 
-export default function Overlay({
+export const Overlay = ({
     open,
     onClose,
     zIndex = 50,
@@ -12,7 +12,7 @@ export default function Overlay({
     open: boolean;
     onClose: () => void;
     zIndex?: number;
-}) {
+}) => {
     useBodyOverflow(open);
 
     if (!open) return null;
@@ -25,4 +25,4 @@ export default function Overlay({
             aria-hidden={'true'}
         />
     );
-}
+};

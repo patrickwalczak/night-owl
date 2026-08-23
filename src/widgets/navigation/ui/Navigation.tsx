@@ -10,10 +10,10 @@ import type { RootCategoriesWithChildren } from '@/entities/category';
 
 import { useIsDesktop } from '@/features/appState/client';
 import { cn } from '@/shared/lib/utils';
+import { Overlay } from '@/shared/ui/overlay';
 
 import useIsDropdownExpanded from '../hooks/useIsDropdownExpanded';
 import useIsScrolled from '../hooks/useIsScrolled';
-import Overlay from './components/Overlay';
 import { CategoriesDropdown } from './desktop/categoriesDropdown/CategoriesDropdown';
 import MobileNavigation from './mobile/MobileNavigation';
 import styles from './navigation.module.scss';
@@ -40,14 +40,6 @@ const Navigation = ({ categories }: { categories: RootCategoriesWithChildren }) 
 
     const pathname = usePathname();
     const isHomepage = pathname === '/';
-
-    const ctx = {
-        categories,
-        isExpanded,
-        isScrolled,
-        setIsExpanded,
-        hideDropdown,
-    };
 
     const onKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === 'Escape' || e.key === 'ArrowUp') {
@@ -82,6 +74,14 @@ const Navigation = ({ categories }: { categories: RootCategoriesWithChildren }) 
 
         return () => mainEl.current?.removeAttribute('inert');
     }, [isExpanded]);
+
+    const ctx = {
+        categories,
+        isExpanded,
+        isScrolled,
+        setIsExpanded,
+        hideDropdown,
+    };
 
     return (
         <NavigationContext.Provider value={ctx}>
