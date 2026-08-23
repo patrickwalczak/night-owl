@@ -5,33 +5,12 @@ import { useId } from 'react';
 import { cn } from '@/shared/lib/utils';
 
 import styles from './radioInput.module.scss';
-import { type InputType, type LabelType, type RadioInputType } from './types';
+import { type ContainerType, type InputType, type LabelType, type RadioInputType } from './types';
 
-export const RadioInput = ({
-    classNames,
-    label,
-    testClassNames,
-    id: providedId,
-    value,
-    ...props
-}: RadioInputType) => {
-    const generatedId = useId();
-    const id = providedId ?? generatedId;
-
+const Container = ({ children, className, ...props }: ContainerType) => {
     return (
-        <div className={cn(styles.container, classNames?.wrapper, testClassNames?.wrapper)}>
-            <Input
-                value={value}
-                id={id}
-                className={cn(classNames?.input, testClassNames?.input)}
-                {...props}
-            />
-            <Label
-                htmlFor={id}
-                className={cn(classNames?.label, testClassNames?.label)}
-            >
-                {label}
-            </Label>
+        <div {...props} className={cn(styles.container, className)}>
+            {children}
         </div>
     );
 };
@@ -54,5 +33,40 @@ const Input = ({ className, ...props }: InputType) => {
             {...props}
             type={'radio'}
         />
+    );
+};
+
+export const CustomRadioInput = {
+    Container,
+    Input,
+    Label,
+};
+
+export const RadioInput = ({
+    classNames,
+    label,
+    testClassNames,
+    id: providedId,
+    value,
+    ...props
+}: RadioInputType) => {
+    const generatedId = useId();
+    const id = providedId ?? generatedId;
+
+    return (
+        <CustomRadioInput.Container className={cn(classNames?.wrapper, testClassNames?.wrapper)}>
+            <CustomRadioInput.Input
+                className={cn(classNames?.input, testClassNames?.input)}
+                id={id}
+                value={value}
+                {...props}
+            />
+            <CustomRadioInput.Label
+                className={cn(classNames?.label, testClassNames?.label)}
+                htmlFor={id}
+            >
+                {label}
+            </CustomRadioInput.Label>
+        </CustomRadioInput.Container>
     );
 };

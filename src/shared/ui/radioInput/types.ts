@@ -1,6 +1,25 @@
-import { type ComponentPropsWithRef } from 'react';
+import { type ComponentPropsWithRef, type ReactNode } from 'react';
 
-export type RadioInputType = Omit<ComponentPropsWithRef<'input'>, 'className' | 'id' | 'name' | 'type' | 'value'> & {
+type NativeInputProps = ComponentPropsWithRef<'input'>;
+
+interface ControlledInputState {
+    checked: boolean;
+    defaultChecked?: never;
+    onChange: NonNullable<NativeInputProps['onChange']>;
+}
+
+interface UncontrolledInputState {
+    checked?: never;
+    defaultChecked?: NativeInputProps['defaultChecked'];
+    onChange?: NativeInputProps['onChange'];
+}
+
+type InputStateType = ControlledInputState | UncontrolledInputState;
+
+export type RadioInputType = Omit<
+    NativeInputProps,
+    'checked' | 'className' | 'defaultChecked' | 'id' | 'name' | 'onChange' | 'type' | 'value'
+> & InputStateType & {
     label: string;
     /** The name used to group related radio inputs. For example: colors, delivery methods, etc. */
     name: string;
@@ -20,6 +39,8 @@ export type RadioInputType = Omit<ComponentPropsWithRef<'input'>, 'className' | 
     };
 };
 
-export type LabelType = ComponentPropsWithRef<'label'>;
+export type ContainerType = Omit<ComponentPropsWithRef<'div'>, 'children'> & { children: ReactNode };
 
-export type InputType = ComponentPropsWithRef<'input'>;
+export type LabelType = Omit<ComponentPropsWithRef<'label'>, 'children'> & { children: ReactNode };
+
+export type InputType = Omit<NativeInputProps, 'checked' | 'defaultChecked' | 'onChange' | 'type'> & InputStateType;

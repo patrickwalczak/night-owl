@@ -2,20 +2,14 @@
 
 import { useState } from 'react';
 
-import { RadioInput } from '@/shared/ui/radioInput/RadioInput';
+import { Checkbox } from '@/shared/ui/checkbox/Checkbox';
 
 export const TempRadio = () => {
     const [radioValue, setRadioValue] = useState('');
 
     return (
         <div style={{ height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <RadioInput
-                label={'Color 1'}
-                value={'color_1'}
-                name={'color'}
-                checked={radioValue === 'color_1'}
-                onChange={e => setRadioValue(e.target.value)}
-            />
+            <Checkbox label={'test'} name={'test'} value={'test'} onChange={() => setRadioValue('test')} checked={radioValue === 'test'} />
         </div>
     );
 };

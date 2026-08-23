@@ -10,7 +10,7 @@ import styles from './checkbox.module.scss';
 
 const Container = ({ children, className, ...props }: ContainerType) => {
     return (
-        <div className={cn(styles.container, className)} {...props}>
+        <div {...props} className={cn(styles.container, className)}>
             {children}
         </div>
     );
@@ -18,13 +18,13 @@ const Container = ({ children, className, ...props }: ContainerType) => {
 
 const Input = (props: InputType) => {
     return (
-        <input className={cn(styles.input, props.className)} type={'checkbox'} {...props} />
+        <input {...props} className={cn(styles.input, props.className)} type={'checkbox'} />
     );
 };
 
 const Label = (props: LabelType) => {
     return (
-        <label className={cn(styles.label, props.className)} {...props}>{props.children}</label>
+        <label {...props} className={cn(styles.label, props.className)}>{props.children}</label>
     );
 };
 
@@ -34,18 +34,23 @@ export const CustomCheckbox = {
     Label,
 };
 
-export const Checkbox = ({ label, name, value, classNames, id: providedId, onChange }: DefaultCheckboxType) => {
+export const Checkbox = ({
+    label,
+    classNames,
+    id: providedId,
+    ...inputProps
+}: DefaultCheckboxType) => {
     const generatedId = useId();
     const id = providedId ?? generatedId;
 
     return (
         <CustomCheckbox.Container className={classNames?.container}>
-            <CustomCheckbox.Input className={classNames?.input} name={name} value={value} id={id} onChange={onChange} />
+            <CustomCheckbox.Input
+                className={classNames?.input}
+                id={id}
+                {...inputProps}
+            />
             <CustomCheckbox.Label className={classNames?.label} htmlFor={id}>{label}</CustomCheckbox.Label>
         </CustomCheckbox.Container>
     );
 };
-
-// https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/checkbox
-// https://dev.to/adbutterfield/custom-styling-radio-buttons-the-modern-way-the-butterfield-way-emk#side-quest-a-brief-history-of-the-appearance-property
-// https://dev.to/adbutterfield/custom-styling-checkboxes-the-modern-way-3o42

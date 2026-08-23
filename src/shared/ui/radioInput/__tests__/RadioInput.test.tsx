@@ -2,7 +2,7 @@ import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { RadioInput } from '../RadioInput';
-import { type RadioInputProps } from '../types';
+import { type RadioInputType } from '../types';
 
 afterEach(cleanup);
 
@@ -26,11 +26,14 @@ describe('RadioInput', () => {
     });
 
     it('supports controlled checked state', () => {
+        const onChange = vi.fn();
+
         const { rerender } = render(
             <RadioInput
                 checked={false}
                 label={'Color 1'}
                 name={'color'}
+                onChange={onChange}
                 value={'color_1'}
             />,
         );
@@ -42,6 +45,7 @@ describe('RadioInput', () => {
                 checked={true}
                 label={'Color 1'}
                 name={'color'}
+                onChange={onChange}
                 value={'color_1'}
             />,
         );
@@ -102,7 +106,7 @@ describe('RadioInput', () => {
             name: 'color',
             type: 'checkbox',
             value: 'color_1',
-        } as unknown as RadioInputProps;
+        } as unknown as RadioInputType;
 
         render(<RadioInput {...props} />);
 
