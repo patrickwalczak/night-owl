@@ -31,7 +31,7 @@ export const Hero = async () => {
                 alt={'Decorative background with an owl'}
                 width={3600}
                 height={4500}
-                sizes={'(max-width: 768px) 100vw, 40vw'}
+                sizes={'(max-width: 1023px) 100vw, 40vw'}
                 preload
             />
         </section>
