@@ -1,6 +1,6 @@
 import { type ComponentPropsWithRef } from 'react';
 
-export type RadioInputProps = Omit<ComponentPropsWithRef<'input'>, 'className' | 'id' | 'name' | 'type' | 'value'> & {
+export type RadioInputType = Omit<ComponentPropsWithRef<'input'>, 'className' | 'id' | 'name' | 'type' | 'value'> & {
     label: string;
     /** The name used to group related radio inputs. For example: colors, delivery methods, etc. */
     name: string;
@@ -20,6 +20,6 @@ export type RadioInputProps = Omit<ComponentPropsWithRef<'input'>, 'className' |
     };
 };
 
-export type LabelProps = ComponentPropsWithRef<'label'>;
+export type LabelType = ComponentPropsWithRef<'label'>;
 
-export type InputProps = ComponentPropsWithRef<'input'>;
+export type InputType = ComponentPropsWithRef<'input'>;

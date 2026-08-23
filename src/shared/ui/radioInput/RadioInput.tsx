@@ -5,7 +5,7 @@ import { useId } from 'react';
 import { cn } from '@/shared/lib/utils';
 
 import styles from './radioInput.module.scss';
-import { type InputProps, type LabelProps, type RadioInputProps } from './types';
+import { type InputType, type LabelType, type RadioInputType } from './types';
 
 export const RadioInput = ({
     classNames,
@@ -14,7 +14,7 @@ export const RadioInput = ({
     id: providedId,
     value,
     ...props
-}: RadioInputProps) => {
+}: RadioInputType) => {
     const generatedId = useId();
     const id = providedId ?? generatedId;
 
@@ -36,7 +36,7 @@ export const RadioInput = ({
     );
 };
 
-const Label = ({ children, className, ...props }: LabelProps) => {
+const Label = ({ children, className, ...props }: LabelType) => {
     return (
         <label
             className={cn(styles.label, className)}
@@ -47,7 +47,7 @@ const Label = ({ children, className, ...props }: LabelProps) => {
     );
 };
 
-const Input = ({ className, ...props }: InputProps) => {
+const Input = ({ className, ...props }: InputType) => {
     return (
         <input
             className={cn(styles.input, className)}
