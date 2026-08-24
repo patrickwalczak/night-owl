@@ -1,5 +1,8 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
+const CSP_REPORT_ENDPOINT_NAME = 'csp-endpoint';
+const CSP_REPORT_PATH = '/api/csp-report';
+
 function detect(
     uaRaw: string,
     chm: string | null,
@@ -16,16 +19,44 @@ function detect(
     return isPhone ? 'mobile' : 'desktop';
 }
 
+function buildCspReportOnlyHeader(isDev: boolean): string {
+    const directives = [
+        `default-src 'self'`,
+        `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''}`,
+        `style-src 'self' 'unsafe-inline'`,
+        `img-src 'self' blob: data: https://placehold.co`,
+        `font-src 'self'`,
+        `connect-src 'self'${isDev ? ' ws: http://localhost:*' : ''}`,
+        `object-src 'none'`,
+        `base-uri 'self'`,
+        `form-action 'self'`,
+        `frame-ancestors 'none'`,
+        'upgrade-insecure-requests',
+        `report-uri ${CSP_REPORT_PATH}`,
+        `report-to ${CSP_REPORT_ENDPOINT_NAME}`,
+    ];
+
+    return directives.join('; ');
+}
+
 export function proxy(req: NextRequest) {
     const device = detect(
         req.headers.get('user-agent') || '',
         req.headers.get('sec-ch-ua-mobile'),
     );
+    const isDev = process.env.NODE_ENV === 'development';
 
     const headers = new Headers(req.headers);
 
     headers.set('x-device-type', device);
     const res = NextResponse.next({ request: { headers } });
+
+    res.headers.set(
+        'Reporting-Endpoints',
+        `${CSP_REPORT_ENDPOINT_NAME}="${req.nextUrl.origin}${CSP_REPORT_PATH}"`,
+    );
+    res.headers.set('Content-Security-Policy-Report-Only', buildCspReportOnlyHeader(isDev));
+
     return res;
 }
 
