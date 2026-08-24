@@ -19,7 +19,7 @@ function detect(
     return isPhone ? 'mobile' : 'desktop';
 }
 
-function buildCspReportOnlyHeader(isDev: boolean): string {
+function buildCspHeader(isDev: boolean): string {
     const directives = [
         `default-src 'self'`,
         `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''}`,
@@ -31,10 +31,13 @@ function buildCspReportOnlyHeader(isDev: boolean): string {
         `base-uri 'self'`,
         `form-action 'self'`,
         `frame-ancestors 'none'`,
-        'upgrade-insecure-requests',
         `report-uri ${CSP_REPORT_PATH}`,
         `report-to ${CSP_REPORT_ENDPOINT_NAME}`,
     ];
+
+    if (!isDev) {
+        directives.push('upgrade-insecure-requests');
+    }
 
     return directives.join('; ');
 }
@@ -55,7 +58,11 @@ export function proxy(req: NextRequest) {
         'Reporting-Endpoints',
         `${CSP_REPORT_ENDPOINT_NAME}="${req.nextUrl.origin}${CSP_REPORT_PATH}"`,
     );
-    res.headers.set('Content-Security-Policy-Report-Only', buildCspReportOnlyHeader(isDev));
+    res.headers.set('Content-Security-Policy', buildCspHeader(isDev));
+    // Legacy frame-blocking header, similar to CSP's frame-ancestors 'none'.
+    res.headers.set('X-Frame-Options', 'DENY');
+    res.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+    res.headers.set('X-Content-Type-Options', 'nosniff');
 
     return res;
 }
