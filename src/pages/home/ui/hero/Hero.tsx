@@ -1,14 +1,11 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
-import { getRootCategoriesWithChildren } from '@/entities/category/server';
 import { cn } from '@/shared/lib/utils';
 
+import { HomeLink } from '../homeLink/HomeLink';
 import styles from './hero.module.scss';
 
-export const Hero = async () => {
-    const categories = await getRootCategoriesWithChildren();
-
+export const Hero = () => {
     return (
         <section className={cn(styles.container, 'align-center', 'justify-center')}>
             <div className={`${styles.textContentContainer} flex flex-col align-center justify-center`}>
@@ -20,10 +17,7 @@ export const Hero = async () => {
                     <span>{'the'}</span>
                     <span>{'Darkness'}</span>
                 </h1>
-
-                <Link className={cn(styles.shopBtn, 'transition-200')} href={`/category/${categories[0].slug}`}>
-                    {'Shop now'}
-                </Link>
+                <HomeLink />
             </div>
             <Image
                 className={styles.heroImage}

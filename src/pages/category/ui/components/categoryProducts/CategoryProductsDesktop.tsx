@@ -8,9 +8,7 @@ import styles from './categoryProducts.module.scss';
 export default function CategoryProductsDesktop() {
     return (
         <main className={cn(styles.container, 'flex', 'flex-col')}>
-
             <StickyViewDesktop />
-
             <div className={styles.productsContainer}>
                 <SideFiltersDesktop />
                 <ProductsInfinite />

@@ -4,23 +4,25 @@ import {
     type ResponsiveStrategy,
 } from '@/shared/model/device.model';
 
-import { type AppState } from './appSlice';
+import { type DeviceState } from './deviceSlice';
+import { type NavigationState } from './navigationSlice';
 
-interface AppStateRoot {
-    app: AppState;
+interface GlobalStateRoot {
+    device: DeviceState;
+    navigation: NavigationState;
 }
 
-export const selectInitialDeviceType = (state: AppStateRoot) => state.app.initialDeviceType;
+export const selectInitialDeviceType = (state: GlobalStateRoot) => state.device.initialDeviceType;
 
-export const selectViewportType = (state: AppStateRoot) => state.app.viewportType;
+export const selectViewportType = (state: GlobalStateRoot) => state.device.viewportType;
 
-export const selectIsViewportReady = (state: AppStateRoot) => state.app.isViewportReady;
+export const selectIsViewportReady = (state: GlobalStateRoot) => state.device.isViewportReady;
 
 export const selectResponsiveType = (
-    state: AppStateRoot,
+    state: GlobalStateRoot,
     strategy: ResponsiveStrategy = DEFAULT_RESPONSIVE_STRATEGY,
 ): DeviceType => {
-    const { initialDeviceType, isViewportReady, viewportType } = state.app;
+    const { initialDeviceType, isViewportReady, viewportType } = state.device;
 
     if (strategy === 'ssr') {
         return initialDeviceType;
@@ -42,18 +44,18 @@ export const selectResponsiveType = (
 };
 
 export const selectIsDesktop = (
-    state: AppStateRoot,
+    state: GlobalStateRoot,
     strategy: ResponsiveStrategy = DEFAULT_RESPONSIVE_STRATEGY,
 ) => selectResponsiveType(state, strategy) === 'desktop';
 
 export const selectIsMobile = (
-    state: AppStateRoot,
+    state: GlobalStateRoot,
     strategy: ResponsiveStrategy = DEFAULT_RESPONSIVE_STRATEGY,
 ) => selectResponsiveType(state, strategy) === 'mobile';
 
 export const selectIsTablet = (
-    state: AppStateRoot,
+    state: GlobalStateRoot,
     strategy: ResponsiveStrategy = DEFAULT_RESPONSIVE_STRATEGY,
 ) => selectResponsiveType(state, strategy) === 'tablet';
 
-export const selectIsNavigationOpen = (state: AppStateRoot) => state.app.isNavigationOpen;
+export const selectIsNavigationOpen = (state: GlobalStateRoot) => state.navigation.isNavigationOpen;

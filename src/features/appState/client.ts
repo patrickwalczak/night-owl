@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/store/client';
 import { type ResponsiveStrategy } from '@/shared/model/device.model';
 
-import { toggleNavigation } from './model/appSlice';
+import { toggleNavigation } from './model/navigationSlice';
 import {
     selectInitialDeviceType,
     selectIsDesktop,
@@ -23,17 +23,13 @@ export const useViewportType = () => useAppSelector(selectViewportType);
 
 export const useIsViewportReady = () => useAppSelector(selectIsViewportReady);
 
-export const useResponsiveType = (strategy?: ResponsiveStrategy) =>
-    useAppSelector(state => selectResponsiveType(state, strategy));
+export const useResponsiveType = (strategy?: ResponsiveStrategy) => useAppSelector(state => selectResponsiveType(state, strategy));
 
-export const useIsDesktop = (strategy?: ResponsiveStrategy) =>
-    useAppSelector(state => selectIsDesktop(state, strategy));
+export const useIsDesktop = (strategy?: ResponsiveStrategy) => useAppSelector(state => selectIsDesktop(state, strategy));
 
-export const useIsTablet = (strategy?: ResponsiveStrategy) =>
-    useAppSelector(state => selectIsTablet(state, strategy));
+export const useIsTablet = (strategy?: ResponsiveStrategy) => useAppSelector(state => selectIsTablet(state, strategy));
 
-export const useIsMobile = (strategy?: ResponsiveStrategy) =>
-    useAppSelector(state => selectIsMobile(state, strategy));
+export const useIsMobile = (strategy?: ResponsiveStrategy) => useAppSelector(state => selectIsMobile(state, strategy));
 
 export const useIsNavigationOpen = () => useAppSelector(selectIsNavigationOpen);
 

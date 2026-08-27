@@ -1,0 +1,26 @@
+@use "../../../../shared/styles/breakpoints";
+
+
+.shopBtn {
+  min-width: 15rem;
+  max-width: 100%;
+  padding: 0.625rem 5rem;
+  border: none;
+  border-radius: 25px;
+
+  font-size: var(--typography-body-l-size);
+  font-weight: var(--font-weight-500);
+  color: var(--color-text-inverted);
+
+  background-color: var(--color-owl-purple-500);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+
+  &:hover {
+    background-color: var(--color-owl-purple-500-faded);
+  }
+
+  @media (min-width: breakpoints.$breakpoint-1024) {
+    min-width: 18rem;
+    padding-block: 0.75rem;
+  }
+}

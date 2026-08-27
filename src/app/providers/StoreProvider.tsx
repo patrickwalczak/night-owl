@@ -16,10 +16,12 @@ export default function StoreProvider({
 }) {
     const [store] = useState(() => {
         return makeStore({
-            app: {
+            device: {
                 initialDeviceType,
                 viewportType: initialDeviceType,
                 isViewportReady: false,
+            },
+            navigation: {
                 isNavigationOpen: false,
             },
         });

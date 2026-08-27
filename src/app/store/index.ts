@@ -1,12 +1,15 @@
-import { configureStore, type PreloadedStateShapeFromReducersMapObject, combineReducers } from '@reduxjs/toolkit';
+import { combineReducers, configureStore, type PreloadedStateShapeFromReducersMapObject } from '@reduxjs/toolkit';
 
-import { appReducer } from '@/features/appState';
+import { deviceReducer, navigationReducer } from '@/features/appState';
 
-type PreloadedStateType = PreloadedStateShapeFromReducersMapObject<typeof rootReducer>;
+const reducer = {
+    device: deviceReducer,
+    navigation: navigationReducer,
+};
 
-const rootReducer = combineReducers({
-    app: appReducer,
-});
+type PreloadedStateType = PreloadedStateShapeFromReducersMapObject<typeof reducer>;
+
+const rootReducer = combineReducers(reducer);
 
 export const makeStore = (preloadedState: PreloadedStateType) => {
     return configureStore({

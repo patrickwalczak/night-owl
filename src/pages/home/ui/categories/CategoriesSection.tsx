@@ -17,9 +17,7 @@ export const CategoriesSection = () => {
             <CategoryTile
                 href={'#'}
                 title={'Indoor Lighting'}
-                description={
-                    'Bring warmth and character to every room with indoor lighting made for cozy, beautiful interiors.'
-                }
+                description={'Bring warmth and character to every room with indoor lighting made for cozy, beautiful interiors.'}
                 image={{ alt: 'Indoor lighting', src: '/cat_img_indoor_lighting.webp' }}
             />
 

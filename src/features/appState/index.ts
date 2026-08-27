@@ -1,8 +1,11 @@
 export {
-    default as appReducer,
     setViewportType,
+    default as deviceReducer,
+} from './model/deviceSlice';
+export {
+    default as navigationReducer,
     toggleNavigation,
-} from './model/appSlice';
+} from './model/navigationSlice';
 export {
     selectInitialDeviceType,
     selectIsDesktop,
@@ -13,4 +16,5 @@ export {
     selectResponsiveType,
     selectViewportType,
 } from './model/selectors';
-export type { AppState } from './model/appSlice';
+export type { DeviceState } from './model/deviceSlice';
+export type { NavigationState } from './model/navigationSlice';
