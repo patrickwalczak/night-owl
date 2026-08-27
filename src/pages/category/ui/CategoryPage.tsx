@@ -23,10 +23,6 @@ export default async function CategoryPage({
 
     const { category, parameters, products } = await getCategoryPageData(category_slug, parsedParams);
 
-    console.log(category);
-    console.log(parameters);
-    console.log(products);
-
     if (!category) notFound();
 
     const areFiltersOpen = (await cookies()).get('areFiltersOpen')?.value === '1';
