@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-import { setViewportType } from '@/features/appState';
+import { setViewportType } from '@/features/appState/client';
 import { DESKTOP_BREAKPOINT, TABLET_BREAKPOINT } from '@/shared/config';
 import { type ViewportType } from '@/shared/model/device.model';
 

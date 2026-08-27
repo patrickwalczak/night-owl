@@ -5,6 +5,7 @@ import { useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/store/client';
 import { type ResponsiveStrategy } from '@/shared/model/device.model';
 
+import { setViewportType } from './model/deviceSlice';
 import { toggleNavigation } from './model/navigationSlice';
 import {
     selectInitialDeviceType,
@@ -16,6 +17,19 @@ import {
     selectResponsiveType,
     selectViewportType,
 } from './model/selectors';
+
+export {
+    setViewportType,
+    selectInitialDeviceType,
+    selectIsDesktop,
+    selectIsMobile,
+    selectIsNavigationOpen,
+    selectIsTablet,
+    selectIsViewportReady,
+    selectResponsiveType,
+    selectViewportType,
+    toggleNavigation,
+};
 
 export const useInitialDeviceType = () => useAppSelector(selectInitialDeviceType);
 
