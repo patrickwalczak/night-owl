@@ -1,3 +1,5 @@
+@use './breakpoints';
+
 @layer base {
   :root {
     // Font families
@@ -123,6 +125,10 @@
     --typography-body-l-letter-spacing: var(--letter-spacing-none);
 
     // Layout
-    --navigation-height: 54px;
+    --navigation-height: 65px;
+
+    @media (min-width: breakpoints.$breakpoint-1024) {
+      --navigation-height: 57px;
+    }
   }
 }

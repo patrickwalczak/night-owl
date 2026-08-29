@@ -6,14 +6,16 @@ import { useAppDispatch, useAppSelector } from '@/app/store/client';
 import { type ResponsiveStrategy } from '@/shared/model/device.model';
 
 import { setViewportType } from './model/deviceSlice';
-import { toggleNavigation } from './model/navigationSlice';
+import { setNavigationVisibility } from './model/navigationSlice';
 import {
     selectInitialDeviceType,
     selectIsDesktop,
     selectIsMobile,
-    selectIsNavigationOpen,
+    selectIsNavigationVisible,
     selectIsTablet,
     selectIsViewportReady,
+    selectNavigationHeight,
+    selectNavigationTopOffset,
     selectResponsiveType,
     selectViewportType,
 } from './model/selectors';
@@ -23,12 +25,14 @@ export {
     selectInitialDeviceType,
     selectIsDesktop,
     selectIsMobile,
-    selectIsNavigationOpen,
+    selectIsNavigationVisible,
     selectIsTablet,
     selectIsViewportReady,
+    selectNavigationHeight,
+    selectNavigationTopOffset,
     selectResponsiveType,
     selectViewportType,
-    toggleNavigation,
+    setNavigationVisibility,
 };
 
 export const useInitialDeviceType = () => useAppSelector(selectInitialDeviceType);
@@ -45,13 +49,19 @@ export const useIsTablet = (strategy?: ResponsiveStrategy) => useAppSelector(sta
 
 export const useIsMobile = (strategy?: ResponsiveStrategy) => useAppSelector(state => selectIsMobile(state, strategy));
 
-export const useIsNavigationOpen = () => useAppSelector(selectIsNavigationOpen);
+export const useIsNavigationVisible = () => useAppSelector(selectIsNavigationVisible);
 
-export const useSetNavigationOpen = () => {
+export const useNavigationHeight = (strategy?: ResponsiveStrategy) => useAppSelector(state => selectNavigationHeight(state, strategy));
+
+export const useNavigationTopOffset = (strategy?: ResponsiveStrategy) => (
+    useAppSelector(state => selectNavigationTopOffset(state, strategy))
+);
+
+export const useSetNavigationVisibility = () => {
     const dispatch = useAppDispatch();
 
-    return useCallback((isNavigationOpen: boolean) => {
-        dispatch(toggleNavigation({ isNavigationOpen }));
+    return useCallback((isNavigationVisible: boolean) => {
+        dispatch(setNavigationVisibility({ isNavigationVisible }));
     },
     [dispatch],
     );

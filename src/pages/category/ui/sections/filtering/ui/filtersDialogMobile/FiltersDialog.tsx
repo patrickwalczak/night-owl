@@ -1,17 +1,17 @@
 'use client';
 
-import { useIsOpenState } from '@/shared/lib/hooks/client';
+import { useOpenState } from '@/shared/lib/hooks/client';
 
 import FilterButton from '../filterButton/FilterButton';
 import FiltersModal from './filtersModal/FiltersModal';
 
 const FiltersDialog = () => {
-    const { isOpened, close, open } = useIsOpenState();
+    const { isOpen, close, open } = useOpenState();
 
     return (
         <>
             <FilterButton label={'Filters'} handleClick={open} />
-            <FiltersModal isOpened={isOpened} close={close} />
+            <FiltersModal isOpen={isOpen} close={close} />
         </>
     );
 };

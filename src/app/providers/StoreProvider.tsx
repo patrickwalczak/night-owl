@@ -22,7 +22,7 @@ export default function StoreProvider({
                 isViewportReady: false,
             },
             navigation: {
-                isNavigationOpen: false,
+                isNavigationVisible: true,
             },
         });
     });

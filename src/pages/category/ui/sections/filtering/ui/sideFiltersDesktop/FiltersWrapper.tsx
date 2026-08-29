@@ -4,14 +4,17 @@ import type React from 'react';
 
 import { useEffect, useRef } from 'react';
 
-import { useIsNavigationOpen } from '@/features/appState/client';
+import { useNavigationTopOffset } from '@/features/appState/client';
 import { cn } from '@/shared/lib/utils';
 
 import { useCategoryPageSelector } from '../../../../../model/client';
 import styles from './sideFiltersDesktop.module.scss';
 
+const STICKY_CATEGORY_BAR_HEIGHT_PX = 58;
+
 const FiltersWrapper = ({ children }: { children: React.ReactNode }) => {
-    const isNavigationOpen = useIsNavigationOpen();
+    const navigationTopOffset = useNavigationTopOffset();
+    const filtersTopOffset = navigationTopOffset + STICKY_CATEGORY_BAR_HEIGHT_PX;
     const areFiltersOpen = useCategoryPageSelector(state => state.categoryListing.areFiltersOpen);
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -29,7 +32,7 @@ const FiltersWrapper = ({ children }: { children: React.ReactNode }) => {
             className={cn(styles.filtersContainer, 'transition-200', areFiltersOpen && styles.opened)}
             style={{
                 width: areFiltersOpen ? '300px' : '0px',
-                top: isNavigationOpen ? '58px' : '100px',
+                top: `${filtersTopOffset}px`,
             }}
         >
             {children}

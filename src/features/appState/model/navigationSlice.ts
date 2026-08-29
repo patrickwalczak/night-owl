@@ -1,26 +1,26 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 export interface NavigationState {
-    isNavigationOpen: boolean;
+    isNavigationVisible: boolean;
 }
 
-interface ToggleNavigationPayload {
-    isNavigationOpen: boolean;
+interface SetNavigationVisibilityPayload {
+    isNavigationVisible: boolean;
 }
 
 const initialState: NavigationState = {
-    isNavigationOpen: false,
+    isNavigationVisible: true,
 };
 
 const navigationSlice = createSlice({
     name: 'navigation',
     initialState,
     reducers: {
-        toggleNavigation(state, action: PayloadAction<ToggleNavigationPayload>) {
-            state.isNavigationOpen = action.payload.isNavigationOpen;
+        setNavigationVisibility(state, action: PayloadAction<SetNavigationVisibilityPayload>) {
+            state.isNavigationVisible = action.payload.isNavigationVisible;
         },
     },
 });
 
-export const { toggleNavigation } = navigationSlice.actions;
+export const { setNavigationVisibility } = navigationSlice.actions;
 export default navigationSlice.reducer;

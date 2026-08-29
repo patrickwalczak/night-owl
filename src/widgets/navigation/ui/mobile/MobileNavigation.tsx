@@ -1,6 +1,6 @@
 'use client';
 
-import { useIsOpenState, useSafeContext } from '@/shared/lib/hooks/client';
+import { useOpenState, useSafeContext } from '@/shared/lib/hooks/client';
 import { cn } from '@/shared/lib/utils';
 import { HamburgerIcon } from '@/shared/ui/icons';
 
@@ -10,7 +10,7 @@ import styles from './navigation.module.scss';
 
 const MobileNavigation = () => {
     const { isScrolled, hideDropdown } = useSafeContext(NavigationContext);
-    const { isOpened: isMenuOpened, close: closeMenu, open: openMenu } = useIsOpenState();
+    const { isOpen: isMenuOpen, close: closeMenu, open: openMenu } = useOpenState();
 
     const handleCloseMenu = () => {
         closeMenu();
@@ -19,11 +19,11 @@ const MobileNavigation = () => {
 
     return (
         <>
-            <Menu isMenuOpened={isMenuOpened} closeMenu={handleCloseMenu} />
+            <Menu isMenuOpen={isMenuOpen} closeMenu={handleCloseMenu} />
             <button
                 type={'button'}
                 aria-label={'Open menu'}
-                aria-expanded={isMenuOpened}
+                aria-expanded={isMenuOpen}
                 aria-controls={'mobile-menu'}
                 aria-haspopup={'true'}
                 className={cn(

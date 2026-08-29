@@ -10,8 +10,7 @@ export interface ScrollState {
     delta: number;
 }
 
-export function useWindowScroll({
-}): ScrollState {
+export function useWindowScroll(): ScrollState {
     return useSyncExternalStore(
         scrollStore.subscribe,
         scrollStore.getSnapshot,

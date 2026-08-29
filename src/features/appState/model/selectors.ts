@@ -1,3 +1,4 @@
+import { NAVIGATION_HEIGHT_PX } from '@/shared/config';
 import {
     DEFAULT_RESPONSIVE_STRATEGY,
     type DeviceType,
@@ -58,4 +59,14 @@ export const selectIsTablet = (
     strategy: ResponsiveStrategy = DEFAULT_RESPONSIVE_STRATEGY,
 ) => selectResponsiveType(state, strategy) === 'tablet';
 
-export const selectIsNavigationOpen = (state: GlobalStateRoot) => state.navigation.isNavigationOpen;
+export const selectIsNavigationVisible = (state: GlobalStateRoot) => state.navigation.isNavigationVisible;
+
+export const selectNavigationHeight = (
+    state: GlobalStateRoot,
+    strategy: ResponsiveStrategy = DEFAULT_RESPONSIVE_STRATEGY,
+) => NAVIGATION_HEIGHT_PX[selectResponsiveType(state, strategy)];
+
+export const selectNavigationTopOffset = (
+    state: GlobalStateRoot,
+    strategy: ResponsiveStrategy = DEFAULT_RESPONSIVE_STRATEGY,
+) => selectIsNavigationVisible(state) ? selectNavigationHeight(state, strategy) : 0;

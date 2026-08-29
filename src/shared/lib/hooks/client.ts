@@ -3,7 +3,7 @@ import 'client-only';
 
 export { useBodyOverflow } from './useBodyOverflow';
 export { useInViewProgress } from './useInViewProgress';
-export { useIsOpenState } from './useIsOpenState';
+export { useOpenState } from './useOpenState';
 export { useIsSticky } from './useIsSticky';
 export { useMediaQuery } from './useMediaQuery';
 export { useOutsideClick } from './useOutsideClick';

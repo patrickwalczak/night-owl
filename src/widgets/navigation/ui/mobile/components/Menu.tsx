@@ -7,9 +7,9 @@ import styles from '../navigation.module.scss';
 import { MobileNavButton } from './MobileNavButton';
 import { MobileNavLink } from './MobileNavLink';
 
-const Menu = ({ isMenuOpened, closeMenu }: { isMenuOpened: boolean; closeMenu: () => void }) => {
+const Menu = ({ isMenuOpen, closeMenu }: { isMenuOpen: boolean; closeMenu: () => void }) => {
     return (
-        <Modal open={isMenuOpened} onClose={closeMenu}>
+        <Modal open={isMenuOpen} onClose={closeMenu}>
             <Modal.Overlay>
                 <Modal.Wrapper
                     id={'mobile-menu'}

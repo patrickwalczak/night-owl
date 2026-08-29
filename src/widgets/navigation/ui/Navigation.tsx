@@ -13,7 +13,7 @@ import { cn } from '@/shared/lib/utils';
 import { Overlay } from '@/shared/ui/overlay';
 
 import useIsDropdownExpanded from '../hooks/useIsDropdownExpanded';
-import useIsScrolled from '../hooks/useIsScrolled';
+import { useIsScrolled } from '../hooks/useIsScrolled';
 import { CategoriesDropdown } from './desktop/categoriesDropdown/CategoriesDropdown';
 import MobileNavigation from './mobile/MobileNavigation';
 import styles from './navigation.module.scss';
@@ -35,8 +35,6 @@ const Navigation = ({ categories }: { categories: RootCategoriesWithChildren }) 
     const { expandDropdown, hideDropdown, isExpanded, setIsExpanded } = useIsDropdownExpanded();
 
     const categoriesButtonRef = useRef<HTMLButtonElement | null>(null);
-
-    const mainEl = useRef<HTMLElement | null>(null);
 
     const pathname = usePathname();
     const isHomepage = pathname === '/';
@@ -63,16 +61,12 @@ const Navigation = ({ categories }: { categories: RootCategoriesWithChildren }) 
     // Keep the main content inactive while the navigation overlay is open
     // so users cannot click or focus elements behind it.
     useEffect(() => {
-        mainEl.current = document.querySelector('main');
+        const mainEl = document.querySelector('main');
 
-        if (mainEl.current && isExpanded) {
-            mainEl.current.setAttribute('inert', String(isExpanded));
-        }
-        else if (mainEl.current) {
-            mainEl.current.removeAttribute('inert');
-        }
+        if (mainEl && isExpanded) mainEl.setAttribute('inert', String(isExpanded));
+        else if (mainEl) mainEl.removeAttribute('inert');
 
-        return () => mainEl.current?.removeAttribute('inert');
+        return () => mainEl?.removeAttribute('inert');
     }, [isExpanded]);
 
     const ctx = {

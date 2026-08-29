@@ -80,7 +80,7 @@ const getObservedSize = (
 };
 
 export function useResizeObserver<T extends Element>({
-    box = 'content-box',
+    box = 'border-box',
     disabled = false,
     onResize,
 }: UseResizeObserverOptions = {}): UseResizeObserverResult<T> {

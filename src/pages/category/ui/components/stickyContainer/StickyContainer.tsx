@@ -2,7 +2,7 @@
 
 import { type ReactNode } from 'react';
 
-import { useIsNavigationOpen } from '@/features/appState/client';
+import { useNavigationTopOffset } from '@/features/appState/client';
 import { useIsSticky } from '@/shared/lib/hooks/client';
 import { cn } from '@/shared/lib/utils';
 
@@ -13,9 +13,7 @@ interface StickyContainerWrapperType {
 }
 
 const StickyContainer = ({ children }: StickyContainerWrapperType) => {
-    const isNavigationOpen = useIsNavigationOpen();
-
-    const topPx = isNavigationOpen ? 0 : 48;
+    const topPx = useNavigationTopOffset();
 
     const { isStuck, sentinelRef } = useIsSticky(topPx);
 

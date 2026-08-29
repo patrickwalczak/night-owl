@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { getCategoryBySlug } from '@/entities/category/server';
+import { getCategoryIdBySlug } from '@/entities/category/server';
 import { getProductsForCategory } from '@/entities/product/server';
 import { toOrderBy, PAGE_SIZE, parseCategorySearchParams } from '@/pages/category/server';
 
@@ -10,7 +10,7 @@ export async function GET(req: Request, ctx: { params: Promise<{ category_slug: 
 
     const parsed = parseCategorySearchParams(searchParams);
 
-    const category = await getCategoryBySlug(params.category_slug);
+    const category = await getCategoryIdBySlug(params.category_slug);
 
     if (!category) {
         return NextResponse.json({ error: 'Category not found' }, { status: 404 });

@@ -3,9 +3,9 @@ import Modal from '@/shared/ui/modal/client';
 
 import styles from './filtersModal.module.scss';
 
-const FiltersModal = ({ isOpened, close }: { isOpened: boolean; close: () => void }) => {
+const FiltersModal = ({ isOpen, close }: { isOpen: boolean; close: () => void }) => {
     return (
-        <Modal open={isOpened} onClose={close}>
+        <Modal open={isOpen} onClose={close}>
             <Modal.Overlay>
                 <Modal.Wrapper
                     id={'filters-modal'}

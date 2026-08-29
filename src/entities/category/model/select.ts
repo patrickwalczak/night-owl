@@ -18,3 +18,7 @@ export const categoryWithChildrenSelect = {
         },
     },
 } as const satisfies CategorySelect;
+
+export const categoryIdSelect = {
+    id: true,
+} as const satisfies CategorySelect;

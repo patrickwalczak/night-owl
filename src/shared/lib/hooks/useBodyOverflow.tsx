@@ -2,9 +2,9 @@
 
 import { useEffect } from 'react';
 
-export const useBodyOverflow = (isOpened: boolean) => {
+export const useBodyOverflow = (isOpen: boolean) => {
     useEffect(() => {
-        if (isOpened) {
+        if (isOpen) {
             document.body.style.overflow = 'hidden';
         }
         else {
@@ -14,5 +14,5 @@ export const useBodyOverflow = (isOpened: boolean) => {
         return () => {
             document.body.style.overflow = '';
         };
-    }, [isOpened]);
+    }, [isOpen]);
 };
