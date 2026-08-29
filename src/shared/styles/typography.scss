@@ -35,4 +35,35 @@
     line-height: var(--typography-h4-line-height);
     letter-spacing: var(--typography-h4-letter-spacing);
   }
+
+  .p {
+    font-size: var(--typography-body-m-size);
+    line-height: var(--typography-body-m-line-height);
+    letter-spacing: var(--typography-body-m-letter-spacing);
+    font-weight: var(--font-weight-200);
+  }
+
+  .text-xs {
+    font-size: var(--typography-body-xs-size);
+    line-height: var(--typography-body-xs-line-height);
+    letter-spacing: var(--typography-body-xs-letter-spacing);
+  }
+
+  .text-sm {
+    font-size: var(--typography-body-s-size);
+    line-height: var(--typography-body-s-line-height);
+    letter-spacing: var(--typography-body-s-letter-spacing);
+  }
+
+  .text-md {
+    font-size: var(--typography-body-m-size);
+    line-height: var(--typography-body-m-line-height);
+    letter-spacing: var(--typography-body-m-letter-spacing);
+  }
+
+  .text-lg {
+    font-size: var(--typography-body-l-size);
+    line-height: var(--typography-body-l-line-height);
+    letter-spacing: var(--typography-body-l-letter-spacing);
+  }
 }

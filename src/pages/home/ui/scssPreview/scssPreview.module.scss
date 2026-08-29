@@ -1,0 +1,260 @@
+@use '../../../../shared/styles/breakpoints';
+
+.section {
+  background-color: var(--color-background-primary);
+  padding: 3rem 1rem;
+}
+
+.inner {
+  display: grid;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 48rem;
+}
+
+.eyebrow {
+  color: var(--color-text-accent);
+  font-size: var(--typography-body-xs-size);
+  font-weight: var(--font-weight-700);
+  line-height: var(--typography-body-xs-line-height);
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: uppercase;
+}
+
+.title {
+  color: var(--color-text-primary);
+}
+
+.description {
+  max-width: 42rem;
+  color: var(--color-text-secondary);
+}
+
+.group {
+  display: grid;
+  gap: 1rem;
+}
+
+.groupTitle {
+  color: var(--color-text-primary);
+  font-size: var(--typography-body-l-size);
+  font-weight: var(--font-weight-600);
+  line-height: var(--typography-body-l-line-height);
+  letter-spacing: var(--typography-body-l-letter-spacing);
+}
+
+.surfaceGrid,
+.textGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+
+  @media (min-width: breakpoints.$breakpoint-768) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: breakpoints.$breakpoint-1280) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.surfaceSample {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  min-height: 12rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border-primary);
+  border-radius: 8px;
+}
+
+.surfaceContent {
+  display: grid;
+  gap: 0.25rem;
+  font-size: var(--typography-body-s-size);
+  line-height: var(--typography-body-s-line-height);
+  letter-spacing: var(--typography-body-s-letter-spacing);
+}
+
+.textGrid {
+  @media (min-width: breakpoints.$breakpoint-1280) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.textSample {
+  display: grid;
+  gap: 0.5rem;
+  min-height: 11rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border-primary);
+  border-radius: 8px;
+}
+
+.textSampleTitle {
+  font-size: var(--typography-body-l-size);
+  font-weight: var(--font-weight-600);
+  line-height: var(--typography-body-l-line-height);
+  letter-spacing: var(--typography-body-l-letter-spacing);
+}
+
+.textSampleCopy {
+  font-size: var(--typography-body-s-size);
+  line-height: var(--typography-body-s-line-height);
+  letter-spacing: var(--typography-body-s-letter-spacing);
+}
+
+.paletteGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+
+  @media (min-width: breakpoints.$breakpoint-768) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  @media (min-width: breakpoints.$breakpoint-1280) {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+}
+
+.paletteItem {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.paletteColor {
+  min-height: 4.5rem;
+  border: 1px solid var(--color-border-primary);
+  border-radius: 8px;
+}
+
+.paletteName,
+.tokenName {
+  overflow-wrap: anywhere;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  font-size: var(--typography-body-xs-size);
+  line-height: var(--typography-body-xs-line-height);
+  letter-spacing: var(--typography-body-xs-letter-spacing);
+}
+
+.paletteName,
+.tokenName {
+  color: var(--color-text-muted);
+}
+
+.typographyList {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.typographyItem {
+  display: grid;
+  gap: 0.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+.typographyText {
+  color: var(--color-text-primary);
+}
+
+.backgroundPrimary {
+  background-color: var(--color-background-primary);
+}
+
+.backgroundSecondary {
+  background-color: var(--color-background-secondary);
+}
+
+.backgroundInverted {
+  background-color: var(--color-background-inverted);
+}
+
+.backgroundAccent {
+  background-color: var(--color-background-accent);
+}
+
+.textPrimary {
+  color: var(--color-text-primary);
+}
+
+.textSecondary {
+  color: var(--color-text-secondary);
+}
+
+.textMuted {
+  color: var(--color-text-muted);
+}
+
+.textInverted {
+  color: var(--color-text-inverted);
+}
+
+.textAccent {
+  color: var(--color-text-accent);
+}
+
+.owlWhite {
+  background-color: var(--color-owl-white);
+}
+
+.owlGray200 {
+  background-color: var(--color-owl-gray-200);
+}
+
+.owlGray300 {
+  background-color: var(--color-owl-gray-300);
+}
+
+.owlGray400 {
+  background-color: var(--color-owl-gray-400);
+}
+
+.owlGray425 {
+  background-color: var(--color-owl-gray-425);
+}
+
+.owlGray450 {
+  background-color: var(--color-owl-gray-450);
+}
+
+.owlGray500 {
+  background-color: var(--color-owl-gray-500);
+}
+
+.owlGray600 {
+  background-color: var(--color-owl-gray-600);
+}
+
+.owlBlue100 {
+  background-color: var(--color-owl-blue-100);
+}
+
+.owlBlue500 {
+  background-color: var(--color-owl-blue-500);
+}
+
+.owlBlue800 {
+  background-color: var(--color-owl-blue-800);
+}
+
+.owlPurple200 {
+  background-color: var(--color-owl-purple-200);
+}
+
+.owlPurple500 {
+  background-color: var(--color-owl-purple-500);
+}
+
+.owlPurple850 {
+  background-color: var(--color-owl-purple-850);
+}

@@ -38,7 +38,7 @@ export const CategoriesDropdown = ({
                 >
                     {categories.length
                         ? (
-                            <ul className={cn(styles.wrapper)}>
+                            <ul className={cn(styles.wrapper, 'list-reset')}>
                                 {categories.map(category => (
                                     <DropdownCategory key={category.id} category={category} isRootCategory />
                                 ))}

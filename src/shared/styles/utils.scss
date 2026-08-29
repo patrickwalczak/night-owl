@@ -51,6 +51,7 @@
   }
 
   .list-reset {
+    margin: 0;
     padding: 0;
     list-style: none;
   }
@@ -91,21 +92,5 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-  }
-
-  .text-xs {
-    font-size: var(--typography-body-xs-size);
-  }
-
-  .text-sm {
-    font-size: var(--typography-body-s-size);
-  }
-
-  .text-md {
-    font-size: var(--typography-body-m-size);
-  }
-
-  .text-lg {
-    font-size: var(--typography-body-l-size);
   }
 }
