@@ -1,4 +1,3 @@
-import { NAVIGATION_HEIGHT_PX } from '@/shared/config';
 import {
     DEFAULT_RESPONSIVE_STRATEGY,
     type DeviceType,
@@ -6,21 +5,19 @@ import {
 } from '@/shared/model/device.model';
 
 import { type DeviceState } from './deviceSlice';
-import { type NavigationState } from './navigationSlice';
 
-interface GlobalStateRoot {
+interface DeviceStateRoot {
     device: DeviceState;
-    navigation: NavigationState;
 }
 
-export const selectInitialDeviceType = (state: GlobalStateRoot) => state.device.initialDeviceType;
+export const selectInitialDeviceType = (state: DeviceStateRoot) => state.device.initialDeviceType;
 
-export const selectViewportType = (state: GlobalStateRoot) => state.device.viewportType;
+export const selectViewportType = (state: DeviceStateRoot) => state.device.viewportType;
 
-export const selectIsViewportReady = (state: GlobalStateRoot) => state.device.isViewportReady;
+export const selectIsViewportReady = (state: DeviceStateRoot) => state.device.isViewportReady;
 
 export const selectResponsiveType = (
-    state: GlobalStateRoot,
+    state: DeviceStateRoot,
     strategy: ResponsiveStrategy = DEFAULT_RESPONSIVE_STRATEGY,
 ): DeviceType => {
     const { initialDeviceType, isViewportReady, viewportType } = state.device;
@@ -45,28 +42,16 @@ export const selectResponsiveType = (
 };
 
 export const selectIsDesktop = (
-    state: GlobalStateRoot,
+    state: DeviceStateRoot,
     strategy: ResponsiveStrategy = DEFAULT_RESPONSIVE_STRATEGY,
 ) => selectResponsiveType(state, strategy) === 'desktop';
 
 export const selectIsMobile = (
-    state: GlobalStateRoot,
+    state: DeviceStateRoot,
     strategy: ResponsiveStrategy = DEFAULT_RESPONSIVE_STRATEGY,
 ) => selectResponsiveType(state, strategy) === 'mobile';
 
 export const selectIsTablet = (
-    state: GlobalStateRoot,
+    state: DeviceStateRoot,
     strategy: ResponsiveStrategy = DEFAULT_RESPONSIVE_STRATEGY,
 ) => selectResponsiveType(state, strategy) === 'tablet';
-
-export const selectIsNavigationVisible = (state: GlobalStateRoot) => state.navigation.isNavigationVisible;
-
-export const selectNavigationHeight = (
-    state: GlobalStateRoot,
-    strategy: ResponsiveStrategy = DEFAULT_RESPONSIVE_STRATEGY,
-) => NAVIGATION_HEIGHT_PX[selectResponsiveType(state, strategy)];
-
-export const selectNavigationTopOffset = (
-    state: GlobalStateRoot,
-    strategy: ResponsiveStrategy = DEFAULT_RESPONSIVE_STRATEGY,
-) => selectIsNavigationVisible(state) ? selectNavigationHeight(state, strategy) : 0;

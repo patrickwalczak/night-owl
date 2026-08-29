@@ -8,7 +8,7 @@ import { createContext, useEffect, useRef } from 'react';
 
 import type { RootCategoriesWithChildren } from '@/entities/category';
 
-import { useIsDesktop } from '@/features/appState/client';
+import { useIsDesktop } from '@/features/layout/client';
 import { cn } from '@/shared/lib/utils';
 import { Overlay } from '@/shared/ui/overlay';
 

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useNavigationHeight, useSetNavigationVisibility } from '@/features/appState/client';
+import { useNavigationHeight, useSetNavigationVisibility } from '@/features/layout/client';
 import { useWindowScroll } from '@/shared/lib/hooks/client';
 
 export const useIsScrolled = () => {

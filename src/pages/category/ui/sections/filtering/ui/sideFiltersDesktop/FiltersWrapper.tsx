@@ -4,7 +4,7 @@ import type React from 'react';
 
 import { useEffect, useRef } from 'react';
 
-import { useNavigationTopOffset } from '@/features/appState/client';
+import { useNavigationTopOffset } from '@/features/layout/client';
 import { cn } from '@/shared/lib/utils';
 
 import { useCategoryPageSelector } from '../../../../../model/client';

@@ -2,7 +2,7 @@
 
 import { type ReactNode } from 'react';
 
-import { useNavigationTopOffset } from '@/features/appState/client';
+import { useNavigationTopOffset } from '@/features/layout/client';
 import { useIsSticky } from '@/shared/lib/hooks/client';
 import { cn } from '@/shared/lib/utils';
 

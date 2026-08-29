@@ -5,20 +5,22 @@ import { useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/store/client';
 import { type ResponsiveStrategy } from '@/shared/model/device.model';
 
-import { setViewportType } from './model/deviceSlice';
-import { setNavigationVisibility } from './model/navigationSlice';
 import {
     selectInitialDeviceType,
     selectIsDesktop,
     selectIsMobile,
-    selectIsNavigationVisible,
     selectIsTablet,
     selectIsViewportReady,
-    selectNavigationHeight,
-    selectNavigationTopOffset,
     selectResponsiveType,
     selectViewportType,
-} from './model/selectors';
+} from './model/deviceSelectors';
+import { setViewportType } from './model/deviceSlice';
+import {
+    selectIsNavigationVisible,
+    selectNavigationHeight,
+    selectNavigationTopOffset,
+} from './model/navigationSelectors';
+import { setNavigationVisibility } from './model/navigationSlice';
 
 export {
     setViewportType,

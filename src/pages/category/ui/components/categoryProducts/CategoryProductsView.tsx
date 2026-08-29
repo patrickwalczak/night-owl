@@ -1,6 +1,6 @@
 'use client';
 
-import { useIsDesktop } from '@/features/appState/client';
+import { useIsDesktop } from '@/features/layout/client';
 
 import CategoryProductsDesktop from './CategoryProductsDesktop';
 import CategoryProductsMobile from './CategoryProductsMobile';

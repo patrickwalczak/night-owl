@@ -1,6 +1,6 @@
 import { combineReducers, configureStore, type PreloadedStateShapeFromReducersMapObject } from '@reduxjs/toolkit';
 
-import { deviceReducer, navigationReducer } from '@/features/appState';
+import { deviceReducer, navigationReducer } from '@/features/layout';
 
 const reducer = {
     device: deviceReducer,
