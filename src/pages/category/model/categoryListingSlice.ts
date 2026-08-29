@@ -9,7 +9,6 @@ import type {
 
 export interface CategoryListingState {
     initialProducts: CategoryProduct[];
-    areFiltersOpen: boolean;
     parameters: CategoryParameter[];
     subcategories: CategorySubcategory[];
     category: CategorySummary;
@@ -20,7 +19,6 @@ export interface CategoryListingState {
 
 const initialState: CategoryListingState = {
     initialProducts: [],
-    areFiltersOpen: false,
     parameters: [],
     subcategories: [],
     category: {
@@ -38,12 +36,6 @@ const categoryListingSlice = createSlice({
     name: 'categoryListing',
     initialState,
     reducers: {
-        setAreFiltersOpen(state, action: PayloadAction<boolean>) {
-            state.areFiltersOpen = action.payload;
-        },
-        toggleFilters(state) {
-            state.areFiltersOpen = !state.areFiltersOpen;
-        },
         setParameters(state, action: PayloadAction<CategoryParameter[]>) {
             state.parameters = action.payload;
         },
@@ -66,14 +58,12 @@ const categoryListingSlice = createSlice({
 });
 
 export const {
-    setAreFiltersOpen,
     setCategory,
     setPage,
     setPageSize,
     setParameters,
     setProductSum,
     setSubcategories,
-    toggleFilters,
 } = categoryListingSlice.actions;
 
 export default categoryListingSlice.reducer;

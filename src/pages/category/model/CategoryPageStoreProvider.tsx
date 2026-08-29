@@ -27,7 +27,6 @@ export default function CategoryPageStoreProvider({
         makeCategoryPageStore({
             categoryListing: {
                 initialProducts: initialProducts.items,
-                areFiltersOpen,
                 parameters,
                 subcategories: category.children,
                 category: {
@@ -39,6 +38,9 @@ export default function CategoryPageStoreProvider({
                 productSum: initialProducts.total,
                 page: initialProducts.page,
                 pageSize: initialProducts.pageSize,
+            },
+            categoryUi: {
+                areFiltersOpen,
             },
         }),
     );

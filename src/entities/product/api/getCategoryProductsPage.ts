@@ -10,7 +10,7 @@ import {
 import { productListItemSelect } from '../model/productListItem.select';
 import { type ProductListPage } from '../model/productListItem.type';
 
-interface GetProductsForCategoryOptions {
+interface GetCategoryProductsPageOptions {
     categoryId: string;
     page: number;
     sort: ProductOrderByWithRelationInput;
@@ -18,7 +18,7 @@ interface GetProductsForCategoryOptions {
     pageSize: number;
 }
 
-export async function getProductsForCategory(opts: GetProductsForCategoryOptions): Promise<ProductListPage> {
+export async function getCategoryProductsPage(opts: GetCategoryProductsPageOptions): Promise<ProductListPage> {
     const page = Math.max(1, opts.page);
 
     const children = await prisma.category.findMany({

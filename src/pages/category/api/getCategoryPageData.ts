@@ -1,7 +1,7 @@
 import { cache } from 'react';
 import 'server-only';
 
-import { getProductsForCategory } from '@/entities/product/server';
+import { getCategoryProductsPage } from '@/entities/product/server';
 import { prisma } from '@/shared/lib/db/server';
 
 import { PAGE_SIZE } from '../config/constants';
@@ -62,7 +62,7 @@ export const getCategoryPageData = cache(
             };
         }
 
-        const products = await getProductsForCategory({
+        const products = await getCategoryProductsPage({
             categoryId: category.id,
             page,
             sort: toOrderBy(opts.sort),

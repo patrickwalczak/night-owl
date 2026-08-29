@@ -1,8 +1,6 @@
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
-import { getCategoryIdBySlug } from '@/entities/category/server';
-
 import { getCategoryPageData } from '../api/getCategoryPageData';
 import { normalizeSearchParams, parseCategorySearchParams } from '../lib/url';
 import CategoryPageStoreProvider from '../model/CategoryPageStoreProvider';

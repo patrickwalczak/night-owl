@@ -1,1 +1,1 @@
-export { getProductsForCategory } from './api/getProductsForCategory';
+export { getCategoryProductsPage } from './api/getCategoryProductsPage';

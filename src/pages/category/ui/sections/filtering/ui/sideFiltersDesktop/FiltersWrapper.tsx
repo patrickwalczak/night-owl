@@ -15,7 +15,7 @@ const STICKY_CATEGORY_BAR_HEIGHT_PX = 58;
 const FiltersWrapper = ({ children }: { children: React.ReactNode }) => {
     const navigationTopOffset = useNavigationTopOffset();
     const filtersTopOffset = navigationTopOffset + STICKY_CATEGORY_BAR_HEIGHT_PX;
-    const areFiltersOpen = useCategoryPageSelector(state => state.categoryListing.areFiltersOpen);
+    const areFiltersOpen = useCategoryPageSelector(state => state.categoryUi.areFiltersOpen);
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
