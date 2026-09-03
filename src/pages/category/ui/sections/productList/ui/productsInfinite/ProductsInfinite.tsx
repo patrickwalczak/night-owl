@@ -1,15 +1,22 @@
 'use client';
 
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 import { Fragment } from 'react/jsx-runtime';
 
 import type { ProductListPage } from '@/entities/product';
 
 import { useCategoryPageSelector } from '@/pages/category/model/client';
+import { useIntersectionObserver } from '@/shared/lib/hooks/client';
 import { cn } from '@/shared/lib/utils';
 
 import Product from '../product/Product';
 import styles from './productsInfinite.module.scss';
+
+type ProductsLoadMode = 'auto' | 'manual';
+
+const INTERSECTION_OPTIONS = { rootMargin: '0px 0px 200px 0px' };
+const DEFAULT_PRODUCTS_LOAD_MODE: ProductsLoadMode = 'auto';
 
 const fetchCategoryProducts = async (categorySlug: string, pageParam: number): Promise<ProductListPage> => {
     const response = await fetch(`/api/category/${categorySlug}/products?page=${pageParam}`);
@@ -22,6 +29,9 @@ const fetchCategoryProducts = async (categorySlug: string, pageParam: number): P
 };
 
 export default function ProductsInfinite() {
+    const [loadMode] = useState<ProductsLoadMode>(DEFAULT_PRODUCTS_LOAD_MODE);
+    const isAutoLoadEnabled = loadMode === 'auto';
+
     const { initialProducts,
         category: { slug },
         totalPages,
@@ -50,8 +60,19 @@ export default function ProductsInfinite() {
         staleTime: 240000,
     });
 
+    const onIntersect = (entry: IntersectionObserverEntry) => {
+        if (!entry.isIntersecting || hasNextPage === false || isFetchingNextPage) return;
+        fetchNextPage();
+    };
+
+    const ref = useIntersectionObserver<HTMLDivElement>({
+        callback: onIntersect,
+        options: INTERSECTION_OPTIONS,
+        enabled: isAutoLoadEnabled && hasNextPage && !isFetchingNextPage,
+    });
+
     return (
-        <div className={styles.container}>
+        <div aria-busy={isFetchingNextPage} className={styles.container}>
             {data.pages.map((pageData) => {
                 return (
                     <Fragment key={pageData.page}>
@@ -66,21 +87,25 @@ export default function ProductsInfinite() {
                     </Fragment>
                 );
             })}
-            <div className={cn('flex-center', 'm-2')}>
-                {isFetchingNextPage === false && hasNextPage === true && (
-                    <button
-                    // ref={ref}
-                        onClick={() => fetchNextPage()}
-                        disabled={!hasNextPage || isFetchingNextPage}
-                        className={cn(styles.loadMoreBtn)}
-                    >
-                        {'Load more...'}
-                    </button>
-                )}
-                {hasNextPage && isFetchingNextPage && (
-                    <div className={styles.loader}></div>
-                )}
-            </div>
+            {hasNextPage && (
+                <div className={cn('flex-center', 'm-2')}>
+                    {isAutoLoadEnabled && isFetchingNextPage === false && (
+                        <div ref={ref} aria-hidden className={styles.sentinel} />
+                    )}
+                    {!isAutoLoadEnabled && isFetchingNextPage === false && (
+                        <button
+                            onClick={() => fetchNextPage()}
+                            disabled={isFetchingNextPage}
+                            className={cn(styles.loadMoreBtn)}
+                        >
+                            {'Load more...'}
+                        </button>
+                    )}
+                    {hasNextPage && isFetchingNextPage && (
+                        <div className={styles.loader}></div>
+                    )}
+                </div>
+            )}
         </div>
     );
 }
