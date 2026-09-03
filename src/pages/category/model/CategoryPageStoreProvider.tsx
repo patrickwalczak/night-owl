@@ -38,6 +38,7 @@ export default function CategoryPageStoreProvider({
                 productSum: initialProducts.total,
                 page: initialProducts.page,
                 pageSize: initialProducts.pageSize,
+                totalPages: initialProducts.totalPages,
             },
             categoryUi: {
                 areFiltersOpen,

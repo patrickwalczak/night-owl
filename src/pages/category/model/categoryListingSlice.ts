@@ -15,6 +15,7 @@ export interface CategoryListingState {
     productSum: number;
     page: number;
     pageSize: number;
+    totalPages: number;
 }
 
 const initialState: CategoryListingState = {
@@ -30,6 +31,7 @@ const initialState: CategoryListingState = {
     productSum: 0,
     page: 1,
     pageSize: 1,
+    totalPages: 1,
 };
 
 const categoryListingSlice = createSlice({

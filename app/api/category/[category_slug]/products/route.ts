@@ -16,7 +16,7 @@ export async function GET(req: Request, ctx: { params: Promise<{ category_slug: 
         return NextResponse.json({ error: 'Category not found' }, { status: 404 });
     }
 
-    const { items, total, pageSize, page } = await getCategoryProductsPage({
+    const productsPage = await getCategoryProductsPage({
         categoryId,
         page: parsed.page,
         sort: toOrderBy(parsed.sort),
@@ -24,14 +24,5 @@ export async function GET(req: Request, ctx: { params: Promise<{ category_slug: 
         pageSize: PAGE_SIZE,
     });
 
-    const totalPages = Math.max(1, Math.ceil(total / pageSize));
-    const nextPage = page < totalPages ? page + 1 : null;
-
-    return NextResponse.json({
-        items,
-        page,
-        nextPage,
-        total,
-        pageSize,
-    });
+    return NextResponse.json(productsPage);
 }

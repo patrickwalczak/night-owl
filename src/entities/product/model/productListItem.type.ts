@@ -11,4 +11,6 @@ export interface ProductListPage {
     total: number;
     pageSize: number;
     page: number;
+    totalPages: number;
+    nextPage: number | null;
 }

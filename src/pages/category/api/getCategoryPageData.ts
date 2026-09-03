@@ -50,6 +50,8 @@ export const getCategoryPageData = async (slug: string, opts: GetCategoryPageDat
             category,
             products: {
                 items: [],
+                nextPage: null,
+                totalPages: 1,
                 total: 0,
                 pageSize: PAGE_SIZE,
                 page,

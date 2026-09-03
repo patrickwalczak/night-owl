@@ -55,8 +55,12 @@ export async function getCategoryProductsPage(opts: GetCategoryProductsPageOptio
         }),
     ]);
 
+    const totalPages = Math.max(1, Math.ceil(total / opts.pageSize));
+
     return {
         items,
+        nextPage: page < totalPages ? page + 1 : null,
+        totalPages,
         total,
         pageSize: opts.pageSize,
         page,
