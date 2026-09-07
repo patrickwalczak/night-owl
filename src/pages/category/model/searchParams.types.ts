@@ -2,14 +2,12 @@ import { type SEARCH_PARAMS_KEYS, type SORT_VALUE } from '../config/searchParams
 
 export type SortOrderType = (typeof SORT_VALUE)[keyof typeof SORT_VALUE];
 
-export type SearchParamsKeys = (typeof SEARCH_PARAMS_KEYS)[keyof typeof SEARCH_PARAMS_KEYS];
-
-export type SearchParamValue = string | string[] | undefined;
+export type RawSearchParamValue = string | string[] | undefined | null;
 
 export interface RawUrlSearchParams {
-    [SEARCH_PARAMS_KEYS.QUERY]?: SearchParamValue;
-    [SEARCH_PARAMS_KEYS.SORT]?: SearchParamValue;
-    [SEARCH_PARAMS_KEYS.PAGE]?: SearchParamValue;
+    [SEARCH_PARAMS_KEYS.QUERY]?: RawSearchParamValue;
+    [SEARCH_PARAMS_KEYS.SORT]?: RawSearchParamValue;
+    [SEARCH_PARAMS_KEYS.PAGE]?: RawSearchParamValue;
 }
 
 export interface ParsedCategorySearchParams {

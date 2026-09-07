@@ -15,6 +15,7 @@ export default async function CategoryPage({
     params: Promise<RouteParamsType>;
     searchParams: Promise<RawUrlSearchParams>;
 }) {
+    // ?page=3&query=lamps&sort=newest&color=red&color=black => awaitedSearchParams = { page: '3', query: 'lamps', sort: 'newest', color: ['red', 'black'] }
     const [awaitedParams, awaitedSearchParams] = await Promise.all([params, searchParams]);
 
     const { category_slug } = awaitedParams;

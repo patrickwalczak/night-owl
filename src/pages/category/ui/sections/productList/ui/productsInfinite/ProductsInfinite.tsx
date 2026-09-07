@@ -12,6 +12,7 @@ import { cn } from '@/shared/lib/utils';
 
 import Product from '../product/Product';
 import styles from './productsInfinite.module.scss';
+import { SinglePageContainer } from './SinglePageContainer';
 
 type ProductsLoadMode = 'auto' | 'manual';
 
@@ -60,13 +61,13 @@ export default function ProductsInfinite() {
         staleTime: 240000,
     });
 
-    const onIntersect = (entry: IntersectionObserverEntry) => {
+    const onSentinelIntersect = (entry: IntersectionObserverEntry) => {
         if (!entry.isIntersecting || hasNextPage === false || isFetchingNextPage) return;
         fetchNextPage();
     };
 
-    const ref = useIntersectionObserver<HTMLDivElement>({
-        callback: onIntersect,
+    const sentinelRef = useIntersectionObserver<HTMLDivElement>({
+        callback: onSentinelIntersect,
         options: INTERSECTION_OPTIONS,
         enabled: isAutoLoadEnabled && hasNextPage && !isFetchingNextPage,
     });
@@ -75,22 +76,13 @@ export default function ProductsInfinite() {
         <div aria-busy={isFetchingNextPage} className={styles.container}>
             {data.pages.map((pageData) => {
                 return (
-                    <Fragment key={pageData.page}>
-                        <div className={cn('m-075', 'flex-center')}>
-                            <span className={cn(styles.separator, 'text-xs')}>{`Page ${pageData.page}`}</span>
-                        </div>
-                        <div className={styles.productsContainer}>
-                            {pageData.items.map(product => (
-                                <Product key={product.id} product={product} />
-                            ))}
-                        </div>
-                    </Fragment>
+                    <SinglePageContainer key={pageData.page} pageData={pageData} />
                 );
             })}
             {hasNextPage && (
                 <div className={cn('flex-center', 'm-2')}>
                     {isAutoLoadEnabled && isFetchingNextPage === false && (
-                        <div ref={ref} aria-hidden className={styles.sentinel} />
+                        <div ref={sentinelRef} aria-hidden className={styles.sentinel} />
                     )}
                     {!isAutoLoadEnabled && isFetchingNextPage === false && (
                         <button

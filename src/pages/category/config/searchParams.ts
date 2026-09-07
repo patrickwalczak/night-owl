@@ -16,11 +16,11 @@ export const SORT_OPTIONS = [
 
 export const SORT_VALUES = SORT_OPTIONS.map(({ value }) => value);
 
-export const SEARCH_PARAMS_KEYS = {
-    QUERY: 'query',
-    SORT: 'sort',
-    PAGE: 'page',
-} as const;
+export enum SEARCH_PARAMS_KEYS {
+    QUERY = 'query',
+    SORT = 'sort',
+    PAGE = 'page',
+};
 
 export const DEFAULT_SORT_ORDER = SORT_VALUE.POPULARITY;
 

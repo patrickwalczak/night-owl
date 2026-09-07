@@ -1,5 +1,5 @@
 import { SEARCH_PARAMS_KEYS, SORT_VALUES, DEFAULT_SORT_ORDER } from '../config/searchParams';
-import { type ParsedCategorySearchParams, type RawUrlSearchParams, type SortOrderType } from '../model/searchParams.types';
+import { type RawSearchParamValue, type ParsedCategorySearchParams, type RawUrlSearchParams, type SortOrderType } from '../model/searchParams.types';
 
 export const isCategorySortOrder = (value: string | null): value is SortOrderType => {
     return SORT_VALUES.includes(value as SortOrderType);
@@ -20,8 +20,7 @@ export function parseCategorySearchParams(searchParams: URLSearchParams): Parsed
     const sortParam = searchParams.get(SEARCH_PARAMS_KEYS.SORT);
     const queryParam = searchParams.get(SEARCH_PARAMS_KEYS.QUERY);
 
-    const parsedPage = Number(pageParam);
-    const page = Number.isInteger(parsedPage) && parsedPage > 0 ? parsedPage : 1;
+    const page = parsePageParam(pageParam);
 
     const sort = isCategorySortOrder(sortParam) ? sortParam : DEFAULT_SORT_ORDER;
 
@@ -65,4 +64,23 @@ export const normalizeSearchParams = (searchParams: RawUrlSearchParams): URLSear
     });
 
     return new URLSearchParams(normalizedSearchParamsEntries);
+};
+
+export const parsePageParam = (pageParam: RawSearchParamValue): number => {
+    const parsedPage = Number(pageParam);
+    const page = Number.isInteger(parsedPage) && parsedPage > 0 ? parsedPage : 1;
+
+    return page;
+};
+
+export const setPageParamInUrl = (page: number) => {
+    const params = new URLSearchParams(window.location.search);
+
+    if (page <= 1) params.delete(SEARCH_PARAMS_KEYS.PAGE);
+    else params.set(SEARCH_PARAMS_KEYS.PAGE, String(page));
+
+    const query = params.toString();
+    const nextUrl = `${window.location.pathname}${query ? `?${query}` : ''}`;
+
+    window.history.replaceState(null, '', nextUrl);
 };
