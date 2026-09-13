@@ -74,7 +74,7 @@ export default function ProductsInfinite() {
 
     const { registerTarget, unregisterTarget } = usePageParamSetter();
 
-    if (true) {
+    if (productSum === 0) {
         return (
             <div className={styles.container}>
                 <NoProductsFound />
