@@ -6,10 +6,10 @@ import { type KeyboardEventHandler, type MouseEventHandler } from 'react';
 import { cn } from '@/shared/lib/utils';
 import { CartIcon } from '@/shared/ui/icons';
 
-import { type CategoryProduct } from '../../../../../model/categoryPage.types';
+import { type ProductListItem } from '../../model/productListItem.type';
 import styles from './product.module.scss';
 
-export default function Product({ product }: { product: CategoryProduct }) {
+export function Product({ product }: { product: ProductListItem }) {
     const onCartClick: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.stopPropagation();
     };

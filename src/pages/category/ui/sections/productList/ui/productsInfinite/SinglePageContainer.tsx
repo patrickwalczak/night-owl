@@ -3,10 +3,10 @@
 import { useCallback } from 'react';
 
 import { type ProductListPage } from '@/entities/product';
+import { Product } from '@/entities/product/client';
 import { type UnregisterTarget, type RegisterTarget } from '@/pages/category/lib/hooks/usePageParamSetter';
 import { cn } from '@/shared/lib/utils';
 
-import Product from '../product/Product';
 import styles from './productsInfinite.module.scss';
 
 interface SinglePageContainerType {
