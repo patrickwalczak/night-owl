@@ -10,6 +10,7 @@ import { useCategoryPageSelector } from '@/pages/category/model/client';
 import { useIntersectionObserver } from '@/shared/lib/hooks/client';
 import { cn } from '@/shared/lib/utils';
 
+import { NoProductsFound } from '../noProductsFound/NoProductsFound';
 import styles from './productsInfinite.module.scss';
 import { SinglePageContainer } from './SinglePageContainer';
 
@@ -72,6 +73,14 @@ export default function ProductsInfinite() {
     });
 
     const { registerTarget, unregisterTarget } = usePageParamSetter();
+
+    if (true) {
+        return (
+            <div className={styles.container}>
+                <NoProductsFound />
+            </div>
+        );
+    }
 
     return (
         <div aria-busy={isFetchingNextPage} className={styles.container}>

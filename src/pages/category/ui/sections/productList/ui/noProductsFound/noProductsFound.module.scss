@@ -1,0 +1,22 @@
+.container {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 18rem;
+  padding: 3rem 1rem;
+  border-block: 1px solid var(--color-border-primary);
+  background-color: var(--color-background-secondary);
+  text-align: center;
+}
+
+.content {
+  max-width: 28rem;
+}
+
+.title {
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  color: var(--color-text-secondary);
+}
