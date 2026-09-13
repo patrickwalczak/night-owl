@@ -2,15 +2,14 @@
 
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { Fragment } from 'react/jsx-runtime';
 
 import type { ProductListPage } from '@/entities/product';
 
+import { usePageParamSetter } from '@/pages/category/lib/hooks/usePageParamSetter';
 import { useCategoryPageSelector } from '@/pages/category/model/client';
 import { useIntersectionObserver } from '@/shared/lib/hooks/client';
 import { cn } from '@/shared/lib/utils';
 
-import Product from '../product/Product';
 import styles from './productsInfinite.module.scss';
 import { SinglePageContainer } from './SinglePageContainer';
 
@@ -72,11 +71,18 @@ export default function ProductsInfinite() {
         enabled: isAutoLoadEnabled && hasNextPage && !isFetchingNextPage,
     });
 
+    const { registerTarget, unregisterTarget } = usePageParamSetter();
+
     return (
         <div aria-busy={isFetchingNextPage} className={styles.container}>
             {data.pages.map((pageData) => {
                 return (
-                    <SinglePageContainer key={pageData.page} pageData={pageData} />
+                    <SinglePageContainer
+                        key={pageData.page}
+                        pageData={pageData}
+                        registerPage={registerTarget}
+                        unregisterPage={unregisterTarget}
+                    />
                 );
             })}
             {hasNextPage && (

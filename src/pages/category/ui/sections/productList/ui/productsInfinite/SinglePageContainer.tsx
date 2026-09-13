@@ -1,8 +1,9 @@
 'use client';
 
+import { useCallback } from 'react';
+
 import { type ProductListPage } from '@/entities/product';
-import { setPageParamInUrl } from '@/pages/category/lib/url';
-import { useIntersectionObserver } from '@/shared/lib/hooks/client';
+import { type UnregisterTarget, type RegisterTarget } from '@/pages/category/lib/hooks/usePageParamSetter';
 import { cn } from '@/shared/lib/utils';
 
 import Product from '../product/Product';
@@ -10,23 +11,23 @@ import styles from './productsInfinite.module.scss';
 
 interface SinglePageContainerType {
     pageData: ProductListPage;
+    registerPage: RegisterTarget;
+    unregisterPage: UnregisterTarget;
 }
 
-const INTERSECTION_OPTIONS: IntersectionObserverInit = { rootMargin: '0px 0px 0px 0px' };
+export const SinglePageContainer = ({ pageData, registerPage, unregisterPage }: SinglePageContainerType) => {
+    const callbackRef = useCallback((node: HTMLDivElement | null) => {
+        if (!node) return;
 
-export const SinglePageContainer = ({ pageData }: SinglePageContainerType) => {
-    const onPageIntersect = (entry: IntersectionObserverEntry) => {
-        if (entry.isIntersecting) setPageParamInUrl(pageData.page);
-    };
+        registerPage(pageData.page, node);
 
-    const pageRef = useIntersectionObserver<HTMLDivElement>({
-        callback: onPageIntersect,
-        options: INTERSECTION_OPTIONS,
-        enabled: true,
-    });
+        return () => {
+            unregisterPage(pageData.page);
+        };
+    }, [pageData.page, registerPage, unregisterPage]);
 
     return (
-        <div ref={pageRef}>
+        <div ref={callbackRef}>
             <div className={cn('m-075', 'flex-center')}>
                 <span className={cn(styles.separator, 'text-xs')}>{`Page ${pageData.page}`}</span>
             </div>
