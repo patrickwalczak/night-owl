@@ -1,35 +1,50 @@
 import { SEARCH_PARAMS_KEYS, SORT_VALUES, DEFAULT_SORT_ORDER } from '../config/searchParams';
-import { type RawSearchParamValue, type ParsedCategorySearchParams, type RawUrlSearchParams, type SortOrderType } from '../model/searchParams.types';
+import {
+    type ParsedCategorySearchParams,
+    type ParsedFilters,
+    type RawSearchParamValue,
+    type RawUrlSearchParams,
+    type SortOrderType,
+} from '../model/searchParams.types';
 
 export const isCategorySortOrder = (value: string | null): value is SortOrderType => {
     return SORT_VALUES.includes(value as SortOrderType);
 };
 
+export const isSearchParamsKey = (value: string): value is SEARCH_PARAMS_KEYS => {
+    return Object.values(SEARCH_PARAMS_KEYS).includes(
+        value as SEARCH_PARAMS_KEYS,
+    );
+};
+
 /**
- * Parses and normalizes category-related search params from the URL.
- *
- * It converts raw URL values into safe values used by the application:
- * - invalid or missing page values fallback to page 1,
- * - invalid or missing sort values fallback to the default sort order,
- * - missing query values become an empty string,
- *
- * This prevents invalid URL params from leaking into the category page logic.
+ * Parses system params and groups nonempty, unique filter values.
+ * Filter names and value slugs still need validation against the category data.
  */
 export function parseCategorySearchParams(searchParams: URLSearchParams): ParsedCategorySearchParams {
     const pageParam = searchParams.get(SEARCH_PARAMS_KEYS.PAGE);
     const sortParam = searchParams.get(SEARCH_PARAMS_KEYS.SORT);
     const queryParam = searchParams.get(SEARCH_PARAMS_KEYS.QUERY);
 
-    const page = parsePageParam(pageParam);
+    const filterValues = new Map<string, Set<string>>();
 
-    const sort = isCategorySortOrder(sortParam) ? sortParam : DEFAULT_SORT_ORDER;
+    for (const [key, value] of searchParams) {
+        if (!key || !value || isSearchParamsKey(key)) continue;
 
-    const query = queryParam ?? '';
+        const values = filterValues.get(key) ?? new Set<string>();
+        values.add(value);
+        filterValues.set(key, values);
+    }
+
+    const filters: ParsedFilters = Object.fromEntries(
+        Array.from(filterValues, ([key, values]) => [key, Array.from(values)]),
+    );
 
     return {
-        page,
-        sort,
-        query,
+        page: parsePageParam(pageParam),
+        sort: isCategorySortOrder(sortParam) ? sortParam : DEFAULT_SORT_ORDER,
+        query: queryParam ?? '',
+        filters,
     };
 }
 
@@ -46,9 +61,7 @@ export function parseCategorySearchParams(searchParams: URLSearchParams): Parsed
  */
 export const normalizeSearchParams = (searchParams: RawUrlSearchParams): URLSearchParams => {
     const normalizedSearchParamsEntries = Object.entries(searchParams).flatMap(([paramKey, paramValue]) => {
-        if (!paramValue) {
-            return [];
-        }
+        if (!paramValue) return [];
 
         if (Array.isArray(paramValue)) {
             return paramValue.flatMap((nestedParamValue) => {
