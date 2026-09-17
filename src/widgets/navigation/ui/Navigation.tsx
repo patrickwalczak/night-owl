@@ -4,7 +4,7 @@ import type { Dispatch, SetStateAction } from 'react';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { createContext, useEffect, useRef } from 'react';
+import { createContext, useRef } from 'react';
 
 import type { RootCategoriesWithChildren } from '@/entities/category';
 
@@ -28,7 +28,7 @@ interface NavigationContextType {
 
 export const NavigationContext = createContext<NavigationContextType | null>(null);
 
-const Navigation = ({ categories }: { categories: RootCategoriesWithChildren }) => {
+export const Navigation = ({ categories }: { categories: RootCategoriesWithChildren }) => {
     const isDesktop = useIsDesktop();
 
     const { isScrolled, direction } = useIsScrolled();
@@ -57,17 +57,6 @@ const Navigation = ({ categories }: { categories: RootCategoriesWithChildren }) 
     const toggleDropdown = () => {
         setIsExpanded(prev => !prev);
     };
-
-    // Keep the main content inactive while the navigation overlay is open
-    // so users cannot click or focus elements behind it.
-    useEffect(() => {
-        const mainEl = document.querySelector('main');
-
-        if (mainEl && isExpanded) mainEl.setAttribute('inert', String(isExpanded));
-        else if (mainEl) mainEl.removeAttribute('inert');
-
-        return () => mainEl?.removeAttribute('inert');
-    }, [isExpanded]);
 
     const ctx = {
         categories,
@@ -119,5 +108,3 @@ const Navigation = ({ categories }: { categories: RootCategoriesWithChildren }) 
         </NavigationContext.Provider>
     );
 };
-
-export default Navigation;
