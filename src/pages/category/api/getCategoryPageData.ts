@@ -9,9 +9,15 @@ import { type CategoryPageData } from '../model/categoryPage.types';
 import { toOrderBy } from './lib/getOrderBy';
 import { type GetCategoryPageDataOptions } from './model/getCategoryPageData/type';
 
-export const getCategoryPageData = async (slug: string, opts: GetCategoryPageDataOptions): Promise<CategoryPageData> => {
-    const page = Math.max(1, opts.page ?? 1);
-
+export const getCategoryPageData = async (
+    slug: string,
+    {
+        page,
+        sort,
+        query,
+        filters,
+    }: GetCategoryPageDataOptions,
+): Promise<CategoryPageData> => {
     const [category, parameters] = await prisma.$transaction(
         [
             prisma.category.findUnique({
@@ -63,9 +69,10 @@ export const getCategoryPageData = async (slug: string, opts: GetCategoryPageDat
     const products = await getCategoryProductsPage({
         categoryId: category.id,
         page,
-        sort: toOrderBy(opts.sort),
-        query: opts.query,
+        sort: toOrderBy(sort),
+        query,
         pageSize: PAGE_SIZE,
+        filters,
     });
 
     return {

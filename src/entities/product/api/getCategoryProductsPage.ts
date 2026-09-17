@@ -15,20 +15,26 @@ interface GetCategoryProductsPageOptions {
     sort: ProductOrderByWithRelationInput;
     query?: string;
     pageSize: number;
+    filters: Record<string, string[]>;
 }
 
-export async function getCategoryProductsPage(opts: GetCategoryProductsPageOptions): Promise<ProductListPage> {
-    const page = Math.max(1, opts.page);
-
+export async function getCategoryProductsPage({
+    page,
+    categoryId,
+    sort,
+    query,
+    pageSize,
+    filters,
+}: GetCategoryProductsPageOptions): Promise<ProductListPage> {
     const children = await prisma.category.findMany({
         where: {
-            parentId: opts.categoryId,
+            parentId: categoryId,
         },
         select: {
             id: true,
         },
     });
-    const categoryIds = [opts.categoryId, ...children.map(c => c.id)];
+    const categoryIds = [categoryId, ...children.map(c => c.id)];
 
     const where: ProductWhereInput = {
         categoryId: {
@@ -36,17 +42,17 @@ export async function getCategoryProductsPage(opts: GetCategoryProductsPageOptio
         },
     };
 
-    if (opts.query) where.name = {
-        contains: opts.query,
+    if (query) where.name = {
+        contains: query,
         mode: 'insensitive',
     };
 
     const [items, total] = await Promise.all([
         prisma.product.findMany({
             where,
-            orderBy: opts.sort,
-            skip: (page - 1) * opts.pageSize,
-            take: opts.pageSize,
+            orderBy: sort,
+            skip: (page - 1) * pageSize,
+            take: pageSize,
             select: productListItemSelect,
         }),
         prisma.product.count({
@@ -54,14 +60,14 @@ export async function getCategoryProductsPage(opts: GetCategoryProductsPageOptio
         }),
     ]);
 
-    const totalPages = Math.max(1, Math.ceil(total / opts.pageSize));
+    const totalPages = Math.max(1, Math.ceil(total / pageSize));
 
     return {
         items,
         nextPage: page < totalPages ? page + 1 : null,
         totalPages,
         total,
-        pageSize: opts.pageSize,
+        pageSize,
         page,
     };
 }

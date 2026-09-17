@@ -1,6 +1,6 @@
 'use client';
 
-import type React from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -22,7 +22,7 @@ interface NavigationContextType {
     categories: RootCategoriesWithChildren;
     isExpanded: boolean;
     isScrolled: boolean;
-    setIsExpanded: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsExpanded: Dispatch<SetStateAction<boolean>>;
     hideDropdown: () => void;
 }
 
@@ -100,7 +100,6 @@ const Navigation = ({ categories }: { categories: RootCategoriesWithChildren }) 
                             <button
                                 ref={categoriesButtonRef}
                                 onClick={toggleDropdown}
-                                type={'button'}
                                 className={cn(styles.categoriesButton, 'button-empty')}
                                 aria-expanded={isExpanded}
                                 aria-controls={'categories-dropdown'}

@@ -8,20 +8,19 @@ export async function GET(req: Request, ctx: { params: Promise<{ category_slug: 
     const params = await ctx.params;
     const { searchParams } = new URL(req.url);
 
-    const parsed = parseCategorySearchParams(searchParams);
+    const { page, sort, query, filters } = parseCategorySearchParams(searchParams);
 
     const categoryId = await getCategoryIdBySlug(params.category_slug);
 
-    if (!categoryId) {
-        return NextResponse.json({ error: 'Category not found' }, { status: 404 });
-    }
+    if (!categoryId) return NextResponse.json({ error: 'Category not found' }, { status: 404 });
 
     const productsPage = await getCategoryProductsPage({
         categoryId,
-        page: parsed.page,
-        sort: toOrderBy(parsed.sort),
-        query: parsed.query,
+        page,
+        sort: toOrderBy(sort),
+        query,
         pageSize: PAGE_SIZE,
+        filters,
     });
 
     return NextResponse.json(productsPage);
