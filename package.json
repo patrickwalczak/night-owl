@@ -11,6 +11,7 @@
 		"typecheck": "tsc --noEmit --pretty false",
 		"check": "npm run lint && npm run typecheck",
 		"check:build": "npm run check && npm run build",
+		"prepush": "npm run check && npm run test:run",
 		"db:validate": "prisma validate --config=src/shared/lib/db/prisma.config.ts",
 		"db:format": "prisma format --config=src/shared/lib/db/prisma.config.ts",
 		"db:generate": "prisma generate --config=src/shared/lib/db/prisma.config.ts",
@@ -18,7 +19,8 @@
 		"db:push:loss": "prisma db push --config=src/shared/lib/db/prisma.config.ts --accept-data-loss",
 		"db:reset": "prisma db push --config=src/shared/lib/db/prisma.config.ts --force-reset",
 		"db:studio": "prisma studio --config=src/shared/lib/db/prisma.config.ts",
-		"test": "vitest"
+		"test": "vitest",
+		"test:run": "vitest run"
 	},
 	"prisma": {
 		"seed": "tsx prisma/seed.ts"

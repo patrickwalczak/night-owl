@@ -21,7 +21,7 @@ const StickyContainer = ({ children }: StickyContainerWrapperType) => {
 
     return (
         <>
-            <div ref={sentinelRef} aria-hidden={'true'} />
+            <div ref={sentinelRef} aria-hidden />
 
             <div
                 className={cn(

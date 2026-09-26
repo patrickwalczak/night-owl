@@ -28,8 +28,7 @@ const FiltersWrapper = ({ children }: { children: React.ReactNode }) => {
     return (
         <div
             ref={containerRef}
-            data-open={areFiltersOpen}
-            className={cn(styles.filtersContainer, 'transition-200', areFiltersOpen && styles.opened)}
+            className={cn(styles.filtersContainer, { [styles.open]: areFiltersOpen })}
             style={{
                 width: areFiltersOpen ? '300px' : '0px',
                 top: `${filtersTopOffset}px`,

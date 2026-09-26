@@ -2,8 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+import { useCategoryPageSelector } from '@/pages/category/model/client';
 import { cn } from '@/shared/lib/utils';
 
+import { ParameterBox } from '../../../../components/parameterBox/ParameterBox';
 import FiltersWrapper from './FiltersWrapper';
 import styles from './sideFiltersDesktop.module.scss';
 import { Subcategories } from './Subcategories';
@@ -11,6 +13,9 @@ import { Subcategories } from './Subcategories';
 const SideFiltersDesktop = () => {
     const filtersRef = useRef<HTMLDivElement | null>(null);
     const [scrollableHeight, setScrollableHeight] = useState('100vh');
+    const parameters = useCategoryPageSelector(
+        state => state.categoryListing.parameters,
+    );
 
     useEffect(() => {
         const onScroll = () => {
@@ -29,8 +34,11 @@ const SideFiltersDesktop = () => {
         <FiltersWrapper>
             <div ref={filtersRef} style={{ height: scrollableHeight }} className={cn(styles.filters, 'flex', 'flex-col')}>
                 <Subcategories />
-
-                <div className={cn(styles.content, 'flex', 'flex-col')} />
+                <div className={cn(styles.content, 'flex', 'flex-col')}>
+                    {parameters.map(parameter => (
+                        <ParameterBox key={parameter.id} parameter={parameter} />
+                    ))}
+                </div>
             </div>
         </FiltersWrapper>
     );
