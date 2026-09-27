@@ -1,7 +1,7 @@
 .filtersContainer {
   position: sticky;
   height: 100%;
-  transition: width 0.2s ease-in-out;
+  transition: width 200ms ease-in-out;
 
   &:not(.open) {
     pointer-events: none;
@@ -32,7 +32,7 @@
 }
 
 .content {
-  gap: 1rem;
+  gap: 0.5rem;
   overflow-y: auto;
   padding-right: 0.25rem;
 }

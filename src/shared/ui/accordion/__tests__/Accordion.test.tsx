@@ -72,41 +72,6 @@ describe('Accordion', () => {
         expect(onExpandedChange.mock.calls).toEqual([[false], [true]]);
     });
 
-    it('requests controlled changes and waits for the parent to update the state', () => {
-        const onExpandedChange = vi.fn();
-        const { rerender } = render(
-            <Accordion.Root isExpanded={false} onExpandedChange={onExpandedChange}>
-                <Accordion.Header headingText={'Brand'} />
-                <Accordion.Panel>{'Available brands'}</Accordion.Panel>
-            </Accordion.Root>,
-        );
-
-        const button = screen.getByRole('button', { name: 'Brand' });
-        const panel = screen.getByRole('region', { hidden: true }) as HTMLDivElement;
-
-        fireEvent.click(button);
-
-        expect(onExpandedChange.mock.calls).toEqual([[true]]);
-        expect(button.getAttribute('aria-expanded')).toBe('false');
-        expect(panel.hidden).toBe(true);
-
-        rerender(
-            <Accordion.Root isExpanded onExpandedChange={onExpandedChange}>
-                <Accordion.Header headingText={'Brand'} />
-                <Accordion.Panel>{'Available brands'}</Accordion.Panel>
-            </Accordion.Root>,
-        );
-
-        expect(button.getAttribute('aria-expanded')).toBe('true');
-        expect(panel.hidden).toBe(false);
-        expect(onExpandedChange.mock.calls).toEqual([[true]]);
-
-        fireEvent.click(button);
-
-        expect(onExpandedChange.mock.calls).toEqual([[true], [false]]);
-        expect(panel.hidden).toBe(false);
-    });
-
     it('calls both analytics handlers with the button as currentTarget before requesting a change', () => {
         const calls: string[] = [];
         const targets: EventTarget[] = [];

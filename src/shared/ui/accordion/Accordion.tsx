@@ -22,15 +22,12 @@ const AccordionRoot = ({
     children,
     className,
     defaultExpanded = false,
-    isExpanded: controlledIsExpanded,
     onExpandedChange,
     disabled = false,
     ...props
 }: AccordionRootType) => {
     const id = useId();
-    const [internalIsExpanded, setInternalIsExpanded] = useState(defaultExpanded);
-    const isControlled = controlledIsExpanded !== undefined;
-    const isExpanded = controlledIsExpanded ?? internalIsExpanded;
+    const [isExpanded, setIsExpanded] = useState(defaultExpanded);
     const panelId = `accordion-panel-${id}`;
     const buttonId = `accordion-button-${id}`;
 
@@ -41,10 +38,10 @@ const AccordionRoot = ({
 
         const nextIsExpanded = !isExpanded;
 
-        if (!isControlled) setInternalIsExpanded(nextIsExpanded);
+        setIsExpanded(nextIsExpanded);
 
         onExpandedChange?.(nextIsExpanded);
-    }, [disabled, isControlled, isExpanded, onExpandedChange]);
+    }, [disabled, isExpanded, onExpandedChange]);
 
     return (
         <AccordionContext.Provider value={{ isExpanded, disabled, panelId, buttonId, toggle }}>
@@ -117,7 +114,9 @@ const AccordionButton = ({ onClick, disabled, ...props }: AccordionButtonType) =
             type={'button'}
         >
             {props.children}
-            <ArrowDownIcon aria-hidden className={cn(styles.icon, { [styles.isExpanded]: isExpanded })} />
+            <span className={styles.iconContainer}>
+                <ArrowDownIcon aria-hidden className={cn(styles.icon, { [styles.isExpanded]: isExpanded })} />
+            </span>
         </button>
     );
 };

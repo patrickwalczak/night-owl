@@ -2,14 +2,7 @@ import type { ComponentPropsWithRef, ReactNode } from 'react';
 
 type DataAttributesType = Record<`data-${string}`, string | number | boolean | undefined>;
 
-interface AccordionControlledStateType {
-    isExpanded: boolean;
-    defaultExpanded?: never;
-    onExpandedChange: (isExpanded: boolean) => void;
-}
-
 interface AccordionUncontrolledStateType {
-    isExpanded?: never;
     defaultExpanded?: boolean;
     onExpandedChange?: (isExpanded: boolean) => void;
 }
@@ -24,7 +17,7 @@ export interface AccordionContextValue {
 
 export type AccordionRootType = Omit<ComponentPropsWithRef<'div'>, 'children' | 'dangerouslySetInnerHTML'>
     & DataAttributesType
-    & (AccordionControlledStateType | AccordionUncontrolledStateType)
+    & AccordionUncontrolledStateType
     & {
         children: ReactNode;
         disabled?: boolean;

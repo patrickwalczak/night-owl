@@ -1,11 +1,21 @@
-.panel {
+.accordion {
   display: flex;
   flex-direction: column;
-  padding-block: 0.25rem;
+  gap: 0.5rem;
+}
+
+.panel {
+  --panel-padding: 0;
+  display: flex;
+  flex-direction: column;
   gap: 0.5rem;
   margin-bottom: 1rem;
 }
 
-.label {
+.checkboxLabel {
   font-size: var(--font-size-14);
+}
+
+.accordionHeader {
+  --button-padding: 0rem 0rem 0.5rem 0;
 }

@@ -3,7 +3,7 @@
 }
 
 .panel {
-  padding: 0 1rem 1rem;
+  padding: var(--panel-padding, 0 1rem 1rem);
 }
 
 .panel[hidden] {
@@ -11,29 +11,26 @@
 }
 
 .header {
-  font-size: var(--font-size-16);
-  font-weight: var(--font-weight-500);
-  line-height: var(--line-height-snug);
-  letter-spacing: var(--letter-spacing-heading);
+  font-size: var(--accordion-header-size, var(--font-size-16));
+  font-weight: var(--accordion-header-weight, var(--font-weight-500));
+  line-height: var(--accordion-header-line-height, var(--line-height-snug));
+  letter-spacing: var(--accordion-header-letter-spacing, var(--letter-spacing-heading));
 }
 
 .button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: var(--button-gap, 0.75rem);
   width: 100%;
-  min-height: 44px;
-  padding: 0.75rem 1rem;
+  padding: var(--button-padding, 0.5rem);
   border: 0;
   background: none;
   color: inherit;
   font: inherit;
   letter-spacing: inherit;
-  text-align: start;
 
   &:disabled {
-    cursor: not-allowed;
     opacity: 0.6;
   }
 
@@ -41,6 +38,10 @@
     outline: 2px solid currentColor;
     outline-offset: -4px;
   }
+}
+
+.iconContainer {
+  overflow: clip;
 }
 
 .icon {
