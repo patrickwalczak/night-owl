@@ -17,8 +17,8 @@ const category: CategoryPageCategory = {
 const parameter: CategoryParameter = {
     id: 'color', name: 'Color', slug: 'color',
     values: [
-        { id: 'black', value: 'Black', slug: 'black', _count: { products: 1 } },
-        { id: 'white', value: 'White', slug: 'white', _count: { products: 1 } },
+        { id: 'black', value: 'Black', slug: 'black', count: 1 },
+        { id: 'white', value: 'White', slug: 'white', count: 1 },
     ],
 };
 

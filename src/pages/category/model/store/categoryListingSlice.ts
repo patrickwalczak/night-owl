@@ -1,6 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import type {
+    CategoryPageData,
     CategoryParameter,
     CategoryProduct,
     CategorySubcategory,
@@ -43,6 +44,16 @@ const categoryListingSlice = createSlice({
     name: 'categoryListing',
     initialState,
     reducers: {
+        setListingData(state, action: PayloadAction<Pick<CategoryPageData, 'products' | 'parameters'>>) {
+            const { products, parameters } = action.payload;
+
+            state.initialProducts = products.items;
+            state.parameters = parameters;
+            state.productSum = products.total;
+            state.page = products.page;
+            state.pageSize = products.pageSize;
+            state.totalPages = products.totalPages;
+        },
         setParameters(state, action: PayloadAction<CategoryParameter[]>) {
             state.parameters = action.payload;
         },
@@ -93,6 +104,7 @@ const categoryListingSlice = createSlice({
 export const {
     setCategory,
     setFilterValue,
+    setListingData,
     setPage,
     setPageSize,
     setParameters,

@@ -19,7 +19,7 @@ export const categoryPageCategorySelect = {
     },
 } as const satisfies CategorySelect;
 
-export const categoryPageParameterSelect = {
+export const categoryPageParameterSelect = (categoryIds: string[]) => ({
     id: true,
     name: true,
     slug: true,
@@ -30,7 +30,15 @@ export const categoryPageParameterSelect = {
             slug: true,
             _count: {
                 select: {
-                    products: true,
+                    products: {
+                        where: {
+                            product: {
+                                categoryId: {
+                                    in: categoryIds,
+                                },
+                            },
+                        },
+                    },
                 },
             },
         },
@@ -38,4 +46,4 @@ export const categoryPageParameterSelect = {
             value: 'asc',
         },
     },
-} as const satisfies ParameterSelect;
+}) as const satisfies ParameterSelect;

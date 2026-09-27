@@ -10,7 +10,7 @@ import { productListItemSelect } from '../model/productListItem.select';
 import { type ProductListPage } from '../model/productListItem.type';
 
 interface GetCategoryProductsPageOptions {
-    categoryId: string;
+    categoryIds: string[];
     page: number;
     sort: ProductOrderByWithRelationInput;
     query?: string;
@@ -20,22 +20,12 @@ interface GetCategoryProductsPageOptions {
 
 export async function getCategoryProductsPage({
     page,
-    categoryId,
+    categoryIds,
     sort,
     query,
     pageSize,
     filters,
 }: GetCategoryProductsPageOptions): Promise<ProductListPage> {
-    const children = await prisma.category.findMany({
-        where: {
-            parentId: categoryId,
-        },
-        select: {
-            id: true,
-        },
-    });
-    const categoryIds = [categoryId, ...children.map(c => c.id)];
-
     const where: ProductWhereInput = {
         categoryId: {
             in: categoryIds,
@@ -46,6 +36,23 @@ export async function getCategoryProductsPage({
         contains: query,
         mode: 'insensitive',
     };
+
+    if (Object.keys(filters).length) {
+        where.AND = Object.entries(filters).map(([parameterSlug, valueSlugs]) => ({
+            parameterValues: {
+                some: {
+                    parameterValue: {
+                        parameter: {
+                            slug: parameterSlug,
+                        },
+                        slug: {
+                            in: valueSlugs,
+                        },
+                    },
+                },
+            },
+        }));
+    }
 
     const [items, total] = await Promise.all([
         prisma.product.findMany({

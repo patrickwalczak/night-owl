@@ -11,7 +11,17 @@ export type CategorySummary = Pick<CategoryPageCategory, 'id' | 'name' | 'slug' 
 
 export type CategoryProduct = ProductListItem;
 
-export type CategoryParameter = ParameterGetPayload<{ select: typeof categoryPageParameterSelect }>;
+type RawCategoryParameter = ParameterGetPayload<{
+    select: ReturnType<typeof categoryPageParameterSelect>;
+}>;
+
+export type CategoryParameterValue = Omit<RawCategoryParameter['values'][number], '_count'> & {
+    count: number;
+};
+
+export type CategoryParameter = Omit<RawCategoryParameter, 'values'> & {
+    values: CategoryParameterValue[];
+};
 
 export type CategoryProductsPage = ProductListPage;
 

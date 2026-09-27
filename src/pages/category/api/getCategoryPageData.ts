@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { getCategoryIdsForListing } from '@/entities/category/server';
 import { getCategoryProductsPage } from '@/entities/product/server';
 import { prisma } from '@/shared/lib/db/server';
 
@@ -18,42 +19,41 @@ export const getCategoryPageData = async (
         filters,
     }: GetCategoryPageDataOptions,
 ): Promise<CategoryPageData> => {
-    const [category, parameters] = await prisma.$transaction(
-        [
-            prisma.category.findUnique({
+    const categoryData = await prisma.$transaction(
+        async (tx) => {
+            const category = await tx.category.findUnique({
                 where: {
                     slug,
                 },
                 select: categoryPageCategorySelect,
-            }),
-            // returns parameters that are assigned to at least one category whose slug matches the current slug or whose parent category has that slug
-            prisma.parameter.findMany({
+            });
+
+            if (!category) return null;
+
+            const categoryIds = await getCategoryIdsForListing(category.id, tx);
+            const rawParameters = await tx.parameter.findMany({
                 where: {
                     categories: {
                         some: {
-                            category: {
-                                OR: [{
-                                    slug,
-                                }, {
-                                    parent: {
-                                        slug,
-                                    },
-                                }],
+                            categoryId: {
+                                in: categoryIds,
                             },
                         },
                     },
                 },
-                select: categoryPageParameterSelect,
-            }),
-        ],
+                select: categoryPageParameterSelect(categoryIds),
+            });
+
+            return { category, categoryIds, rawParameters };
+        },
         {
             isolationLevel: 'RepeatableRead',
         },
     );
 
-    if (!category) {
+    if (!categoryData) {
         return {
-            category,
+            category: null,
             products: {
                 items: [],
                 nextPage: null,
@@ -62,12 +62,21 @@ export const getCategoryPageData = async (
                 pageSize: PAGE_SIZE,
                 page,
             },
-            parameters,
+            parameters: [],
         };
     }
 
+    const { category, categoryIds, rawParameters } = categoryData;
+    const parameters = rawParameters.map(({ values, ...parameter }) => ({
+        ...parameter,
+        values: values.map(({ _count, ...value }) => ({
+            ...value,
+            count: _count.products,
+        })),
+    }));
+
     const products = await getCategoryProductsPage({
-        categoryId: category.id,
+        categoryIds,
         page,
         sort: toOrderBy(sort),
         query,

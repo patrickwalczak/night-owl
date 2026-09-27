@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 
 import type { CategoryPageCategory, CategoryParameter, CategoryProductsPage } from '../categoryPage.types';
 
+import { useSyncListingData } from '../../lib/hooks/useSyncListingData';
 import { useSyncSelectedFilters } from '../../lib/hooks/useSyncSelectedFilters';
 import { type ParsedFilters } from '../params/searchParams.types';
 import { CategoryPageStoreContext } from './client';
@@ -51,6 +52,7 @@ export default function CategoryPageStoreProvider({
         }),
     );
 
+    useSyncListingData(store, initialProducts, parameters);
     useSyncSelectedFilters(store, category.id, selectedFilters);
 
     return (
