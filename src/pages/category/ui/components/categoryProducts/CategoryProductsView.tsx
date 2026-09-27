@@ -1,5 +1,8 @@
 'use client';
 
+import type { CategoryProductsPage } from '@/pages/category/model/categoryPage.types';
+import type { ParsedFilters } from '@/pages/category/model/params/searchParams.types';
+
 import { useIsDesktop } from '@/features/layout/client';
 import { cn } from '@/shared/lib/utils';
 
@@ -11,7 +14,12 @@ import StickyViewMobile from '../stickyContainer/StickyViewMobile';
 import Subcategories from '../subcategories/Subcategories';
 import styles from './categoryProducts.module.scss';
 
-export default function CategoryProductsView() {
+interface CategoryProductsViewType {
+    initialProducts: CategoryProductsPage;
+    appliedFilters: ParsedFilters;
+}
+
+export default function CategoryProductsView({ initialProducts, appliedFilters }: CategoryProductsViewType) {
     const isDesktop = useIsDesktop();
 
     return (
@@ -22,7 +30,7 @@ export default function CategoryProductsView() {
                         <StickyViewDesktop />
                         <div className={styles.productsContainer}>
                             <SideFiltersDesktop />
-                            <ProductsInfinite />
+                            <ProductsInfinite initialProducts={initialProducts} appliedFilters={appliedFilters} />
                         </div>
                     </>
                 )
@@ -32,7 +40,7 @@ export default function CategoryProductsView() {
                         <Subcategories />
                         <StickyViewMobile />
                         <div className={styles.productsContainer}>
-                            <ProductsInfinite />
+                            <ProductsInfinite initialProducts={initialProducts} appliedFilters={appliedFilters} />
                         </div>
                     </>
                 )}

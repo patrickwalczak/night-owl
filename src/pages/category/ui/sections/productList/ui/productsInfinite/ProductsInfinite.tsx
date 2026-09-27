@@ -4,8 +4,10 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import type { ProductListPage } from '@/entities/product';
+import type { ParsedFilters } from '@/pages/category/model/params/searchParams.types';
 
 import { usePageParamSetter } from '@/pages/category/lib/hooks/usePageParamSetter';
+import { normalizeSearchParams } from '@/pages/category/lib/url';
 import { useCategoryPageSelector } from '@/pages/category/model/store/client';
 import { useIntersectionObserver } from '@/shared/lib/hooks/client';
 import { cn } from '@/shared/lib/utils';
@@ -16,11 +18,21 @@ import { SinglePageContainer } from './SinglePageContainer';
 
 type ProductsLoadMode = 'auto' | 'manual';
 
+interface ProductsInfiniteType {
+    initialProducts: ProductListPage;
+    appliedFilters: ParsedFilters;
+}
+
 const INTERSECTION_OPTIONS = { rootMargin: '0px 0px 200px 0px' };
 const DEFAULT_PRODUCTS_LOAD_MODE: ProductsLoadMode = 'auto';
 
-const fetchCategoryProducts = async (categorySlug: string, pageParam: number): Promise<ProductListPage> => {
-    const response = await fetch(`/api/category/${categorySlug}/products?page=${pageParam}`);
+const fetchCategoryProducts = async (
+    categorySlug: string,
+    pageParam: number,
+    appliedFilters: ParsedFilters,
+): Promise<ProductListPage> => {
+    const searchParams = normalizeSearchParams({ ...appliedFilters, page: String(pageParam) });
+    const response = await fetch(`/api/category/${categorySlug}/products?${searchParams}`);
 
     if (!response.ok) {
         throw new Error('Failed to fetch products');
@@ -29,35 +41,18 @@ const fetchCategoryProducts = async (categorySlug: string, pageParam: number): P
     return response.json();
 };
 
-export default function ProductsInfinite() {
+export default function ProductsInfinite({ initialProducts, appliedFilters }: ProductsInfiniteType) {
     const [loadMode] = useState<ProductsLoadMode>(DEFAULT_PRODUCTS_LOAD_MODE);
     const isAutoLoadEnabled = loadMode === 'auto';
 
-    const { initialProducts,
-        category: { slug },
-        totalPages,
-        page,
-        productSum,
-        pageSize,
-    } = useCategoryPageSelector(state => state.categoryListing);
-    const nextPage = page >= totalPages ? null : page + 1;
+    const slug = useCategoryPageSelector(state => state.categoryListing.category.slug);
 
-    const { data, hasNextPage, isFetchingNextPage, fetchNextPage } = useInfiniteQuery({
-        initialPageParam: page,
-        queryKey: ['products-infinite', slug],
-        queryFn: ({ pageParam }) => fetchCategoryProducts(slug, pageParam),
+    const { data, hasNextPage, isPending, isFetchingNextPage, fetchNextPage } = useInfiniteQuery({
+        initialPageParam: initialProducts.page,
+        queryKey: ['products-infinite', slug, appliedFilters],
+        queryFn: ({ pageParam }) => fetchCategoryProducts(slug, pageParam, appliedFilters),
         getNextPageParam: lastPage => lastPage.nextPage,
-        initialData: {
-            pages: [{
-                items: initialProducts,
-                nextPage,
-                pageSize,
-                totalPages,
-                total: productSum,
-                page,
-            }],
-            pageParams: [page],
-        },
+        initialData: { pages: [initialProducts], pageParams: [initialProducts.page] },
         staleTime: 240000,
     });
 
@@ -74,7 +69,19 @@ export default function ProductsInfinite() {
 
     const { registerTarget, unregisterTarget } = usePageParamSetter();
 
-    if (productSum === 0) {
+    if (isPending) {
+        return (
+            <div aria-busy className={cn(styles.container, 'flex-center')}>
+                <div className={styles.loader} />
+            </div>
+        );
+    }
+
+    if (!data) {
+        return <p role={'alert'}>{'Failed to fetch products'}</p>;
+    }
+
+    if (data.pages[0]?.total === 0) {
         return (
             <div className={styles.container}>
                 <NoProductsFound />

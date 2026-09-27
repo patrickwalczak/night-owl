@@ -15,7 +15,7 @@ export const CategoriesSection = () => {
             />
 
             <CategoryTile
-                href={'#'}
+                href={'/category/indoor-lighting'}
                 title={'Indoor Lighting'}
                 description={'Bring warmth and character to every room with indoor lighting made for cozy, beautiful interiors.'}
                 image={{ alt: 'Indoor lighting', src: '/cat_img_indoor_lighting.webp' }}
@@ -28,7 +28,7 @@ export const CategoriesSection = () => {
                 image={{ alt: 'Accessories', src: '/cat_img_accessories.webp' }}
             />
             <CategoryBanner
-                href={'#'}
+                href={'/category/indoor-lighting'}
                 title={'Lighting made for every mood'}
                 description={'Find the perfect lighting setup for your space.'}
                 linkLabel={'Shop all products'}

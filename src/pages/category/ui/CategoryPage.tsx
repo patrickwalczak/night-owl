@@ -36,7 +36,7 @@ export default async function CategoryPage({
             parameters={parameters}
             selectedFilters={parsedParams.filters}
         >
-            <CategoryProductsView />
+            <CategoryProductsView initialProducts={products} appliedFilters={parsedParams.filters} />
         </CategoryPageStoreProvider>
     );
 }
