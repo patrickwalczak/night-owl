@@ -1,13 +1,8 @@
 export const SORT_VALUE = {
-    POPULARITY: 'popularity',
     NEWEST: 'newest',
 } as const;
 
 export const SORT_OPTIONS = [
-    {
-        value: SORT_VALUE.POPULARITY,
-        label: 'Featured',
-    },
     {
         value: SORT_VALUE.NEWEST,
         label: 'Newest',
@@ -22,6 +17,6 @@ export enum SEARCH_PARAMS_KEYS {
     PAGE = 'page',
 };
 
-export const DEFAULT_SORT_ORDER = SORT_VALUE.POPULARITY;
+export const DEFAULT_SORT_ORDER = SORT_VALUE.NEWEST;
 
 export const DEFAULT_PAGE = '1';

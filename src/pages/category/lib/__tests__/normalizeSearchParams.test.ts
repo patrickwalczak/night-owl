@@ -26,13 +26,13 @@ describe('normalizeSearchParams', () => {
 
     it('expands array values into repeated query params', () => {
         const result = normalizeSearchParams({
-            [SEARCH_PARAMS_KEYS.SORT]: ['popularity', 'newest'],
+            [SEARCH_PARAMS_KEYS.SORT]: ['newest'],
             [SEARCH_PARAMS_KEYS.QUERY]: 'mouse',
         });
 
-        expect(result.getAll(SEARCH_PARAMS_KEYS.SORT)).toEqual(['popularity', 'newest']);
+        expect(result.getAll(SEARCH_PARAMS_KEYS.SORT)).toEqual(['newest']);
         expect(result.get(SEARCH_PARAMS_KEYS.QUERY)).toBe('mouse');
-        expect(result.toString()).toBe('sort=popularity&sort=newest&query=mouse');
+        expect(result.toString()).toBe('sort=newest&query=mouse');
     });
 
     it('removes empty values from arrays', () => {

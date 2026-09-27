@@ -7,10 +7,6 @@ export function toOrderBy(sort: SortOrderType) {
             return {
                 createdAt: 'desc' as const,
             };
-        case SORT_VALUE.POPULARITY:
-            return {
-                createdAt: 'desc' as const,
-            };
         default:
             return {
                 createdAt: 'desc' as const,
