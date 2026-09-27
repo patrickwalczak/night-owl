@@ -1,0 +1,127 @@
+@use '../../../../../shared/styles/breakpoints';
+
+.content {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.placeholder {
+	border-radius: 5px;
+	background-color: var(--color-border-primary);
+	animation: pulse 1.6s ease-in-out infinite;
+}
+
+.header {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	grid-template-areas:
+		'heading heading'
+		'subcategories subcategories'
+		'count filters';
+	align-items: center;
+	gap: 0.75rem 1rem;
+	padding-inline: 1rem;
+
+	@media (min-width: breakpoints.$breakpoint-1024) {
+		grid-template-areas: 'heading filters';
+		padding: 0.5rem 2rem;
+	}
+}
+
+.heading {
+	grid-area: heading;
+	width: min(100%, 20rem);
+	height: calc(var(--typography-h4-size) * var(--typography-h4-line-height));
+
+	@media (min-width: breakpoints.$breakpoint-1024) {
+		margin-left: 1rem;
+	}
+}
+
+.subcategories {
+	grid-area: subcategories;
+	display: flex;
+	gap: 0.75rem;
+	overflow: hidden;
+	padding-block: 0.25rem;
+}
+
+.subcategory {
+	flex: 0 0 7rem;
+	height: 1rem;
+}
+
+.count {
+	grid-area: count;
+	width: 6rem;
+	height: 1rem;
+}
+
+.filters {
+	grid-area: filters;
+	width: 6rem;
+	height: 2rem;
+}
+
+.products {
+	padding-inline: 1rem;
+
+	@media (min-width: breakpoints.$breakpoint-1024) {
+		padding-inline: 2rem;
+	}
+}
+
+.card {
+	min-width: 0;
+	border: 1px solid var(--color-border-primary);
+	border-radius: 5px;
+	overflow: hidden;
+	background-color: var(--color-background-secondary);
+}
+
+.image {
+	height: 350px;
+	border-radius: 0;
+}
+
+.details {
+	display: grid;
+	gap: 0.75rem;
+	padding: 1rem 0.5rem 0.5rem;
+}
+
+.title {
+	justify-self: center;
+	width: 70%;
+	height: 1.5rem;
+}
+
+.cart {
+	justify-self: end;
+	width: 2.25rem;
+	height: 2.25rem;
+	border-radius: 50%;
+}
+
+@media (min-width: breakpoints.$breakpoint-1024) {
+	.subcategories, .count {
+		display: none;
+	}
+}
+
+@keyframes pulse {
+	0%, 100% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0.5;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.placeholder {
+		animation: none;
+	}
+}

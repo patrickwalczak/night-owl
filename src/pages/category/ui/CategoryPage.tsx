@@ -1,21 +1,29 @@
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 
 import { getCategoryPageData } from '../api/getCategoryPageData';
 import { normalizeSearchParams, parseCategorySearchParams } from '../lib/url';
 import { type RouteParamsType } from '../model/params/routeParams.types';
 import { type RawUrlSearchParams } from '../model/params/searchParams.types';
 import CategoryPageStoreProvider from '../model/store/CategoryPageStoreProvider';
+import CategoryPageSkeleton from '../ui/components/categoryPageSkeleton/CategoryPageSkeleton';
 import CategoryProductsView from '../ui/components/categoryProducts/CategoryProductsView';
 
-export default async function CategoryPage({
-    params,
-    searchParams,
-}: {
+interface CategoryPageType {
     params: Promise<RouteParamsType>;
     searchParams: Promise<RawUrlSearchParams>;
-}) {
-    // ?page=3&query=lamps&sort=newest&color=red&color=black => awaitedSearchParams = { page: '3', query: 'lamps', sort: 'newest', color: ['red', 'black'] }
+}
+
+export default function CategoryPage(props: CategoryPageType) {
+    return (
+        <Suspense fallback={<CategoryPageSkeleton />}>
+            <CategoryPageContent {...props} />
+        </Suspense>
+    );
+}
+
+async function CategoryPageContent({ params, searchParams }: CategoryPageType) {
     const [awaitedParams, awaitedSearchParams] = await Promise.all([params, searchParams]);
 
     const { category_slug } = awaitedParams;

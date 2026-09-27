@@ -3,7 +3,6 @@
 import type { Dispatch, SetStateAction } from 'react';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { createContext, useRef } from 'react';
 
 import type { RootCategoriesWithChildren } from '@/entities/category';
@@ -26,18 +25,20 @@ interface NavigationContextType {
     hideDropdown: () => void;
 }
 
+interface NavigationType {
+    categories: RootCategoriesWithChildren;
+    isHomepage: boolean;
+}
+
 export const NavigationContext = createContext<NavigationContextType | null>(null);
 
-export const Navigation = ({ categories }: { categories: RootCategoriesWithChildren }) => {
+export const Navigation = ({ categories, isHomepage }: NavigationType) => {
     const isDesktop = useIsDesktop();
 
     const { isScrolled, direction } = useIsScrolled();
     const { expandDropdown, hideDropdown, isExpanded, setIsExpanded } = useIsDropdownExpanded();
 
     const categoriesButtonRef = useRef<HTMLButtonElement | null>(null);
-
-    const pathname = usePathname();
-    const isHomepage = pathname === '/';
 
     const onKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === 'Escape' || e.key === 'ArrowUp') {

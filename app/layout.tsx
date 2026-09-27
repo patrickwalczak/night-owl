@@ -1,13 +1,13 @@
 import '../src/shared/styles/index.scss';
 import { Playfair_Display, Inter } from 'next/font/google';
-import { headers } from 'next/headers';
 
+import DeviceStoreProvider from '@/app/providers/DeviceStoreProvider';
 import ReactQueryProvider from '@/app/providers/ReactQueryProvider';
 import AppClient from '@/app/ui/AppClient';
-import { isDeviceType } from '@/shared/model/device.model';
 import { NavigationServer } from '@/widgets/navigation/server';
 
-import StoreProvider from '../src/app/providers/StoreProvider';
+// The initial layout waits for the request's device header to render the matching variant.
+export const instant = false;
 
 export const inter = Inter({
     subsets: ['latin'],
@@ -21,25 +21,22 @@ export const playfair = Playfair_Display({
     display: 'swap',
 });
 
-export default async function RootLayout({
+export default function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const deviceTypeHeader = (await headers()).get('x-device-type');
-    const initialDeviceType = isDeviceType(deviceTypeHeader) ? deviceTypeHeader : 'desktop';
-
     return (
         <html lang={'en'} className={`${inter.variable} ${playfair.variable}`}>
             <body>
-                <StoreProvider initialDeviceType={initialDeviceType}>
+                <DeviceStoreProvider>
                     <ReactQueryProvider>
                         <AppClient>
                             <NavigationServer />
                             {children}
                         </AppClient>
                     </ReactQueryProvider>
-                </StoreProvider>
+                </DeviceStoreProvider>
             </body>
         </html>
     );
