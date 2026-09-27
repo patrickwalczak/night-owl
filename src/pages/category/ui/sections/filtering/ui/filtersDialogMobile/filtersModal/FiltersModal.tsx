@@ -1,9 +1,13 @@
+import { useCategoryPageSelector } from '@/pages/category/model/client';
+import { ParameterBox } from '@/pages/category/ui/components/parameterBox/ParameterBox';
 import { cn } from '@/shared/lib/utils';
 import Modal from '@/shared/ui/modal/client';
 
 import styles from './filtersModal.module.scss';
 
 const FiltersModal = ({ isOpen, close }: { isOpen: boolean; close: () => void }) => {
+    const parameters = useCategoryPageSelector(state => state.categoryListing.parameters);
+
     return (
         <Modal open={isOpen} onClose={close}>
             <Modal.Overlay>
@@ -21,6 +25,9 @@ const FiltersModal = ({ isOpen, close }: { isOpen: boolean; close: () => void })
                     </Modal.Header>
 
                     <div className={cn(styles.body, 'flex', 'flex-col')}>
+                        {parameters.map(parameter => (
+                            <ParameterBox key={parameter.id} parameter={parameter} />
+                        ))}
                     </div>
                 </Modal.Wrapper>
             </Modal.Overlay>

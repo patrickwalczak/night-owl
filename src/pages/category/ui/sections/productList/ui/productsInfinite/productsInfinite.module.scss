@@ -6,8 +6,17 @@
 
 .productsContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  justify-content: center;
   gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+  @media (min-width: breakpoints.$breakpoint-480) {
+    grid-template-columns: repeat(auto-fit, minmax(330px, 480px));
+  }
+
+  @media (min-width: breakpoints.$breakpoint-768) {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
 }
 
 .loader {
