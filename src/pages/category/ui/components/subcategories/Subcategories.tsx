@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { cn } from '@/shared/lib/utils';
 
-import { useCategoryPageSelector } from '../../../model/client';
+import { useCategoryPageSelector } from '../../../model/store/client';
 import styles from './subcategories.module.scss';
 
 const Subcategories = () => {

@@ -5,12 +5,16 @@ import type {
     CategoryProduct,
     CategorySubcategory,
     CategorySummary,
-} from './categoryPage.types';
+    SelectedFilter,
+} from '../categoryPage.types';
+
+import { type ParsedFilters } from '../params/searchParams.types';
 
 export interface CategoryListingState {
     initialProducts: CategoryProduct[];
     parameters: CategoryParameter[];
     subcategories: CategorySubcategory[];
+    selectedFilters: ParsedFilters;
     category: CategorySummary;
     productSum: number;
     page: number;
@@ -22,6 +26,7 @@ const initialState: CategoryListingState = {
     initialProducts: [],
     parameters: [],
     subcategories: [],
+    selectedFilters: {},
     category: {
         id: '',
         name: '',
@@ -56,16 +61,44 @@ const categoryListingSlice = createSlice({
         setPageSize(state, action: PayloadAction<number>) {
             state.pageSize = action.payload;
         },
+        setSelectedFilters(state, action: PayloadAction<ParsedFilters>) {
+            state.selectedFilters = action.payload;
+        },
+        setFilterValue(state, action: PayloadAction<SelectedFilter>) {
+            const { parameterSlug, parameterValueSlug, checked } = action.payload;
+            const values = state.selectedFilters[parameterSlug] ?? [];
+
+            if (checked) {
+                if (!values.includes(parameterValueSlug)) {
+                    state.selectedFilters[parameterSlug] = [...values, parameterValueSlug];
+                }
+
+                return;
+            }
+
+            if (!values.includes(parameterValueSlug)) return;
+
+            const remainingValues = values.filter(value => value !== parameterValueSlug);
+
+            if (remainingValues.length > 0) {
+                state.selectedFilters[parameterSlug] = remainingValues;
+            }
+            else {
+                delete state.selectedFilters[parameterSlug];
+            }
+        },
     },
 });
 
 export const {
     setCategory,
+    setFilterValue,
     setPage,
     setPageSize,
     setParameters,
     setProductSum,
     setSubcategories,
+    setSelectedFilters,
 } = categoryListingSlice.actions;
 
 export default categoryListingSlice.reducer;

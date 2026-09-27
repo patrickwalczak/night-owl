@@ -1,3 +1,3 @@
-import { type ParsedCategorySearchParams } from '../../../model/searchParams.types';
+import { type ParsedCategorySearchParams } from '../../../model/params/searchParams.types';
 
 export type GetCategoryPageDataOptions = ParsedCategorySearchParams;

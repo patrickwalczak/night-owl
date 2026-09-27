@@ -6,7 +6,7 @@ import { useState } from 'react';
 import type { ProductListPage } from '@/entities/product';
 
 import { usePageParamSetter } from '@/pages/category/lib/hooks/usePageParamSetter';
-import { useCategoryPageSelector } from '@/pages/category/model/client';
+import { useCategoryPageSelector } from '@/pages/category/model/store/client';
 import { useIntersectionObserver } from '@/shared/lib/hooks/client';
 import { cn } from '@/shared/lib/utils';
 

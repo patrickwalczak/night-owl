@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import { useCategoryPageSelector } from '@/pages/category/model/client';
+import { useCategoryPageSelector } from '@/pages/category/model/store/client';
 import { cn } from '@/shared/lib/utils';
 
 import { ParameterBox } from '../../../../components/parameterBox/ParameterBox';

@@ -1,6 +1,6 @@
 'use client';
 
-import { useCategoryPageSelector } from '../../../model/client';
+import { useCategoryPageSelector } from '../../../model/store/client';
 
 const CategoryProductsTotal = () => {
     const productSum = useCategoryPageSelector(state => state.categoryListing.productSum);

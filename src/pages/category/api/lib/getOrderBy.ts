@@ -1,5 +1,5 @@
 import { SORT_VALUE } from '../../config/searchParams';
-import { type SortOrderType } from '../../model/searchParams.types';
+import { type SortOrderType } from '../../model/params/searchParams.types';
 
 export function toOrderBy(sort: SortOrderType) {
     switch (sort) {

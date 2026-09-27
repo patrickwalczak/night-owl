@@ -1,4 +1,4 @@
-import { type SEARCH_PARAMS_KEYS, type SORT_VALUE } from '../config/searchParams';
+import { type SEARCH_PARAMS_KEYS, type SORT_VALUE } from '../../config/searchParams';
 
 export type SortOrderType = (typeof SORT_VALUE)[keyof typeof SORT_VALUE];
 

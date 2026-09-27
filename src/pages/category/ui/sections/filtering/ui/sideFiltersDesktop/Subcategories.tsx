@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { useCategoryPageSelector } from '@/pages/category/model/client';
+import { useCategoryPageSelector } from '@/pages/category/model/store/client';
 import { cn } from '@/shared/lib/utils';
 
 import styles from './sideFiltersDesktop.module.scss';

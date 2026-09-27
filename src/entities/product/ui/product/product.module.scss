@@ -48,10 +48,6 @@
 		background: var(--color-owl-purple-500-faded);
 	}
 
-	&:active {
-		transform: scale(.96);
-	}
-
 	svg {
 		inline-size: var(--font-size-28);
 		block-size: var(--font-size-28);

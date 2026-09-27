@@ -3,9 +3,9 @@ import { notFound } from 'next/navigation';
 
 import { getCategoryPageData } from '../api/getCategoryPageData';
 import { normalizeSearchParams, parseCategorySearchParams } from '../lib/url';
-import CategoryPageStoreProvider from '../model/CategoryPageStoreProvider';
-import { type RouteParamsType } from '../model/routeParams.types';
-import { type RawUrlSearchParams } from '../model/searchParams.types';
+import { type RouteParamsType } from '../model/params/routeParams.types';
+import { type RawUrlSearchParams } from '../model/params/searchParams.types';
+import CategoryPageStoreProvider from '../model/store/CategoryPageStoreProvider';
 import CategoryProductsView from '../ui/components/categoryProducts/CategoryProductsView';
 
 export default async function CategoryPage({
@@ -34,6 +34,7 @@ export default async function CategoryPage({
             category={category}
             areFiltersOpen={areFiltersOpen}
             parameters={parameters}
+            selectedFilters={parsedParams.filters}
         >
             <CategoryProductsView />
         </CategoryPageStoreProvider>

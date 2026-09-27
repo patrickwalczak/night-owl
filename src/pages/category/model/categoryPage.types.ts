@@ -20,3 +20,9 @@ export interface CategoryPageData {
     products: CategoryProductsPage;
     parameters: CategoryParameter[];
 }
+
+export interface SelectedFilter {
+    parameterSlug: string;
+    parameterValueSlug: string;
+    checked: boolean;
+}

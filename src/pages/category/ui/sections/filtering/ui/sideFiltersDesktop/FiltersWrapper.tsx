@@ -7,7 +7,7 @@ import { useEffect, useRef } from 'react';
 import { useNavigationTopOffset } from '@/features/layout/client';
 import { cn } from '@/shared/lib/utils';
 
-import { useCategoryPageSelector } from '../../../../../model/client';
+import { useCategoryPageSelector } from '../../../../../model/store/client';
 import styles from './sideFiltersDesktop.module.scss';
 
 const STICKY_CATEGORY_BAR_HEIGHT_PX = 58;

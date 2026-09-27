@@ -1,7 +1,7 @@
 'use client';
 
-import { toggleFilters } from '../../../../../model/categoryUiSlice';
-import { useCategoryPageDispatch, useCategoryPageSelector } from '../../../../../model/client';
+import { toggleFilters } from '../../../../../model/store/categoryUiSlice';
+import { useCategoryPageDispatch, useCategoryPageSelector } from '../../../../../model/store/client';
 import FilterButton from '../filterButton/FilterButton';
 import styles from './sideFiltersButton.module.scss';
 

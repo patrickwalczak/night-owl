@@ -3,8 +3,10 @@
 import { useState, type ReactNode } from 'react';
 import { Provider } from 'react-redux';
 
-import type { CategoryPageCategory, CategoryParameter, CategoryProductsPage } from './categoryPage.types';
+import type { CategoryPageCategory, CategoryParameter, CategoryProductsPage } from '../categoryPage.types';
 
+import { useSyncSelectedFilters } from '../../lib/hooks/useSyncSelectedFilters';
+import { type ParsedFilters } from '../params/searchParams.types';
 import { CategoryPageStoreContext } from './client';
 import { makeCategoryPageStore } from './store';
 
@@ -14,6 +16,7 @@ interface CategoryPageStoreProviderProps {
     parameters: CategoryParameter[];
     category: CategoryPageCategory;
     initialProducts: CategoryProductsPage;
+    selectedFilters: ParsedFilters;
 }
 
 export default function CategoryPageStoreProvider({
@@ -22,6 +25,7 @@ export default function CategoryPageStoreProvider({
     initialProducts,
     parameters,
     category,
+    selectedFilters,
 }: CategoryPageStoreProviderProps) {
     const [store] = useState(() =>
         makeCategoryPageStore({
@@ -39,12 +43,15 @@ export default function CategoryPageStoreProvider({
                 page: initialProducts.page,
                 pageSize: initialProducts.pageSize,
                 totalPages: initialProducts.totalPages,
+                selectedFilters,
             },
             categoryUi: {
                 areFiltersOpen,
             },
         }),
     );
+
+    useSyncSelectedFilters(store, category.id, selectedFilters);
 
     return (
         <Provider store={store} context={CategoryPageStoreContext}>

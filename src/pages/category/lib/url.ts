@@ -5,7 +5,7 @@ import {
     type RawSearchParamValue,
     type RawUrlSearchParams,
     type SortOrderType,
-} from '../model/searchParams.types';
+} from '../model/params/searchParams.types';
 
 export const isCategorySortOrder = (value: string | null): value is SortOrderType => {
     return SORT_VALUES.includes(value as SortOrderType);
