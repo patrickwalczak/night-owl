@@ -26,6 +26,7 @@
   background-color: transparent;
   outline: none;
   transition: outline 200ms ease-in;
+  cursor: pointer;
 
   &:checked {
     background-size: cover;
@@ -51,4 +52,6 @@
   }
 }
 
-.label {}
+.label {
+  cursor: pointer;
+}
