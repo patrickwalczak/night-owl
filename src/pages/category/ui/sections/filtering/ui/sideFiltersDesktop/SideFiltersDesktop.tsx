@@ -6,6 +6,7 @@ import { useCategoryPageSelector } from '@/pages/category/model/store/client';
 import { cn } from '@/shared/lib/utils';
 
 import { ParameterBox } from '../../../../components/parameterBox/ParameterBox';
+import { FilterActions } from '../filterActions/FilterActions';
 import FiltersWrapper from './FiltersWrapper';
 import styles from './sideFiltersDesktop.module.scss';
 import { Subcategories } from './Subcategories';
@@ -18,27 +19,35 @@ const SideFiltersDesktop = () => {
     );
 
     useEffect(() => {
-        const onScroll = () => {
+        const updateHeight = () => {
             if (!filtersRef.current) return;
             const rect = filtersRef.current.getBoundingClientRect();
-            setScrollableHeight(`${window.innerHeight - rect.y}px`);
+            setScrollableHeight(`${Math.max(0, window.innerHeight - rect.y)}px`);
         };
 
-        onScroll();
-        window.addEventListener('scroll', onScroll);
+        const frame = window.requestAnimationFrame(updateHeight);
+        window.addEventListener('scroll', updateHeight, { passive: true });
+        window.addEventListener('resize', updateHeight);
 
-        return () => window.removeEventListener('scroll', onScroll);
+        return () => {
+            window.cancelAnimationFrame(frame);
+            window.removeEventListener('scroll', updateHeight);
+            window.removeEventListener('resize', updateHeight);
+        };
     }, []);
 
     return (
         <FiltersWrapper>
             <div ref={filtersRef} style={{ height: scrollableHeight }} className={cn(styles.filters, 'flex', 'flex-col')}>
-                <Subcategories />
-                <div className={cn(styles.content, 'flex', 'flex-col')}>
-                    {parameters.map(parameter => (
-                        <ParameterBox key={parameter.id} parameter={parameter} />
-                    ))}
+                <div className={cn(styles.scrollArea, 'flex', 'flex-col')}>
+                    <Subcategories />
+                    <div className={cn(styles.content, 'flex', 'flex-col')}>
+                        {parameters.map(parameter => (
+                            <ParameterBox key={parameter.id} parameter={parameter} />
+                        ))}
+                    </div>
                 </div>
+                <FilterActions />
             </div>
         </FiltersWrapper>
     );

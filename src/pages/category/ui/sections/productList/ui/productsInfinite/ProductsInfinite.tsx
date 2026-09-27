@@ -49,7 +49,7 @@ export default function ProductsInfinite({ initialProducts, appliedFilters }: Pr
 
     const { data, hasNextPage, isPending, isFetchingNextPage, fetchNextPage } = useInfiniteQuery({
         initialPageParam: initialProducts.page,
-        queryKey: ['products-infinite', slug, appliedFilters],
+        queryKey: ['products-infinite', slug, appliedFilters, initialProducts.page],
         queryFn: ({ pageParam }) => fetchCategoryProducts(slug, pageParam, appliedFilters),
         getNextPageParam: lastPage => lastPage.nextPage,
         initialData: { pages: [initialProducts], pageParams: [initialProducts.page] },

@@ -3,6 +3,7 @@ import { ParameterBox } from '@/pages/category/ui/components/parameterBox/Parame
 import { cn } from '@/shared/lib/utils';
 import Modal from '@/shared/ui/modal/client';
 
+import { FilterActions } from '../../filterActions/FilterActions';
 import styles from './filtersModal.module.scss';
 
 const FiltersModal = ({ isOpen, close }: { isOpen: boolean; close: () => void }) => {
@@ -29,6 +30,7 @@ const FiltersModal = ({ isOpen, close }: { isOpen: boolean; close: () => void })
                             <ParameterBox key={parameter.id} parameter={parameter} />
                         ))}
                     </div>
+                    <FilterActions className={styles.actions} onApply={close} />
                 </Modal.Wrapper>
             </Modal.Overlay>
         </Modal>

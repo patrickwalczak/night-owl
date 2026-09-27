@@ -31,7 +31,7 @@ export const CategoriesSection = () => {
                 href={'/category/indoor-lighting'}
                 title={'Lighting made for every mood'}
                 description={'Find the perfect lighting setup for your space.'}
-                linkLabel={'Shop all products'}
+                linkLabel={'Shop now'}
             />
         </div>
     );
