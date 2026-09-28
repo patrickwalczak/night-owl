@@ -6,9 +6,6 @@ import ReactQueryProvider from '@/app/providers/ReactQueryProvider';
 import AppClient from '@/app/ui/AppClient';
 import { NavigationServer } from '@/widgets/navigation/server';
 
-// The initial layout waits for the request's device header to render the matching variant.
-export const instant = false;
-
 export const inter = Inter({
     subsets: ['latin'],
     variable: '--font-inter',
