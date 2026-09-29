@@ -6,6 +6,8 @@ import ReactQueryProvider from '@/app/providers/ReactQueryProvider';
 import AppClient from '@/app/ui/AppClient';
 import { NavigationServer } from '@/widgets/navigation/server';
 
+export const instant = false;
+
 export const inter = Inter({
     subsets: ['latin'],
     variable: '--font-inter',
