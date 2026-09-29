@@ -1,12 +1,9 @@
 import '../src/shared/styles/index.scss';
 import { Playfair_Display, Inter } from 'next/font/google';
 
-import DeviceStoreProvider from '@/app/providers/DeviceStoreProvider';
 import ReactQueryProvider from '@/app/providers/ReactQueryProvider';
-import AppClient from '@/app/ui/AppClient';
+import StoreProvider from '@/app/providers/StoreProvider';
 import { NavigationServer } from '@/widgets/navigation/server';
-
-export const instant = false;
 
 export const inter = Inter({
     subsets: ['latin'],
@@ -28,14 +25,12 @@ export default function RootLayout({
     return (
         <html lang={'en'} className={`${inter.variable} ${playfair.variable}`}>
             <body>
-                <DeviceStoreProvider>
+                <StoreProvider>
                     <ReactQueryProvider>
-                        <AppClient>
-                            <NavigationServer />
-                            {children}
-                        </AppClient>
+                        <NavigationServer />
+                        {children}
                     </ReactQueryProvider>
-                </DeviceStoreProvider>
+                </StoreProvider>
             </body>
         </html>
     );

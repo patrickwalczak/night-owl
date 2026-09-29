@@ -3,22 +3,6 @@ import { type NextRequest, NextResponse } from 'next/server';
 const CSP_REPORT_ENDPOINT_NAME = 'csp-endpoint';
 const CSP_REPORT_PATH = '/api/csp-report';
 
-function detect(
-    uaRaw: string,
-    chm: string | null,
-): 'mobile' | 'tablet' | 'desktop' {
-    const ua = uaRaw.toLowerCase();
-
-    if (chm === '?1') return 'mobile';
-    const isTablet
-        = /ipad/.test(ua) || (/android/.test(ua) && !/mobile/.test(ua));
-    if (isTablet) return 'tablet';
-    const isPhone
-        = /iphone|ipod|windows phone/.test(ua)
-            || (/android/.test(ua) && /mobile/.test(ua));
-    return isPhone ? 'mobile' : 'desktop';
-}
-
 function buildCspHeader(isDev: boolean): string {
     const directives = [
         `default-src 'self'`,
@@ -43,16 +27,8 @@ function buildCspHeader(isDev: boolean): string {
 }
 
 export function proxy(req: NextRequest) {
-    const device = detect(
-        req.headers.get('user-agent') || '',
-        req.headers.get('sec-ch-ua-mobile'),
-    );
     const isDev = process.env.NODE_ENV === 'development';
-
-    const headers = new Headers(req.headers);
-
-    headers.set('x-device-type', device);
-    const res = NextResponse.next({ request: { headers } });
+    const res = NextResponse.next();
 
     res.headers.set(
         'Reporting-Endpoints',
