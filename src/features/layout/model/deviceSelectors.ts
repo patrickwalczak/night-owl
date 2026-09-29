@@ -10,12 +10,6 @@ interface DeviceStateRoot {
     device: DeviceState;
 }
 
-export const selectInitialDeviceType = (state: DeviceStateRoot) => state.device.initialDeviceType;
-
-export const selectViewportType = (state: DeviceStateRoot) => state.device.viewportType;
-
-export const selectIsViewportReady = (state: DeviceStateRoot) => state.device.isViewportReady;
-
 export const selectResponsiveType = (
     state: DeviceStateRoot,
     strategy: ResponsiveStrategy = DEFAULT_RESPONSIVE_STRATEGY,

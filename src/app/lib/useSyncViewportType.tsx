@@ -31,9 +31,7 @@ export function useSyncViewportType() {
         const updateViewportType = () => {
             const viewportType = getViewportType();
 
-            if (lastViewportType.current === viewportType) {
-                return;
-            }
+            if (lastViewportType.current === viewportType) return;
 
             lastViewportType.current = viewportType;
             dispatch(setViewportType(viewportType));

@@ -47,6 +47,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	height: var(--navigation-height);
 	padding: 0.75rem;
 
 	@media (min-width: breakpoints.$breakpoint-1024) {

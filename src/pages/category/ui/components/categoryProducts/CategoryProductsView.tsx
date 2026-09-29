@@ -3,7 +3,6 @@
 import type { CategoryProductsPage } from '@/pages/category/model/categoryPage.types';
 import type { ParsedFilters } from '@/pages/category/model/params/searchParams.types';
 
-import { useIsDesktop } from '@/features/layout/client';
 import { cn } from '@/shared/lib/utils';
 
 import SideFiltersDesktop from '../../sections/filtering/ui/sideFiltersDesktop/SideFiltersDesktop';
@@ -20,11 +19,9 @@ interface CategoryProductsViewType {
 }
 
 export default function CategoryProductsView({ initialProducts, appliedFilters }: CategoryProductsViewType) {
-    const isDesktop = useIsDesktop();
-
     return (
         <main className={cn(styles.container, 'flex', 'flex-col')}>
-            {isDesktop
+            {true
                 ? (
                     <>
                         <StickyViewDesktop />

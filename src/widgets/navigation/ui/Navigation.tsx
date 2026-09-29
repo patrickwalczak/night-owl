@@ -7,7 +7,6 @@ import { createContext, useRef } from 'react';
 
 import type { RootCategoriesWithChildren } from '@/entities/category';
 
-import { useIsDesktop } from '@/features/layout/client';
 import { cn } from '@/shared/lib/utils';
 import { Overlay } from '@/shared/ui/overlay';
 
@@ -33,8 +32,6 @@ interface NavigationType {
 export const NavigationContext = createContext<NavigationContextType | null>(null);
 
 export const Navigation = ({ categories, isHomepage }: NavigationType) => {
-    const isDesktop = useIsDesktop();
-
     const { isScrolled, direction } = useIsScrolled();
     const { expandDropdown, hideDropdown, isExpanded, setIsExpanded } = useIsDropdownExpanded();
 
@@ -85,25 +82,23 @@ export const Navigation = ({ categories, isHomepage }: NavigationType) => {
                         <span className={cn(styles.logo, 'transition-200')}>{'Night Owl'}</span>
                     </Link>
 
-                    {isDesktop && (
-                        <div className={cn(styles.listWrapper, 'flex', 'align-center')}>
-                            <button
-                                ref={categoriesButtonRef}
-                                onClick={toggleDropdown}
-                                className={cn(styles.categoriesButton, 'button-empty')}
-                                aria-expanded={isExpanded}
-                                aria-controls={'categories-dropdown'}
-                                id={'categories-button'}
-                                onKeyDown={handleKeyDownOnButton}
-                            >
-                                {'Categories'}
-                            </button>
-                        </div>
-                    )}
+                    <div className={cn(styles.listWrapper, 'flex', 'align-center')}>
+                        <button
+                            ref={categoriesButtonRef}
+                            onClick={toggleDropdown}
+                            className={cn(styles.categoriesButton, 'button-empty')}
+                            aria-expanded={isExpanded}
+                            aria-controls={'categories-dropdown'}
+                            id={'categories-button'}
+                            onKeyDown={handleKeyDownOnButton}
+                        >
+                            {'Categories'}
+                        </button>
+                    </div>
 
-                    {!isDesktop && <MobileNavigation />}
+                    <MobileNavigation />
                 </nav>
-                {isDesktop && <CategoriesDropdown controllerBtnRef={categoriesButtonRef} isExpanded={isExpanded} categories={categories} />}
+                <CategoriesDropdown controllerBtnRef={categoriesButtonRef} isExpanded={isExpanded} categories={categories} />
             </header>
             <Overlay open={isExpanded} onClose={hideDropdown} zIndex={2} />
         </NavigationContext.Provider>
