@@ -12,7 +12,6 @@ type MobileNavButtonType = PropsWithChildren<HTMLMotionProps<'button'>> & {
 export const MobileNavButton = ({
     className,
     children,
-    type = 'button',
     hasBorderBottom = false,
     ...props
 }: MobileNavButtonType) => {
@@ -24,7 +23,6 @@ export const MobileNavButton = ({
                 hasBorderBottom && styles.borderBottom,
                 className,
             )}
-            type={type}
             initial={{ opacity: 0, x: -30, rotate: -10 }}
             animate={{ opacity: 1, x: 0, rotate: 0 }}
             transition={{ delay: 0.2, duration: 0.4 }}

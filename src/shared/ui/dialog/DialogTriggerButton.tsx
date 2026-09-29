@@ -27,7 +27,6 @@ export const DialogTriggerButton = ({
     return (
         <button
             {...props}
-            type={'button'}
             aria-haspopup={'dialog'}
             aria-expanded={isDialogOpen}
             aria-controls={dialogId}

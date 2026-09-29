@@ -33,7 +33,7 @@ export const MobileNavLink = ({
                 className={cn(
                     styles.element,
                     styles.link,
-                    hasBorderBottom && styles.borderBottom,
+                    { [styles.borderBottom]: hasBorderBottom },
                     className,
                 )}
                 {...props}

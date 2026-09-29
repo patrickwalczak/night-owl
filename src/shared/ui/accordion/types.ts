@@ -54,10 +54,9 @@ export interface AccordionHeaderType extends Omit<
 
 export interface AccordionButtonType extends Omit<
     ComponentPropsWithRef<'button'>,
-    'id' | 'type' | 'aria-expanded' | 'aria-controls' | 'aria-label' | 'aria-hidden' | 'dangerouslySetInnerHTML'
+    'id' | 'aria-expanded' | 'aria-controls' | 'aria-label' | 'aria-hidden' | 'dangerouslySetInnerHTML'
 >, DataAttributesType {
     'children': ReactNode;
-    'type'?: 'button';
     'id'?: never;
     'aria-expanded'?: never;
     'aria-controls'?: never;

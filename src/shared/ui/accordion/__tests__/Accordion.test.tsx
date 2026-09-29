@@ -7,13 +7,14 @@ import { Accordion } from '../Accordion';
 afterEach(cleanup);
 
 describe('Accordion', () => {
-    it('keeps the existing API and toggles the associated panel without submitting a form', () => {
+    it.each([undefined, 'button', 'submit', 'reset'] as const)('toggles the associated panel and respects button type: %s', (type) => {
         const onSubmit = vi.fn(event => event.preventDefault());
+        const onReset = vi.fn(event => event.preventDefault());
 
         render(
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} onReset={onReset}>
                 <Accordion.Root>
-                    <Accordion.Header headingText={'Brand'} />
+                    <Accordion.Header headingText={'Brand'} buttonProps={{ type }} />
                     <Accordion.Panel>{'Available brands'}</Accordion.Panel>
                 </Accordion.Root>
             </form>,
@@ -36,7 +37,8 @@ describe('Accordion', () => {
 
         expect(button.getAttribute('aria-expanded')).toBe('false');
         expect(panel.hidden).toBe(true);
-        expect(onSubmit).not.toHaveBeenCalled();
+        expect(onSubmit).toHaveBeenCalledTimes(type === 'submit' ? 2 : 0);
+        expect(onReset).toHaveBeenCalledTimes(type === 'reset' ? 2 : 0);
     });
 
     it('starts expanded and emits one change per interaction in StrictMode while preserving panel state', () => {

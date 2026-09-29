@@ -36,7 +36,6 @@ export function Product({ product }: { product: ProductListItem }) {
 
                 <div className={styles.bottomContainer}>
                     <button
-                        type={'button'}
                         className={cn(styles.cartBtn, 'button-empty', 'flex-center')}
                         aria-label={`Add “${product.name}” to cart`}
                         onClick={onCartClick}

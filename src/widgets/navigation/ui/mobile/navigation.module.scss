@@ -15,6 +15,10 @@
 }
 
 .hamburgerBtn {
+  @media (min-width: breakpoints.$breakpoint-1024) {
+    display: none;
+  }
+
   transform: scale(1);
   justify-self: end;
 

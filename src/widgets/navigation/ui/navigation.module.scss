@@ -79,16 +79,3 @@
 	font-size: var(--font-size-22);
 	font-weight: var(--font-weight-400);
 }
-
-.cartButton {
-	position: relative;
-
-	svg {
-		width: var(--font-size-32);
-		height: var(--font-size-32);
-	}
-
-	path {
-		stroke: var(--color-owl-white);
-	}
-}

@@ -21,7 +21,6 @@ const MobileNavigation = () => {
         <>
             <Menu isMenuOpen={isMenuOpen} closeMenu={handleCloseMenu} />
             <button
-                type={'button'}
                 aria-label={'Open menu'}
                 aria-expanded={isMenuOpen}
                 aria-controls={'mobile-menu'}

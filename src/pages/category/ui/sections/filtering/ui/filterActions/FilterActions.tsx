@@ -55,7 +55,6 @@ export const FilterActions = ({ className, onApply }: FilterActionsType) => {
     return (
         <div className={cn(styles.actions, className)} aria-busy={isPending}>
             <button
-                type={'button'}
                 className={cn(styles.button, styles.apply)}
                 onClick={applyFilters}
                 disabled={isPending}
@@ -63,7 +62,6 @@ export const FilterActions = ({ className, onApply }: FilterActionsType) => {
                 {isPending ? 'Updating…' : 'Apply filters'}
             </button>
             <button
-                type={'button'}
                 className={cn(styles.button, styles.clear)}
                 onClick={clearFilters}
                 disabled={isPending}

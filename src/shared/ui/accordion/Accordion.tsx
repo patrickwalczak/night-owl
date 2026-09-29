@@ -91,7 +91,7 @@ const AccordionHeader = ({
     );
 };
 
-const AccordionButton = ({ onClick, disabled, ...props }: AccordionButtonType) => {
+const AccordionButton = ({ onClick, disabled, type = 'button', ...props }: AccordionButtonType) => {
     const { isExpanded, disabled: rootDisabled, panelId, buttonId, toggle } = useSafeContext(AccordionContext);
 
     const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -111,7 +111,7 @@ const AccordionButton = ({ onClick, disabled, ...props }: AccordionButtonType) =
             aria-controls={panelId}
             disabled={rootDisabled || disabled}
             onClick={handleClick}
-            type={'button'}
+            type={type}
         >
             {props.children}
             <span className={styles.iconContainer}>
