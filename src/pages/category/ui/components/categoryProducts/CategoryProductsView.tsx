@@ -17,7 +17,7 @@ interface CategoryProductsViewType {
 
 export default function CategoryProductsView({ initialProducts, appliedFilters }: CategoryProductsViewType) {
     return (
-        <main className={cn(styles.container, 'flex', 'flex-col')}>
+        <main className={cn(styles.container)}>
             <Header />
             <div className={styles.productsContainer}>
                 <SideFiltersDesktop />

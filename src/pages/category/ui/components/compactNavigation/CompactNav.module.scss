@@ -7,4 +7,8 @@
   height: 50px;
   padding: 0.25rem;
   background-color: var(--color-background-secondary);
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
 }

@@ -22,7 +22,7 @@ const StickyContainer = ({ children, className }: StickyContainerWrapperType) =>
 
     return (
         <>
-            <div ref={sentinelRef} aria-hidden />
+            <div ref={sentinelRef} aria-hidden className={styles.sentinel} />
 
             <div
                 className={cn(

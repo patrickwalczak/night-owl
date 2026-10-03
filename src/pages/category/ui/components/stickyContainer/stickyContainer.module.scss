@@ -14,3 +14,11 @@
     }
   }
 }
+
+.sentinel {
+  display: none;
+
+  @media (min-width: breakpoints.$breakpoint-1024) {
+    display: block;
+  }
+}
