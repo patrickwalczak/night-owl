@@ -1,0 +1,7 @@
+.header {
+  padding: 1rem;
+
+  @media (min-width: 1024px) {
+    padding: 1.5rem;
+  }
+}

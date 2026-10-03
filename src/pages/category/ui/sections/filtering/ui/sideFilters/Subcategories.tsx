@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 
 import { useCategoryPageSelector } from '@/pages/category/model/store/client';

@@ -1,7 +1,7 @@
 'use client';
 
 import SideFiltersButton from '../../sections/filtering/ui/sideFilters/SideFiltersButton';
-import CategoryName from '../categoryName/CategoryName';
+import CategoryName from '../../sections/header/ui/categoryName/CategoryName';
 import StickyContainer from './StickyContainer';
 
 export const StickyBarWide = () => {

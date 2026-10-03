@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useCategoryPageSelector } from '@/pages/category/model/store/client';
 import { cn } from '@/shared/lib/utils';
 
-import { ParameterBox } from '../../../../components/parameterBox/ParameterBox';
 import { FilterActions } from '../filterActions/FilterActions';
+import { ParameterBox } from '../parameterBox/ParameterBox';
 import FiltersWrapper from './FiltersWrapper';
 import styles from './sideFiltersDesktop.module.scss';
 import { Subcategories } from './Subcategories';

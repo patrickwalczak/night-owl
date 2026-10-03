@@ -3,9 +3,9 @@ import { type ChangeEvent } from 'react';
 import { Accordion } from '@/shared/ui/accordion/Accordion';
 import { Checkbox } from '@/shared/ui/checkbox/Checkbox';
 
-import { type CategoryParameter } from '../../../../category/model/categoryPage.types';
-import { setFilterValue } from '../../../../category/model/store/categoryListingSlice';
-import { useCategoryPageDispatch, useCategoryPageSelector } from '../../../../category/model/store/client';
+import { type CategoryParameter } from '../../../../../model/categoryPage.types';
+import { setFilterValue } from '../../../../../model/store/categoryListingSlice';
+import { useCategoryPageDispatch, useCategoryPageSelector } from '../../../../../model/store/client';
 import styles from './parameterBox.module.scss';
 
 const checkboxClasses = { label: styles.checkboxLabel };
