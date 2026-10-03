@@ -2,17 +2,12 @@
 
 import SideFiltersButton from '../../sections/filtering/ui/sideFilters/SideFiltersButton';
 import CategoryName from '../../sections/header/ui/categoryName/CategoryName';
-import StickyContainer from './StickyContainer';
 
-export const StickyBarWide = () => {
+export const StickyBarWide = ({ isStuck }: { isStuck: boolean }) => {
     return (
-        <StickyContainer>
-            {({ isStuck }) => (
-                <>
-                    <CategoryName isStuck={isStuck} isProductSum />
-                    <SideFiltersButton />
-                </>
-            )}
-        </StickyContainer>
+        <div className={'flex align-center justify-between'} style={{ columnGap: '1rem' }}>
+            <CategoryName isStuck={isStuck} isProductSum />
+            <SideFiltersButton />
+        </div>
     );
 };

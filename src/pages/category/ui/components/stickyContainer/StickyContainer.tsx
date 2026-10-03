@@ -27,12 +27,8 @@ const StickyContainer = ({ children, className }: StickyContainerWrapperType) =>
             <div
                 className={cn(
                     styles.stickyContainer,
-                    { [styles.isStuck]: isStuck },
+                    { [styles.stickyContainerIsStuck]: isStuck },
                     className,
-                    'flex',
-                    'align-center',
-                    'justify-between',
-                    'transition-200',
                 )}
                 style={{ top: `${topPx}px` }}
             >

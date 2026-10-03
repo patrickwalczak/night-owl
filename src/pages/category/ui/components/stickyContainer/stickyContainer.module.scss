@@ -5,6 +5,7 @@
   z-index: zindex.$category-filters;
   column-gap: 1rem;
   background-color: var(--color-background-primary);
+  transition: box-shadow 200ms ease-in-out, top 200ms ease-in-out;
 
   @media (min-width: breakpoints.$breakpoint-1024) {
     position: sticky;

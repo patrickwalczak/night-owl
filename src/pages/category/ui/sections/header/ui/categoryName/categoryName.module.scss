@@ -1,6 +1,7 @@
 .categoryName {
   --fs-small: var(--font-size-22);
   font-size: var(--font-size-22);
+  transition: font-size 200ms ease-in-out;
 
   @media(min-width: 1024px) {
     font-size: var(--font-size-26);

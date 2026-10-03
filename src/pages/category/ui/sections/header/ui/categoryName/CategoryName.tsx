@@ -13,7 +13,7 @@ const CategoryName = ({ isStuck = false }: {
     const productSum = useCategoryPageSelector(state => state.categoryListing.productSum);
 
     return (
-        <h2 className={cn(styles.categoryName, { [styles.stuck]: isStuck }, 'transition-200', 'h4')}>
+        <h2 className={cn(styles.categoryName, { [styles.stuck]: isStuck }, 'h4')}>
             {name}
             {` (${productSum})`}
         </h2>
