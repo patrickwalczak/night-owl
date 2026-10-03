@@ -1,8 +1,23 @@
 .card {
+	width: 100%;
+	max-width: 480px;
 	border-radius: 5px;
 	overflow: clip;
 	cursor: pointer;
 	box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.1);
+	justify-self: center;
+
+	@media (min-width: 768px) {
+		max-width: 500px;
+	}
+
+	@media (min-width: 1024px) {
+		max-width: 520px;
+	}
+
+	@media (min-width: 1280px) {
+		max-width: 550px;
+	}
 
 	&:focus-visible {
 		outline-offset: 3px;

@@ -1,24 +1,18 @@
 'use client';
 
-import { cn } from '@/shared/lib/utils';
-
 import SideFiltersButton from '../../sections/filtering/ui/sideFiltersButton/SideFiltersButton';
 import CategoryName from '../categoryName/CategoryName';
 import StickyContainer from './StickyContainer';
 
-const StickyViewDesktop = () => {
+export const StickyBarWide = () => {
     return (
         <StickyContainer>
             {({ isStuck }) => (
                 <>
                     <CategoryName isStuck={isStuck} isProductSum />
-                    <div className={cn('flex', 'align-center', 'gap-050')}>
-                        <SideFiltersButton />
-                    </div>
+                    <SideFiltersButton />
                 </>
             )}
         </StickyContainer>
     );
 };
-
-export default StickyViewDesktop;

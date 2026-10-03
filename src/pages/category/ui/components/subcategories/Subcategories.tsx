@@ -7,7 +7,7 @@ import { cn } from '@/shared/lib/utils';
 import { useCategoryPageSelector } from '../../../model/store/client';
 import styles from './subcategories.module.scss';
 
-const Subcategories = () => {
+export const Subcategories = () => {
     const subcategories = useCategoryPageSelector(state => state.categoryListing.subcategories);
 
     if (!subcategories.length) return null;
@@ -28,5 +28,3 @@ const Subcategories = () => {
         </div>
     );
 };
-
-export default Subcategories;

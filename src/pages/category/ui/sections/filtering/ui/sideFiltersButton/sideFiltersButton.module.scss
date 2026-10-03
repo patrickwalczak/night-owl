@@ -1,3 +1,15 @@
 .btn {
   align-self: end;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  font-size: var(--typography-body-m-size);
+
+  svg {
+    width: var(--font-size-26);
+    height: var(--font-size-26)
+  }
+
+  @media (width < 1024px) {
+    display: none;
+  }
 }

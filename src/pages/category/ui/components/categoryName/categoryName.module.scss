@@ -1,8 +1,10 @@
 .categoryName {
   --fs-small: var(--font-size-22);
+  font-size: var(--font-size-22);
 
-  padding-inline: 1rem;
-  font-family: var(--font-family-inter);
+  @media(min-width: 1024px) {
+    font-size: var(--font-size-26);
+  }
 }
 
 .stuck {

@@ -10,9 +10,10 @@ import styles from './stickyContainer.module.scss';
 
 interface StickyContainerWrapperType {
     children: ReactNode | ((props: { isStuck: boolean }) => ReactNode);
+    className?: string;
 }
 
-const StickyContainer = ({ children }: StickyContainerWrapperType) => {
+const StickyContainer = ({ children, className }: StickyContainerWrapperType) => {
     const topPx = useNavigationTopOffset();
 
     const { isStuck, sentinelRef } = useIsSticky(topPx);
@@ -26,7 +27,8 @@ const StickyContainer = ({ children }: StickyContainerWrapperType) => {
             <div
                 className={cn(
                     styles.stickyContainer,
-                    isStuck && styles.isStuck,
+                    { [styles.isStuck]: isStuck },
+                    className,
                     'flex',
                     'align-center',
                     'justify-between',
