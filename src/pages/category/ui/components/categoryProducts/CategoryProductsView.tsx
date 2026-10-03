@@ -3,8 +3,8 @@ import type { ParsedFilters } from '@/pages/category/model/params/searchParams.t
 
 import { cn } from '@/shared/lib/utils';
 
-import FiltersDialog from '../../sections/filtering/ui/filtersDialogMobile/FiltersDialog';
-import SideFiltersDesktop from '../../sections/filtering/ui/sideFiltersDesktop/SideFiltersDesktop';
+import FiltersDialog from '../../sections/filtering/ui/filtersDialog/FiltersDialog';
+import SideFiltersDesktop from '../../sections/filtering/ui/sideFilters/SideFiltersDesktop';
 import ProductsInfinite from '../../sections/productList/ui/productsInfinite/ProductsInfinite';
 import { StickyBarWide } from '../stickyContainer/StickyBarWide';
 import { Subcategories } from '../subcategories/Subcategories';

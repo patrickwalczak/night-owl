@@ -1,10 +1,10 @@
 'use client';
 
 import { cn } from '@/shared/lib/utils/cn';
+import { FiltersIcon } from '@/shared/ui/icons';
 
 import { toggleFilters } from '../../../../../model/store/categoryUiSlice';
 import { useCategoryPageDispatch, useCategoryPageSelector } from '../../../../../model/store/client';
-import FilterButton from '../filterButton/FilterButton';
 import styles from './sideFiltersButton.module.scss';
 
 const SideFiltersButton = () => {
@@ -16,7 +16,12 @@ const SideFiltersButton = () => {
         dispatch(toggleFilters());
     };
 
-    return <FilterButton label={label} handleClick={handleClick} className={cn(styles.btn, 'flex', 'align-center', 'button-empty')} />;
+    return (
+        <button onClick={handleClick} className={cn(styles.btn, 'flex', 'align-center', 'button-empty')}>
+            {label}
+            <FiltersIcon />
+        </button>
+    );
 };
 
 export default SideFiltersButton;

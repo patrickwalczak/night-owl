@@ -28,7 +28,6 @@ export const FilterActions = ({ className, onApply }: FilterActionsType) => {
     const updateFilters = (filters: ParsedFilters) => {
         const searchParams = new URLSearchParams(window.location.search);
 
-        // Replace the applied filters and restart pagination, keeping search and sorting.
         for (const key of Array.from(searchParams.keys())) {
             if (!isSearchParamsKey(key) || key === SEARCH_PARAMS_KEYS.PAGE) searchParams.delete(key);
         }

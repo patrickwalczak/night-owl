@@ -1,6 +1,6 @@
 'use client';
 
-import SideFiltersButton from '../../sections/filtering/ui/sideFiltersButton/SideFiltersButton';
+import SideFiltersButton from '../../sections/filtering/ui/sideFilters/SideFiltersButton';
 import CategoryName from '../categoryName/CategoryName';
 import StickyContainer from './StickyContainer';
 
