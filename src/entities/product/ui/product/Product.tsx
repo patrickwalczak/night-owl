@@ -39,8 +39,8 @@ export function Product({ product }: { product: ProductListItem }) {
                     )
                     : (
                         <Image
-                            src={'https://placehold.co/600x400.webp'}
-                            alt={product.name}
+                            src={'/product-placeholder.svg'}
+                            alt={`Photo coming soon for ${product.name}`}
                             fill
                             sizes={'(max-width: 582px) calc(100vw - 32px), 550px'}
                             className={styles.img}
