@@ -1,5 +1,7 @@
 'use client';
 
+import { COOKIES } from '@/shared/config';
+import { setCookie } from '@/shared/lib/cookies/client';
 import { cn } from '@/shared/lib/utils/cn';
 import { FiltersIcon } from '@/shared/ui/icons';
 
@@ -14,6 +16,14 @@ const SideFiltersButton = () => {
 
     const handleClick = () => {
         dispatch(toggleFilters());
+
+        setCookie(COOKIES.areFiltersOpen.name, areFiltersOpen ? '0' : '1', {
+            path: '/',
+            sameSite: 'lax',
+            expires: Date.now() + 30 * 24 * 60 * 60 * 1000,
+        }).catch((error) => {
+            console.error('Failed to save filters preference cookie.', error);
+        });
     };
 
     return (

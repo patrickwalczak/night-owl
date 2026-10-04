@@ -2,6 +2,8 @@ import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
+import { COOKIES } from '@/shared/config';
+
 import { getCategoryPageData } from '../api/getCategoryPageData';
 import { normalizeSearchParams, parseCategorySearchParams } from '../lib/url';
 import { type RouteParamsType } from '../model/params/routeParams.types';
@@ -34,7 +36,7 @@ async function CategoryPageContent({ params, searchParams }: CategoryPageType) {
 
     if (!category) notFound();
 
-    const areFiltersOpen = (await cookies()).get('areFiltersOpen')?.value === '1';
+    const areFiltersOpen = (await cookies()).get(COOKIES.areFiltersOpen.name)?.value === '1';
 
     return (
         <CategoryPageStoreProvider
