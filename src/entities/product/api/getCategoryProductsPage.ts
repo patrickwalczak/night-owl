@@ -54,20 +54,17 @@ export async function getCategoryProductsPage({
         }));
     }
 
-    const [items, total] = await Promise.all([
-        prisma.product.findMany({
+    const total = await prisma.product.count({ where });
+    const totalPages = Math.max(1, Math.ceil(total / pageSize));
+    const items = page <= totalPages && total > 0
+        ? await prisma.product.findMany({
             where,
             orderBy: sort,
             skip: (page - 1) * pageSize,
             take: pageSize,
             select: productListItemSelect,
-        }),
-        prisma.product.count({
-            where,
-        }),
-    ]);
-
-    const totalPages = Math.max(1, Math.ceil(total / pageSize));
+        })
+        : [];
 
     return {
         items,

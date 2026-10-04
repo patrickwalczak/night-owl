@@ -8,7 +8,7 @@ function buildCspHeader(isDev: boolean): string {
         `default-src 'self'`,
         `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''}`,
         `style-src 'self' 'unsafe-inline'`,
-        `img-src 'self' blob: data: https://placehold.co`,
+        `img-src 'self' blob: data: https://placehold.co https://res.cloudinary.com`,
         `font-src 'self'`,
         `connect-src 'self'${isDev ? ' ws: http://localhost:*' : ''}`,
         `object-src 'none'`,

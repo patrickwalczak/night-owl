@@ -81,7 +81,7 @@ export const normalizeSearchParams = (searchParams: RawUrlSearchParams): URLSear
 
 export const parsePageParam = (pageParam: RawSearchParamValue): number => {
     const parsedPage = Number(pageParam);
-    const page = Number.isInteger(parsedPage) && parsedPage > 0 ? parsedPage : 1;
+    const page = Number.isSafeInteger(parsedPage) && parsedPage > 0 ? parsedPage : 1;
 
     return page;
 };

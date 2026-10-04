@@ -29,7 +29,7 @@ describe('parseCategorySearchParams', () => {
         });
     });
 
-    it.each(['0', '-1', '1.5', 'invalid', 'Infinity', ''])('defaults invalid page %j to page 1', (page) => {
+    it.each(['0', '-1', '1.5', 'invalid', 'Infinity', '', '9007199254740992', '1e100'])('defaults invalid page %j to page 1', (page) => {
         const result = parseCategorySearchParams(new URLSearchParams({ page, sort: 'invalid' }));
 
         expect(result.page).toBe(1);

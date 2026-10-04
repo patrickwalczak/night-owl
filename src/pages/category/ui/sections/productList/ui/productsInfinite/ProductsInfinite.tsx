@@ -47,7 +47,7 @@ export const ProductsInfinite = ({ initialProducts, appliedFilters }: ProductsIn
 
     const slug = useCategoryPageSelector(state => state.categoryListing.category.slug);
 
-    const { data, hasNextPage, isPending, isFetchingNextPage, fetchNextPage } = useInfiniteQuery({
+    const { data, hasNextPage, isPending, isFetchingNextPage, isFetchNextPageError, fetchNextPage } = useInfiniteQuery({
         initialPageParam: initialProducts.page,
         queryKey: ['products-infinite', slug, appliedFilters, initialProducts.page],
         queryFn: ({ pageParam }) => fetchCategoryProducts(slug, pageParam, appliedFilters),
@@ -57,14 +57,14 @@ export const ProductsInfinite = ({ initialProducts, appliedFilters }: ProductsIn
     });
 
     const onSentinelIntersect = (entry: IntersectionObserverEntry) => {
-        if (!entry.isIntersecting || hasNextPage === false || isFetchingNextPage) return;
+        if (!entry.isIntersecting || hasNextPage === false || isFetchingNextPage || isFetchNextPageError) return;
         fetchNextPage();
     };
 
     const sentinelRef = useIntersectionObserver<HTMLDivElement>({
         callback: onSentinelIntersect,
         options: INTERSECTION_OPTIONS,
-        enabled: isAutoLoadEnabled && hasNextPage && !isFetchingNextPage,
+        enabled: isAutoLoadEnabled && hasNextPage && !isFetchingNextPage && !isFetchNextPageError,
     });
 
     const { registerTarget, unregisterTarget } = usePageParamSetter();
@@ -103,10 +103,18 @@ export const ProductsInfinite = ({ initialProducts, appliedFilters }: ProductsIn
             })}
             {hasNextPage && (
                 <div className={cn('flex-center', 'm-2')}>
-                    {isAutoLoadEnabled && isFetchingNextPage === false && (
+                    {isFetchNextPageError && !isFetchingNextPage && (
+                        <div role={'alert'}>
+                            <p>{'Failed to load more products.'}</p>
+                            <button onClick={() => fetchNextPage()} className={styles.loadMoreBtn}>
+                                {'Try again'}
+                            </button>
+                        </div>
+                    )}
+                    {isAutoLoadEnabled && !isFetchingNextPage && !isFetchNextPageError && (
                         <div ref={sentinelRef} aria-hidden className={styles.sentinel} />
                     )}
-                    {!isAutoLoadEnabled && isFetchingNextPage === false && (
+                    {!isAutoLoadEnabled && !isFetchingNextPage && !isFetchNextPageError && (
                         <button
                             onClick={() => fetchNextPage()}
                             disabled={isFetchingNextPage}

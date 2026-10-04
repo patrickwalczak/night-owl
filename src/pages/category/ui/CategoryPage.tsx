@@ -1,10 +1,11 @@
 import { cookies } from 'next/headers';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { Suspense } from 'react';
 
 import { COOKIES } from '@/shared/config';
 
 import { getCategoryPageData } from '../api/getCategoryPageData';
+import { SEARCH_PARAMS_KEYS } from '../config/searchParams';
 import { normalizeSearchParams, parseCategorySearchParams } from '../lib/url';
 import { type RouteParamsType } from '../model/params/routeParams.types';
 import { type RawUrlSearchParams } from '../model/params/searchParams.types';
@@ -35,6 +36,13 @@ async function CategoryPageContent({ params, searchParams }: CategoryPageType) {
     const { category, parameters, products } = await getCategoryPageData(category_slug, parsedParams);
 
     if (!category) notFound();
+
+    if (parsedParams.page > products.totalPages) {
+        search.delete(SEARCH_PARAMS_KEYS.PAGE);
+        const query = search.toString();
+
+        redirect(`/category/${category.slug}${query ? `?${query}` : ''}`);
+    }
 
     const areFiltersOpen = (await cookies()).get(COOKIES.areFiltersOpen.name)?.value === '1';
 

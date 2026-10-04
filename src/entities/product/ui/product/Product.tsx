@@ -1,5 +1,6 @@
 'use client';
 
+import { CldImage } from 'next-cloudinary';
 import Image from 'next/image';
 import { type KeyboardEventHandler, type MouseEventHandler } from 'react';
 
@@ -26,7 +27,25 @@ export function Product({ product }: { product: ProductListItem }) {
             aria-label={`Open ${product.name}`}
         >
             <div className={cn(styles.thumb)}>
-                <Image src={'https://placehold.co/600x400.webp'} alt={product.name} fill className={styles.img} />
+                {product.image.trim()
+                    ? (
+                        <CldImage
+                            src={product.image}
+                            alt={product.name}
+                            fill
+                            sizes={'(max-width: 582px) calc(100vw - 32px), 550px'}
+                            className={styles.img}
+                        />
+                    )
+                    : (
+                        <Image
+                            src={'https://placehold.co/600x400.webp'}
+                            alt={product.name}
+                            fill
+                            sizes={'(max-width: 582px) calc(100vw - 32px), 550px'}
+                            className={styles.img}
+                        />
+                    )}
             </div>
 
             <div className={cn(styles.details, 'align-center')}>
