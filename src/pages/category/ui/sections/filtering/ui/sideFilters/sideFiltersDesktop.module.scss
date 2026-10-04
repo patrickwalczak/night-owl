@@ -1,7 +1,14 @@
+@use '../../../../../../../shared/styles/breakpoints';
+
 .filtersContainer {
+  display: none;
   position: sticky;
   height: 100%;
   transition: width 200ms ease-in-out;
+
+  @media (min-width: breakpoints.$breakpoint-1024) {
+    display: block;
+  }
 
   &:not(.open) {
     pointer-events: none;

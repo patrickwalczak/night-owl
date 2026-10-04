@@ -3,10 +3,10 @@ import type { ParsedFilters } from '@/pages/category/model/params/searchParams.t
 
 import { cn } from '@/shared/lib/utils';
 
-import FiltersDialog from '../../sections/filtering/ui/filtersDialog/FiltersDialog';
+import { FiltersDialog } from '../../sections/filtering/ui/filtersDialog/FiltersDialog';
 import SideFiltersDesktop from '../../sections/filtering/ui/sideFilters/SideFiltersDesktop';
-import { Header } from '../../sections/header/ui/header/Header';
-import ProductsInfinite from '../../sections/productList/ui/productsInfinite/ProductsInfinite';
+import { StickyHeader } from '../../sections/header/ui/stickyHeader/StickyHeader';
+import { ProductsInfinite } from '../../sections/productList/ui/productsInfinite/ProductsInfinite';
 import { CompactNav } from '../compactNavigation/CompactNav';
 import styles from './categoryProducts.module.scss';
 
@@ -18,7 +18,7 @@ interface CategoryProductsViewType {
 export default function CategoryProductsView({ initialProducts, appliedFilters }: CategoryProductsViewType) {
     return (
         <main className={cn(styles.container)}>
-            <Header />
+            <StickyHeader />
             <div className={styles.productsContainer}>
                 <SideFiltersDesktop />
                 <ProductsInfinite initialProducts={initialProducts} appliedFilters={appliedFilters} />

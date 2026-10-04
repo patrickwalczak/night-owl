@@ -41,7 +41,7 @@ const fetchCategoryProducts = async (
     return response.json();
 };
 
-export default function ProductsInfinite({ initialProducts, appliedFilters }: ProductsInfiniteType) {
+export const ProductsInfinite = ({ initialProducts, appliedFilters }: ProductsInfiniteType) => {
     const [loadMode] = useState<ProductsLoadMode>(DEFAULT_PRODUCTS_LOAD_MODE);
     const isAutoLoadEnabled = loadMode === 'auto';
 
@@ -122,4 +122,4 @@ export default function ProductsInfinite({ initialProducts, appliedFilters }: Pr
             )}
         </div>
     );
-}
+};

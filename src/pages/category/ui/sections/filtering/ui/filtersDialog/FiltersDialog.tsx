@@ -7,7 +7,7 @@ import { FiltersIcon } from '@/shared/ui/icons';
 import FiltersModal from './FiltersModal';
 import styles from './filtersModal.module.scss';
 
-const FiltersDialog = () => {
+export const FiltersDialog = () => {
     const { isOpen, close, open } = useOpenState();
 
     return (
@@ -23,5 +23,3 @@ const FiltersDialog = () => {
         </>
     );
 };
-
-export default FiltersDialog;

@@ -8,6 +8,7 @@ import { makeStore } from '@/app/store';
 
 export default function StoreProvider({ children }: { children: ReactNode }) {
     const [store] = useState(makeStore);
+    const [serverState] = useState(() => store.getState());
 
-    return <Provider store={store}>{children}</Provider>;
+    return <Provider store={store} serverState={serverState}>{children}</Provider>;
 }
