@@ -3,7 +3,9 @@
 import {
     type ComponentPropsWithRef,
     type MouseEvent,
-    useEffect,
+    type SyntheticEvent,
+    useCallback,
+    useLayoutEffect,
     useRef,
 } from 'react';
 
@@ -35,7 +37,7 @@ type DialogAccessibilityType
         'aria-labelledby'?: never;
     };
 
-type DialogType = Omit<
+export type DialogProps = Omit<
     ComponentPropsWithRef<'dialog'>,
     'open' | 'onClose' | 'aria-labelledby' | 'aria-label'
 >
@@ -49,36 +51,44 @@ export const Dialog = ({
     isOpen,
     onClose,
     ref,
+    onClick,
+    onCancel,
     ...props
-}: DialogType) => {
+}: DialogProps) => {
     const dialogRef = useRef<HTMLDialogElement>(null);
 
-    useEffect(() => {
+    const setRef = useCallback((node: HTMLDialogElement | null) => {
+        return mergeRefs(dialogRef, ref)(node);
+    }, [ref]);
+
+    // Layout effects run before React captures the new ViewTransition snapshot.
+    useLayoutEffect(() => {
         const dialog = dialogRef.current;
-
-        if (!dialog) {
-            return;
-        }
-
-        if (isOpen && !dialog.open) {
-            dialog.showModal();
-            return;
-        }
-
-        if (!isOpen && dialog.open) {
-            dialog.close();
-        }
-
-        return () => {
-            if (dialog.open) {
-                dialog.close();
-            }
-        };
+        if (!dialog) return;
+        if (isOpen && !dialog.open) dialog.showModal();
+        if (!isOpen && dialog.open) dialog.close();
     }, [isOpen]);
+
+    useLayoutEffect(() => {
+        const dialog = dialogRef.current;
+        return () => {
+            if (dialog?.open) dialog.close();
+        };
+    }, []);
+
+    const handleCancel = (event: SyntheticEvent<HTMLDialogElement>) => {
+        onCancel?.(event);
+        const prevented = event.defaultPrevented;
+        // Let the controlled owner finish its exit animation before closing.
+        event.preventDefault();
+        if (!prevented) onClose();
+    };
 
     // Native <dialog> does not close on backdrop click by default.
     // Click coordinates outside the dialog box are treated as a backdrop click.
     const handleClick = (event: MouseEvent<HTMLDialogElement>) => {
+        onClick?.(event);
+        if (event.defaultPrevented || event.target !== event.currentTarget) return;
         const dialog = event.currentTarget;
         const rect = dialog.getBoundingClientRect();
 
@@ -96,8 +106,13 @@ export const Dialog = ({
     return (
         <dialog
             {...props}
-            ref={mergeRefs(dialogRef, ref)}
-            onClose={onClose}
+            ref={setRef}
+            onClose={(event) => {
+                // Strict Mode closes and reopens the modal while replaying effects.
+                // Its queued close event must not dismiss the reopened dialog.
+                if (isOpen && !event.currentTarget.open && dialogRef.current?.isConnected) onClose();
+            }}
+            onCancel={handleCancel}
             onClick={handleClick}
         >
             {children}
