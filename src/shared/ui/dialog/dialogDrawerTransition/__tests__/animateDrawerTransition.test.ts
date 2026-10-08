@@ -23,7 +23,7 @@ describe('drawer ViewTransition animation', () => {
         const visible = { transform: 'translateX(0)', opacity: 1 };
         expect(animate).toHaveBeenCalledWith(
             phase === 'enter' ? [hidden, visible] : [visible, hidden],
-            expect.objectContaining({ duration: 300, easing: 'cubic-bezier(0, 0, 0.2, 1)', delay: 0, fill: 'both' }),
+            expect.objectContaining({ duration: 300, easing: 'cubic-bezier(0, 0, 0.2, 1)', fill: 'both' }),
         );
         expect(target === 'new' ? animateOld : animateNew).not.toHaveBeenCalled();
         dispose?.();

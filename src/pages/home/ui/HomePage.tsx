@@ -7,7 +7,7 @@ export default function HomePage() {
     return (
         <main>
             <Hero />
-            {/* <DrawerPreview /> */}
+            <DrawerPreview />
             <CategoriesSection />
             {/* <ScssPreview /> */}
         </main>

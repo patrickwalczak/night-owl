@@ -3,13 +3,14 @@
 import { useId, useState } from 'react';
 
 import { DialogDrawerMotion, DialogDrawerTransition, DialogTriggerButton } from '@/shared/ui/dialog/client';
+import { DrawerCoreViewTransition } from '@/shared/ui/drawerViewTransition';
 import { CloseIcon } from '@/shared/ui/icons';
 
 import styles from './drawerPreview.module.scss';
 
 export const DrawerPreview = () => {
     const id = useId();
-    const [variant, setVariant] = useState<'motion' | 'transition' | null>(null);
+    const [variant, setVariant] = useState<'motion' | 'transition' | 'core-transition' | null>(null);
     const [side, setSide] = useState<'left' | 'right'>('right');
     const close = () => setVariant(null);
 
@@ -48,7 +49,7 @@ export const DrawerPreview = () => {
         <section className={styles.preview} aria-labelledby={`${id}-preview-title`}>
             <div>
                 <h2 id={`${id}-preview-title`}>{'Drawer preview'}</h2>
-                <p>{'Compare both animations. Close with Escape, the backdrop, or the close button.'}</p>
+                <p>{'Compare the three drawer variants.'}</p>
             </div>
             <div className={styles.controls}>
                 <label className={styles.side}>
@@ -74,6 +75,15 @@ export const DrawerPreview = () => {
                 >
                     {'Open ViewTransition'}
                 </DialogTriggerButton>
+                <button
+                    type={'button'}
+                    className={styles.button}
+                    aria-haspopup={'dialog'}
+                    aria-expanded={variant === 'core-transition'}
+                    onClick={() => setVariant('core-transition')}
+                >
+                    {'Open Core ViewTransition'}
+                </button>
             </div>
             <DialogDrawerMotion
                 id={`${id}-motion`}
@@ -81,6 +91,7 @@ export const DrawerPreview = () => {
                 isOpen={variant === 'motion'}
                 onClose={close}
                 side={side}
+                unmountOnExit={true}
             >
                 {content(`${id}-motion-title`)}
             </DialogDrawerMotion>
@@ -90,9 +101,19 @@ export const DrawerPreview = () => {
                 isOpen={variant === 'transition'}
                 onClose={close}
                 side={side}
+                unmountOnExit={true}
             >
                 {content(`${id}-transition-title`)}
             </DialogDrawerTransition>
+            <DrawerCoreViewTransition
+                ariaLabelledby={`${id}-core-transition-title`}
+                open={variant === 'core-transition'}
+                onClose={close}
+                anchor={side}
+                unmountOnExit={true}
+            >
+                {content(`${id}-core-transition-title`)}
+            </DrawerCoreViewTransition>
         </section>
     );
 };

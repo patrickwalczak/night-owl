@@ -1,7 +1,7 @@
 'use client';
 
+import { motion, useReducedMotion } from 'framer-motion';
 import {
-    type ComponentPropsWithRef,
     type MouseEvent,
     type SyntheticEvent,
     useCallback,
@@ -11,62 +11,42 @@ import {
 
 import { mergeRefs } from '@/shared/lib/utils';
 
-type DialogAccessibilityType
-    = | {
-        /**
-           * Use when the dialog has a visible title.
-           * The value must match the id of the title element.
-           */
-        'aria-labelledby': string;
+import { type DialogProps } from '../types';
 
-        /**
-           * Use aria-labelledby OR aria-label, not both.
-           */
-        'aria-label'?: never;
-    }
-    | {
-        /**
-           * Use when the dialog has no visible title.
-           * Provides an accessible name for screen readers.
-           */
-        'aria-label': string;
-
-        /**
-           * Use aria-labelledby OR aria-label, not both.
-           */
-        'aria-labelledby'?: never;
-    };
-
-export type DialogProps = Omit<
-    ComponentPropsWithRef<'dialog'>,
-    'open' | 'onClose' | 'aria-labelledby' | 'aria-label'
->
-& DialogAccessibilityType & {
-    isOpen: boolean;
-    onClose: () => void;
-};
-
-export const Dialog = ({
+export const MotionDialog = ({
     children,
     isOpen,
     onClose,
     ref,
     onClick,
     onCancel,
+    onDrag: _onDrag,
+    onDragStart: _onDragStart,
+    onDragEnd: _onDragEnd,
+    onAnimationStart: _onAnimationStart,
+    side,
+    timeout,
+    onExitComplete,
     ...props
-}: DialogProps) => {
+}: DialogProps & {
+    side: 'left' | 'right';
+    timeout: number;
+    onExitComplete: () => void;
+}) => {
+    const reducedMotion = useReducedMotion();
+    const x = reducedMotion ? 0 : side === 'left' ? '-100%' : '100%';
     const dialogRef = useRef<HTMLDialogElement>(null);
 
     const setRef = useCallback((node: HTMLDialogElement | null) => {
-        return mergeRefs(dialogRef, ref)(node);
-    }, [ref]);
+        const cleanup = mergeRefs(dialogRef, ref)(node);
+        if (node && isOpen && !node.open) node.showModal();
+        return cleanup;
+    }, [ref, isOpen]);
 
-    // Layout effects run before React captures the new ViewTransition snapshot.
     useLayoutEffect(() => {
         const dialog = dialogRef.current;
         if (!dialog) return;
         if (isOpen && !dialog.open) dialog.showModal();
-        if (!isOpen && dialog.open) dialog.close();
     }, [isOpen]);
 
     useLayoutEffect(() => {
@@ -104,18 +84,26 @@ export const Dialog = ({
     };
 
     return (
-        <dialog
+        <motion.dialog
             {...props}
             ref={setRef}
+            data-side={side}
+            initial={{ x, opacity: 0 }}
+            animate={isOpen ? { x: 0, opacity: 1 } : { x, opacity: 1 }}
+            transition={{ duration: reducedMotion ? 0 : timeout / 1000, ease: [0, 0, 0.2, 1], delay: 0 }}
+            onAnimationComplete={() => {
+                if (!isOpen) {
+                    if (dialogRef.current?.open) dialogRef.current.close();
+                    onExitComplete();
+                }
+            }}
             onClose={(event) => {
-                // Strict Mode closes and reopens the modal while replaying effects.
-                // Its queued close event must not dismiss the reopened dialog.
                 if (isOpen && !event.currentTarget.open && dialogRef.current?.isConnected) onClose();
             }}
             onCancel={handleCancel}
             onClick={handleClick}
         >
             {children}
-        </dialog>
+        </motion.dialog>
     );
 };

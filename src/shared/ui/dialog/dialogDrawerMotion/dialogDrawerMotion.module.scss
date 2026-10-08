@@ -18,10 +18,6 @@
     &[data-side='left'] {
         inset: 0 auto 0 0;
     }
-
-    &::backdrop {
-        background: transparent;
-    }
 }
 
 html:has(.drawer[open]) {

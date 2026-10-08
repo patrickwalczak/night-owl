@@ -79,6 +79,71 @@ describe.each([
     ['Motion', DialogDrawerMotion],
     ['ViewTransition', DialogDrawerTransition],
 ])('%s drawer in Strict Mode', (_name, Drawer) => {
+    it.each([false, true])('mounts in the expected container with createPortal=%s', async (createPortal) => {
+        const { container, getByRole } = render(
+            <Drawer aria-label={'Portal preview'} isOpen={true} onClose={vi.fn()} createPortal={createPortal} />,
+        );
+        const dialog = await waitFor(() => getByRole('dialog'));
+        expect(container.contains(dialog)).toBe(!createPortal);
+        expect(document.body.contains(dialog)).toBe(true);
+        expect(dialog.hasAttribute('createPortal')).toBe(false);
+    });
+
+    it.each([true, false])('handles content state with unmountOnExit=%s', async (unmountOnExit) => {
+        const props = { 'aria-label': 'State preview', 'onClose': vi.fn(), 'timeout': 0, unmountOnExit };
+        const content = <input aria-label={'Note'} defaultValue={''} />;
+        const { rerender, getByRole, queryByRole, container } = render(
+            <Drawer {...props} isOpen={true}>{content}</Drawer>,
+        );
+        const input = await waitFor(() => getByRole('textbox'));
+        fireEvent.change(input, { target: { value: 'Keep this note' } });
+        rerender(<Drawer {...props} isOpen={false}>{content}</Drawer>);
+        await waitFor(() => expect(queryByRole('dialog')).toBeNull());
+        if (unmountOnExit) {
+            await waitFor(() => expect(container.querySelector('dialog')).toBeNull());
+        }
+        else {
+            expect(container.querySelector('dialog')).not.toBeNull();
+            expect(container.querySelector('dialog')?.open).toBe(false);
+        }
+        rerender(<Drawer {...props} isOpen={true}>{content}</Drawer>);
+        await waitFor(() => expect((getByRole('textbox') as HTMLInputElement).value)
+            .toBe(unmountOnExit ? '' : 'Keep this note'));
+        expect(props.onClose).not.toHaveBeenCalled();
+        expect(getByRole('dialog').hasAttribute('unmountOnExit')).toBe(false);
+    });
+
+    it.each([true, false])('handles initially closed content with unmountOnExit=%s', async (unmountOnExit) => {
+        const props = { 'aria-label': 'Lifecycle', 'onClose': vi.fn(), 'timeout': 0, unmountOnExit };
+        const { container, rerender, getByRole } = render(
+            <Drawer {...props} isOpen={false}><input aria-label={'Note'} /></Drawer>,
+        );
+        if (unmountOnExit) expect(container.querySelector('input')).toBeNull();
+        else await waitFor(() => expect(container.querySelector('input')).not.toBeNull());
+        expect(container.querySelector('dialog')?.open ?? false).toBe(false);
+        rerender(<Drawer {...props} isOpen={true}><input aria-label={'Note'} /></Drawer>);
+        const input = await waitFor(() => getByRole('textbox'));
+        fireEvent.change(input, { target: { value: 'Saved note' } });
+        rerender(<Drawer {...props} isOpen={false}><input aria-label={'Note'} /></Drawer>);
+        await waitFor(() => {
+            const dialog = container.querySelector('dialog');
+            if (unmountOnExit) expect(dialog).toBeNull();
+            else {
+                expect(dialog).not.toBeNull();
+                expect(dialog?.open).toBe(false);
+            }
+        });
+        rerender(<Drawer {...props} isOpen={true}><input aria-label={'Note'} /></Drawer>);
+        await waitFor(() => expect((getByRole('textbox') as HTMLInputElement).value)
+            .toBe(unmountOnExit ? '' : 'Saved note'));
+        expect(props.onClose).not.toHaveBeenCalled();
+    });
+
+    it('does not mount closed content by default', () => {
+        const { container } = render(<Drawer aria-label={'Closed'} isOpen={false} onClose={vi.fn()} />);
+        expect(container.querySelector('dialog')).toBeNull();
+    });
+
     it('stays open after effect replay and queued native close events', async () => {
         const onClose = vi.fn();
         const { getByRole } = render(
