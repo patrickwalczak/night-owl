@@ -10,6 +10,7 @@ import {
 import ReactDOM from 'react-dom';
 
 import { cn } from '@/shared/lib/utils/cn';
+import { isClickOutsideElement } from '@/shared/lib/utils/isClickOutsideElement';
 
 import styles from './drawer.module.scss';
 
@@ -32,7 +33,7 @@ type DrawerType = AriaProps & {
     onClose: () => void;
     open: boolean;
     /** Transition duration in milliseconds. Defaults to 300. */
-    transitionDuration?: number;
+    transitionDuratio?: number;
     /** Whether to remove the drawer from the DOM after the exit transition completes. Defaults to true. */
     unmountOnExit?: boolean;
     onExited?: () => void;
@@ -48,7 +49,7 @@ export const Drawer = (
         onClose,
         onExited,
         open,
-        transitionDuration = 300,
+        transitionDuratio = 300,
         unmountOnExit = true,
     }: DrawerType,
 ) => {
@@ -63,35 +64,22 @@ export const Drawer = (
         const dialog = dialogRef.current;
         if (!dialog) return;
 
-        if (open) {
-            if (!dialog.open) dialog.showModal();
-            return;
+        if (open && !dialog.open) dialog.showModal();
+
+        if (!open && dialog.open) {
+            dialog.close();
+
+            const animations = dialog.getAnimations();
+
+            Promise.allSettled(animations.map(animation => animation.finished)).then(() => {
+                onExited?.();
+                if (unmountOnExit) setMounted(false);
+            });
         }
-
-        if (!dialog.open) return;
-
-        dialog.close();
-
-        let cancelled = false;
-
-        const animations = dialog.getAnimations({ subtree: true });
-
-        Promise.allSettled(
-            animations.map(animation => animation.finished),
-        ).then(() => {
-            if (cancelled) return;
-
-            if (unmountOnExit) setMounted(false);
-            onExited?.();
-        });
-
-        return () => {
-            cancelled = true;
-        };
     }, [open, mounted, unmountOnExit, onExited]);
 
     function closeDialog(e: MouseEvent<HTMLDialogElement>) {
-        if (e.target === dialogRef.current) {
+        if (isClickOutsideElement(e)) {
             onClose();
         }
     }
@@ -101,10 +89,14 @@ export const Drawer = (
             className={cn(styles.drawerRoot, 't_drawer_root', {
                 [styles.drawerRootIsLeft]: position === 'left',
             })}
-            style={{ '--drawer-transition-duration': `${transitionDuration}ms` } as CSSProperties}
+            style={{ '--drawer-transition-duration': `${transitionDuratio}ms` } as CSSProperties}
             data-drawer
             id={id}
             onClick={closeDialog}
+            onCancel={(event) => {
+                event.preventDefault();
+                onClose();
+            }}
             ref={dialogRef}
             {...ariaLabel && { 'aria-label': ariaLabel }}
             {...ariaLabelledby && { 'aria-labelledby': ariaLabelledby }}

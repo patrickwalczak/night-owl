@@ -34,17 +34,3 @@ export type DialogProps = Omit<
     isOpen: boolean;
     onClose: () => void;
 };
-
-type DrawerProps<T> = T extends unknown
-    ? Omit<T, 'onDrag' | 'onDragStart' | 'onDragEnd' | 'onAnimationStart'>
-    : never;
-
-export type DialogDrawerProps = DrawerProps<DialogProps> & {
-    side?: 'left' | 'right';
-    /** Animation duration in milliseconds. Defaults to 300. */
-    timeout?: number;
-    /** Mount the drawer and its backdrop in document.body. Defaults to false. */
-    createPortal?: boolean;
-    /** Remove drawer content after exit. Set false to preserve its state. Defaults to true. */
-    unmountOnExit?: boolean;
-};
