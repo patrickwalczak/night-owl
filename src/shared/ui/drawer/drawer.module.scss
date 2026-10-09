@@ -27,13 +27,9 @@
     transform: translateX(0);
   }
 
-  &.drawerRootIsLeft {
+  &IsLeft {
     inset: 0 auto 0 0;
     transform: translateX(-100%);
-
-    &[open] {
-      transform: translateX(0);
-    }
   }
 
   &[open]::backdrop {
@@ -50,7 +46,7 @@
     transform: translateX(100%);
   }
 
-  .drawerRoot.drawerRootIsLeft[open] {
+  .drawerRootIsLeft[open] {
     transform: translateX(-100%);
   }
 
