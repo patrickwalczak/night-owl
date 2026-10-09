@@ -2,6 +2,7 @@ import {
     useEffect,
     useId,
     useRef,
+    useState,
     type ReactNode,
     type MouseEvent,
 } from 'react';
@@ -51,33 +52,45 @@ export const DrawerCoreViewTransition = (
 ) => {
     const dialogRef = useRef<HTMLDialogElement>(null);
     const id = useId();
+    const [mounted, setMounted] = useState(open);
 
-    // Keep a stable ref to onClose so the event listener never needs re-attaching
-    const onCloseRef = useRef(onClose);
-    useEffect(() => {
-        onCloseRef.current = onClose;
-    }, [onClose]);
+    // https://react.dev/reference/react/useState#storing-information-from-previous-renders
+    if (open && !mounted) setMounted(true);
 
-    // Show/hide in response to the `open` prop
     useEffect(() => {
         const dialog = dialogRef.current;
         if (!dialog) return;
 
         if (open) {
-            if (!dialog.open) {
-                dialog.showModal();
-            }
+            if (!dialog.open) dialog.showModal();
+            return;
         }
-        else {
-            if (dialog.open) {
-                dialog.close();
-            }
-        }
-    }, [open]);
+
+        if (!dialog.open) return;
+
+        dialog.close();
+
+        let cancelled = false;
+
+        const animations = dialog.getAnimations({ subtree: true });
+
+        Promise.allSettled(
+            animations.map(animation => animation.finished),
+        ).then(() => {
+            if (cancelled) return;
+
+            if (unmountOnExit) setMounted(false);
+            onExited?.();
+        });
+
+        return () => {
+            cancelled = true;
+        };
+    }, [open, mounted, unmountOnExit, onExited]);
 
     function closeDialog(e: MouseEvent<HTMLDialogElement>) {
         if (e.target === dialogRef.current) {
-            onCloseRef.current();
+            onClose();
         }
     }
 
@@ -95,6 +108,8 @@ export const DrawerCoreViewTransition = (
             {children}
         </dialog>
     );
+
+    if (!mounted) return null;
 
     return createPortal ? ReactDOM.createPortal(DrawerElement, document.body) : DrawerElement;
 };
