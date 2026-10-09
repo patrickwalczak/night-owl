@@ -3,7 +3,7 @@
 import { useId, useState } from 'react';
 
 import { DialogDrawerMotion, DialogDrawerTransition, DialogTriggerButton } from '@/shared/ui/dialog/client';
-import { DrawerCoreViewTransition } from '@/shared/ui/drawerViewTransition';
+import { Drawer } from '@/shared/ui/drawer';
 import { CloseIcon } from '@/shared/ui/icons';
 
 import styles from './drawerPreview.module.scss';
@@ -82,7 +82,7 @@ export const DrawerPreview = () => {
                     aria-expanded={variant === 'core-transition'}
                     onClick={() => setVariant('core-transition')}
                 >
-                    {'Open Core ViewTransition'}
+                    {'Open Drawer'}
                 </button>
             </div>
             <DialogDrawerMotion
@@ -91,7 +91,6 @@ export const DrawerPreview = () => {
                 isOpen={variant === 'motion'}
                 onClose={close}
                 side={side}
-                unmountOnExit={true}
             >
                 {content(`${id}-motion-title`)}
             </DialogDrawerMotion>
@@ -101,19 +100,17 @@ export const DrawerPreview = () => {
                 isOpen={variant === 'transition'}
                 onClose={close}
                 side={side}
-                unmountOnExit={true}
             >
                 {content(`${id}-transition-title`)}
             </DialogDrawerTransition>
-            <DrawerCoreViewTransition
+            <Drawer
                 ariaLabelledby={`${id}-core-transition-title`}
                 open={variant === 'core-transition'}
                 onClose={close}
-                anchor={side}
-                unmountOnExit={true}
+                position={side}
             >
                 {content(`${id}-core-transition-title`)}
-            </DrawerCoreViewTransition>
+            </Drawer>
         </section>
     );
 };

@@ -5,12 +5,13 @@ import {
     useState,
     type ReactNode,
     type MouseEvent,
+    type CSSProperties,
 } from 'react';
 import ReactDOM from 'react-dom';
 
 import { cn } from '@/shared/lib/utils/cn';
 
-import styles from './drawerCore.module.scss';
+import styles from './drawer.module.scss';
 
 type AriaProps = {
     ariaLabel?: never;
@@ -20,24 +21,26 @@ type AriaProps = {
     ariaLabelledby?: never;
 };
 
+export type DrawerPosition = 'left' | 'right';
+
 type DrawerType = AriaProps & {
-    /** Defines the horizontal anchor position of the modal. */
-    anchor?: 'left' | 'right';
+    /** Defines the horizontal position of the modal. */
+    position?: DrawerPosition;
     children: ReactNode;
     /** Whether to render the dialog in document.body using a portal. */
     createPortal?: boolean;
     onClose: () => void;
     open: boolean;
-    testClass?: string;
-    timeout?: number;
+    /** Transition duration in milliseconds. Defaults to 300. */
+    transitionDuration?: number;
     /** Whether to remove the drawer from the DOM after the exit transition completes. Defaults to true. */
     unmountOnExit?: boolean;
     onExited?: () => void;
 };
 
-export const DrawerCoreViewTransition = (
+export const Drawer = (
     {
-        anchor = 'right',
+        position = 'right',
         ariaLabel,
         ariaLabelledby,
         children,
@@ -45,8 +48,7 @@ export const DrawerCoreViewTransition = (
         onClose,
         onExited,
         open,
-        testClass = '',
-        timeout = 300,
+        transitionDuration = 300,
         unmountOnExit = true,
     }: DrawerType,
 ) => {
@@ -96,9 +98,11 @@ export const DrawerCoreViewTransition = (
 
     const DrawerElement = (
         <dialog
-            className={cn(styles.drawerRoot, 't_drawer_root')}
+            className={cn(styles.drawerRoot, 't_drawer_root', {
+                [styles.drawerRootIsLeft]: position === 'left',
+            })}
+            style={{ '--drawer-transition-duration': `${transitionDuration}ms` } as CSSProperties}
             data-drawer
-            data-side={anchor}
             id={id}
             onClick={closeDialog}
             ref={dialogRef}

@@ -10,24 +10,24 @@
   border: none;
   color: gray;
   transition:
-          transform 300ms cubic-bezier(0, 0, 0.2, 1),
-          overlay 300ms allow-discrete,
-          display 300ms allow-discrete;
+          transform var(--drawer-transition-duration) cubic-bezier(0, 0, 0.2, 1),
+          overlay var(--drawer-transition-duration) allow-discrete,
+          display var(--drawer-transition-duration) allow-discrete;
 
   &::backdrop {
     opacity: 0;
     background-color: rgb(0 0 0 / 70%);
     transition:
-            opacity 300ms cubic-bezier(0.4, 0, 0.2, 1),
-            overlay 300ms allow-discrete,
-            display 300ms allow-discrete;
+            opacity var(--drawer-transition-duration) cubic-bezier(0.4, 0, 0.2, 1),
+            overlay var(--drawer-transition-duration) allow-discrete,
+            display var(--drawer-transition-duration) allow-discrete;
   }
 
   &[open] {
     transform: translateX(0);
   }
 
-  &[data-side='left'] {
+  &.drawerRootIsLeft {
     inset: 0 auto 0 0;
     transform: translateX(-100%);
 
@@ -46,11 +46,11 @@
 }
 
 @starting-style {
-  .drawerRoot[data-side='right'][open] {
+  .drawerRoot[open] {
     transform: translateX(100%);
   }
 
-  .drawerRoot[data-side='left'][open] {
+  .drawerRoot.drawerRootIsLeft[open] {
     transform: translateX(-100%);
   }
 

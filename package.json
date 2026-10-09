@@ -8,7 +8,7 @@
 		"start": "next start",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
-		"typecheck": "tsc --noEmit --pretty false",
+		"typecheck": "next typegen && tsc --noEmit --pretty false",
 		"check": "npm run lint && npm run typecheck",
 		"check:build": "npm run check && npm run build",
 		"prepush": "npm run check && npm run test:run",
