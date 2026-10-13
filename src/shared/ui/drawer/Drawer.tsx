@@ -28,12 +28,17 @@ type DrawerType = AriaProps & {
     /** Defines the horizontal position of the modal. */
     position?: DrawerPosition;
     children: ReactNode;
-    /** Whether to render the dialog in document.body using a portal. */
-    createPortal?: boolean;
     onClose: () => void;
     open: boolean;
     /** Transition duration in milliseconds. Defaults to 300. */
     transitionDuratio?: number;
+    /**
+     * When true (default), the drawer is added to the DOM only when first opened.
+     * When false, the drawer is added to the DOM immediately, but stays hidden until opened.
+     * After closing, unmountOnExit=true removes it after the exit animation;
+     * unmountOnExit=false keeps it in the DOM, hidden.
+     */
+    mountOnEnter?: boolean;
     /** Whether to remove the drawer from the DOM after the exit transition completes. Defaults to true. */
     unmountOnExit?: boolean;
     onExited?: () => void;
@@ -45,17 +50,17 @@ export const Drawer = (
         ariaLabel,
         ariaLabelledby,
         children,
-        createPortal = false,
         onClose,
         onExited,
         open,
         transitionDuratio = 300,
+        mountOnEnter = true,
         unmountOnExit = true,
     }: DrawerType,
 ) => {
     const dialogRef = useRef<HTMLDialogElement>(null);
     const id = useId();
-    const [mounted, setMounted] = useState(open);
+    const [mounted, setMounted] = useState(open || !mountOnEnter);
 
     // https://react.dev/reference/react/useState#storing-information-from-previous-renders
     if (open && !mounted) setMounted(true);
@@ -107,5 +112,5 @@ export const Drawer = (
 
     if (!mounted) return null;
 
-    return createPortal ? ReactDOM.createPortal(DrawerElement, document.body) : DrawerElement;
+    return DrawerElement;
 };
