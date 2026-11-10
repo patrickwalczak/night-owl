@@ -3,4 +3,4 @@ import 'client-only';
 
 export { Dialog } from './Dialog';
 export { DialogTriggerButton } from './DialogTriggerButton';
-export type { DialogProps } from './types';
+export type { DialogType } from './types';
