@@ -1,13 +1,11 @@
 import {
     useEffect,
-    useId,
     useRef,
     useState,
     type ReactNode,
     type MouseEvent,
     type CSSProperties,
 } from 'react';
-import ReactDOM from 'react-dom';
 
 import { cn } from '@/shared/lib/utils/cn';
 import { isClickOutsideElement } from '@/shared/lib/utils/isClickOutsideElement';
@@ -16,9 +14,9 @@ import styles from './drawer.module.scss';
 
 type AriaProps = {
     ariaLabel?: never;
-    ariaLabelledby?: string;
+    ariaLabelledby: string;
 } | {
-    ariaLabel?: null | string;
+    ariaLabel: string;
     ariaLabelledby?: never;
 };
 
@@ -28,12 +26,12 @@ type DrawerType = AriaProps & {
     /** Defines the horizontal position of the modal. */
     position?: DrawerPosition;
     children: ReactNode;
-    /** Whether to render the dialog in document.body using a portal. */
-    createPortal?: boolean;
     onClose: () => void;
     open: boolean;
     /** Transition duration in milliseconds. Defaults to 300. */
-    transitionDuratio?: number;
+    transitionDuration?: number;
+    /** Whether to defer mounting until the drawer first opens. Defaults to true. */
+    mountOnEnter?: boolean;
     /** Whether to remove the drawer from the DOM after the exit transition completes. Defaults to true. */
     unmountOnExit?: boolean;
     onExited?: () => void;
@@ -45,17 +43,16 @@ export const Drawer = (
         ariaLabel,
         ariaLabelledby,
         children,
-        createPortal = false,
         onClose,
         onExited,
         open,
-        transitionDuratio = 300,
+        transitionDuration = 300,
+        mountOnEnter = true,
         unmountOnExit = true,
     }: DrawerType,
 ) => {
     const dialogRef = useRef<HTMLDialogElement>(null);
-    const id = useId();
-    const [mounted, setMounted] = useState(open);
+    const [mounted, setMounted] = useState(open || !mountOnEnter);
 
     // https://react.dev/reference/react/useState#storing-information-from-previous-renders
     if (open && !mounted) setMounted(true);
@@ -79,33 +76,27 @@ export const Drawer = (
     }, [open, mounted, unmountOnExit, onExited]);
 
     function closeDialog(e: MouseEvent<HTMLDialogElement>) {
-        if (isClickOutsideElement(e)) {
-            onClose();
-        }
+        if (isClickOutsideElement(e)) onClose();
     }
 
-    const DrawerElement = (
+    if (!mounted) return null;
+
+    return (
         <dialog
             className={cn(styles.drawerRoot, 't_drawer_root', {
                 [styles.drawerRootIsLeft]: position === 'left',
             })}
-            style={{ '--drawer-transition-duration': `${transitionDuratio}ms` } as CSSProperties}
-            data-drawer
-            id={id}
+            style={{ '--drawer-transition-duration': `${transitionDuration}ms` } as CSSProperties}
             onClick={closeDialog}
             onCancel={(event) => {
                 event.preventDefault();
                 onClose();
             }}
             ref={dialogRef}
-            {...ariaLabel && { 'aria-label': ariaLabel }}
-            {...ariaLabelledby && { 'aria-labelledby': ariaLabelledby }}
+            aria-label={ariaLabel}
+            aria-labelledby={ariaLabelledby}
         >
             {children}
         </dialog>
     );
-
-    if (!mounted) return null;
-
-    return createPortal ? ReactDOM.createPortal(DrawerElement, document.body) : DrawerElement;
 };
