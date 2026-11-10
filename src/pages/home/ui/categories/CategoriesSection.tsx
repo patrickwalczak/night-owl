@@ -5,15 +5,14 @@ import { CategoryTile } from './CategoryTile';
 export const CategoriesSection = () => {
     return (
         <div className={styles.container}>
-            <CategoryTile
+            {/* <CategoryTile
                 href={'#'}
                 title={'Outdoor Lighting'}
                 description={
                     'Illuminate your garden, patio, and entrance with stylish outdoor lighting made for every evening.'
                 }
                 image={{ alt: 'Outdoor lighting', src: '/cat_img_outdoor_lighting.webp' }}
-            />
-
+            /> */}
             <CategoryTile
                 href={'/category/indoor-lighting'}
                 title={'Indoor Lighting'}
@@ -21,12 +20,12 @@ export const CategoriesSection = () => {
                 image={{ alt: 'Indoor lighting', src: '/cat_img_indoor_lighting.webp' }}
             />
 
-            <CategoryTile
+            {/* <CategoryTile
                 href={'#'}
                 title={'Accessories'}
                 description={'Complete your lighting setup with bulbs, cords, switches, and stylish accessories.'}
                 image={{ alt: 'Accessories', src: '/cat_img_accessories.webp' }}
-            />
+            /> */}
             <CategoryBanner
                 href={'/category/indoor-lighting'}
                 title={'Lighting made for every mood'}

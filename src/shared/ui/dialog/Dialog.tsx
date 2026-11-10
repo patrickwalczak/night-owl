@@ -9,7 +9,7 @@ import {
 
 import { isClickOutsideElement, mergeRefs } from '@/shared/lib/utils';
 
-import { type DialogProps } from './types';
+import { type DialogType } from './types';
 
 export const Dialog = ({
     children,
@@ -19,9 +19,8 @@ export const Dialog = ({
     onClick,
     onCancel,
     ...props
-}: DialogProps) => {
+}: DialogType) => {
     const dialogRef = useRef<HTMLDialogElement>(null);
-
     const mergedRef = useMemo(() => mergeRefs(dialogRef, ref), [ref]);
 
     useEffect(() => {
@@ -34,9 +33,7 @@ export const Dialog = ({
     }, [isOpen]);
 
     function closeDialog(e: MouseEvent<HTMLDialogElement>) {
-        if (isClickOutsideElement(e)) {
-            onClose();
-        }
+        if (isClickOutsideElement(e)) onClose();
     }
 
     return (

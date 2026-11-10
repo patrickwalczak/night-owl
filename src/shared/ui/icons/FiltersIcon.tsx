@@ -9,7 +9,7 @@ type FiltersType = SVGProps<SVGSVGElement>;
 export const FiltersIcon = ({ className, ...props }: FiltersType) => {
     return (
         <svg
-            aria-hidden={'true'}
+            aria-hidden
             className={cn(styles.icon, className)}
             viewBox={'0 0 25 24'}
             fill={'none'}

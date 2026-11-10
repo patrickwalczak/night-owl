@@ -26,7 +26,7 @@ type DialogAccessibilityType
         'aria-labelledby'?: never;
     };
 
-export type DialogProps = Omit<
+export type DialogType = Omit<
     ComponentPropsWithRef<'dialog'>,
     'open' | 'onClose' | 'aria-labelledby' | 'aria-label'
 >

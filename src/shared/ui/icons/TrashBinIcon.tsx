@@ -1,6 +1,6 @@
 export const TrashBinIcon = () => {
     return (
-        <svg aria-hidden={'true'} width={'24'} height={'24'} viewBox={'0 0 24 24'} fill={'none'} xmlns={'http://www.w3.org/2000/svg'}>
+        <svg aria-hidden width={'24'} height={'24'} viewBox={'0 0 24 24'} fill={'none'} xmlns={'http://www.w3.org/2000/svg'}>
             <g clipPath={'url(#clip0_1_20431)'}>
                 <path d={'M14 11V17'} stroke={'#292929'} strokeWidth={'2'} strokeLinecap={'round'} strokeLinejoin={'round'} />
                 <path d={'M10 11V17'} stroke={'#292929'} strokeWidth={'2'} strokeLinecap={'round'} strokeLinejoin={'round'} />

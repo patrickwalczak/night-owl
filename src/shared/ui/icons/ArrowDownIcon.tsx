@@ -1,7 +1,7 @@
 export const ArrowDownIcon = ({ className = '' }: { className?: string }) => {
     return (
         <svg
-            aria-hidden={'true'}
+            aria-hidden
             className={className}
             width={'24'}
             height={'24'}
