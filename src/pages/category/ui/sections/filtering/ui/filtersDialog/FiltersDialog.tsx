@@ -1,6 +1,6 @@
 'use client';
 
-import { useOpenState } from '@/shared/lib/hooks/client';
+import { useOpenState } from '@/shared/lib/hooks/useOpenState/client';
 import { cn } from '@/shared/lib/utils/cn';
 import { FiltersIcon } from '@/shared/ui/icons';
 

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { useSetNavigationVisibility } from '@/features/layout/client';
 import { NAVIGATION_HEIGHT_PX } from '@/shared/config';
-import { useWindowScroll } from '@/shared/lib/hooks/client';
+import { useWindowScroll } from '@/shared/lib/hooks/useWindowScroll/client';
 
 export const useIsScrolled = () => {
     const setNavigationVisibility = useSetNavigationVisibility();

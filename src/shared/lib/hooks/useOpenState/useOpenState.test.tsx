@@ -1,7 +1,7 @@
 import { act, renderHook } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { useOpenState } from '../useOpenState';
+import { useOpenState } from './useOpenState';
 
 describe('useOpenState', () => {
     it('opens and closes state', () => {

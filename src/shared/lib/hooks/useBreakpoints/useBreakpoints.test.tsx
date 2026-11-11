@@ -5,8 +5,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { BREAKPOINTS } from '@/shared/config/breakpoints';
 
-import { breakpointsStore } from '../model/store';
-import { useBreakpoints, type BreakpointsSnapshot } from '../useBreakpoints';
+import { breakpointsStore } from './model/store';
+import { useBreakpoints, type BreakpointsSnapshot } from './useBreakpoints';
 
 function mockViewport(initialWidth: number) {
     let width = initialWidth;

@@ -1,7 +1,7 @@
 # useBreakpoints
 
 ```tsx
-import { useBreakpoints } from '@/shared/lib/hooks/client';
+import { useBreakpoints } from '@/shared/lib/hooks/useBreakpoints/client';
 
 const { isCompact, isWide, atLeast } = useBreakpoints();
 // atLeast[768] means viewport width >= 768 CSS pixels.

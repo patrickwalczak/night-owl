@@ -1,6 +1,6 @@
 'use client';
 
-import { useBodyOverflow } from '@/shared/lib/hooks/client';
+import { useBodyOverflow } from '@/shared/lib/hooks/useBodyOverflow/client';
 
 import styles from './overlay.module.scss';
 

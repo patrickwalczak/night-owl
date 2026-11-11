@@ -9,7 +9,7 @@ import type { ParsedFilters } from '@/pages/category/model/params/searchParams.t
 import { usePageParamSetter } from '@/pages/category/lib/hooks/usePageParamSetter';
 import { normalizeSearchParams } from '@/pages/category/lib/url';
 import { useCategoryPageSelector } from '@/pages/category/model/store/client';
-import { useIntersectionObserver } from '@/shared/lib/hooks/client';
+import { useIntersectionObserver } from '@/shared/lib/hooks/useIntersectionObserver/client';
 import { cn } from '@/shared/lib/utils';
 
 import { NoProductsFound } from '../noProductsFound/NoProductsFound';

@@ -2,7 +2,7 @@ import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { createRef, type MouseEvent, StrictMode } from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { Accordion } from '../Accordion';
+import { Accordion } from './Accordion';
 
 afterEach(cleanup);
 

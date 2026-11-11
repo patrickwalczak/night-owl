@@ -2,7 +2,7 @@
 
 import { createContext, type MouseEvent, useCallback, useId, useState } from 'react';
 
-import { useSafeContext } from '@/shared/lib/hooks/useSafeContext';
+import { useSafeContext } from '@/shared/lib/hooks/useSafeContext/client';
 import { cn } from '@/shared/lib/utils';
 import { ArrowDownIcon } from '@/shared/ui/icons';
 
