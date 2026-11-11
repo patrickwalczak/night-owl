@@ -1,0 +1,17 @@
+# Backlog
+
+- [ ] Add the Outdoor Lighting (`outdoor-lighting`) and Accessories (`accessories`) categories to the database, then uncomment their tiles in `src/pages/home/ui/categories/CategoriesSection.tsx` and replace the `#` links with `/category/outdoor-lighting` and `/category/accessories`.
+
+- [ ] Implement category browsing in the Compact navigation: the catalog entry (currently labeled `Categories` in [Menu.tsx](../src/widgets/navigation/ui/mobile/components/Menu.tsx)) has no click handler. Show categories and subcategories with working navigation links when activated. Consider a drawer; the presentation is not yet decided. Coordinate its open/close behavior with the existing menu and transitions to Wide.
+
+- [ ] Refactor the category page: split `getCategoryPageData` into smaller queries, move data fetching and rendering as close as possible to the components that need the data, and use separate `Suspense` boundaries where sections can load independently. Remove the category page's Redux store; pass server data through props and keep shared draft filters and UI state in local state or context. Preserve filter application through the URL and product infinite scrolling.
+
+- [ ] Align responsive rendering with [architectural decision 001](architecture-decisions.md#001-responsive-layouts-compact-and-wide-css-and-matchmedia): use consistent `Compact`/`Wide` naming and the same 1024px breakpoint in CSS and JavaScript, with CSS controlling layout and visibility and `matchMedia` controlling width-dependent behavior and mounting. Fix visibility at the breakpoint and handle open panels when switching layouts, preserving shared user state and matching server HTML with the initial client render.
+
+  Areas to update:
+
+  - [Main navigation](../src/widgets/navigation/ui/): `Navigation`, `MobileNavigation`, `CategoriesDropdown`, and their styles. Align `mobile`/`desktop` naming with Compact/Wide, fix both navigation buttons being hidden at exactly 1024px, and handle open menus/dropdowns when crossing the breakpoint.
+  - [Category filters](../src/pages/category/ui/sections/filtering/ui/): `SideFiltersDesktop`, `FiltersWrapper`, `SideFiltersButton`, `FiltersDialog`, and `FiltersModal`. Limit panel-specific effects to the relevant layout, close the Compact modal when switching to Wide, and preserve shared draft filters. Account for the modal portal: hiding its trigger or parent with CSS does not hide the modal.
+  - Category header and controls: [StickyHeader and StickyBarWide](../src/pages/category/ui/sections/header/ui/stickyHeader/), [CompactNav](../src/pages/category/ui/components/compactNavigation/), and [Subcategories](../src/pages/category/ui/components/subcategories/). Align names with actual visibility, avoid running Wide-only sticky logic in Compact, and unify the breakpoint conditions.
+  - Shared responsive logic: [useBreakpoints](../src/shared/lib/hooks/useBreakpoints/useBreakpoints.ts) and [SCSS breakpoints](../src/shared/styles/_breakpoints.scss). Use the shared hook when migrating components and preserve hydration-safe initial rendering when introducing conditional mounting.
+  - Other responsive styles: [home page](../src/pages/home/ui/), [product cards](../src/entities/product/ui/product/), and [category skeleton](../src/pages/category/ui/components/categoryPageSkeleton/). Review hardcoded layout breakpoints for consistency; retain smaller styling breakpoints where useful without introducing extra layout types.

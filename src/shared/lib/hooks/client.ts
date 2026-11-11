@@ -4,7 +4,7 @@ import 'client-only';
 export { useBodyOverflow } from './useBodyOverflow';
 export { useOpenState } from './useOpenState';
 export { useIsSticky } from './useIsSticky';
-export { useMediaQuery } from './useMediaQuery';
+export { useBreakpoints, type Breakpoint, type BreakpointsSnapshot } from './useBreakpoints/useBreakpoints';
 export { useOutsideClick } from './useOutsideClick';
 export { useSafeContext } from './useSafeContext';
 export { useIntersectionObserver } from './useIntersectionObserver';
