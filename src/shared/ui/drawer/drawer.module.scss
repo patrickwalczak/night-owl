@@ -10,17 +10,17 @@
   border: none;
   color: gray;
   transition:
-          transform var(--drawer-transition-duration) cubic-bezier(0, 0, 0.2, 1),
-          overlay var(--drawer-transition-duration) allow-discrete,
-          display var(--drawer-transition-duration) allow-discrete;
+    transform var(--drawer-transition-duration) cubic-bezier(0, 0, 0.2, 1),
+    overlay var(--drawer-transition-duration) allow-discrete,
+    display var(--drawer-transition-duration) allow-discrete;
 
   &::backdrop {
     opacity: 0;
     background-color: rgb(0 0 0 / 70%);
     transition:
-            opacity var(--drawer-transition-duration) cubic-bezier(0.4, 0, 0.2, 1),
-            overlay var(--drawer-transition-duration) allow-discrete,
-            display var(--drawer-transition-duration) allow-discrete;
+      opacity var(--drawer-transition-duration) cubic-bezier(0.4, 0, 0.2, 1),
+      overlay var(--drawer-transition-duration) allow-discrete,
+      display var(--drawer-transition-duration) allow-discrete;
   }
 
   &[open] {
@@ -62,5 +62,35 @@
     .drawerRoot[open]::backdrop {
       opacity: 0;
     }
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 0.5rem 0.75rem;
+  background: var(--color-background-accent);
+  border-bottom: 1px solid var(--color-owl-gray-300);
+  color: var(--color-text-inverted);
+}
+
+.heading {
+  font-size: var(--font-size-20);
+  font-weight: var(--font-weight-300);
+}
+
+.close {
+  svg {
+    width: var(--font-size-32);
+    height: var(--font-size-32);
+  }
+
+  path {
+    stroke: var(--color-text-inverted);
+    stroke-width: 1px;
   }
 }

@@ -1,7 +1,7 @@
 import { useCategoryPageSelector } from '@/pages/category/model/store/client';
 import { ParameterBox } from '@/pages/category/ui/sections/filtering/ui/parameterBox/ParameterBox';
 import { cn } from '@/shared/lib/utils';
-import Modal from '@/shared/ui/modal/client';
+import { Drawer } from '@/shared/ui/drawer';
 
 import { FilterActions } from '../filterActions/FilterActions';
 import styles from './filtersModal.module.scss';
@@ -10,30 +10,24 @@ const FiltersModal = ({ isOpen, close }: { isOpen: boolean; close: () => void })
     const parameters = useCategoryPageSelector(state => state.categoryListing.parameters);
 
     return (
-        <Modal open={isOpen} onClose={close}>
-            <Modal.Overlay>
-                <Modal.Wrapper
-                    id={'filters-modal'}
-                    className={cn(styles.modal)}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.3 }}
-                >
-                    <Modal.Header className={cn(styles.header, 'flex', 'align-center', 'justify-between')}>
-                        <h3 className={cn(styles.heading, 'h4')}>{'Filters'}</h3>
-                        <Modal.CloseButton className={styles.closeModalBtn} />
-                    </Modal.Header>
+        <Drawer.Main open={isOpen} onClose={close} position={'left'}>
+            <div
+                id={'filters-modal'}
+                className={cn(styles.modal)}
+            >
+                <Drawer.Header>
+                    <Drawer.Heading>{'Filters'}</Drawer.Heading>
+                    <Drawer.Close />
+                </Drawer.Header>
 
-                    <div className={cn(styles.body, 'flex', 'flex-col')}>
-                        {parameters.map(parameter => (
-                            <ParameterBox key={parameter.id} parameter={parameter} />
-                        ))}
-                    </div>
-                    <FilterActions className={styles.actions} onApply={close} />
-                </Modal.Wrapper>
-            </Modal.Overlay>
-        </Modal>
+                <div className={cn(styles.body, 'flex', 'flex-col')}>
+                    {parameters.map(parameter => (
+                        <ParameterBox key={parameter.id} parameter={parameter} />
+                    ))}
+                </div>
+                <FilterActions className={styles.actions} onApply={close} />
+            </div>
+        </Drawer.Main>
     );
 };
 

@@ -1,5 +1,7 @@
 # Backlog
 
+- [ ] Add optional opening and closing animations to the shared `Dialog`, similar to `Drawer`, including mounting/unmounting and waiting for exit animations. Use this to restore the Compact menu's container opacity/scale animation; keep its item animations independent.
+
 - [ ] Add the Outdoor Lighting (`outdoor-lighting`) and Accessories (`accessories`) categories to the database, then uncomment their tiles in `src/pages/home/ui/categories/CategoriesSection.tsx` and replace the `#` links with `/category/outdoor-lighting` and `/category/accessories`.
 
 - [ ] Implement category browsing in the Compact navigation: the catalog entry (currently labeled `Categories` in [Menu.tsx](../src/widgets/navigation/ui/mobile/components/Menu.tsx)) has no click handler. Show categories and subcategories with working navigation links when activated. Consider a drawer; the presentation is not yet decided. Coordinate its open/close behavior with the existing menu and transitions to Wide.
