@@ -1,5 +1,3 @@
-'use client';
-
 import { type ComponentPropsWithRef, type MouseEventHandler, type PropsWithChildren } from 'react';
 
 type DialogTriggerButtonType = PropsWithChildren<

@@ -1,5 +1,3 @@
-'use client';
-
 import { useSyncExternalStore } from 'react';
 
 import { breakpointsStore, type BreakpointsSnapshot } from './model/store';

@@ -1,5 +1,3 @@
-'use client';
-
 import { useContext, type Context } from 'react';
 
 export function useSafeContext<T>(context: Context<T | null>): T {
