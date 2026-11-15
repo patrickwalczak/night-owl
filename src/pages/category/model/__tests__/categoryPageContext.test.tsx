@@ -48,7 +48,7 @@ describe('CategoryPageProvider', () => {
             ...initialProps,
             category: {
                 id: 'outdoor', name: 'Outdoor', slug: 'outdoor', parentId: null,
-                children: [{ id: 'lamps', name: 'Lamps', slug: 'lamps', _count: { products: 4 } }],
+                children: [{ id: 'lamps', name: 'Lamps', slug: 'lamps', count: 4 }],
             },
             parameters: [{ id: 'size', name: 'Size', slug: 'size', values: [] }],
             productSum: 4,

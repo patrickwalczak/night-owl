@@ -7,3 +7,13 @@ export type CategoryWithChildren = CategoryGetPayload<{
 }>;
 
 export type RootCategoriesWithChildren = CategoryWithChildren[];
+
+export type RawCategoryWithProductCount = CategoryWithChildren['children'][number];
+
+export type CategoryWithProductCount = Omit<RawCategoryWithProductCount, '_count'> & {
+    count: number;
+};
+
+export type CategoryWithChildrenAndProductCounts = Omit<CategoryWithChildren, 'children'> & {
+    children: CategoryWithProductCount[];
+};

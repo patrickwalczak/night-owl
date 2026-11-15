@@ -6,7 +6,7 @@ Move data fetching close to the sections that consume it, allow independent load
 
 - [x] Replace the category page's Redux store with local context. Migrate consumers and remove the slices, store provider, and Redux synchronization hooks.
 
-- [ ] Extract the parameter query and value-count mapping from `getCategoryPageData` into a dedicated query accepting `categoryIds`. Preserve the current parameter scope and counts.
+- [X] Extract the parameter query and value-count mapping from `getCategoryPageData` into a dedicated query accepting `categoryIds`. Preserve the current parameter scope and counts.
 
 - [ ] Pass parameters through props to the Compact and Wide filter panels and their `ParameterBox` components. Remove `parameters` from `CategoryPageContext`.
 

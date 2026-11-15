@@ -1,11 +1,10 @@
+import type { CategoryWithChildrenAndProductCounts } from '@/entities/category';
 import type { ProductListItem, ProductListPage } from '@/entities/product';
-import type { CategoryGetPayload, ParameterGetPayload } from '@/shared/lib/db';
-
-import { type categoryWithChildrenSelect } from '@/entities/category';
+import type { ParameterGetPayload } from '@/shared/lib/db';
 
 import type { categoryPageParameterSelect } from './categoryPage.select';
 
-export type CategoryPageCategory = CategoryGetPayload<{ select: typeof categoryWithChildrenSelect }>;
+export type CategoryPageCategory = CategoryWithChildrenAndProductCounts;
 
 export type CategorySubcategory = CategoryPageCategory['children'][number];
 

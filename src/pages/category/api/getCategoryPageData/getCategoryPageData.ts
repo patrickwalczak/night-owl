@@ -1,14 +1,12 @@
 import 'server-only';
 
-import { categoryWithChildrenSelect } from '@/entities/category';
+import { getCachedCategoryWithChildrenBySlug } from '@/entities/category/server';
 import { getCategoryProductsPage } from '@/entities/product/server';
-import { prisma } from '@/shared/lib/db/server';
 
 import { PAGE_SIZE } from '../../config/constants';
-import { mapCategoryParametersWithProductCounts } from '../../lib/mapCategoryParametersWithProductCounts';
 import { toOrderBy } from '../../lib/toOrderBy';
-import { categoryPageParameterSelect } from '../../model/categoryPage.select';
 import { type CategoryPageData } from '../../model/categoryPage.types';
+import { getCategoryParameters } from './getCategoryParameters';
 import { type GetCategoryPageDataOptions } from './types';
 
 const NOT_FOUND_FALLBACK = {
@@ -33,12 +31,7 @@ export const getCategoryPageData = async (
         filters,
     }: GetCategoryPageDataOptions,
 ): Promise<CategoryPageData> => {
-    const category = await prisma.category.findUnique({
-        where: {
-            slug,
-        },
-        select: categoryWithChildrenSelect,
-    });
+    const category = await getCachedCategoryWithChildrenBySlug(slug);
 
     if (!category) return NOT_FOUND_FALLBACK;
 
@@ -47,20 +40,7 @@ export const getCategoryPageData = async (
         ...category.children.map(child => child.id),
     ];
 
-    const rawParameters = await prisma.parameter.findMany({
-        where: {
-            categories: {
-                some: {
-                    categoryId: {
-                        in: categoryIds,
-                    },
-                },
-            },
-        },
-        select: categoryPageParameterSelect(categoryIds),
-    });
-
-    const parameters = mapCategoryParametersWithProductCounts(rawParameters);
+    const parameters = await getCategoryParameters(categoryIds);
 
     const products = await getCategoryProductsPage({
         categoryIds,
