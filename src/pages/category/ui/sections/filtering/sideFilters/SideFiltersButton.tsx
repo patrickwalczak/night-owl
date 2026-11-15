@@ -5,8 +5,8 @@ import { setCookie } from '@/shared/lib/cookies/client';
 import { cn } from '@/shared/lib/utils';
 import { FiltersIcon } from '@/shared/ui/icons';
 
-import { toggleFilters } from '../../../../../model/store/categoryUiSlice';
-import { useCategoryPageDispatch, useCategoryPageSelector } from '../../../../../model/store/client';
+import { toggleFilters } from '../../../../model/store/categoryUiSlice';
+import { useCategoryPageDispatch, useCategoryPageSelector } from '../../../../model/store/client';
 import styles from './sideFiltersButton.module.scss';
 
 const SideFiltersButton = () => {

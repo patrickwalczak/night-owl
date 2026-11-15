@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from 'react';
 
-import { breakpointsStore, type BreakpointsSnapshot } from './model/store';
+import { breakpointsStore, type BreakpointsSnapshot } from './store';
 
 /** Breakpoint matches are null during SSR and hydration until the client snapshot is read. */
 export function useBreakpoints(): BreakpointsSnapshot {

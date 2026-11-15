@@ -1,5 +1,5 @@
-@use '../../../../../../../shared/styles/breakpoints';
-@use '../../../../../../../shared/styles/zindex';
+@use '../../../../../../shared/styles/breakpoints';
+@use '../../../../../../shared/styles/zindex';
 
 .header {
   z-index: zindex.$category-filters;

@@ -1,6 +1,6 @@
 import { cn } from '@/shared/lib/utils';
 
-import productStyles from '../../sections/productList/ui/productsInfinite/productsInfinite.module.scss';
+import productStyles from '../../sections/productList/productsInfinite/productsInfinite.module.scss';
 import pageStyles from '../categoryProducts/categoryProducts.module.scss';
 import styles from './categoryPageSkeleton.module.scss';
 

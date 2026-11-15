@@ -3,10 +3,10 @@ import type { ParsedFilters } from '@/pages/category/model/params/searchParams.t
 
 import { cn } from '@/shared/lib/utils';
 
-import { CompactFilters } from '../../sections/filtering/ui/compactFilters/CompactFilters';
-import SideFiltersDesktop from '../../sections/filtering/ui/sideFilters/SideFiltersDesktop';
-import { StickyHeader } from '../../sections/header/ui/stickyHeader/StickyHeader';
-import { ProductsInfinite } from '../../sections/productList/ui/productsInfinite/ProductsInfinite';
+import { CompactFilters } from '../../sections/filtering/compactFilters/CompactFilters';
+import SideFiltersDesktop from '../../sections/filtering/sideFilters/SideFiltersDesktop';
+import { StickyHeader } from '../../sections/header/stickyHeader/StickyHeader';
+import { ProductsInfinite } from '../../sections/productList/productsInfinite/ProductsInfinite';
 import { CompactNav } from '../compactNavigation/CompactNav';
 import styles from './categoryProducts.module.scss';
 

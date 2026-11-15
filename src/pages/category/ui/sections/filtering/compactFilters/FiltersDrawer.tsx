@@ -1,5 +1,5 @@
 import { useCategoryPageSelector } from '@/pages/category/model/store/client';
-import { ParameterBox } from '@/pages/category/ui/sections/filtering/ui/parameterBox/ParameterBox';
+import { ParameterBox } from '@/pages/category/ui/sections/filtering/parameterBox/ParameterBox';
 import { cn } from '@/shared/lib/utils';
 import { Drawer } from '@/shared/ui/drawer';
 
