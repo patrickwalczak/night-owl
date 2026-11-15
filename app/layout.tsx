@@ -4,7 +4,6 @@ import { Playfair_Display, Inter } from 'next/font/google';
 import { NavigationServer } from '@/widgets/navigation/server';
 
 import ReactQueryProvider from '../src/app/providers/ReactQueryProvider';
-import StoreProvider from '../src/app/providers/StoreProvider';
 
 export const inter = Inter({
     subsets: ['latin'],
@@ -26,12 +25,10 @@ export default function RootLayout({
     return (
         <html lang={'en'} className={`${inter.variable} ${playfair.variable}`}>
             <body>
-                <StoreProvider>
-                    <ReactQueryProvider>
-                        <NavigationServer />
-                        {children}
-                    </ReactQueryProvider>
-                </StoreProvider>
+                <ReactQueryProvider>
+                    <NavigationServer />
+                    {children}
+                </ReactQueryProvider>
             </body>
         </html>
     );

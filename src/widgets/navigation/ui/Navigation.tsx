@@ -7,11 +7,11 @@ import { createContext, useRef } from 'react';
 
 import type { RootCategoriesWithChildren } from '@/entities/category';
 
+import { useNavigationLayout } from '@/shared/lib/hooks/useNavigationLayout/client';
 import { cn } from '@/shared/lib/utils';
 import { Overlay } from '@/shared/ui/overlay';
 
 import useIsDropdownExpanded from '../hooks/useIsDropdownExpanded';
-import { useIsScrolled } from '../hooks/useIsScrolled';
 import { CategoriesDropdown } from './desktop/categoriesDropdown/CategoriesDropdown';
 import MobileNavigation from './mobile/MobileNavigation';
 import styles from './navigation.module.scss';
@@ -32,7 +32,7 @@ interface NavigationType {
 export const NavigationContext = createContext<NavigationContextType | null>(null);
 
 export const Navigation = ({ categories, isHomepage }: NavigationType) => {
-    const { isScrolled, direction } = useIsScrolled();
+    const { isScrolled, isNavigationVisible } = useNavigationLayout();
     const { expandDropdown, hideDropdown, isExpanded, setIsExpanded } = useIsDropdownExpanded();
 
     const categoriesButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -72,7 +72,7 @@ export const Navigation = ({ categories, isHomepage }: NavigationType) => {
                     isHomepage && styles.isHomepage,
                     isScrolled && styles.isScrolled,
                     isExpanded && styles.isDropdownExpanded,
-                    direction === 'down' && styles.isHidden,
+                    !isNavigationVisible && styles.isHidden,
                     'transition-200',
                 )}
                 onKeyDown={onKeyDown}

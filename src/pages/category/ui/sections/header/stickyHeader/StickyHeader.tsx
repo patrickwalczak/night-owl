@@ -1,7 +1,7 @@
 'use client';
 
-import { useNavigationTopOffset } from '@/features/layout/client';
 import { useIsSticky } from '@/shared/lib/hooks/useIsSticky/client';
+import { useNavigationTopOffset } from '@/shared/lib/hooks/useNavigationLayout/client';
 import { cn } from '@/shared/lib/utils';
 
 import { Subcategories } from '../../../components/subcategories/Subcategories';
