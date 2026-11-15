@@ -1,3 +1,5 @@
+'use client';
+
 import { type ChangeEvent } from 'react';
 
 import { Accordion } from '@/shared/ui/accordion/client';

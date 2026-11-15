@@ -1,14 +1,18 @@
+import type { ReactNode } from 'react';
+
 import { cn } from '@/shared/lib/utils';
 import { Drawer } from '@/shared/ui/drawer';
 
-import { type CategoryParameter } from '../../../../model/categoryPage.types';
 import { FilterActions } from '../filterActions/FilterActions';
-import { ParameterBox } from '../parameterBox/ParameterBox';
 import styles from './filtersDrawer.module.scss';
 
-export const FiltersDrawer = ({ isOpen, close }: { isOpen: boolean; close: () => void }) => {
-    const parameters: CategoryParameter[] = [];
+interface FiltersDrawerType {
+    isOpen: boolean;
+    close: () => void;
+    children: ReactNode;
+}
 
+export const FiltersDrawer = ({ isOpen, close, children }: FiltersDrawerType) => {
     return (
         <Drawer.Main open={isOpen} onClose={close} position={'left'}>
             <div
@@ -21,9 +25,7 @@ export const FiltersDrawer = ({ isOpen, close }: { isOpen: boolean; close: () =>
                 </Drawer.Header>
 
                 <div className={cn(styles.body, 'flex', 'flex-col')}>
-                    {parameters.map(parameter => (
-                        <ParameterBox key={parameter.id} parameter={parameter} />
-                    ))}
+                    {children}
                 </div>
                 <FilterActions className={styles.actions} onApply={close} />
             </div>

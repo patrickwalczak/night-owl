@@ -1,5 +1,7 @@
 'use client';
 
+import type { ReactNode } from 'react';
+
 import { useOpenState } from '@/shared/lib/hooks/useOpenState/client';
 import { cn } from '@/shared/lib/utils';
 import { FiltersIcon } from '@/shared/ui/icons';
@@ -7,7 +9,7 @@ import { FiltersIcon } from '@/shared/ui/icons';
 import { FiltersDrawer } from './FiltersDrawer';
 import styles from './filtersDrawer.module.scss';
 
-export const CompactFilters = () => {
+export const CompactFilters = ({ children }: { children: ReactNode }) => {
     const { isOpen, close, open } = useOpenState();
 
     return (
@@ -19,7 +21,9 @@ export const CompactFilters = () => {
                 {'Filters'}
                 <FiltersIcon />
             </button>
-            <FiltersDrawer isOpen={isOpen} close={close} />
+            <FiltersDrawer isOpen={isOpen} close={close}>
+                {children}
+            </FiltersDrawer>
         </>
     );
 };

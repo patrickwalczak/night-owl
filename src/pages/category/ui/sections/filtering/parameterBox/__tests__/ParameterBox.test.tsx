@@ -36,12 +36,11 @@ interface TestCategoryType {
 const TestCategory = ({ appliedFilters, categoryId = category.id, page = 1, showParameters = true }: TestCategoryType) => (
     <CategoryPageProvider
         category={{ ...category, id: categoryId }}
-        parameters={[parameter]}
         appliedFilters={appliedFilters}
-        productSum={page * 20}
         areFiltersOpen
     >
         <SelectionPreview />
+        <output data-testid={'page'}>{page}</output>
         {showParameters && <ParameterBox parameter={parameter} />}
     </CategoryPageProvider>
 );
@@ -108,6 +107,7 @@ describe('ParameterBox selection', () => {
 
         rerender(<TestCategory appliedFilters={{ size: ['large'], color: ['white', 'black'] }} page={2} />);
 
+        expect(screen.getByTestId('page').textContent).toBe('2');
         expect(checkbox('Black').checked).toBe(false);
         expect(checkbox('White').checked).toBe(true);
         expect(selection()).toEqual({ color: ['white'], size: ['large'] });

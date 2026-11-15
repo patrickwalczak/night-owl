@@ -1,0 +1,54 @@
+.skeleton {
+  width: 300px;
+  padding: 1rem;
+  background-color: var(--color-background-primary);
+}
+
+.content {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.placeholder {
+  border-radius: 5px;
+  background-color: var(--color-border-secondary);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+.subcategories {
+  display: grid;
+  gap: 1rem;
+}
+
+.label {
+  width: 65%;
+  height: 1rem;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.button {
+  height: 44px;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .placeholder {
+    animation: none;
+  }
+}

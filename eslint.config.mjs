@@ -7,6 +7,8 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 
+import { importPaths } from './eslint/rules/import-paths.mjs';
+
 export default defineConfig([
     /**
    * Base Next.js rules.
@@ -268,6 +270,18 @@ export default defineConfig([
             ],
 
             '@typescript-eslint/no-empty-function': 'off',
+        },
+    },
+
+    {
+        files: ['src/**/*.{ts,tsx,js,jsx,mjs,cjs}', 'app/**/*.{ts,tsx,js,jsx,mjs,cjs}'],
+        plugins: {
+            local: {
+                rules: { 'import-paths': importPaths },
+            },
+        },
+        rules: {
+            'local/import-paths': 'error',
         },
     },
 

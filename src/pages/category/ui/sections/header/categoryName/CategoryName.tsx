@@ -1,20 +1,22 @@
 'use client';
 
+import type { ReactNode } from 'react';
+
 import { cn } from '@/shared/lib/utils';
 
 import { useCategoryPageContext } from '../../../../model/categoryPageContext';
 import styles from './categoryName.module.scss';
 
-export const CategoryName = ({ isStuck = false }: {
-    isProductSum?: boolean;
+export const CategoryName = ({ isStuck = false, productCount }: {
+    productCount: ReactNode;
     isStuck?: boolean;
 }) => {
-    const { category: { name }, productSum } = useCategoryPageContext();
+    const { category: { name } } = useCategoryPageContext();
 
     return (
         <h2 className={cn(styles.categoryName, { [styles.stuck]: isStuck }, 'h4')}>
             {name}
-            {` (${productSum})`}
+            {productCount}
         </h2>
     );
 };

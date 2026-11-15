@@ -12,7 +12,6 @@ import type { ParsedFilters, SortOrderType } from '../../../../model/params/sear
 
 import { usePageParamSetter } from '../../../../lib/hooks/usePageParamSetter';
 import { normalizeSearchParams } from '../../../../lib/url';
-import { useCategoryPageContext } from '../../../../model/categoryPageContext';
 import { NoProductsFound } from '../noProductsFound/NoProductsFound';
 import styles from './productsInfinite.module.scss';
 import { SinglePageContainer } from './SinglePageContainer';
@@ -20,6 +19,7 @@ import { SinglePageContainer } from './SinglePageContainer';
 type ProductsLoadMode = 'auto' | 'manual';
 
 interface ProductsInfiniteType {
+    categorySlug: string;
     initialProducts: ProductListPage;
     appliedFilters: ParsedFilters;
     sort: SortOrderType;
@@ -44,16 +44,14 @@ const fetchCategoryProducts = async (
     return response.json();
 };
 
-export const ProductsInfinite = ({ initialProducts, appliedFilters, sort }: ProductsInfiniteType) => {
+export const ProductsInfinite = ({ categorySlug, initialProducts, appliedFilters, sort }: ProductsInfiniteType) => {
     const [loadMode] = useState<ProductsLoadMode>(DEFAULT_PRODUCTS_LOAD_MODE);
     const isAutoLoadEnabled = loadMode === 'auto';
 
-    const { category: { slug } } = useCategoryPageContext();
-
     const { data, hasNextPage, isPending, isFetchingNextPage, isFetchNextPageError, fetchNextPage } = useInfiniteQuery({
         initialPageParam: initialProducts.page,
-        queryKey: ['products-infinite', slug, appliedFilters, sort, initialProducts.page],
-        queryFn: ({ pageParam }) => fetchCategoryProducts(slug, pageParam, appliedFilters, sort),
+        queryKey: ['products-infinite', categorySlug, appliedFilters, sort, initialProducts.page],
+        queryFn: ({ pageParam }) => fetchCategoryProducts(categorySlug, pageParam, appliedFilters, sort),
         getNextPageParam: lastPage => lastPage.nextPage,
         initialData: { pages: [initialProducts], pageParams: [initialProducts.page] },
         staleTime: 240000,

@@ -1,0 +1,73 @@
+@use '../../../../../shared/styles/breakpoints';
+
+.placeholder {
+  border-radius: 5px;
+  background-color: var(--color-border-secondary);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+.card {
+  min-width: 0;
+  width: 100%;
+  max-width: 480px;
+  justify-self: center;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: var(--color-background-secondary);
+
+  @media (min-width: breakpoints.$breakpoint-768) {
+    max-width: 500px;
+  }
+
+  @media (min-width: breakpoints.$breakpoint-1024) {
+    max-width: 520px;
+  }
+
+  @media (min-width: breakpoints.$breakpoint-1280) {
+    max-width: 550px;
+  }
+}
+
+.image {
+  height: 420px;
+  border-radius: 0;
+
+  @media (min-width: breakpoints.$breakpoint-768) {
+    height: 520px;
+  }
+}
+
+.details {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem 0.5rem 0.5rem;
+}
+
+.title {
+  justify-self: center;
+  width: 70%;
+  height: 1.5rem;
+}
+
+.cart {
+  justify-self: end;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .placeholder {
+    animation: none;
+  }
+}

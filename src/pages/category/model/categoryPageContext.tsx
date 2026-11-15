@@ -4,14 +4,13 @@ import { createContext, useCallback, useState, type ReactNode } from 'react';
 
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext/client';
 
-import type { CategoryPageCategory, CategoryParameter, SelectedFilter } from './categoryPage.types';
+import type { CategoryPageCategory, SelectedFilter } from './categoryPage.types';
 import type { ParsedFilters } from './params/searchParams.types';
 
 import { updateSelectedFilters } from './updateSelectedFilters';
 
 interface CategoryPageContextType {
     category: CategoryPageCategory;
-    productSum: number;
     selectedFilters: ParsedFilters;
     setSelectedFilters: (filters: ParsedFilters) => void;
     setFilterValue: (filter: SelectedFilter) => void;
@@ -22,7 +21,6 @@ interface CategoryPageContextType {
 interface CategoryPageProviderType {
     children: ReactNode;
     category: CategoryPageCategory;
-    productSum: number;
     appliedFilters: ParsedFilters;
     areFiltersOpen: boolean;
 }
@@ -34,7 +32,6 @@ export const useCategoryPageContext = () => useSafeContext(CategoryPageContext);
 export const CategoryPageProvider = ({
     children,
     category,
-    productSum,
     appliedFilters,
     areFiltersOpen: initiallyOpen,
 }: CategoryPageProviderType) => {
@@ -67,7 +64,6 @@ export const CategoryPageProvider = ({
     return (
         <CategoryPageContext.Provider value={{
             category,
-            productSum,
             selectedFilters: filterSelection.filters,
             setSelectedFilters,
             setFilterValue,

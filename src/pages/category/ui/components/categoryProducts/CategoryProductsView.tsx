@@ -1,31 +1,49 @@
+import { Suspense } from 'react';
+
 import { cn } from '@/shared/lib/utils';
 
-import type { CategoryProductsPage } from '../../../model/categoryPage.types';
-import type { ParsedFilters, SortOrderType } from '../../../model/params/searchParams.types';
-
 import { CompactFilters } from '../../sections/filtering/compactFilters/CompactFilters';
-import { SideFiltersDesktop } from '../../sections/filtering/sideFilters/SideFiltersDesktop';
+import { FilterParametersServer } from '../../sections/filtering/FilterParametersServer';
+import { FilterParametersSkeleton } from '../../sections/filtering/FilterParametersSkeleton';
+import { FiltersServer } from '../../sections/filtering/FiltersServer';
+import { SideFiltersDesktopSkeleton } from '../../sections/filtering/sideFilters/SideFiltersDesktopSkeleton';
+import { CategoryProductCountServer } from '../../sections/header/categoryName/CategoryProductCountServer';
 import { StickyHeader } from '../../sections/header/stickyHeader/StickyHeader';
-import { ProductsInfinite } from '../../sections/productList/productsInfinite/ProductsInfinite';
+import { CategoryProductsServer } from '../../sections/productList/CategoryProductsServer';
+import { ProductsSkeleton } from '../../sections/productList/ProductsSkeleton';
 import { CompactNav } from '../compactNavigation/CompactNav';
 import styles from './categoryProducts.module.scss';
 
 interface CategoryProductsViewType {
-    initialProducts: CategoryProductsPage;
-    appliedFilters: ParsedFilters;
-    sort: SortOrderType;
+    categorySlug: string;
+    searchParams: string;
 }
 
-export const CategoryProductsView = ({ initialProducts, appliedFilters, sort }: CategoryProductsViewType) => {
+export const CategoryProductsView = ({ categorySlug, searchParams }: CategoryProductsViewType) => {
+    const listingKey = `${categorySlug}?${searchParams}`;
+
     return (
         <main className={cn(styles.container)}>
-            <StickyHeader />
+            <StickyHeader productCount={(
+                <Suspense key={listingKey} fallback={null}>
+                    <CategoryProductCountServer categorySlug={categorySlug} searchParams={searchParams} />
+                </Suspense>
+            )}
+            />
             <div className={styles.productsContainer}>
-                <SideFiltersDesktop parameters={[]} />
-                <ProductsInfinite initialProducts={initialProducts} appliedFilters={appliedFilters} sort={sort} />
+                <Suspense key={categorySlug} fallback={<SideFiltersDesktopSkeleton />}>
+                    <FiltersServer categorySlug={categorySlug} />
+                </Suspense>
+                <Suspense key={listingKey} fallback={<ProductsSkeleton />}>
+                    <CategoryProductsServer categorySlug={categorySlug} searchParams={searchParams} />
+                </Suspense>
             </div>
             <CompactNav>
-                <CompactFilters />
+                <CompactFilters>
+                    <Suspense key={categorySlug} fallback={<FilterParametersSkeleton />}>
+                        <FilterParametersServer categorySlug={categorySlug} />
+                    </Suspense>
+                </CompactFilters>
             </CompactNav>
         </main>
     );

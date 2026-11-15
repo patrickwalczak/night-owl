@@ -1,5 +1,5 @@
 import type { CategoryWithChildrenAndProductCounts } from '@/entities/category';
-import type { ProductListItem, ProductListPage } from '@/entities/product';
+import type { ProductListItem } from '@/entities/product';
 import type { ParameterGetPayload } from '@/shared/lib/db';
 
 import type { categoryPageParameterSelect } from './categoryPage.select';
@@ -23,13 +23,6 @@ export type CategoryParameterValue = Omit<RawCategoryParameter['values'][number]
 export type CategoryParameter = Omit<RawCategoryParameter, 'values'> & {
     values: CategoryParameterValue[];
 };
-
-export type CategoryProductsPage = ProductListPage;
-
-export interface CategoryPageData {
-    category: CategoryPageCategory | null;
-    products: CategoryProductsPage;
-}
 
 export interface SelectedFilter {
     parameterSlug: string;
