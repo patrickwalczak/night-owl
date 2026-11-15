@@ -3,7 +3,7 @@ import type { ParsedFilters } from '@/pages/category/model/params/searchParams.t
 
 import { cn } from '@/shared/lib/utils';
 
-import { FiltersDialog } from '../../sections/filtering/ui/filtersDialog/FiltersDialog';
+import { CompactFilters } from '../../sections/filtering/ui/compactFilters/CompactFilters';
 import SideFiltersDesktop from '../../sections/filtering/ui/sideFilters/SideFiltersDesktop';
 import { StickyHeader } from '../../sections/header/ui/stickyHeader/StickyHeader';
 import { ProductsInfinite } from '../../sections/productList/ui/productsInfinite/ProductsInfinite';
@@ -24,7 +24,7 @@ export default function CategoryProductsView({ initialProducts, appliedFilters }
                 <ProductsInfinite initialProducts={initialProducts} appliedFilters={appliedFilters} />
             </div>
             <CompactNav>
-                <FiltersDialog />
+                <CompactFilters />
             </CompactNav>
         </main>
     );

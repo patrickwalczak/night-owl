@@ -4,10 +4,10 @@ import { useOpenState } from '@/shared/lib/hooks/useOpenState/client';
 import { cn } from '@/shared/lib/utils/cn';
 import { FiltersIcon } from '@/shared/ui/icons';
 
-import FiltersModal from './FiltersModal';
-import styles from './filtersModal.module.scss';
+import { FiltersDrawer } from './FiltersDrawer';
+import styles from './filtersDrawer.module.scss';
 
-export const FiltersDialog = () => {
+export const CompactFilters = () => {
     const { isOpen, close, open } = useOpenState();
 
     return (
@@ -19,7 +19,7 @@ export const FiltersDialog = () => {
                 {'Filters'}
                 <FiltersIcon />
             </button>
-            <FiltersModal isOpen={isOpen} close={close} />
+            <FiltersDrawer isOpen={isOpen} close={close} />
         </>
     );
 };

@@ -4,9 +4,9 @@ import { cn } from '@/shared/lib/utils';
 import { Drawer } from '@/shared/ui/drawer';
 
 import { FilterActions } from '../filterActions/FilterActions';
-import styles from './filtersModal.module.scss';
+import styles from './filtersDrawer.module.scss';
 
-const FiltersModal = ({ isOpen, close }: { isOpen: boolean; close: () => void }) => {
+export const FiltersDrawer = ({ isOpen, close }: { isOpen: boolean; close: () => void }) => {
     const parameters = useCategoryPageSelector(state => state.categoryListing.parameters);
 
     return (
@@ -30,5 +30,3 @@ const FiltersModal = ({ isOpen, close }: { isOpen: boolean; close: () => void })
         </Drawer.Main>
     );
 };
-
-export default FiltersModal;

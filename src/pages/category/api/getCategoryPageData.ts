@@ -31,6 +31,7 @@ export const getCategoryPageData = async (
             if (!category) return null;
 
             const categoryIds = await getCategoryIdsForListing(category.id, tx);
+
             const rawParameters = await tx.parameter.findMany({
                 where: {
                     categories: {
