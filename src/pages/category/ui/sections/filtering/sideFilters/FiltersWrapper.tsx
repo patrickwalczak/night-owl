@@ -7,7 +7,7 @@ import { useEffect, useRef } from 'react';
 import { useNavigationTopOffset } from '@/features/layout/client';
 import { cn } from '@/shared/lib/utils';
 
-import { useCategoryPageSelector } from '../../../../model/store/client';
+import { useCategoryPageContext } from '../../../../model/categoryPageContext';
 import styles from './sideFiltersDesktop.module.scss';
 
 const STICKY_CATEGORY_BAR_HEIGHT_PX = 58;
@@ -15,7 +15,7 @@ const STICKY_CATEGORY_BAR_HEIGHT_PX = 58;
 const FiltersWrapper = ({ children }: { children: React.ReactNode }) => {
     const navigationTopOffset = useNavigationTopOffset();
     const filtersTopOffset = navigationTopOffset + STICKY_CATEGORY_BAR_HEIGHT_PX;
-    const areFiltersOpen = useCategoryPageSelector(state => state.categoryUi.areFiltersOpen);
+    const { areFiltersOpen } = useCategoryPageContext();
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { cn } from '@/shared/lib/utils';
 
-import { useCategoryPageSelector } from '../../../../model/store/client';
+import { useCategoryPageContext } from '../../../../model/categoryPageContext';
 import { FilterActions } from '../filterActions/FilterActions';
 import { ParameterBox } from '../parameterBox/ParameterBox';
 import FiltersWrapper from './FiltersWrapper';
@@ -14,9 +14,7 @@ import { Subcategories } from './Subcategories';
 const SideFiltersDesktop = () => {
     const filtersRef = useRef<HTMLDivElement | null>(null);
     const [scrollableHeight, setScrollableHeight] = useState('100vh');
-    const parameters = useCategoryPageSelector(
-        state => state.categoryListing.parameters,
-    );
+    const { parameters } = useCategoryPageContext();
 
     useEffect(() => {
         const updateHeight = () => {

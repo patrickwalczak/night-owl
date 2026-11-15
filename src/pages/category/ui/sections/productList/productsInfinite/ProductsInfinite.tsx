@@ -12,7 +12,7 @@ import type { ParsedFilters } from '../../../../model/params/searchParams.types'
 
 import { usePageParamSetter } from '../../../../lib/hooks/usePageParamSetter';
 import { normalizeSearchParams } from '../../../../lib/url';
-import { useCategoryPageSelector } from '../../../../model/store/client';
+import { useCategoryPageContext } from '../../../../model/categoryPageContext';
 import { NoProductsFound } from '../noProductsFound/NoProductsFound';
 import styles from './productsInfinite.module.scss';
 import { SinglePageContainer } from './SinglePageContainer';
@@ -46,7 +46,7 @@ export const ProductsInfinite = ({ initialProducts, appliedFilters }: ProductsIn
     const [loadMode] = useState<ProductsLoadMode>(DEFAULT_PRODUCTS_LOAD_MODE);
     const isAutoLoadEnabled = loadMode === 'auto';
 
-    const slug = useCategoryPageSelector(state => state.categoryListing.category.slug);
+    const { category: { slug } } = useCategoryPageContext();
 
     const { data, hasNextPage, isPending, isFetchingNextPage, isFetchNextPageError, fetchNextPage } = useInfiniteQuery({
         initialPageParam: initialProducts.page,

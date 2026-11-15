@@ -85,7 +85,7 @@ export default defineConfig([
             },
         },
         rules: {
-            '@typescript-eslint/no-explicit-any': 'off',
+            '@typescript-eslint/no-explicit-any': 'error',
             'import/no-duplicates': 'error',
             /**
        * Warn about console usage, but allow warn and error.

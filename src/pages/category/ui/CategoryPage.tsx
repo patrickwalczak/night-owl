@@ -7,9 +7,9 @@ import { COOKIES } from '@/shared/config';
 import { getCategoryPageData } from '../api/getCategoryPageData/getCategoryPageData';
 import { SEARCH_PARAMS_KEYS } from '../config/searchParams';
 import { normalizeSearchParams, parseCategorySearchParams } from '../lib/url';
+import { CategoryPageProvider } from '../model/categoryPageContext';
 import { type RouteParamsType } from '../model/params/routeParams.types';
 import { type RawUrlSearchParams } from '../model/params/searchParams.types';
-import CategoryPageStoreProvider from '../model/store/CategoryPageStoreProvider';
 import CategoryPageSkeleton from './components/categoryPageSkeleton/CategoryPageSkeleton';
 import CategoryProductsView from './components/categoryProducts/CategoryProductsView';
 
@@ -47,14 +47,14 @@ async function CategoryPageContent({ params, searchParams }: CategoryPageType) {
     const areFiltersOpen = (await cookies()).get(COOKIES.areFiltersOpen.name)?.value === '1';
 
     return (
-        <CategoryPageStoreProvider
-            initialProducts={products}
+        <CategoryPageProvider
+            productSum={products.total}
             category={category}
             areFiltersOpen={areFiltersOpen}
             parameters={parameters}
             selectedFilters={parsedParams.filters}
         >
             <CategoryProductsView initialProducts={products} appliedFilters={parsedParams.filters} />
-        </CategoryPageStoreProvider>
+        </CategoryPageProvider>
     );
 }

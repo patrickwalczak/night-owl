@@ -9,8 +9,7 @@ import type { ParsedFilters } from '../../../../model/params/searchParams.types'
 
 import { SEARCH_PARAMS_KEYS } from '../../../../config/searchParams';
 import { isSearchParamsKey, normalizeSearchParams } from '../../../../lib/url';
-import { setSelectedFilters } from '../../../../model/store/categoryListingSlice';
-import { useCategoryPageDispatch, useCategoryPageSelector } from '../../../../model/store/client';
+import { useCategoryPageContext } from '../../../../model/categoryPageContext';
 import styles from './filterActions.module.scss';
 
 interface FilterActionsType {
@@ -21,8 +20,7 @@ interface FilterActionsType {
 export const FilterActions = ({ className, onApply }: FilterActionsType) => {
     const router = useRouter();
     const pathname = usePathname();
-    const dispatch = useCategoryPageDispatch();
-    const selectedFilters = useCategoryPageSelector(state => state.categoryListing.selectedFilters);
+    const { setSelectedFilters, selectedFilters } = useCategoryPageContext();
     const [isPending, startTransition] = useTransition();
 
     const updateFilters = (filters: ParsedFilters) => {
@@ -47,7 +45,7 @@ export const FilterActions = ({ className, onApply }: FilterActionsType) => {
     };
 
     const clearFilters = () => {
-        dispatch(setSelectedFilters({}));
+        setSelectedFilters({});
         updateFilters({});
     };
 

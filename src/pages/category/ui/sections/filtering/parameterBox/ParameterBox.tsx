@@ -4,24 +4,23 @@ import { Accordion } from '@/shared/ui/accordion/client';
 import { Checkbox } from '@/shared/ui/checkbox/client';
 
 import { type CategoryParameter } from '../../../../model/categoryPage.types';
-import { setFilterValue } from '../../../../model/store/categoryListingSlice';
-import { useCategoryPageDispatch, useCategoryPageSelector } from '../../../../model/store/client';
+import { useCategoryPageContext } from '../../../../model/categoryPageContext';
 import styles from './parameterBox.module.scss';
 
 const checkboxClasses = { label: styles.checkboxLabel };
 
 export const ParameterBox = ({ parameter }: { parameter: CategoryParameter }) => {
-    const dispatch = useCategoryPageDispatch();
-    const selectedValues = useCategoryPageSelector(state => state.categoryListing.selectedFilters[parameter.slug]);
+    const { setFilterValue, selectedFilters } = useCategoryPageContext();
+    const selectedValues = selectedFilters[parameter.slug];
 
     const onChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { value, checked } = event.currentTarget;
 
-        dispatch(setFilterValue({
+        setFilterValue({
             parameterSlug: parameter.slug,
             parameterValueSlug: value,
             checked,
-        }));
+        });
     };
 
     return (

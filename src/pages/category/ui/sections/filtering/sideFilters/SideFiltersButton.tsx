@@ -5,17 +5,15 @@ import { setCookie } from '@/shared/lib/cookies/client';
 import { cn } from '@/shared/lib/utils';
 import { FiltersIcon } from '@/shared/ui/icons';
 
-import { toggleFilters } from '../../../../model/store/categoryUiSlice';
-import { useCategoryPageDispatch, useCategoryPageSelector } from '../../../../model/store/client';
+import { useCategoryPageContext } from '../../../../model/categoryPageContext';
 import styles from './sideFiltersButton.module.scss';
 
 const SideFiltersButton = () => {
-    const dispatch = useCategoryPageDispatch();
-    const areFiltersOpen = useCategoryPageSelector(state => state.categoryUi.areFiltersOpen);
+    const { toggleFilters, areFiltersOpen } = useCategoryPageContext();
     const label = areFiltersOpen ? 'Hide filters' : 'Show filters';
 
     const handleClick = () => {
-        dispatch(toggleFilters());
+        toggleFilters();
 
         setCookie(COOKIES.areFiltersOpen.name, areFiltersOpen ? '0' : '1', {
             path: '/',

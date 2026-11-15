@@ -3,11 +3,11 @@ import Link from 'next/link';
 
 import { cn } from '@/shared/lib/utils';
 
-import { useCategoryPageSelector } from '../../../../model/store/client';
+import { useCategoryPageContext } from '../../../../model/categoryPageContext';
 import styles from './sideFiltersDesktop.module.scss';
 
 export const Subcategories = () => {
-    const subcategories = useCategoryPageSelector(state => state.categoryListing.subcategories);
+    const { category: { children: subcategories } } = useCategoryPageContext();
 
     if (subcategories.length === 0) return null;
 

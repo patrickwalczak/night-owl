@@ -4,8 +4,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import type { CategoryPageCategory, CategoryParameter } from '../../../../../model/categoryPage.types';
 import type { ParsedFilters } from '../../../../../model/params/searchParams.types';
 
-import CategoryPageStoreProvider from '../../../../../model/store/CategoryPageStoreProvider';
-import { useCategoryPageSelector } from '../../../../../model/store/client';
+import { CategoryPageProvider, useCategoryPageContext } from '../../../../../model/categoryPageContext';
 import { ParameterBox } from '../ParameterBox';
 
 afterEach(cleanup);
@@ -22,7 +21,7 @@ const parameter: CategoryParameter = {
 };
 
 const SelectionPreview = () => {
-    const selectedFilters = useCategoryPageSelector(state => state.categoryListing.selectedFilters);
+    const { selectedFilters } = useCategoryPageContext();
 
     return <output data-testid={'selected-filters'}>{JSON.stringify(selectedFilters)}</output>;
 };
@@ -35,16 +34,16 @@ interface TestCategoryType {
 }
 
 const TestCategory = ({ selectedFilters, categoryId = category.id, page = 1, showParameters = true }: TestCategoryType) => (
-    <CategoryPageStoreProvider
+    <CategoryPageProvider
         category={{ ...category, id: categoryId }}
         parameters={[parameter]}
         selectedFilters={selectedFilters}
-        initialProducts={{ items: [], nextPage: null, total: 0, totalPages: 1, pageSize: 20, page }}
+        productSum={page * 20}
         areFiltersOpen
     >
         <SelectionPreview />
         {showParameters && <ParameterBox parameter={parameter} />}
-    </CategoryPageStoreProvider>
+    </CategoryPageProvider>
 );
 
 const checkbox = (name: string) => screen.getByLabelText(name) as HTMLInputElement;
@@ -52,7 +51,7 @@ const selection = () => JSON.parse(screen.getByTestId('selected-filters').textCo
 const openParameter = () => fireEvent.click(screen.getByRole('button', { name: 'Color' }));
 
 describe('ParameterBox selection', () => {
-    it('initializes from applied filters and updates the store on check and uncheck', () => {
+    it('initializes from applied filters and updates the selection on check and uncheck', () => {
         render(<TestCategory selectedFilters={{ color: ['black'] }} />);
         openParameter();
 
@@ -70,7 +69,7 @@ describe('ParameterBox selection', () => {
         expect(selection()).toEqual({ color: ['white'] });
     });
 
-    it('restores draft checkboxes when the filter UI is remounted', () => {
+    it('restores selected checkboxes when the filter UI is remounted', () => {
         const { rerender } = render(<TestCategory selectedFilters={{}} />);
         openParameter();
         fireEvent.click(checkbox('Black'));
@@ -102,7 +101,7 @@ describe('ParameterBox selection', () => {
         expect(selection()).toEqual({});
     });
 
-    it('preserves draft edits on pagination when applied filters only change object or ordering', () => {
+    it('preserves unapplied filter changes on pagination when applied filters only change object or ordering', () => {
         const { rerender } = render(<TestCategory selectedFilters={{ color: ['black', 'white'], size: ['large'] }} />);
         openParameter();
         fireEvent.click(checkbox('Black'));
@@ -114,7 +113,7 @@ describe('ParameterBox selection', () => {
         expect(selection()).toEqual({ color: ['white'], size: ['large'] });
     });
 
-    it('resets draft selection on a category change even when applied filters are the same', () => {
+    it('resets filter selection on a category change even when applied filters are the same', () => {
         const { rerender } = render(<TestCategory selectedFilters={{}} />);
         openParameter();
         fireEvent.click(checkbox('Black'));
