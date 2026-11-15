@@ -1,14 +1,27 @@
 import 'server-only';
 
-import { getCategoryIdsForListing } from '@/entities/category/server';
+import { categoryWithChildrenSelect } from '@/entities/category/index';
 import { getCategoryProductsPage } from '@/entities/product/server';
 import { prisma } from '@/shared/lib/db/server';
 
 import { PAGE_SIZE } from '../config/constants';
-import { categoryPageCategorySelect, categoryPageParameterSelect } from '../model/categoryPage.select';
+import { categoryPageParameterSelect } from '../model/categoryPage.select';
 import { type CategoryPageData } from '../model/categoryPage.types';
 import { toOrderBy } from './lib/getOrderBy';
 import { type GetCategoryPageDataOptions } from './model/getCategoryPageData/type';
+
+const NOT_FOUND_FALLBACK = {
+    category: null,
+    products: {
+        items: [],
+        nextPage: null,
+        totalPages: 1,
+        total: 0,
+        pageSize: PAGE_SIZE,
+        page: 1,
+    },
+    parameters: [],
+};
 
 export const getCategoryPageData = async (
     slug: string,
@@ -19,55 +32,33 @@ export const getCategoryPageData = async (
         filters,
     }: GetCategoryPageDataOptions,
 ): Promise<CategoryPageData> => {
-    const categoryData = await prisma.$transaction(
-        async (tx) => {
-            const category = await tx.category.findUnique({
-                where: {
-                    slug,
-                },
-                select: categoryPageCategorySelect,
-            });
+    const category = await prisma.category.findUnique({
+        where: {
+            slug,
+        },
+        select: categoryWithChildrenSelect,
+    });
 
-            if (!category) return null;
+    if (!category) return NOT_FOUND_FALLBACK;
 
-            const categoryIds = await getCategoryIdsForListing(category.id, tx);
+    const categoryIds = [
+        category.id,
+        ...category.children.map(child => child.id),
+    ];
 
-            const rawParameters = await tx.parameter.findMany({
-                where: {
-                    categories: {
-                        some: {
-                            categoryId: {
-                                in: categoryIds,
-                            },
-                        },
+    const rawParameters = await prisma.parameter.findMany({
+        where: {
+            categories: {
+                some: {
+                    categoryId: {
+                        in: categoryIds,
                     },
                 },
-                select: categoryPageParameterSelect(categoryIds),
-            });
-
-            return { category, categoryIds, rawParameters };
-        },
-        {
-            isolationLevel: 'RepeatableRead',
-        },
-    );
-
-    if (!categoryData) {
-        return {
-            category: null,
-            products: {
-                items: [],
-                nextPage: null,
-                totalPages: 1,
-                total: 0,
-                pageSize: PAGE_SIZE,
-                page,
             },
-            parameters: [],
-        };
-    }
+        },
+        select: categoryPageParameterSelect(categoryIds),
+    });
 
-    const { category, categoryIds, rawParameters } = categoryData;
     const parameters = rawParameters.map(({ values, ...parameter }) => ({
         ...parameter,
         values: values.map(({ _count, ...value }) => ({

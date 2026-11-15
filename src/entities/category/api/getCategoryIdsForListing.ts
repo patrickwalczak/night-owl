@@ -4,9 +4,8 @@ import { prisma } from '@/shared/lib/db/server';
 
 export const getCategoryIdsForListing = async (
     categoryId: string,
-    db: Pick<typeof prisma, 'category'> = prisma,
 ): Promise<string[]> => {
-    const children = await db.category.findMany({
+    const children = await prisma.category.findMany({
         where: {
             parentId: categoryId,
         },

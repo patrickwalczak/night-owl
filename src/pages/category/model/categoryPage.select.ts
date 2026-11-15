@@ -1,23 +1,4 @@
-import type { CategorySelect, ParameterSelect } from '@/shared/lib/db';
-
-export const categoryPageCategorySelect = {
-    id: true,
-    name: true,
-    slug: true,
-    parentId: true,
-    children: {
-        select: {
-            id: true,
-            name: true,
-            slug: true,
-            _count: {
-                select: {
-                    products: true,
-                },
-            },
-        },
-    },
-} as const satisfies CategorySelect;
+import type { ParameterSelect } from '@/shared/lib/db';
 
 export const categoryPageParameterSelect = (categoryIds: string[]) => ({
     id: true,

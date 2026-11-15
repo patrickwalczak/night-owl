@@ -8,6 +8,8 @@
 
 - [ ] Refactor the category page: split `getCategoryPageData` into smaller queries, move data fetching and rendering as close as possible to the components that need the data, and use separate `Suspense` boundaries where sections can load independently. Remove the category page's Redux store; pass server data through props and keep shared draft filters and UI state in local state or context. Preserve filter application through the URL and product infinite scrolling.
 
+- [ ] Consider extending the category model to support multiple parent categories per category and deeper nesting. Evaluate a many-to-many parent/child relation, cycle prevention, and the impact on navigation, descendant queries, and product/filter listings, including deduplication when a category is reachable through multiple paths.
+
 - [ ] Align responsive rendering with [architectural decision 001](architecture-decisions.md#001-responsive-layouts-compact-and-wide-css-and-matchmedia): use consistent `Compact`/`Wide` naming and the same 1024px breakpoint in CSS and JavaScript, with CSS controlling layout and visibility and `matchMedia` controlling width-dependent behavior and mounting. Fix visibility at the breakpoint and handle open panels when switching layouts, preserving shared user state and matching server HTML with the initial client render.
 
   Areas to update:

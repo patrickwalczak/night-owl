@@ -15,3 +15,10 @@
 - `index.ts` exports environment-neutral functionality usable by both server and client code.
 - `server.ts` exports server-specific functionality and uses `import 'server-only'`.
 - Create only the entry points a module needs. Keep client- and server-specific exports out of neutral APIs.
+
+## 003. Category tree: two supported levels
+
+- The application currently supports exactly two category levels: level 1 contains root categories, and level 2 contains their direct children (subcategories).
+- Root categories have no parent. Each subcategory belongs to one root category; deeper nesting is not currently supported by the application.
+- Category navigation and product/filter listings follow this two-level structure. A root category's listing includes the root category and its direct children; a subcategory's listing includes only that subcategory.
+- Supporting deeper nesting or multiple parents requires a separate architectural decision; the possible extension is tracked in the backlog.
