@@ -5,6 +5,7 @@ import { getCategoryProductsPage } from '@/entities/product/server';
 import { prisma } from '@/shared/lib/db/server';
 
 import { PAGE_SIZE } from '../../config/constants';
+import { mapCategoryParametersWithProductCounts } from '../../lib/mapCategoryParametersWithProductCounts';
 import { toOrderBy } from '../../lib/toOrderBy';
 import { categoryPageParameterSelect } from '../../model/categoryPage.select';
 import { type CategoryPageData } from '../../model/categoryPage.types';
@@ -59,13 +60,7 @@ export const getCategoryPageData = async (
         select: categoryPageParameterSelect(categoryIds),
     });
 
-    const parameters = rawParameters.map(({ values, ...parameter }) => ({
-        ...parameter,
-        values: values.map(({ _count, ...value }) => ({
-            ...value,
-            count: _count.products,
-        })),
-    }));
+    const parameters = mapCategoryParametersWithProductCounts(rawParameters);
 
     const products = await getCategoryProductsPage({
         categoryIds,

@@ -13,7 +13,7 @@ export type CategorySummary = Pick<CategoryPageCategory, 'id' | 'name' | 'slug' 
 
 export type CategoryProduct = ProductListItem;
 
-type RawCategoryParameter = ParameterGetPayload<{
+export type RawCategoryParameter = ParameterGetPayload<{
     select: ReturnType<typeof categoryPageParameterSelect>;
 }>;
 

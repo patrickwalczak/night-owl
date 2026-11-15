@@ -21,7 +21,6 @@ interface GetCategoryProductsPageOptions {
 export async function getCategoryProductsPage({
     page,
     categoryIds,
-    sort,
     query,
     pageSize,
     filters,
@@ -61,7 +60,6 @@ export async function getCategoryProductsPage({
     const items = page <= totalPages && total > 0
         ? await prisma.product.findMany({
             where,
-            orderBy: sort,
             skip: (page - 1) * pageSize,
             take: pageSize,
             select: productListItemSelect,
