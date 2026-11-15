@@ -1,0 +1,26 @@
+.placeholder {
+  display: inline-block;
+  width: 4ch;
+  height: 0.75em;
+  margin-inline-start: 0.35em;
+  vertical-align: middle;
+  border-radius: 4px;
+  background-color: var(--color-border-secondary);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .placeholder {
+    animation: none;
+  }
+}

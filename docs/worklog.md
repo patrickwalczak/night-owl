@@ -24,7 +24,7 @@ Move data fetching close to the sections that consume it, allow independent load
 
 - [x] Remove `productSum` from context. Render `CategoryProductCountServer` through a slot in the sticky header and reuse the listing's cached result for the same category slug and serialized search parameters. Show the category name immediately while the count loads, without a duplicate product-list query.
 
-- [x] Add independent `Suspense` boundaries for products and the product count. Reuse `ProductsSkeleton` in both the listing fallback and `CategoryPageSkeleton`; use a null fallback for the count. `CategoryPage` now waits only for route inputs, category lookup, and the filter-panel cookie. Product and filter queries run in their server sections, with count content composed through client header wrappers.
+- [x] Add independent `Suspense` boundaries for products and the product count. Reuse `ProductsSkeleton` in both the listing fallback and `CategoryPageSkeleton`; use a small inline `CategoryProductCountSkeleton` for the count, respecting reduced-motion preferences. `CategoryPage` now waits only for route inputs, category lookup, and the filter-panel cookie. Product and filter queries run in their server sections, with count content composed through client header wrappers.
 
 - [x] Delete `getCategoryPageData`, its fallback result, and the unused aggregate types and options.
 
