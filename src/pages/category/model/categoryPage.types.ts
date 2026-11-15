@@ -29,7 +29,6 @@ export type CategoryProductsPage = ProductListPage;
 export interface CategoryPageData {
     category: CategoryPageCategory | null;
     products: CategoryProductsPage;
-    parameters: CategoryParameter[];
 }
 
 export interface SelectedFilter {

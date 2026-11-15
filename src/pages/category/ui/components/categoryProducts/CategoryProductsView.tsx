@@ -21,7 +21,7 @@ export const CategoryProductsView = ({ initialProducts, appliedFilters, sort }: 
         <main className={cn(styles.container)}>
             <StickyHeader />
             <div className={styles.productsContainer}>
-                <SideFiltersDesktop />
+                <SideFiltersDesktop parameters={[]} />
                 <ProductsInfinite initialProducts={initialProducts} appliedFilters={appliedFilters} sort={sort} />
             </div>
             <CompactNav>

@@ -1,13 +1,13 @@
 import { cn } from '@/shared/lib/utils';
 import { Drawer } from '@/shared/ui/drawer';
 
-import { useCategoryPageContext } from '../../../../model/categoryPageContext';
+import { type CategoryParameter } from '../../../../model/categoryPage.types';
 import { FilterActions } from '../filterActions/FilterActions';
 import { ParameterBox } from '../parameterBox/ParameterBox';
 import styles from './filtersDrawer.module.scss';
 
 export const FiltersDrawer = ({ isOpen, close }: { isOpen: boolean; close: () => void }) => {
-    const { parameters } = useCategoryPageContext();
+    const parameters: CategoryParameter[] = [];
 
     return (
         <Drawer.Main open={isOpen} onClose={close} position={'left'}>

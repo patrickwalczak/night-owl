@@ -11,7 +11,6 @@ import { updateSelectedFilters } from './updateSelectedFilters';
 
 interface CategoryPageContextType {
     category: CategoryPageCategory;
-    parameters: CategoryParameter[];
     productSum: number;
     selectedFilters: ParsedFilters;
     setSelectedFilters: (filters: ParsedFilters) => void;
@@ -23,7 +22,6 @@ interface CategoryPageContextType {
 interface CategoryPageProviderType {
     children: ReactNode;
     category: CategoryPageCategory;
-    parameters: CategoryParameter[];
     productSum: number;
     appliedFilters: ParsedFilters;
     areFiltersOpen: boolean;
@@ -36,7 +34,6 @@ export const useCategoryPageContext = () => useSafeContext(CategoryPageContext);
 export const CategoryPageProvider = ({
     children,
     category,
-    parameters,
     productSum,
     appliedFilters,
     areFiltersOpen: initiallyOpen,
@@ -70,7 +67,6 @@ export const CategoryPageProvider = ({
     return (
         <CategoryPageContext.Provider value={{
             category,
-            parameters,
             productSum,
             selectedFilters: filterSelection.filters,
             setSelectedFilters,

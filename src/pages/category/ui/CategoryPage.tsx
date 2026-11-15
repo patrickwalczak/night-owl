@@ -33,7 +33,7 @@ async function CategoryPageContent({ params, searchParams }: CategoryPageType) {
     const search = normalizeSearchParams(awaitedSearchParams);
     const parsedParams = parseCategorySearchParams(search);
 
-    const { category, parameters, products } = await getCategoryPageData(category_slug, parsedParams);
+    const { category, products } = await getCategoryPageData(category_slug, parsedParams);
 
     if (!category) notFound();
 
@@ -51,7 +51,6 @@ async function CategoryPageContent({ params, searchParams }: CategoryPageType) {
             productSum={products.total}
             category={category}
             areFiltersOpen={areFiltersOpen}
-            parameters={parameters}
             appliedFilters={parsedParams.filters}
         >
             <CategoryProductsView initialProducts={products} appliedFilters={parsedParams.filters} sort={parsedParams.sort} />

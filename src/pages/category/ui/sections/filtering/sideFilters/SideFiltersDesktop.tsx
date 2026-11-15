@@ -4,17 +4,16 @@ import { useEffect, useRef, useState } from 'react';
 
 import { cn } from '@/shared/lib/utils';
 
-import { useCategoryPageContext } from '../../../../model/categoryPageContext';
+import { type CategoryParameter } from '../../../../model/categoryPage.types';
 import { FilterActions } from '../filterActions/FilterActions';
 import { ParameterBox } from '../parameterBox/ParameterBox';
 import { FiltersWrapper } from './FiltersWrapper';
 import styles from './sideFiltersDesktop.module.scss';
 import { Subcategories } from './Subcategories';
 
-export const SideFiltersDesktop = () => {
+export const SideFiltersDesktop = ({ parameters }: { parameters: CategoryParameter[] }) => {
     const filtersRef = useRef<HTMLDivElement | null>(null);
     const [scrollableHeight, setScrollableHeight] = useState('100vh');
-    const { parameters } = useCategoryPageContext();
 
     useEffect(() => {
         const updateHeight = () => {

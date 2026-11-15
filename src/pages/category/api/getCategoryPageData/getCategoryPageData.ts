@@ -40,8 +40,6 @@ export const getCategoryPageData = async (
         ...category.children.map(child => child.id),
     ];
 
-    const parameters = await getCategoryParameters(categoryIds);
-
     const products = await getCategoryProductsPage({
         categoryIds,
         page,
@@ -54,6 +52,5 @@ export const getCategoryPageData = async (
     return {
         category,
         products,
-        parameters,
     };
 };
