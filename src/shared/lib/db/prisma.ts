@@ -1,7 +1,8 @@
 import 'dotenv/config';
 import { PrismaPg } from '@prisma/adapter-pg';
 
-import { serverEnv } from '../../config/env';
+import { serverEnv } from '@/shared/config/server';
+
 import { PrismaClient } from './generated/client';
 
 const globalForPrisma = globalThis as typeof globalThis & {

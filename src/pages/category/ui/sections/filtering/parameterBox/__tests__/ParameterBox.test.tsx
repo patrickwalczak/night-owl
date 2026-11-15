@@ -1,12 +1,11 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
 
-import type { CategoryPageCategory, CategoryParameter } from '@/pages/category/model/categoryPage.types';
-import type { ParsedFilters } from '@/pages/category/model/params/searchParams.types';
+import type { CategoryPageCategory, CategoryParameter } from '../../../../../model/categoryPage.types';
+import type { ParsedFilters } from '../../../../../model/params/searchParams.types';
 
-import CategoryPageStoreProvider from '@/pages/category/model/store/CategoryPageStoreProvider';
-import { useCategoryPageSelector } from '@/pages/category/model/store/client';
-
+import CategoryPageStoreProvider from '../../../../../model/store/CategoryPageStoreProvider';
+import { useCategoryPageSelector } from '../../../../../model/store/client';
 import { ParameterBox } from '../ParameterBox';
 
 afterEach(cleanup);

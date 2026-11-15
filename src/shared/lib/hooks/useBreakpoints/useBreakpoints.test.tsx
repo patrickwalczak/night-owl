@@ -3,7 +3,7 @@ import { StrictMode } from 'react';
 import { renderToString } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { BREAKPOINTS } from '@/shared/config/breakpoints';
+import { BREAKPOINTS } from '@/shared/config';
 
 import { breakpointsStore } from './store';
 import { useBreakpoints, type BreakpointsSnapshot } from './useBreakpoints';

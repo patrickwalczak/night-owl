@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { categoryWithChildrenSelect } from '@/entities/category/index';
+import { categoryWithChildrenSelect } from '@/entities/category';
 import { getCategoryProductsPage } from '@/entities/product/server';
 import { prisma } from '@/shared/lib/db/server';
 

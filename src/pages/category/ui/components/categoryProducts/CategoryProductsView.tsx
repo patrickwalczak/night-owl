@@ -1,7 +1,7 @@
-import type { CategoryProductsPage } from '@/pages/category/model/categoryPage.types';
-import type { ParsedFilters } from '@/pages/category/model/params/searchParams.types';
-
 import { cn } from '@/shared/lib/utils';
+
+import type { CategoryProductsPage } from '../../../model/categoryPage.types';
+import type { ParsedFilters } from '../../../model/params/searchParams.types';
 
 import { CompactFilters } from '../../sections/filtering/compactFilters/CompactFilters';
 import SideFiltersDesktop from '../../sections/filtering/sideFilters/SideFiltersDesktop';

@@ -1,6 +1,6 @@
 import { type ComponentPropsWithoutRef } from 'react';
 
-import { cn } from '@/shared/lib/utils/cn';
+import { cn } from '@/shared/lib/utils';
 
 import styles from './drawer.module.scss';
 

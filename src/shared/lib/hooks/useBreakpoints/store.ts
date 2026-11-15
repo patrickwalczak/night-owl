@@ -1,4 +1,4 @@
-import { BREAKPOINTS, WIDE_BREAKPOINT, type Breakpoint } from '@/shared/config/breakpoints';
+import { BREAKPOINTS, WIDE_BREAKPOINT, type Breakpoint } from '@/shared/config';
 
 export interface BreakpointsSnapshot {
     readonly atLeast: Readonly<Record<Breakpoint, boolean | null>>;

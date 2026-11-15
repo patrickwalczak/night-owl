@@ -3,14 +3,14 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { useTransition } from 'react';
 
-import type { ParsedFilters } from '@/pages/category/model/params/searchParams.types';
-
-import { SEARCH_PARAMS_KEYS } from '@/pages/category/config/searchParams';
-import { isSearchParamsKey, normalizeSearchParams } from '@/pages/category/lib/url';
-import { setSelectedFilters } from '@/pages/category/model/store/categoryListingSlice';
-import { useCategoryPageDispatch, useCategoryPageSelector } from '@/pages/category/model/store/client';
 import { cn } from '@/shared/lib/utils';
 
+import type { ParsedFilters } from '../../../../model/params/searchParams.types';
+
+import { SEARCH_PARAMS_KEYS } from '../../../../config/searchParams';
+import { isSearchParamsKey, normalizeSearchParams } from '../../../../lib/url';
+import { setSelectedFilters } from '../../../../model/store/categoryListingSlice';
+import { useCategoryPageDispatch, useCategoryPageSelector } from '../../../../model/store/client';
 import styles from './filterActions.module.scss';
 
 interface FilterActionsType {

@@ -1,10 +1,10 @@
 'use client';
 
 import { useNavigationTopOffset } from '@/features/layout/client';
-import { Subcategories } from '@/pages/category/ui/components/subcategories/Subcategories';
 import { useIsSticky } from '@/shared/lib/hooks/useIsSticky/client';
 import { cn } from '@/shared/lib/utils';
 
+import { Subcategories } from '../../../components/subcategories/Subcategories';
 import { StickyBarWide } from './StickyBarWide';
 import styles from './StickyHeader.module.scss';
 

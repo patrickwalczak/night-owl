@@ -12,4 +12,4 @@ export function useBreakpoints(): BreakpointsSnapshot {
 }
 
 export type { BreakpointsSnapshot };
-export type { Breakpoint } from '@/shared/config/breakpoints';
+export type { Breakpoint } from '@/shared/config';

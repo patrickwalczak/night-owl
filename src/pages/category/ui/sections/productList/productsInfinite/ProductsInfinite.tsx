@@ -4,14 +4,15 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import type { ProductListPage } from '@/entities/product';
-import type { ParsedFilters } from '@/pages/category/model/params/searchParams.types';
 
-import { usePageParamSetter } from '@/pages/category/lib/hooks/usePageParamSetter';
-import { normalizeSearchParams } from '@/pages/category/lib/url';
-import { useCategoryPageSelector } from '@/pages/category/model/store/client';
 import { useIntersectionObserver } from '@/shared/lib/hooks/useIntersectionObserver/client';
 import { cn } from '@/shared/lib/utils';
 
+import type { ParsedFilters } from '../../../../model/params/searchParams.types';
+
+import { usePageParamSetter } from '../../../../lib/hooks/usePageParamSetter';
+import { normalizeSearchParams } from '../../../../lib/url';
+import { useCategoryPageSelector } from '../../../../model/store/client';
 import { NoProductsFound } from '../noProductsFound/NoProductsFound';
 import styles from './productsInfinite.module.scss';
 import { SinglePageContainer } from './SinglePageContainer';

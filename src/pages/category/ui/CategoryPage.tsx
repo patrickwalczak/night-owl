@@ -10,8 +10,8 @@ import { normalizeSearchParams, parseCategorySearchParams } from '../lib/url';
 import { type RouteParamsType } from '../model/params/routeParams.types';
 import { type RawUrlSearchParams } from '../model/params/searchParams.types';
 import CategoryPageStoreProvider from '../model/store/CategoryPageStoreProvider';
-import CategoryPageSkeleton from '../ui/components/categoryPageSkeleton/CategoryPageSkeleton';
-import CategoryProductsView from '../ui/components/categoryProducts/CategoryProductsView';
+import CategoryPageSkeleton from './components/categoryPageSkeleton/CategoryPageSkeleton';
+import CategoryProductsView from './components/categoryProducts/CategoryProductsView';
 
 interface CategoryPageType {
     params: Promise<RouteParamsType>;

@@ -1,7 +1,7 @@
 'use client';
 
 import { useOpenState } from '@/shared/lib/hooks/useOpenState/client';
-import { cn } from '@/shared/lib/utils/cn';
+import { cn } from '@/shared/lib/utils';
 import { FiltersIcon } from '@/shared/ui/icons';
 
 import { FiltersDrawer } from './FiltersDrawer';

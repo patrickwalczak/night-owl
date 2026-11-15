@@ -1,7 +1,7 @@
 import { type ComponentPropsWithoutRef } from 'react';
 
 import { useSafeContext } from '@/shared/lib/hooks/useSafeContext/client';
-import { cn } from '@/shared/lib/utils/cn';
+import { cn } from '@/shared/lib/utils';
 import { CloseIcon } from '@/shared/ui/icons';
 
 import styles from './drawer.module.scss';

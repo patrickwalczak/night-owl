@@ -1,9 +1,10 @@
-import '../src/shared/styles/index.scss';
+import '@/shared/styles/index.scss';
 import { Playfair_Display, Inter } from 'next/font/google';
 
-import ReactQueryProvider from '@/app/providers/ReactQueryProvider';
-import StoreProvider from '@/app/providers/StoreProvider';
 import { NavigationServer } from '@/widgets/navigation/server';
+
+import ReactQueryProvider from '../src/app/providers/ReactQueryProvider';
+import StoreProvider from '../src/app/providers/StoreProvider';
 
 export const inter = Inter({
     subsets: ['latin'],

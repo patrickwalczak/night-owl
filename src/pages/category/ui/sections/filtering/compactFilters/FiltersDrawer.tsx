@@ -1,9 +1,9 @@
-import { useCategoryPageSelector } from '@/pages/category/model/store/client';
-import { ParameterBox } from '@/pages/category/ui/sections/filtering/parameterBox/ParameterBox';
 import { cn } from '@/shared/lib/utils';
 import { Drawer } from '@/shared/ui/drawer';
 
+import { useCategoryPageSelector } from '../../../../model/store/client';
 import { FilterActions } from '../filterActions/FilterActions';
+import { ParameterBox } from '../parameterBox/ParameterBox';
 import styles from './filtersDrawer.module.scss';
 
 export const FiltersDrawer = ({ isOpen, close }: { isOpen: boolean; close: () => void }) => {

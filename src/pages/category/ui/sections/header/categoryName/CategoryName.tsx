@@ -1,8 +1,8 @@
 'use client';
 
-import { useCategoryPageSelector } from '@/pages/category/model/store/client';
 import { cn } from '@/shared/lib/utils';
 
+import { useCategoryPageSelector } from '../../../../model/store/client';
 import styles from './categoryName.module.scss';
 
 const CategoryName = ({ isStuck = false }: {
