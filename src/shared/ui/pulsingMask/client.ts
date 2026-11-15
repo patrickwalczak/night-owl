@@ -1,4 +1,4 @@
 'use client';
 import 'client-only';
 
-export { default } from './PulsingMask';
+export { PulsingMask } from './PulsingMask';

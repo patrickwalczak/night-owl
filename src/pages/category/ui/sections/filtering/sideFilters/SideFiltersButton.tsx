@@ -8,7 +8,7 @@ import { FiltersIcon } from '@/shared/ui/icons';
 import { useCategoryPageContext } from '../../../../model/categoryPageContext';
 import styles from './sideFiltersButton.module.scss';
 
-const SideFiltersButton = () => {
+export const SideFiltersButton = () => {
     const { toggleFilters, areFiltersOpen } = useCategoryPageContext();
     const label = areFiltersOpen ? 'Hide filters' : 'Show filters';
 
@@ -31,5 +31,3 @@ const SideFiltersButton = () => {
         </button>
     );
 };
-
-export default SideFiltersButton;

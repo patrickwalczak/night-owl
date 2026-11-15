@@ -4,7 +4,7 @@ import type { CategoryProductsPage } from '../../../model/categoryPage.types';
 import type { ParsedFilters } from '../../../model/params/searchParams.types';
 
 import { CompactFilters } from '../../sections/filtering/compactFilters/CompactFilters';
-import SideFiltersDesktop from '../../sections/filtering/sideFilters/SideFiltersDesktop';
+import { SideFiltersDesktop } from '../../sections/filtering/sideFilters/SideFiltersDesktop';
 import { StickyHeader } from '../../sections/header/stickyHeader/StickyHeader';
 import { ProductsInfinite } from '../../sections/productList/productsInfinite/ProductsInfinite';
 import { CompactNav } from '../compactNavigation/CompactNav';
@@ -15,7 +15,7 @@ interface CategoryProductsViewType {
     appliedFilters: ParsedFilters;
 }
 
-export default function CategoryProductsView({ initialProducts, appliedFilters }: CategoryProductsViewType) {
+export const CategoryProductsView = ({ initialProducts, appliedFilters }: CategoryProductsViewType) => {
     return (
         <main className={cn(styles.container)}>
             <StickyHeader />
@@ -28,4 +28,4 @@ export default function CategoryProductsView({ initialProducts, appliedFilters }
             </CompactNav>
         </main>
     );
-}
+};

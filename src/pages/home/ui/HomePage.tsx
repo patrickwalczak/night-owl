@@ -2,7 +2,7 @@ import { CategoriesSection } from './categories/CategoriesSection';
 import { Hero } from './hero/Hero';
 // import { ScssPreview } from './scssPreview/ScssPreview';
 
-export default function HomePage() {
+export const HomePage = () => {
     return (
         <main>
             <Hero />
@@ -10,4 +10,4 @@ export default function HomePage() {
             {/* <ScssPreview /> */}
         </main>
     );
-}
+};

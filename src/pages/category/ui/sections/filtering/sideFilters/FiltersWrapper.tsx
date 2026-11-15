@@ -12,7 +12,7 @@ import styles from './sideFiltersDesktop.module.scss';
 
 const STICKY_CATEGORY_BAR_HEIGHT_PX = 58;
 
-const FiltersWrapper = ({ children }: { children: React.ReactNode }) => {
+export const FiltersWrapper = ({ children }: { children: React.ReactNode }) => {
     const navigationTopOffset = useNavigationTopOffset();
     const filtersTopOffset = navigationTopOffset + STICKY_CATEGORY_BAR_HEIGHT_PX;
     const { areFiltersOpen } = useCategoryPageContext();
@@ -38,5 +38,3 @@ const FiltersWrapper = ({ children }: { children: React.ReactNode }) => {
         </div>
     );
 };
-
-export default FiltersWrapper;

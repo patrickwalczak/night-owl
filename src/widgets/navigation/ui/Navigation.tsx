@@ -13,7 +13,7 @@ import { Overlay } from '@/shared/ui/overlay';
 
 import useIsDropdownExpanded from '../hooks/useIsDropdownExpanded';
 import { CategoriesDropdown } from './desktop/categoriesDropdown/CategoriesDropdown';
-import MobileNavigation from './mobile/MobileNavigation';
+import { MobileNavigation } from './mobile/MobileNavigation';
 import styles from './navigation.module.scss';
 
 interface NavigationContextType {

@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import styles from './notFoundPage.module.scss';
 
-export default function NotFoundPage() {
+export const NotFoundPage = () => {
     return (
         <main className={styles.page}>
             <div className={styles.content}>
@@ -36,4 +36,4 @@ export default function NotFoundPage() {
             </div>
         </main>
     );
-}
+};

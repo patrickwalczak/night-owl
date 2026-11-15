@@ -4,7 +4,7 @@ import productStyles from '../../sections/productList/productsInfinite/productsI
 import pageStyles from '../categoryProducts/categoryProducts.module.scss';
 import styles from './categoryPageSkeleton.module.scss';
 
-export default function CategoryPageSkeleton() {
+export const CategoryPageSkeleton = () => {
     return (
         <main className={pageStyles.container}>
             <span role={'status'} className={'sr-only'}>{'Loading products...'}</span>
@@ -37,4 +37,4 @@ export default function CategoryPageSkeleton() {
             </div>
         </main>
     );
-}
+};

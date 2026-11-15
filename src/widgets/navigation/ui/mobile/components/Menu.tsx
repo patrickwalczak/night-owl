@@ -9,7 +9,7 @@ import styles from '../navigation.module.scss';
 import { MobileNavButton } from './MobileNavButton';
 import { MobileNavLink } from './MobileNavLink';
 
-const Menu = ({ isMenuOpen, closeMenu }: { isMenuOpen: boolean; closeMenu: () => void }) => {
+export const Menu = ({ isMenuOpen, closeMenu }: { isMenuOpen: boolean; closeMenu: () => void }) => {
     useBodyOverflow(isMenuOpen);
 
     return (
@@ -44,5 +44,3 @@ const Menu = ({ isMenuOpen, closeMenu }: { isMenuOpen: boolean; closeMenu: () =>
         </Dialog>
     );
 };
-
-export default Menu;

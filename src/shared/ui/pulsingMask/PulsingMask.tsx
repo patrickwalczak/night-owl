@@ -6,7 +6,7 @@ import { cn } from '@/shared/lib/utils';
 
 import styles from './styles.module.scss';
 
-export default function PulsingMask({
+export const PulsingMask = ({
     active,
     label = 'Loading...',
     wrapClassName,
@@ -16,7 +16,7 @@ export default function PulsingMask({
     label?: string;
     wrapClassName?: string;
     children: React.ReactNode;
-}) {
+}) => {
     const contentRef = useCallback(
         (node: HTMLElement | null) => {
             if (node) {
@@ -45,4 +45,4 @@ export default function PulsingMask({
             )}
         </div>
     );
-}
+};

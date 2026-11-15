@@ -5,7 +5,7 @@ import { cn } from '@/shared/lib/utils';
 import { useCategoryPageContext } from '../../../../model/categoryPageContext';
 import styles from './categoryName.module.scss';
 
-const CategoryName = ({ isStuck = false }: {
+export const CategoryName = ({ isStuck = false }: {
     isProductSum?: boolean;
     isStuck?: boolean;
 }) => {
@@ -18,5 +18,3 @@ const CategoryName = ({ isStuck = false }: {
         </h2>
     );
 };
-
-export default CategoryName;

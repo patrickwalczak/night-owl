@@ -10,21 +10,21 @@ import { normalizeSearchParams, parseCategorySearchParams } from '../lib/url';
 import { CategoryPageProvider } from '../model/categoryPageContext';
 import { type RouteParamsType } from '../model/params/routeParams.types';
 import { type RawUrlSearchParams } from '../model/params/searchParams.types';
-import CategoryPageSkeleton from './components/categoryPageSkeleton/CategoryPageSkeleton';
-import CategoryProductsView from './components/categoryProducts/CategoryProductsView';
+import { CategoryPageSkeleton } from './components/categoryPageSkeleton/CategoryPageSkeleton';
+import { CategoryProductsView } from './components/categoryProducts/CategoryProductsView';
 
 interface CategoryPageType {
     params: Promise<RouteParamsType>;
     searchParams: Promise<RawUrlSearchParams>;
 }
 
-export default function CategoryPage(props: CategoryPageType) {
+export const CategoryPage = (props: CategoryPageType) => {
     return (
         <Suspense fallback={<CategoryPageSkeleton />}>
             <CategoryPageContent {...props} />
         </Suspense>
     );
-}
+};
 
 async function CategoryPageContent({ params, searchParams }: CategoryPageType) {
     const [awaitedParams, awaitedSearchParams] = await Promise.all([params, searchParams]);

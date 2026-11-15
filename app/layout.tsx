@@ -3,7 +3,7 @@ import { Playfair_Display, Inter } from 'next/font/google';
 
 import { NavigationServer } from '@/widgets/navigation/server';
 
-import ReactQueryProvider from '../src/app/providers/ReactQueryProvider';
+import { ReactQueryProvider } from '../src/app/providers/ReactQueryProvider';
 
 export const inter = Inter({
     subsets: ['latin'],

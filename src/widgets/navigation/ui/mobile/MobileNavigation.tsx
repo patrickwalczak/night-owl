@@ -6,10 +6,10 @@ import { cn } from '@/shared/lib/utils';
 import { HamburgerIcon } from '@/shared/ui/icons';
 
 import { NavigationContext } from '../Navigation';
-import Menu from './components/Menu';
+import { Menu } from './components/Menu';
 import styles from './navigation.module.scss';
 
-const MobileNavigation = () => {
+export const MobileNavigation = () => {
     const { isScrolled, hideDropdown } = useSafeContext(NavigationContext);
     const { isOpen: isMenuOpen, close: closeMenu, open: openMenu } = useOpenState();
 
@@ -40,5 +40,3 @@ const MobileNavigation = () => {
         </>
     );
 };
-
-export default MobileNavigation;

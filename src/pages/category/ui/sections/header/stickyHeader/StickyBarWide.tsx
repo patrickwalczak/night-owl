@@ -1,7 +1,7 @@
 'use client';
 
-import SideFiltersButton from '../../filtering/sideFilters/SideFiltersButton';
-import CategoryName from '../categoryName/CategoryName';
+import { SideFiltersButton } from '../../filtering/sideFilters/SideFiltersButton';
+import { CategoryName } from '../categoryName/CategoryName';
 
 export const StickyBarWide = ({ isStuck }: { isStuck: boolean }) => {
     return (
