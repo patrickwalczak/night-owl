@@ -2,7 +2,7 @@
 
 import { COOKIES } from '@/shared/config';
 import { setCookie } from '@/shared/lib/cookies/client';
-import { cn } from '@/shared/lib/utils/cn';
+import { cn } from '@/shared/lib/utils';
 import { FiltersIcon } from '@/shared/ui/icons';
 
 import { toggleFilters } from '../../../../../model/store/categoryUiSlice';

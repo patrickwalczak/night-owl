@@ -1,8 +1,7 @@
 import { useEffect, useId, useRef, useState, type ReactNode, type MouseEvent, type CSSProperties } from 'react';
 
 import { useBodyOverflow } from '@/shared/lib/hooks/useBodyOverflow/client';
-import { cn } from '@/shared/lib/utils/cn';
-import { isClickOutsideElement } from '@/shared/lib/utils/isClickOutsideElement';
+import { cn, isClickOutsideElement } from '@/shared/lib/utils';
 
 import styles from './drawer.module.scss';
 import { DrawerContext } from './DrawerContext';

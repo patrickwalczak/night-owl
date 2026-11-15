@@ -4,11 +4,11 @@ import { categoryWithChildrenSelect } from '@/entities/category/index';
 import { getCategoryProductsPage } from '@/entities/product/server';
 import { prisma } from '@/shared/lib/db/server';
 
-import { PAGE_SIZE } from '../config/constants';
-import { categoryPageParameterSelect } from '../model/categoryPage.select';
-import { type CategoryPageData } from '../model/categoryPage.types';
-import { toOrderBy } from './lib/getOrderBy';
-import { type GetCategoryPageDataOptions } from './model/getCategoryPageData/type';
+import { PAGE_SIZE } from '../../config/constants';
+import { toOrderBy } from '../../lib/toOrderBy';
+import { categoryPageParameterSelect } from '../../model/categoryPage.select';
+import { type CategoryPageData } from '../../model/categoryPage.types';
+import { type GetCategoryPageDataOptions } from './types';
 
 const NOT_FOUND_FALLBACK = {
     category: null,

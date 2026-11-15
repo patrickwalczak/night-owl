@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 
 import { COOKIES } from '@/shared/config';
 
-import { getCategoryPageData } from '../api/getCategoryPageData';
+import { getCategoryPageData } from '../api/getCategoryPageData/getCategoryPageData';
 import { SEARCH_PARAMS_KEYS } from '../config/searchParams';
 import { normalizeSearchParams, parseCategorySearchParams } from '../lib/url';
 import { type RouteParamsType } from '../model/params/routeParams.types';
