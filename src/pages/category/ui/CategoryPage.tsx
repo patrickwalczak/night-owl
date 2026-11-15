@@ -52,7 +52,7 @@ async function CategoryPageContent({ params, searchParams }: CategoryPageType) {
             category={category}
             areFiltersOpen={areFiltersOpen}
             parameters={parameters}
-            selectedFilters={parsedParams.filters}
+            appliedFilters={parsedParams.filters}
         >
             <CategoryProductsView initialProducts={products} appliedFilters={parsedParams.filters} />
         </CategoryPageProvider>

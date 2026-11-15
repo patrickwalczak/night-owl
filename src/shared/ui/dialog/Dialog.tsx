@@ -14,8 +14,6 @@ export const Dialog = ({
     isOpen,
     onClose,
     ref,
-    onClick,
-    onCancel,
     ...props
 }: DialogType) => {
     const dialogRef = useRef<HTMLDialogElement>(null);

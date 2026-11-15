@@ -27,7 +27,9 @@ export const FilterActions = ({ className, onApply }: FilterActionsType) => {
         const searchParams = new URLSearchParams(window.location.search);
 
         for (const key of Array.from(searchParams.keys())) {
-            if (!isSearchParamsKey(key) || key === SEARCH_PARAMS_KEYS.PAGE) searchParams.delete(key);
+            if (!isSearchParamsKey(key) || key === SEARCH_PARAMS_KEYS.PAGE) {
+                searchParams.delete(key);
+            }
         }
 
         normalizeSearchParams(filters).forEach((value, key) => searchParams.append(key, value));

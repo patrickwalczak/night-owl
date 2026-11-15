@@ -10,7 +10,7 @@ const initialProps = {
     category: { id: 'lighting', name: 'Lighting', slug: 'lighting', parentId: null, children: [] },
     parameters: [],
     productSum: 20,
-    selectedFilters: { color: ['black'] },
+    appliedFilters: { color: ['black'] },
     areFiltersOpen: true,
 };
 
@@ -69,11 +69,11 @@ describe('CategoryPageProvider', () => {
         expect(snapshot().areFiltersOpen).toBe(true);
         fireEvent.click(screen.getByRole('button', { name: 'Toggle filters' }));
         fireEvent.click(screen.getByRole('button', { name: 'Clear selection' }));
-        rerender(<TestPage {...initialProps} productSum={40} selectedFilters={{ color: ['black'] }} />);
+        rerender(<TestPage {...initialProps} productSum={40} appliedFilters={{ color: ['black'] }} />);
 
         expect(snapshot()).toMatchObject({ areFiltersOpen: false, selectedFilters: {}, productSum: 40 });
 
-        rerender(<TestPage {...initialProps} selectedFilters={{ color: ['white'] }} />);
+        rerender(<TestPage {...initialProps} appliedFilters={{ color: ['white'] }} />);
 
         expect(snapshot()).toMatchObject({ areFiltersOpen: false, selectedFilters: { color: ['white'] } });
     });

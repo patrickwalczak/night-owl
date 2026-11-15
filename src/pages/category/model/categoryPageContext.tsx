@@ -25,7 +25,7 @@ interface CategoryPageProviderType {
     category: CategoryPageCategory;
     parameters: CategoryParameter[];
     productSum: number;
-    selectedFilters: ParsedFilters;
+    appliedFilters: ParsedFilters;
     areFiltersOpen: boolean;
 }
 
@@ -38,17 +38,21 @@ export const CategoryPageProvider = ({
     category,
     parameters,
     productSum,
-    selectedFilters,
+    appliedFilters,
     areFiltersOpen: initiallyOpen,
 }: CategoryPageProviderType) => {
     const [areFiltersOpen, setAreFiltersOpen] = useState(initiallyOpen);
     const source = JSON.stringify([
         category.id,
-        Object.keys(selectedFilters).sort().map(key => [key, [...selectedFilters[key]].sort()]),
+        Object.keys(appliedFilters).sort().map(key => [key, [...appliedFilters[key]].sort()]),
     ]);
-    const [filterSelection, setFilterSelection] = useState({ source, filters: selectedFilters });
+    const [filterSelection, setFilterSelection] = useState({ source, filters: appliedFilters });
 
-    if (filterSelection.source !== source) setFilterSelection({ source, filters: selectedFilters });
+    // Sync checkboxes when URL filters change (e.g. Back/Forward) or the category changes.
+    // Preserve unapplied selections when only pagination or unrelated server props change.
+    if (filterSelection.source !== source) {
+        setFilterSelection({ source, filters: appliedFilters });
+    }
 
     const setSelectedFilters = useCallback((filters: ParsedFilters) => {
         setFilterSelection(current => ({ ...current, filters }));

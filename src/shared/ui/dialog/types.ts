@@ -28,7 +28,7 @@ type DialogAccessibilityType
 
 export type DialogType = Omit<
     ComponentPropsWithRef<'dialog'>,
-    'open' | 'onClose' | 'aria-labelledby' | 'aria-label'
+    'open' | 'onClose' | 'onClick' | 'onCancel' | 'aria-labelledby' | 'aria-label'
 >
 & DialogAccessibilityType & {
     isOpen: boolean;

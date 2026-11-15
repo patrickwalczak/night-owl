@@ -27,17 +27,17 @@ const SelectionPreview = () => {
 };
 
 interface TestCategoryType {
-    selectedFilters: ParsedFilters;
+    appliedFilters: ParsedFilters;
     categoryId?: string;
     page?: number;
     showParameters?: boolean;
 }
 
-const TestCategory = ({ selectedFilters, categoryId = category.id, page = 1, showParameters = true }: TestCategoryType) => (
+const TestCategory = ({ appliedFilters, categoryId = category.id, page = 1, showParameters = true }: TestCategoryType) => (
     <CategoryPageProvider
         category={{ ...category, id: categoryId }}
         parameters={[parameter]}
-        selectedFilters={selectedFilters}
+        appliedFilters={appliedFilters}
         productSum={page * 20}
         areFiltersOpen
     >
@@ -52,7 +52,7 @@ const openParameter = () => fireEvent.click(screen.getByRole('button', { name: '
 
 describe('ParameterBox selection', () => {
     it('initializes from applied filters and updates the selection on check and uncheck', () => {
-        render(<TestCategory selectedFilters={{ color: ['black'] }} />);
+        render(<TestCategory appliedFilters={{ color: ['black'] }} />);
         openParameter();
 
         expect(checkbox('Black').checked).toBe(true);
@@ -70,43 +70,43 @@ describe('ParameterBox selection', () => {
     });
 
     it('restores selected checkboxes when the filter UI is remounted', () => {
-        const { rerender } = render(<TestCategory selectedFilters={{}} />);
+        const { rerender } = render(<TestCategory appliedFilters={{}} />);
         openParameter();
         fireEvent.click(checkbox('Black'));
 
-        rerender(<TestCategory selectedFilters={{}} showParameters={false} />);
-        rerender(<TestCategory selectedFilters={{}} />);
+        rerender(<TestCategory appliedFilters={{}} showParameters={false} />);
+        rerender(<TestCategory appliedFilters={{}} />);
 
         expect(checkbox('Black').checked).toBe(true);
         expect(selection()).toEqual({ color: ['black'] });
     });
 
     it('follows changed applied filters, including navigation back and clearing filters', () => {
-        const { rerender } = render(<TestCategory selectedFilters={{ color: ['black'] }} />);
+        const { rerender } = render(<TestCategory appliedFilters={{ color: ['black'] }} />);
 
-        rerender(<TestCategory selectedFilters={{ color: ['white'] }} />);
+        rerender(<TestCategory appliedFilters={{ color: ['white'] }} />);
 
         expect(checkbox('Black').checked).toBe(false);
         expect(checkbox('White').checked).toBe(true);
         expect(selection()).toEqual({ color: ['white'] });
 
-        rerender(<TestCategory selectedFilters={{ color: ['black'] }} />);
+        rerender(<TestCategory appliedFilters={{ color: ['black'] }} />);
 
         expect(checkbox('Black').checked).toBe(true);
         expect(checkbox('White').checked).toBe(false);
 
-        rerender(<TestCategory selectedFilters={{}} />);
+        rerender(<TestCategory appliedFilters={{}} />);
 
         expect(checkbox('Black').checked).toBe(false);
         expect(selection()).toEqual({});
     });
 
     it('preserves unapplied filter changes on pagination when applied filters only change object or ordering', () => {
-        const { rerender } = render(<TestCategory selectedFilters={{ color: ['black', 'white'], size: ['large'] }} />);
+        const { rerender } = render(<TestCategory appliedFilters={{ color: ['black', 'white'], size: ['large'] }} />);
         openParameter();
         fireEvent.click(checkbox('Black'));
 
-        rerender(<TestCategory selectedFilters={{ size: ['large'], color: ['white', 'black'] }} page={2} />);
+        rerender(<TestCategory appliedFilters={{ size: ['large'], color: ['white', 'black'] }} page={2} />);
 
         expect(checkbox('Black').checked).toBe(false);
         expect(checkbox('White').checked).toBe(true);
@@ -114,11 +114,11 @@ describe('ParameterBox selection', () => {
     });
 
     it('resets filter selection on a category change even when applied filters are the same', () => {
-        const { rerender } = render(<TestCategory selectedFilters={{}} />);
+        const { rerender } = render(<TestCategory appliedFilters={{}} />);
         openParameter();
         fireEvent.click(checkbox('Black'));
 
-        rerender(<TestCategory selectedFilters={{}} categoryId={'furniture'} />);
+        rerender(<TestCategory appliedFilters={{}} categoryId={'furniture'} />);
 
         expect(checkbox('Black').checked).toBe(false);
         expect(selection()).toEqual({});
