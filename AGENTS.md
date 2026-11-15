@@ -13,6 +13,7 @@ Read and follow [the architectural decisions](docs/architecture-decisions.md) be
 
 ## Coding preferences
 
+- Always place database seed scripts in `prisma/seeds`, not in `scripts` or other directories. Seeds are local-only and must remain ignored by Git; do not add `.gitignore` exceptions for them.
 - Use arrow functions for components, hooks, helpers, and test utilities instead of function declarations.
 - Destructure context values, for example `const { parameters } = useCategoryPageContext();`. Do not access them directly on the hook call, such as `useCategoryPageContext().parameters`.
 - Use descriptive names that explain a value's role. Prefer `filterSelection` over `draft`; avoid generic names such as `source` when a more specific name would explain the purpose.

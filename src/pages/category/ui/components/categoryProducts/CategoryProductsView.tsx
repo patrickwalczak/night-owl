@@ -1,7 +1,7 @@
 import { cn } from '@/shared/lib/utils';
 
 import type { CategoryProductsPage } from '../../../model/categoryPage.types';
-import type { ParsedFilters } from '../../../model/params/searchParams.types';
+import type { ParsedFilters, SortOrderType } from '../../../model/params/searchParams.types';
 
 import { CompactFilters } from '../../sections/filtering/compactFilters/CompactFilters';
 import { SideFiltersDesktop } from '../../sections/filtering/sideFilters/SideFiltersDesktop';
@@ -13,15 +13,16 @@ import styles from './categoryProducts.module.scss';
 interface CategoryProductsViewType {
     initialProducts: CategoryProductsPage;
     appliedFilters: ParsedFilters;
+    sort: SortOrderType;
 }
 
-export const CategoryProductsView = ({ initialProducts, appliedFilters }: CategoryProductsViewType) => {
+export const CategoryProductsView = ({ initialProducts, appliedFilters, sort }: CategoryProductsViewType) => {
     return (
         <main className={cn(styles.container)}>
             <StickyHeader />
             <div className={styles.productsContainer}>
                 <SideFiltersDesktop />
-                <ProductsInfinite initialProducts={initialProducts} appliedFilters={appliedFilters} />
+                <ProductsInfinite initialProducts={initialProducts} appliedFilters={appliedFilters} sort={sort} />
             </div>
             <CompactNav>
                 <CompactFilters />

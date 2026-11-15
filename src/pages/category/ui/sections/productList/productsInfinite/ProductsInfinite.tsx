@@ -8,7 +8,7 @@ import type { ProductListPage } from '@/entities/product';
 import { useIntersectionObserver } from '@/shared/lib/hooks/useIntersectionObserver/client';
 import { cn } from '@/shared/lib/utils';
 
-import type { ParsedFilters } from '../../../../model/params/searchParams.types';
+import type { ParsedFilters, SortOrderType } from '../../../../model/params/searchParams.types';
 
 import { usePageParamSetter } from '../../../../lib/hooks/usePageParamSetter';
 import { normalizeSearchParams } from '../../../../lib/url';
@@ -22,6 +22,7 @@ type ProductsLoadMode = 'auto' | 'manual';
 interface ProductsInfiniteType {
     initialProducts: ProductListPage;
     appliedFilters: ParsedFilters;
+    sort: SortOrderType;
 }
 
 const INTERSECTION_OPTIONS = { rootMargin: '0px 0px 200px 0px' };
@@ -31,8 +32,9 @@ const fetchCategoryProducts = async (
     categorySlug: string,
     pageParam: number,
     appliedFilters: ParsedFilters,
+    sort: SortOrderType,
 ): Promise<ProductListPage> => {
-    const searchParams = normalizeSearchParams({ ...appliedFilters, page: String(pageParam) });
+    const searchParams = normalizeSearchParams({ ...appliedFilters, page: String(pageParam), sort });
     const response = await fetch(`/api/category/${categorySlug}/products?${searchParams}`);
 
     if (!response.ok) {
@@ -42,7 +44,7 @@ const fetchCategoryProducts = async (
     return response.json();
 };
 
-export const ProductsInfinite = ({ initialProducts, appliedFilters }: ProductsInfiniteType) => {
+export const ProductsInfinite = ({ initialProducts, appliedFilters, sort }: ProductsInfiniteType) => {
     const [loadMode] = useState<ProductsLoadMode>(DEFAULT_PRODUCTS_LOAD_MODE);
     const isAutoLoadEnabled = loadMode === 'auto';
 
@@ -50,8 +52,8 @@ export const ProductsInfinite = ({ initialProducts, appliedFilters }: ProductsIn
 
     const { data, hasNextPage, isPending, isFetchingNextPage, isFetchNextPageError, fetchNextPage } = useInfiniteQuery({
         initialPageParam: initialProducts.page,
-        queryKey: ['products-infinite', slug, appliedFilters, initialProducts.page],
-        queryFn: ({ pageParam }) => fetchCategoryProducts(slug, pageParam, appliedFilters),
+        queryKey: ['products-infinite', slug, appliedFilters, sort, initialProducts.page],
+        queryFn: ({ pageParam }) => fetchCategoryProducts(slug, pageParam, appliedFilters, sort),
         getNextPageParam: lastPage => lastPage.nextPage,
         initialData: { pages: [initialProducts], pageParams: [initialProducts.page] },
         staleTime: 240000,

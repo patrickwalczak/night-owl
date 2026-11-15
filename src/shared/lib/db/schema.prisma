@@ -12,6 +12,7 @@ model Product {
   name        String
   slug        String   @unique
   image       String
+  sortOrder   Int?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -21,6 +22,7 @@ model Product {
   parameterValues ProductParameterValue[]
 
   @@index([categoryId])
+  @@index([sortOrder, id])
 }
 
 model ParameterValue {
