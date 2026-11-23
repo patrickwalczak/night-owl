@@ -1,15 +1,11 @@
-'use client';
-
 import Link from 'next/link';
 
+import { type CategoryWithProductCount } from '@/entities/category';
 import { cn } from '@/shared/lib/utils';
 
-import { useCategoryPageContext } from '../../../model/categoryPageContext';
-import styles from './subcategories.module.scss';
+import styles from './subcategoriesCompact.module.scss';
 
-export const Subcategories = () => {
-    const { category: { children: subcategories } } = useCategoryPageContext();
-
+export const SubcategoriesCompact = ({ subcategories }: { subcategories: CategoryWithProductCount[] }) => {
     if (!subcategories.length) return null;
 
     return (

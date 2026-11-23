@@ -1,16 +1,6 @@
-import type { CategoryWithChildrenAndProductCounts } from '@/entities/category';
-import type { ProductListItem } from '@/entities/product';
 import type { ParameterGetPayload } from '@/shared/lib/db';
 
 import type { categoryPageParameterSelect } from './categoryPage.select';
-
-export type CategoryPageCategory = CategoryWithChildrenAndProductCounts;
-
-export type CategorySubcategory = CategoryPageCategory['children'][number];
-
-export type CategorySummary = Pick<CategoryPageCategory, 'id' | 'name' | 'slug' | 'parentId'>;
-
-export type CategoryProduct = ProductListItem;
 
 export type RawCategoryParameter = ParameterGetPayload<{
     select: ReturnType<typeof categoryPageParameterSelect>;

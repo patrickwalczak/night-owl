@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 
 import { cn } from '@/shared/lib/utils';
 
@@ -9,9 +9,13 @@ import { FilterActions } from '../filterActions/FilterActions';
 import { ParameterBox } from '../parameterBox/ParameterBox';
 import { FiltersWrapper } from './FiltersWrapper';
 import styles from './sideFiltersDesktop.module.scss';
-import { Subcategories } from './Subcategories';
 
-export const SideFiltersDesktop = ({ parameters }: { parameters: CategoryParameter[] }) => {
+interface SideFiltersDesktopType {
+    parameters: CategoryParameter[];
+    subcategories: ReactNode;
+}
+
+export const SideFiltersDesktop = ({ parameters, subcategories }: SideFiltersDesktopType) => {
     const filtersRef = useRef<HTMLDivElement | null>(null);
     const [scrollableHeight, setScrollableHeight] = useState('100vh');
 
@@ -37,7 +41,7 @@ export const SideFiltersDesktop = ({ parameters }: { parameters: CategoryParamet
         <FiltersWrapper>
             <div ref={filtersRef} style={{ height: scrollableHeight }} className={cn(styles.filters, 'flex', 'flex-col')}>
                 <div className={cn(styles.scrollArea, 'flex', 'flex-col')}>
-                    <Subcategories />
+                    {subcategories}
                     <div className={cn(styles.content, 'flex', 'flex-col')}>
                         {parameters.map(parameter => (
                             <ParameterBox key={parameter.id} parameter={parameter} />

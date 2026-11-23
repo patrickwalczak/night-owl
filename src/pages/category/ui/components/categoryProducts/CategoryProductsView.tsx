@@ -7,9 +7,7 @@ import { FilterParametersServer } from '../../sections/filtering/FilterParameter
 import { FilterParametersSkeleton } from '../../sections/filtering/FilterParametersSkeleton';
 import { FiltersServer } from '../../sections/filtering/FiltersServer';
 import { SideFiltersDesktopSkeleton } from '../../sections/filtering/sideFilters/SideFiltersDesktopSkeleton';
-import { CategoryProductCountServer } from '../../sections/header/categoryName/CategoryProductCountServer';
-import { CategoryProductCountSkeleton } from '../../sections/header/categoryName/CategoryProductCountSkeleton';
-import { StickyHeader } from '../../sections/header/stickyHeader/StickyHeader';
+import { CategoryHeaderServer } from '../../sections/header/CategoryHeaderServer';
 import { CategoryProductsServer } from '../../sections/productList/CategoryProductsServer';
 import { ProductsSkeleton } from '../../sections/productList/ProductsSkeleton';
 import { CompactNav } from '../compactNavigation/CompactNav';
@@ -22,18 +20,10 @@ interface CategoryProductsViewType {
 
 export const CategoryProductsView = ({ categorySlug, searchParams }: CategoryProductsViewType) => {
     const listingKey = `${categorySlug}?${searchParams}`;
-    const productCount = (
-        <Suspense key={listingKey} fallback={<CategoryProductCountSkeleton />}>
-            <CategoryProductCountServer
-                categorySlug={categorySlug}
-                searchParams={searchParams}
-            />
-        </Suspense>
-    );
 
     return (
         <main className={cn(styles.container)}>
-            <StickyHeader productCount={productCount} />
+            <CategoryHeaderServer categorySlug={categorySlug} searchParams={searchParams} />
             <div className={styles.productsContainer}>
                 <Suspense key={categorySlug} fallback={<SideFiltersDesktopSkeleton />}>
                     <FiltersServer categorySlug={categorySlug} />

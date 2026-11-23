@@ -1,7 +1,7 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
 
-import type { CategoryPageCategory, CategoryParameter } from '../../../../../model/categoryPage.types';
+import type { CategoryParameter } from '../../../../../model/categoryPage.types';
 import type { ParsedFilters } from '../../../../../model/params/searchParams.types';
 
 import { CategoryPageProvider, useCategoryPageContext } from '../../../../../model/categoryPageContext';
@@ -9,9 +9,7 @@ import { ParameterBox } from '../ParameterBox';
 
 afterEach(cleanup);
 
-const category: CategoryPageCategory = {
-    id: 'lighting', name: 'Lighting', slug: 'lighting', parentId: null, children: [],
-};
+const initialCategoryId = 'lighting';
 const parameter: CategoryParameter = {
     id: 'color', name: 'Color', slug: 'color',
     values: [
@@ -33,9 +31,9 @@ interface TestCategoryType {
     showParameters?: boolean;
 }
 
-const TestCategory = ({ appliedFilters, categoryId = category.id, page = 1, showParameters = true }: TestCategoryType) => (
+const TestCategory = ({ appliedFilters, categoryId = initialCategoryId, page = 1, showParameters = true }: TestCategoryType) => (
     <CategoryPageProvider
-        category={{ ...category, id: categoryId }}
+        categoryId={categoryId}
         appliedFilters={appliedFilters}
         areFiltersOpen
     >

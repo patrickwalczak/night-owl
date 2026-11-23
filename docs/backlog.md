@@ -12,12 +12,24 @@
 
 - [ ] Consider extending the category model to support multiple parent categories per category and deeper nesting. Evaluate a many-to-many parent/child relation, cycle prevention, and the impact on navigation, descendant queries, and product/filter listings, including deduplication when a category is reachable through multiple paths.
 
+- [ ] Run the category header's sticky behavior only in Wide layouts (`>= 1024px`). [StickyHeader](../src/pages/category/ui/sections/header/stickyHeader/StickyHeader.tsx) is visually sticky only in Wide, but currently creates an intersection observer through [useIsSticky](../src/shared/lib/hooks/useIsSticky/useIsSticky.tsx) and subscribes to navigation offset changes through [useNavigationTopOffset](../src/shared/lib/hooks/useNavigationLayout/useNavigationLayout.ts) in Compact as well.
+
+  Use the existing `useBreakpoints` hook and `WIDE_BREAKPOINT`, following [ADR 001](architecture-decisions.md#001-responsive-layouts-compact-and-wide-css-and-matchmedia). Enable the observer and this header's scroll-store subscription only in Wide. Keep hook calls unconditional and preserve other consumers of the shared scroll store.
+
+  Acceptance criteria:
+
+  - Below 1024px, the header remains in normal document flow, reports `isStuck: false` to render-function children, and exposes `data-stuck="false"`. It has no active sticky observer or navigation-offset subscription.
+  - At 1024px and above, preserve the current sticky position, navigation offset, compacted padding, shadow, and title resizing through `data-stuck`.
+  - Switching from Wide to Compact disconnects the observer, unsubscribes this consumer from offset changes, and clears stale sticky state. Switching back starts observation with the current scroll position and navigation offset, without duplicate subscriptions.
+  - Preserve one header tree, server-rendered children, the product-count Suspense boundary, and matching server HTML and initial client render. CSS continues to control responsive layout and visibility.
+  - Manually verify initial loads and resizing at 1023px, 1024px, and 1025px, including switching layouts after scrolling in both directions. Run `npm run check` and relevant existing tests; do not add new unit tests unless explicitly requested.
+
 - [ ] Align responsive rendering with [architectural decision 001](architecture-decisions.md#001-responsive-layouts-compact-and-wide-css-and-matchmedia): use consistent `Compact`/`Wide` naming and the same 1024px breakpoint in CSS and JavaScript, with CSS controlling layout and visibility and `matchMedia` controlling width-dependent behavior and mounting. Fix visibility at the breakpoint and handle open panels when switching layouts, preserving shared user state and matching server HTML with the initial client render.
 
   Areas to update:
 
   - [Main navigation](../src/widgets/navigation/ui/): `Navigation`, `MobileNavigation`, `CategoriesDropdown`, and their styles. Align `mobile`/`desktop` naming with Compact/Wide, fix both navigation buttons being hidden at exactly 1024px, and handle open menus/dropdowns when crossing the breakpoint.
   - [Category filters](../src/pages/category/ui/sections/filtering/): `SideFiltersDesktop`, `FiltersWrapper`, `SideFiltersButton`, `FiltersDialog`, and `FiltersModal`. Limit panel-specific effects to the relevant layout, close the Compact modal when switching to Wide, and preserve shared draft filters. Account for the modal portal: hiding its trigger or parent with CSS does not hide the modal.
-  - Category header and controls: [StickyHeader and StickyBarWide](../src/pages/category/ui/sections/header/stickyHeader/), [CompactNav](../src/pages/category/ui/components/compactNavigation/), and [Subcategories](../src/pages/category/ui/components/subcategories/). Align names with actual visibility, avoid running Wide-only sticky logic in Compact, and unify the breakpoint conditions.
+  - Category header and controls: [StickyHeader and StickyBarWide](../src/pages/category/ui/sections/header/stickyHeader/), [CompactNav](../src/pages/category/ui/components/compactNavigation/), and [SubcategoriesCompact](../src/pages/category/ui/components/subcategoriesCompact/). Align names with actual visibility and unify the breakpoint conditions. The sticky observer and navigation-offset subscription are covered by the dedicated task above.
   - Shared responsive logic: [useBreakpoints](../src/shared/lib/hooks/useBreakpoints/client.ts) and [SCSS breakpoints](../src/shared/styles/_breakpoints.scss). Use the shared hook when migrating components and preserve hydration-safe initial rendering when introducing conditional mounting.
   - Other responsive styles: [home page](../src/pages/home/ui/), [product cards](../src/entities/product/ui/product/), and [category skeleton](../src/pages/category/ui/components/categoryPageSkeleton/). Review hardcoded layout breakpoints for consistency; retain smaller styling breakpoints where useful without introducing extra layout types.

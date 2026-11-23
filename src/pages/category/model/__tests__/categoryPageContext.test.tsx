@@ -7,19 +7,19 @@ import { CategoryPageProvider, useCategoryPageContext } from '../categoryPageCon
 afterEach(cleanup);
 
 const initialProps = {
-    category: { id: 'lighting', name: 'Lighting', slug: 'lighting', parentId: null, children: [] },
+    categoryId: 'lighting',
     appliedFilters: { color: ['black'] },
     areFiltersOpen: true,
 };
 
 const Probe = () => {
-    const { category, selectedFilters, areFiltersOpen, toggleFilters, setSelectedFilters }
+    const { selectedFilters, areFiltersOpen, toggleFilters, setSelectedFilters }
         = useCategoryPageContext();
 
     return (
         <>
             <output data-testid={'snapshot'}>
-                {JSON.stringify({ category, selectedFilters, areFiltersOpen })}
+                {JSON.stringify({ selectedFilters, areFiltersOpen })}
             </output>
             <button onClick={toggleFilters}>{'Toggle filters'}</button>
             <button onClick={() => setSelectedFilters({})}>{'Clear selection'}</button>
@@ -40,20 +40,16 @@ const TestPage = (props: Omit<ComponentProps<typeof CategoryPageProvider>, 'chil
 const snapshot = () => JSON.parse(screen.getByTestId('snapshot').textContent ?? '{}');
 
 describe('CategoryPageProvider', () => {
-    it('exposes fresh category data when server props change', () => {
+    it('restores applied filters when the category identity changes', () => {
         const { rerender } = render(<TestPage {...initialProps} />);
-        const nextProps = {
-            ...initialProps,
-            category: {
-                id: 'outdoor', name: 'Outdoor', slug: 'outdoor', parentId: null,
-                children: [{ id: 'lamps', name: 'Lamps', slug: 'lamps', count: 4 }],
-            },
-        };
+        fireEvent.click(screen.getByRole('button', { name: 'Clear selection' }));
+        expect(snapshot().selectedFilters).toEqual({});
 
-        rerender(<TestPage {...nextProps} />);
+        rerender(<TestPage {...initialProps} categoryId={'outdoor'} />);
 
         expect(snapshot()).toMatchObject({
-            category: nextProps.category,
+            selectedFilters: initialProps.appliedFilters,
+            areFiltersOpen: true,
         });
     });
 
@@ -66,7 +62,6 @@ describe('CategoryPageProvider', () => {
         rerender(
             <TestPage
                 {...initialProps}
-                category={{ ...initialProps.category, name: 'Updated lighting' }}
                 appliedFilters={{ color: ['black'] }}
             />,
         );
@@ -74,7 +69,6 @@ describe('CategoryPageProvider', () => {
         expect(snapshot()).toMatchObject({
             areFiltersOpen: false,
             selectedFilters: {},
-            category: { name: 'Updated lighting' },
         });
 
         rerender(<TestPage {...initialProps} appliedFilters={{ color: ['white'] }} />);

@@ -1,14 +1,12 @@
-'use client';
 import Link from 'next/link';
+
+import type { CategoryWithProductCount } from '@/entities/category';
 
 import { cn } from '@/shared/lib/utils';
 
-import { useCategoryPageContext } from '../../../../model/categoryPageContext';
 import styles from './sideFiltersDesktop.module.scss';
 
-export const Subcategories = () => {
-    const { category: { children: subcategories } } = useCategoryPageContext();
-
+export const Subcategories = ({ subcategories }: { subcategories: CategoryWithProductCount[] }) => {
     if (subcategories.length === 0) return null;
 
     return (

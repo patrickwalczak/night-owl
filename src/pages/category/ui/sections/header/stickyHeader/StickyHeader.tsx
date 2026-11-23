@@ -6,11 +6,13 @@ import { useIsSticky } from '@/shared/lib/hooks/useIsSticky/client';
 import { useNavigationTopOffset } from '@/shared/lib/hooks/useNavigationLayout/client';
 import { cn } from '@/shared/lib/utils';
 
-import { Subcategories } from '../../../components/subcategories/Subcategories';
-import { StickyBarWide } from './StickyBarWide';
 import styles from './StickyHeader.module.scss';
 
-export const StickyHeader = ({ productCount }: { productCount: ReactNode }) => {
+interface StickyHeaderType {
+    children: ReactNode | ((state: { isStuck: boolean }) => ReactNode);
+}
+
+export const StickyHeader = ({ children }: StickyHeaderType) => {
     const topPx = useNavigationTopOffset();
     const { isStuck, sentinelRef } = useIsSticky(topPx);
 
@@ -18,11 +20,11 @@ export const StickyHeader = ({ productCount }: { productCount: ReactNode }) => {
         <>
             <div ref={sentinelRef} aria-hidden className={styles.sentinel} />
             <header
+                data-stuck={isStuck}
                 className={cn(styles.header, { [styles.headerIsStuck]: isStuck })}
                 style={{ top: `${topPx}px` }}
             >
-                <StickyBarWide isStuck={isStuck} productCount={productCount} />
-                <Subcategories />
+                {typeof children === 'function' ? children({ isStuck }) : children}
             </header>
         </>
     );

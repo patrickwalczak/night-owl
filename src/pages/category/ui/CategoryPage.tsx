@@ -30,7 +30,7 @@ export const CategoryPage = async ({ params, searchParams }: CategoryPageType) =
 
     return (
         <CategoryPageProvider
-            category={category}
+            categoryId={category.id}
             areFiltersOpen={areFiltersOpen}
             appliedFilters={parsedParams.filters}
         >
